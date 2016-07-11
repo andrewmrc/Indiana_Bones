@@ -1,0 +1,110 @@
+fileFormatVersion: 2
+guid: d84c9894fbd79dd41a0e829431842f33
+timeCreated: 1467834011
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: canubi-idle_0
+    21300002: canubi-idle_1
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: canubi-idle_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 3, y: 49}
+        - {x: -22, y: 49}
+        - {x: -48, y: 18}
+        - {x: -50, y: 13}
+        - {x: -50, y: -7}
+        - {x: -34, y: -48}
+        - {x: 44, y: -48}
+        - {x: 49, y: -38}
+        - {x: 49, y: 37}
+        - {x: 25, y: 44}
+      - - {x: -37, y: 19}
+        - {x: -35, y: 17}
+        - {x: -32, y: 18}
+        - {x: -32, y: 21}
+        - {x: -34, y: 23}
+        - {x: -37, y: 22}
+    - name: canubi-idle_1
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -50, y: 50}
+        - {x: -50, y: 5}
+        - {x: -46, y: 3}
+        - {x: -50, y: -22}
+        - {x: -50, y: -45}
+        - {x: 49, y: -45}
+        - {x: 49, y: 50}
+      - - {x: -37, y: 22}
+        - {x: -35, y: 20}
+        - {x: -32, y: 21}
+        - {x: -32, y: 24}
+        - {x: -34, y: 26}
+        - {x: -37, y: 25}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
