@@ -4,7 +4,7 @@ using System.Collections;
 namespace IndianaBones
 {
 
-    public class Colonna : MonoBehaviour
+	public class OLDColonna : MonoBehaviour
     {
         
 
