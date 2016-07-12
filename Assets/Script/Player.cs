@@ -75,7 +75,7 @@ namespace IndianaBones
                 proiettili += 5;
         }
 
-        IEnumerator SayCiaoTenTimes(float seconds)
+		IEnumerator SayCiaoTenTimes(float seconds){
             
             
 
