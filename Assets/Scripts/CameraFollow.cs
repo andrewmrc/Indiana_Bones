@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace IndianaBones
 {
-    public class Camera : MonoBehaviour
+    public class CameraFollow : MonoBehaviour
     {
 
 

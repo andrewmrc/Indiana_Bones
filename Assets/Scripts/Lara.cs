@@ -16,7 +16,7 @@ namespace IndianaBones
 
         void Start()
         {
-            Griglia elementi = FindObjectOfType<Griglia>();
+            Grid elementi = FindObjectOfType<Grid>();
             xPosition = 9;
             yPosition = 8;
             
@@ -33,7 +33,7 @@ namespace IndianaBones
         public void Posizione()
         {
             OldValue();
-            Griglia elementi = FindObjectOfType<Griglia>();
+            Grid elementi = FindObjectOfType<Grid>();
             GameController gamec = FindObjectOfType<GameController>();
             Player player = FindObjectOfType<Player>();
             Lara lara = FindObjectOfType<Lara>();
@@ -118,7 +118,7 @@ namespace IndianaBones
         }
         public void OldValue()
         {
-            Griglia elementi = FindObjectOfType<Griglia>();
+            Grid elementi = FindObjectOfType<Grid>();
             xOld = (int)this.transform.position.x;
             yOld = (int)this.transform.position.y;
             elementi.scacchiera[xOld, yOld].status = 0;
@@ -127,7 +127,7 @@ namespace IndianaBones
 
         void Update()
         {
-            Griglia elementi = FindObjectOfType<Griglia>();
+            Grid elementi = FindObjectOfType<Grid>();
 
             elementi.scacchiera[xPosition, yPosition].status = 3;
 

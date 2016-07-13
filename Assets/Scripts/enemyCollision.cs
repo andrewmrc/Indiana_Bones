@@ -17,12 +17,12 @@ namespace IndianaBones
 
             if (coll.gameObject.name == "dente(Clone)")
             {
-                Griglia objGriglia = FindObjectOfType<Griglia>();
+                Grid objGrid = FindObjectOfType<Grid>();
                 Lara newLara = FindObjectOfType<Lara>();
 
                 GameObject newDente = Instantiate(denteSpawn);
                 newDente.transform.position = laraCroft.transform.position;
-                objGriglia.scacchiera[(int)newDente.transform.position.x, (int)newDente.transform.position.y].status = -1;
+                objGrid.scacchiera[(int)newDente.transform.position.x, (int)newDente.transform.position.y].status = -1;
                 
 
                 newLara.vita -= 1;

@@ -4,7 +4,7 @@ using System.Collections;
 namespace IndianaBones
 {
 
-    public class Cella : MonoBehaviour
+    public class CellaOLD : MonoBehaviour
     {
         public int status = 0;
         // Use this for initialization

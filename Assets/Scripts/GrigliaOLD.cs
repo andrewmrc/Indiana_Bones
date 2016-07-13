@@ -4,7 +4,7 @@ using System.Collections;
 namespace IndianaBones
 {
 
-    public class Griglia : MonoBehaviour
+    public class GrigliaOLD : MonoBehaviour
     {
 
         public GameObject player;
@@ -23,6 +23,7 @@ namespace IndianaBones
         float offset_y = 1;
 
         public Cella[,] scacchiera = new Cella[30, 10];
+
         void Awake()
         {
 

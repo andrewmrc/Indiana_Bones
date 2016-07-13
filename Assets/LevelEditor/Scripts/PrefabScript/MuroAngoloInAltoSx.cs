@@ -11,14 +11,14 @@ namespace IndianaBones
         
         void Start()
         {
-            Griglia elementi = FindObjectOfType<Griglia>();
+            Grid elementi = FindObjectOfType<Grid>();
             x = (int)this.transform.position.x;
             y = (int)this.transform.position.y;
             elementi.scacchiera[x, y].status = 2;
             SpriteRenderer muro = elementi.scacchiera[x, y].GetComponent<SpriteRenderer>();
             muro.sprite = Resources.Load("muroAngoloInAltoSx", typeof(Sprite)) as Sprite;
             this.transform.position = new Vector2(x, y);
-            elementi.scacchiera[x, y].name = "muro";
+            elementi.scacchiera[x, y].name = "Muro_AngoloAltoSx";
             elementi.scacchiera[x, y].gameObject.AddComponent<BoxCollider2D>();
             Destroy(this.gameObject);
 

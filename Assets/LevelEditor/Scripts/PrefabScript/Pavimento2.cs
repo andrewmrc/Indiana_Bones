@@ -11,7 +11,7 @@ namespace IndianaBones
         
         void Start()
         {
-            Griglia elementi = FindObjectOfType<Griglia>();
+            Grid elementi = FindObjectOfType<Grid>();
             x = (int)this.transform.position.x;
             y = (int)this.transform.position.y;
             

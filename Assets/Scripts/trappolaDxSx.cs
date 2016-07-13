@@ -26,7 +26,7 @@ namespace IndianaBones
         {
             Player objPlayer = FindObjectOfType<Player>();
 
-            Griglia elementi = FindObjectOfType<Griglia>();
+            Grid elementi = FindObjectOfType<Grid>();
             if (player.transform.position == elementi.scacchiera[x-1,y].transform.position)
             {
                 objPlayer.xPosition -= 1;

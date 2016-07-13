@@ -54,14 +54,14 @@ namespace IndianaBones
         
         public void Attacco()
         {
-            Griglia elementi = FindObjectOfType<Griglia>();
+            Grid elementi = FindObjectOfType<Grid>();
             if (elementi.ManhattanDist() == 1)
-                Destroy(elementi.lara);
+                Destroy(elementi.enemy);
         }
 
         public void OldValue()
         {
-            Griglia elementi = FindObjectOfType<Griglia>();
+            Grid elementi = FindObjectOfType<Grid>();
             xOld = (int)this.transform.position.x;
             yOld = (int)this.transform.position.y;
             elementi.scacchiera[xOld, yOld].status = 0;
@@ -70,7 +70,7 @@ namespace IndianaBones
 
         public void PickUp()
         {
-            Griglia elementi = FindObjectOfType<Griglia>();
+            Grid elementi = FindObjectOfType<Grid>();
             if (elementi.scacchiera[xPosition, yPosition].status == -1)
                 proiettili += 5;
         }
@@ -92,7 +92,7 @@ namespace IndianaBones
 
             numDenti.text = (proiettili.ToString());
 
-            Griglia elementi = FindObjectOfType<Griglia>();
+            Grid elementi = FindObjectOfType<Grid>();
 
             Vector3 distance = targetTr.position - this.transform.position;
             Vector3 direction = distance.normalized;

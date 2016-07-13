@@ -4,9 +4,12 @@ using System.Collections;
 namespace IndianaBones
 {
 
-    public class EditorCella : MonoBehaviour
+    public class Cella : MonoBehaviour
     {
         public int status = 0;
+		//public int height;
+		//public int width;
+
         // Use this for initialization
         void Start()
         {
