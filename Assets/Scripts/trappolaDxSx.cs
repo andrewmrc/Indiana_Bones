@@ -12,13 +12,16 @@ namespace IndianaBones
         
         void Start()
         {
-            this.transform.position = new Vector2(14, 5);
+           
 
             Player objPlayer = FindObjectOfType<Player>();
             player = objPlayer.gameObject.transform;
 
             x = (int)this.transform.position.x;
             y = (int)this.transform.position.y;
+
+            Grid elementi = FindObjectOfType<Grid>();
+            this.transform.position = elementi.scacchiera[x, y].transform.position;
         }
 
         // Update is called once per frame
@@ -32,7 +35,7 @@ namespace IndianaBones
                 objPlayer.xPosition -= 1;
                 objPlayer.xOld -= 1;
                 objPlayer.controlloVita();
-                player.transform.position = new Vector2(x - 2, y);
+               player.transform.position = elementi.scacchiera[x - 2, y].transform.position;
                 objPlayer.targetTr = elementi.scacchiera[x-2, y].transform;
                
                 

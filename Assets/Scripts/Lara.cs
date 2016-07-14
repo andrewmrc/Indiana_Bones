@@ -12,14 +12,20 @@ namespace IndianaBones
         public float speed = 2;
         public Transform targetTr;
         public bool active = false;
+        GameObject giocatore;
+        public int distanzaAttivazione = 10;
        
 
         void Start()
         {
             Grid elementi = FindObjectOfType<Grid>();
-            xPosition = 9;
-            yPosition = 8;
-            
+
+            xPosition = (int)this.transform.position.x;
+            yPosition = (int)this.transform.position.y;
+
+            targetTr = elementi.scacchiera[xPosition, yPosition].transform;
+
+
         }
 
 
@@ -28,7 +34,13 @@ namespace IndianaBones
             lifePoints = 2;
         }
 
-        
+        public int ManhattanDist()
+        {
+            Player elementiPlayer = FindObjectOfType<Player>();
+            giocatore = elementiPlayer.gameObject;
+
+            return (Mathf.Abs((int)giocatore.transform.position.x - (int)this.transform.position.x) + Mathf.Abs((int)giocatore.transform.position.y - (int)this.transform.position.y));
+        }
 
         public void Posizione()
         {
@@ -41,7 +53,7 @@ namespace IndianaBones
             {
                 if (vita > 0)
                 {
-                    if (elementi.ManhattanDist() > 1)
+                    if (ManhattanDist() > 1)
 
                     {
                         if ((player.xPosition != lara.xPosition) && (player.yPosition != lara.yPosition))
@@ -100,7 +112,7 @@ namespace IndianaBones
                     
 
 
-                    else if (elementi.ManhattanDist() == 1)
+                    else if (ManhattanDist() == 1)
 
                     {
                         if (attacco == 1)
@@ -131,7 +143,7 @@ namespace IndianaBones
 
             elementi.scacchiera[xPosition, yPosition].status = 3;
 
-            if (elementi.ManhattanDist() < 7)
+            if (ManhattanDist() < distanzaAttivazione)
                 active = true;
 
             

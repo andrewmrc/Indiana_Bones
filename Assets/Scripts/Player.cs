@@ -17,7 +17,8 @@ namespace IndianaBones
         public float speed = 2;
         public Transform targetTr;
         private Animator animator;
-        public Text numDenti;
+       public Text numDenti;
+        public GameObject child;
 
 
         void Awake()
@@ -28,12 +29,17 @@ namespace IndianaBones
 
         void Start()
         {
-            xPosition = 1;
-            yPosition = 1;
-           
-            
-            
-            
+            xPosition = (int)this.transform.position.x;
+            yPosition = (int)this.transform.position.y;
+
+            Grid elementi = FindObjectOfType<Grid>();
+            this.transform.position = elementi.scacchiera[xPosition, yPosition].transform.position;
+            targetTr = elementi.scacchiera[xPosition, yPosition].transform;
+
+
+
+
+
         }
 
         protected override void SetupStats()
@@ -49,15 +55,15 @@ namespace IndianaBones
 
 
         }
-        
 
         
-        public void Attacco()
+
+       /* public void Attacco()
         {
             Grid elementi = FindObjectOfType<Grid>();
-            if (elementi.ManhattanDist() == 1)
+            if (ManhattanDist() == 1)
                 Destroy(elementi.enemy);
-        }
+        }*/
 
         public void OldValue()
         {
@@ -75,7 +81,7 @@ namespace IndianaBones
                 proiettili += 5;
         }
 
-		IEnumerator SayCiaoTenTimes(float seconds){
+		IEnumerator Camminata(float seconds){
             
             
 
@@ -90,16 +96,16 @@ namespace IndianaBones
             x = xPosition;
             y = yPosition;
 
-            numDenti.text = (proiettili.ToString());
+           numDenti.text = (proiettili.ToString());
 
             Grid elementi = FindObjectOfType<Grid>();
 
             Vector3 distance = targetTr.position - this.transform.position;
             Vector3 direction = distance.normalized;
 
-            transform.position = transform.position + direction * 2 * speed * Time.deltaTime;
+            transform.position = transform.position + direction *  speed * Time.deltaTime;
 
-            if (distance.magnitude < 0.10f)
+            if (distance.magnitude < 0.20f)
             {
                 transform.position = targetTr.position;
 
@@ -107,10 +113,11 @@ namespace IndianaBones
 
 
             if (Input.GetKeyDown("space"))
-                Attacco();
-            elementi.scacchiera[xPosition, yPosition].status = 1;
+                //Attacco();
 
-            if (movimento == 1)
+                elementi.scacchiera[xPosition, yPosition].status = 1;
+
+            if (movimento == 1) //movimento la utilizzeranno solo i nemici per i loro turni
             {
                 elementi.scacchiera[xOld, yOld].status = 0;
                 
@@ -123,36 +130,39 @@ namespace IndianaBones
                     if (proiettili > 0)
                 {
                     proiettili -= 1;
-                    GameObject nuovoDente = Instantiate(dente);
-                    nuovoDente.transform.position = new Vector2(xPosition, yPosition);
+
+                        
+                        
+                        GameObject nuovoDente = Instantiate(dente);
+                    nuovoDente.transform.position = new Vector2(child.transform.position.x,child.transform.position.y);
                 gamec.turno = 0;
             }
                 
 
-            if (Input.GetKeyDown("right"))
-                if (xPosition < 29)
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            
                    if(elementi.scacchiera[xPosition+1,yPosition].status < 2)
                     if (gamec.turno == 1)
                     {
                             PickUp();
                             animator.SetBool("Walk", true);
-                            StartCoroutine(SayCiaoTenTimes(0.5f));
+                            StartCoroutine(Camminata(0.5f));
                             bulletDir = 3;
                             OldValue();
                         xPosition += 1;
                         targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-                        gamec.turno = 0;
-
+                gamec.turno = 0;
+                Debug.Log("sono qui");
                     }
 
-            if (Input.GetKeyDown("left"))
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
                 if (xPosition > 0)
                     if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
                         if (gamec.turno == 1)
                     {
                             PickUp();
                             animator.SetBool("Walk", true);
-                            StartCoroutine(SayCiaoTenTimes(0.5f));
+                            StartCoroutine(Camminata(0.5f));
                             bulletDir = 4;
                             OldValue();
                         xPosition -= 1;
@@ -161,14 +171,14 @@ namespace IndianaBones
 
                     }
 
-            if (Input.GetKeyDown("down"))
+            if (Input.GetKeyDown(KeyCode.DownArrow))
                 if (yPosition > 0)
                     if (elementi.scacchiera[xPosition, yPosition -1].status < 2)
                         if (gamec.turno == 1)
                     {
                             PickUp();
                             animator.SetBool("Walk", true);
-                            StartCoroutine(SayCiaoTenTimes(0.5f));
+                            StartCoroutine(Camminata(0.5f));
                             bulletDir = 2;
                             OldValue();
                         yPosition -= 1;
@@ -177,14 +187,14 @@ namespace IndianaBones
 
                     }
 
-            if (Input.GetKeyDown("up"))
-                if (yPosition < 9)
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+                if (yPosition < 100)
                     if (elementi.scacchiera[xPosition, yPosition + 1].status < 2)
                         if (gamec.turno == 1)
                     {
                             PickUp();
                             animator.SetBool("Walk", true);
-                            StartCoroutine(SayCiaoTenTimes(0.5f));
+                            StartCoroutine(Camminata(0.5f));
                             bulletDir = 1;
                         OldValue();
                         yPosition += 1;

@@ -7,8 +7,7 @@ namespace IndianaBones
     public class Grid : MonoBehaviour
     {
 		
-		public GameObject player;
-		public GameObject enemy;
+		
 
 		public int n = 100;
         public int m = 100;
@@ -41,10 +40,7 @@ namespace IndianaBones
 
 
 
-        public int ManhattanDist()
-		{
-			return (Mathf.Abs((int)player.transform.position.x - (int)enemy.transform.position.x) + Mathf.Abs((int)player.transform.position.y - (int)enemy.transform.position.y));
-		}
+        
 
        
         void Update()
