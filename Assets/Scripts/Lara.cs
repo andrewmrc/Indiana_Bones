@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 namespace IndianaBones
 {
@@ -14,10 +17,20 @@ namespace IndianaBones
         public bool active = false;
         GameObject giocatore;
         public int distanzaAttivazione = 10;
-       
+
+        
+        [Header("Level and Stats")]
+        [Space(10)]
+        
+        public List<EnemyLevels> levelsList = new List<EnemyLevels>();
+
+        
 
         void Start()
         {
+            
+            
+
             Grid elementi = FindObjectOfType<Grid>();
 
             xPosition = (int)this.transform.position.x;

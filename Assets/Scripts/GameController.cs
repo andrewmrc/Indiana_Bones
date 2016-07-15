@@ -29,16 +29,32 @@ namespace IndianaBones
 
                 yield return new WaitForSeconds(seconds);
                 Lara lara = FindObjectOfType<Lara>();
+                Scaramucca scaramucca = FindObjectOfType<Scaramucca>();
+                ScaramuccaY scaramuccay = FindObjectOfType<ScaramuccaY>();
                 
                 
                 if (lara != null)
                 {
                     lara.Posizione();
-                    
-
                     lara.attacco = 1;
                 }
                 else if (lara == null)
+                    turno = 1;
+
+                if (scaramucca != null)
+                {
+                    scaramucca.MovimentoScaramucca();
+                    
+                }
+                else if (scaramucca == null)
+                    turno = 1;
+
+                if (scaramuccay != null)
+                {
+                    scaramuccay.MovimentoScaramucca();
+
+                }
+                else if (scaramuccay == null)
                     turno = 1;
 
                 count++;

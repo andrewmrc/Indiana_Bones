@@ -9,16 +9,13 @@ namespace IndianaBones
 
         public GameObject dente;
         
-
         public float forza = 0.5f;
 
-        
-        
+        bool seen = false;
 
-        void Awake()
-        {
-           
-        }
+
+
+     
 
         // Update is called once per frame
         void FixedUpdate()
@@ -49,6 +46,15 @@ namespace IndianaBones
             
 
 
+        }
+
+        void Update()
+        {
+            if (GetComponent<Renderer>().isVisible)
+                seen = true;
+
+            if (seen && !GetComponent<Renderer>().isVisible)
+                Destroy(gameObject);
         }
 
         public void OnCollisionEnter2D(Collision2D coll)

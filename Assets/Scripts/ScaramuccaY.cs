@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace IndianaBones
 {
 
-    public class Scaramucca : Character
+    public class ScaramuccaY : Character
     {
 
         public int RangePattuglia = 3;
@@ -30,6 +30,7 @@ namespace IndianaBones
             RangeInterno = RangePattuglia;
 
 
+
         }
 
         protected override void SetupStats()
@@ -45,14 +46,14 @@ namespace IndianaBones
             if (RangeInterno > 0)
             {
 
-                xPosition += 1;
+                yPosition += 1;
                 targetTr = elementi.scacchiera[xPosition, yPosition].transform;
                 RangeInterno--;
                 RangeOld++;
             }
             else
             { 
-                xPosition -= 1;
+                yPosition -= 1;
                 targetTr = elementi.scacchiera[xPosition, yPosition].transform;
                 RangeOld++;
                 if ((RangeOld/2) == RangePattuglia)
