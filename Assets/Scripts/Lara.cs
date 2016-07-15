@@ -61,13 +61,13 @@ namespace IndianaBones
                             if (player.xPosition < lara.xPosition)
                                 if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
                                     lara.xPosition -= 1;
-                                else
+                                else if (elementi.scacchiera[xPosition , yPosition +1].status < 2)
                                     lara.yPosition += 1;
                             if (player.xPosition > lara.xPosition)
 
                                 if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
                                     lara.xPosition += 1;
-                                else
+                                else if (elementi.scacchiera[xPosition , yPosition -1].status < 2)
                                     lara.yPosition -= 1;
 
 
@@ -79,13 +79,13 @@ namespace IndianaBones
                             if (player.yPosition < lara.yPosition)
                                 if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
                                     lara.xPosition -= 1;
-                                else
+                                else if (elementi.scacchiera[xPosition , yPosition+1].status < 2)
                                     lara.yPosition += 1;
                             if (player.yPosition > lara.yPosition)
 
                                 if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
                                     lara.xPosition += 1;
-                                else
+                                else if (elementi.scacchiera[xPosition , yPosition-1].status < 2)
                                     lara.yPosition -= 1;
 
 
@@ -95,13 +95,13 @@ namespace IndianaBones
                             if (player.yPosition < lara.yPosition)
                                 if (elementi.scacchiera[xPosition, yPosition - 1].status < 2)
                                     lara.yPosition -= 1;
-                                else
+                                else if (elementi.scacchiera[xPosition+1, yPosition].status < 2)
                                     lara.xPosition += 1;
                             if (player.yPosition > lara.yPosition)
 
                                 if (elementi.scacchiera[xPosition, yPosition + 1].status < 2)
                                     lara.yPosition += 1;
-                                else
+                                else if (elementi.scacchiera[xPosition-1, yPosition].status < 2)
                                     lara.xPosition -= 1;
 
                         }

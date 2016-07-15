@@ -29,9 +29,13 @@ namespace IndianaBones
 
                 yield return new WaitForSeconds(seconds);
                 Lara lara = FindObjectOfType<Lara>();
+                
+                
                 if (lara != null)
                 {
                     lara.Posizione();
+                    
+
                     lara.attacco = 1;
                 }
                 else if (lara == null)
@@ -57,6 +61,13 @@ namespace IndianaBones
 
            Scrollbar nuovaVita = vita.GetComponent<Scrollbar>();
            nuovaVita.size = barraVita;
+            Scaramucca scam = FindObjectOfType<Scaramucca>();
+
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                scam.MovimentoScaramucca();
+                Debug.Log("mucca");
+            }
 
 
 
