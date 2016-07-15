@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.UI;
 
 namespace IndianaBones
@@ -7,8 +9,6 @@ namespace IndianaBones
 
     public class Player : Character
     {
-
-        public int life = 5;
         public int proiettili = 5;
         public GameObject dente;
         public int x;
@@ -17,14 +17,45 @@ namespace IndianaBones
         public float speed = 2;
         public Transform targetTr;
         private Animator animator;
-       public Text numDenti;
+        public Text numDenti;
         public GameObject child;
 
+		[Header("Level and Stats")]
+		[Space(10)]
+		public int playerLevel = 1;
+		public int currentLife;
+		public int currentAttack;
+		public int currentMana;
+
+		public float expToLevelUp;
+		public int expCollected;
+		public int startingLife;
+		public int startingAttack;
+		public int startingMana;
+
+		//public List<PlayerLevels> levelsList = new List<PlayerLevels> ();
+
+		public static Player Instance;
 
         void Awake()
         {
+			//Metodo per passare l'oggetto da una scena all'altra
+			if (Instance == null) {
+				DontDestroyOnLoad (gameObject);
+				Instance = this;
+			} else if (Instance != this) {
+				Destroy (gameObject);
+			}
+
             animator = GetComponent<Animator>();
             animator.SetBool("Walk", false);
+
+			if (playerLevel == 1) {
+				//Set the starting stats of the player
+				currentLife = startingLife;
+				currentAttack = startingAttack;
+				currentMana = startingMana;
+			}
         }
 
         void Start()
@@ -49,13 +80,12 @@ namespace IndianaBones
 
        public void controlloVita()
         {
-            life -= 1;
+			currentLife -= 1;
             GameController gamec = FindObjectOfType<GameController>();
             gamec.barraVita -= 0.20f;
 
 
         }
-
         
 
        /* public void Attacco()
@@ -91,8 +121,38 @@ namespace IndianaBones
         
         }
 
+
+		public void LevelUp () {
+			//Save the previous required exp
+			float expToPreviousLevelUp = expToLevelUp;
+
+			//Set the new exp required to level up to the next level
+			expToLevelUp = expToPreviousLevelUp * 1.5f;
+
+			//Increase Life each level up
+			currentLife++;
+
+			//Increase Attack if the player level is pair
+			if (playerLevel % 2 == 0) {
+				currentAttack++;
+			}
+
+			//Increase Mana if the player level is odd
+			if (playerLevel % 2 != 0) {
+				currentMana= currentMana+3;
+			}
+				
+		}
+
+
         void Update()
         {
+			//Check if the player have reached the required exp to level up
+			if (expCollected >= expToLevelUp) {
+				playerLevel++;
+				LevelUp ();
+			}
+
             x = xPosition;
             y = yPosition;
 
