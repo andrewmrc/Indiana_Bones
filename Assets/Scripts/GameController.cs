@@ -55,8 +55,8 @@ namespace IndianaBones
                 StartCoroutine(TurnEnemyAfterSeconds(0.2f));
             }
 
-            Scrollbar nuovaVita = vita.GetComponent<Scrollbar>();
-            nuovaVita.size = barraVita;
+           Scrollbar nuovaVita = vita.GetComponent<Scrollbar>();
+           nuovaVita.size = barraVita;
 
 
 
