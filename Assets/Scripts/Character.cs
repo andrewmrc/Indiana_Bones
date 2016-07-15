@@ -11,8 +11,7 @@ namespace IndianaBones
         public int yPosition;
         public int xOld;
         public int yOld;
-        public int movimento = 1;
-
+        public int movimento = 0;
         void Awake()
         {
             
