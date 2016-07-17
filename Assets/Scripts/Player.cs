@@ -78,9 +78,9 @@ namespace IndianaBones
             lifePoints = 5;
         }
 
-       public void controlloVita()
+       public void controlloVita(int attack)
         {
-			currentLife -= 1;
+			currentLife -= attack;
             GameController gamec = FindObjectOfType<GameController>();
             gamec.barraVita -= 0.20f;
 
@@ -185,6 +185,16 @@ namespace IndianaBones
 
             GameController gamec = FindObjectOfType<GameController>();
 
+            Transform figlio = transform.FindChild("lancio");
+
+            if (Input.GetKeyDown(KeyCode.Keypad8))
+            {
+                figlio.transform.localEulerAngles = new Vector3(0, 0, 90);
+                //figlio.transform.Translate(0, 90, 0);
+                Debug.Log("sono qui");
+            }
+
+
             if (Input.GetKeyDown("a"))
                 if (gamec.turno == 1)
                     if (proiettili > 0)
@@ -211,6 +221,7 @@ namespace IndianaBones
                             OldValue();
                         xPosition += 1;
                         targetTr = elementi.scacchiera[xPosition, yPosition].transform;
+                        elementi.scacchiera[xPosition, yPosition].status = 4;
                 gamec.turno = 0;
                 Debug.Log("sono qui");
                     }
@@ -227,7 +238,8 @@ namespace IndianaBones
                             OldValue();
                         xPosition -= 1;
                         targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-                        gamec.turno = 0;
+                            elementi.scacchiera[xPosition, yPosition].status = 4;
+                            gamec.turno = 0;
 
                     }
 
@@ -243,7 +255,8 @@ namespace IndianaBones
                             OldValue();
                         yPosition -= 1;
                         targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-                        gamec.turno = 0;
+                            elementi.scacchiera[xPosition, yPosition].status = 4;
+                            gamec.turno = 0;
 
                     }
 
@@ -259,7 +272,8 @@ namespace IndianaBones
                         OldValue();
                         yPosition += 1;
                         targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-                        gamec.turno = 0;
+                            elementi.scacchiera[xPosition, yPosition].status = 4;
+                            gamec.turno = 0;
                     }
 
             

@@ -43,15 +43,15 @@ namespace IndianaBones
 
             Grid elementi = FindObjectOfType<Grid>();
 
-            if (RangeInterno > 0)
-            {
+            if ((RangeInterno > 0) && (elementi.scacchiera[xPosition, yPosition + 1].status != 4))
+                {
 
                 yPosition += 1;
                 targetTr = elementi.scacchiera[xPosition, yPosition].transform;
                 RangeInterno--;
                 RangeOld++;
             }
-            else
+            else if ((RangeInterno <= 0) && (elementi.scacchiera[xPosition, yPosition - 1].status != 4))
             { 
                 yPosition -= 1;
                 targetTr = elementi.scacchiera[xPosition, yPosition].transform;
@@ -72,6 +72,17 @@ namespace IndianaBones
 
         void Update()
         {
+            Player giocatore = FindObjectOfType<Player>();
+            //nel caso in cui il valore Life del nemico è minore/uguale a zero vengono incrementati gli exp del player
+            foreach (var statistiche in levelsList)
+                if (statistiche.Life <= 0)
+                {
+                    giocatore.expCollected += statistiche.Exp;
+
+                    //da aggiungere la distruzione del nemico da valutare con l'animazione relativa alla morte
+                }
+
+
             Vector3 distance = targetTr.position - this.transform.position;
             Vector3 direction = distance.normalized;
 

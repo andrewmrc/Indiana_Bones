@@ -34,7 +34,9 @@ namespace IndianaBones
             {
                 objPlayer.xPosition += 1;
                 objPlayer.xOld += 1;
-                objPlayer.controlloVita();
+                //inserito un valore di default per il danno trappola da rivedere se si vuole 
+                //avere un aumento del danno per livello come nel caso dei nemici
+                objPlayer.controlloVita(1);
                 player.transform.position = elementi.scacchiera[x + 2, y].transform.position;
                 objPlayer.targetTr = elementi.scacchiera[x+2, y].transform;
                

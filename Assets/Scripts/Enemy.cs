@@ -17,7 +17,7 @@ namespace IndianaBones
         public int distanzaAttivazione = 10;
        
 		public List<EnemyLevels> levelsList = new List<EnemyLevels> ();
-
+        
 
         void Start()
         {
@@ -51,7 +51,7 @@ namespace IndianaBones
             Grid elementi = FindObjectOfType<Grid>();
             GameController gamec = FindObjectOfType<GameController>();
             Player player = FindObjectOfType<Player>();
-            Lara lara = FindObjectOfType<Lara>();
+            Canubi lara = FindObjectOfType<Canubi>();
             if (active == true)
             {
                 if (vita > 0)
@@ -118,8 +118,10 @@ namespace IndianaBones
                     else if (ManhattanDist() == 1)
 
                     {
+                        foreach(var statistiche in levelsList)
+
                         if (attacco == 1)
-                            player.controlloVita();
+                            player.controlloVita(statistiche.Attack);
                         attacco = 0;
                         gamec.turno = 1;
                     }

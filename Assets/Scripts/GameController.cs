@@ -28,7 +28,7 @@ namespace IndianaBones
 
 
                 yield return new WaitForSeconds(seconds);
-                Lara lara = FindObjectOfType<Lara>();
+                Canubi lara = FindObjectOfType<Canubi>();
                 Scaramucca scaramucca = FindObjectOfType<Scaramucca>();
                 ScaramuccaY scaramuccay = FindObjectOfType<ScaramuccaY>();
                 
@@ -72,7 +72,7 @@ namespace IndianaBones
             if (turno == 0 && turnoNemici == 1)
             {
                 turnoNemici = 0;
-                StartCoroutine(TurnEnemyAfterSeconds(0.2f));
+                StartCoroutine(TurnEnemyAfterSeconds(1f));
             }
 
            Scrollbar nuovaVita = vita.GetComponent<Scrollbar>();

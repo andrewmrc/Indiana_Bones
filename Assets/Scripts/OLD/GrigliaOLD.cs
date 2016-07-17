@@ -46,7 +46,7 @@ namespace IndianaBones
             lara.transform.position = scacchiera[8, 8].transform.position;
             colonna.transform.position = scacchiera[5,5].transform.position;
             scacchiera[5, 5].status = 2;
-            Lara eleLara = FindObjectOfType<Lara>();
+            Canubi eleLara = FindObjectOfType<Canubi>();
             eleLara.targetTr = scacchiera[8, 8].transform;
             Player  playerEle = FindObjectOfType<Player>();
             playerEle.targetTr = scacchiera[1, 1].transform;

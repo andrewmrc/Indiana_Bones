@@ -8,7 +8,7 @@ namespace IndianaBones
 {
     
 
-    public class Lara : Character
+    public class Canubi : Character
     {
         public int attacco = 1;
         public int vita = 1;
@@ -23,15 +23,14 @@ namespace IndianaBones
         [Space(10)]
         
         public List<EnemyLevels> levelsList = new List<EnemyLevels>();
-
         
 
         void Start()
         {
-            
+
             
 
-            Grid elementi = FindObjectOfType<Grid>();
+                Grid elementi = FindObjectOfType<Grid>();
 
             xPosition = (int)this.transform.position.x;
             yPosition = (int)this.transform.position.y;
@@ -61,7 +60,7 @@ namespace IndianaBones
             Grid elementi = FindObjectOfType<Grid>();
             GameController gamec = FindObjectOfType<GameController>();
             Player player = FindObjectOfType<Player>();
-            Lara lara = FindObjectOfType<Lara>();
+            Canubi canubiEnemy = FindObjectOfType<Canubi>();
             if (active == true)
             {
                 if (vita > 0)
@@ -69,57 +68,57 @@ namespace IndianaBones
                     if (ManhattanDist() > 1)
 
                     {
-                        if ((player.xPosition != lara.xPosition) && (player.yPosition != lara.yPosition))
+                        if ((player.xPosition != canubiEnemy.xPosition) && (player.yPosition != canubiEnemy.yPosition))
                         {
-                            if (player.xPosition < lara.xPosition)
+                            if (player.xPosition < canubiEnemy.xPosition)
                                 if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
-                                    lara.xPosition -= 1;
+                                    canubiEnemy.xPosition -= 1;
                                 else if (elementi.scacchiera[xPosition , yPosition +1].status < 2)
-                                    lara.yPosition += 1;
-                            if (player.xPosition > lara.xPosition)
+                                    canubiEnemy.yPosition += 1;
+                            if (player.xPosition > canubiEnemy.xPosition)
 
                                 if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
-                                    lara.xPosition += 1;
+                                    canubiEnemy.xPosition += 1;
                                 else if (elementi.scacchiera[xPosition , yPosition -1].status < 2)
-                                    lara.yPosition -= 1;
+                                    canubiEnemy.yPosition -= 1;
 
 
 
 
                         }
-                        else if (player.yPosition == lara.yPosition)
+                        else if (player.yPosition == canubiEnemy.yPosition)
                         {
-                            if (player.yPosition < lara.yPosition)
+                            if (player.yPosition < canubiEnemy.yPosition)
                                 if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
-                                    lara.xPosition -= 1;
+                                    canubiEnemy.xPosition -= 1;
                                 else if (elementi.scacchiera[xPosition , yPosition+1].status < 2)
-                                    lara.yPosition += 1;
-                            if (player.yPosition > lara.yPosition)
+                                    canubiEnemy.yPosition += 1;
+                            if (player.yPosition > canubiEnemy.yPosition)
 
                                 if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
-                                    lara.xPosition += 1;
+                                    canubiEnemy.xPosition += 1;
                                 else if (elementi.scacchiera[xPosition , yPosition-1].status < 2)
-                                    lara.yPosition -= 1;
+                                    canubiEnemy.yPosition -= 1;
 
 
                         }
-                        else if (player.xPosition == lara.xPosition)
+                        else if (player.xPosition == canubiEnemy.xPosition)
                         {
-                            if (player.yPosition < lara.yPosition)
+                            if (player.yPosition < canubiEnemy.yPosition)
                                 if (elementi.scacchiera[xPosition, yPosition - 1].status < 2)
-                                    lara.yPosition -= 1;
+                                    canubiEnemy.yPosition -= 1;
                                 else if (elementi.scacchiera[xPosition+1, yPosition].status < 2)
-                                    lara.xPosition += 1;
-                            if (player.yPosition > lara.yPosition)
+                                    canubiEnemy.xPosition += 1;
+                            if (player.yPosition > canubiEnemy.yPosition)
 
                                 if (elementi.scacchiera[xPosition, yPosition + 1].status < 2)
-                                    lara.yPosition += 1;
+                                    canubiEnemy.yPosition += 1;
                                 else if (elementi.scacchiera[xPosition-1, yPosition].status < 2)
-                                    lara.xPosition -= 1;
+                                    canubiEnemy.xPosition -= 1;
 
                         }
 
-                        targetTr = elementi.scacchiera[lara.xPosition, lara.yPosition].transform;
+                        targetTr = elementi.scacchiera[canubiEnemy.xPosition, canubiEnemy.yPosition].transform;
                     }
 
                     
@@ -128,13 +127,19 @@ namespace IndianaBones
                     else if (ManhattanDist() == 1)
 
                     {
+                        gamec.turno = 1;
+                        foreach (var statistiche in levelsList)
+                        
+                         //viene richiamato il valore di attacco corrente del nemico e passato al metodo in Player
+                         //per essere sottratto alla sua vita  
+                        
                         if (attacco == 1)
-                            player.controlloVita();
+                            player.controlloVita(statistiche.Attack);
                         attacco = 0;
                         gamec.turno = 1;
                     }
 
-
+                    
                 }
                 
             }
@@ -152,6 +157,17 @@ namespace IndianaBones
 
         void Update()
         {
+            Player giocatore = FindObjectOfType<Player>();
+
+            //nel caso in cui il valore Life del nemico è minore/uguale a zero vengono incrementati gli exp del player
+            foreach (var statistiche in levelsList)
+                if (statistiche.Life <= 0)
+                {
+                    giocatore.expCollected += statistiche.Exp;
+
+                    //da aggiungere la distruzione del nemico da valutare con l'animazione relativa alla morte
+                }
+
             Grid elementi = FindObjectOfType<Grid>();
 
             elementi.scacchiera[xPosition, yPosition].status = 3;

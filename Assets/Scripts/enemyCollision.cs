@@ -18,7 +18,7 @@ namespace IndianaBones
             if (coll.gameObject.name == "dente(Clone)")
             {
                 Grid objGrid = FindObjectOfType<Grid>();
-                Lara newLara = FindObjectOfType<Lara>();
+                Canubi newLara = FindObjectOfType<Canubi>();
 
                 GameObject newDente = Instantiate(denteSpawn);
                 newDente.transform.position = laraCroft.transform.position;
