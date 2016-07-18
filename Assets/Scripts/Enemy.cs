@@ -32,10 +32,7 @@ namespace IndianaBones
         }
 
 
-        protected override void SetupStats()
-        {
-            lifePoints = 2;
-        }
+       
 
         public int ManhattanDist()
         {

@@ -12,15 +12,16 @@ namespace IndianaBones
         public int xOld;
         public int yOld;
         public int movimento = 0;
+        
         void Awake()
         {
             
             
-            SetupStats();
+            
         }
 
        
-        protected abstract void SetupStats();
+        
 
     }
 }

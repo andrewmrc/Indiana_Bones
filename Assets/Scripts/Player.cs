@@ -88,10 +88,7 @@ namespace IndianaBones
 
         }
 
-        protected override void SetupStats()
-        {
-            lifePoints = 5;
-        }
+        
 
        public void controlloVita(int attack)
         {

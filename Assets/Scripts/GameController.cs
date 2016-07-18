@@ -31,50 +31,7 @@ namespace IndianaBones
             
         }
 
-        IEnumerator TurnEnemyAfterSeconds(float seconds)
-        {
-            
-            
-            int count = 0;
-            while (count < 1)
-            {
-
-
-                yield return new WaitForSeconds(seconds);
-                Canubi lara = FindObjectOfType<Canubi>();
-                Scaramucca scaramucca = FindObjectOfType<Scaramucca>();
-                ScaramuccaY scaramuccay = FindObjectOfType<ScaramuccaY>();
-                
-                
-                if (lara != null)
-                {
-                    lara.Posizione();
-                    lara.attacco = 1;
-                }
-                else if (lara == null)
-                    turno = 1;
-
-                if (scaramucca != null)
-                {
-                    scaramucca.MovimentoScaramucca();
-                    
-                }
-                else if (scaramucca == null)
-                    turno = 1;
-
-                if (scaramuccay != null)
-                {
-                    scaramuccay.MovimentoScaramucca();
-
-                }
-                else if (scaramuccay == null)
-                    turno = 1;
-
-                count++;
-            }
-            turnoNemici = 1;
-
-        }
+        
 
         void Update()
         {
@@ -85,18 +42,26 @@ namespace IndianaBones
             if (turno == 0 && turnoNemici == 1)
             {
                 turnoNemici = 0;
-                StartCoroutine(TurnEnemyAfterSeconds(1f));
+                Scaramucca[] scaramuccche = FindObjectsOfType<Scaramucca>();
+
+                foreach (Scaramucca scaramucca in scaramuccche)
+                {
+                    scaramucca.attivo = true;
+                }
+
+                Canubi[] AllCanubi = FindObjectsOfType<Canubi>();
+
+                foreach (Canubi canubi in AllCanubi)
+                {
+                    canubi.attivo = true;
+                }
+
+                turnoNemici = 1;
             }
 
            Scrollbar nuovaVita = vita.GetComponent<Scrollbar>();
            nuovaVita.size = barraVita;
-            Scaramucca scam = FindObjectOfType<Scaramucca>();
-
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                scam.MovimentoScaramucca();
-                Debug.Log("mucca");
-            }
+           
 
 
 
