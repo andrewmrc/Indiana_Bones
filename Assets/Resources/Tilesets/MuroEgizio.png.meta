@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: e81cc7f2c537caf4e8f410f2658cd37e
-timeCreated: 1468848594
-licenseType: Pro
+guid: 4cb70ec1be3f9ee42ba5efc22a0e1454
+timeCreated: 1468872437
+licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: wall_0
-    21300002: wall_1
-    21300004: wall_2
-    21300006: wall_3
-    21300008: wall_4
-    21300010: wall_5
-    21300012: wall_6
-    21300014: wall_7
-    21300016: wall_8
-    21300018: wall_9
+    21300000: MuroEgizio_0
+    21300002: MuroEgizio_1
+    21300004: MuroEgizio_2
+    21300006: MuroEgizio_3
+    21300008: MuroEgizio_4
+    21300010: MuroEgizio_5
+    21300012: MuroEgizio_6
+    21300014: MuroEgizio_7
+    21300016: MuroEgizio_8
+    21300018: MuroEgizio_9
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -60,7 +60,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: wall_0
+    - name: MuroEgizio_0
       rect:
         serializedVersion: 2
         x: 0
@@ -75,7 +75,7 @@ TextureImporter:
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: wall_1
+    - name: MuroEgizio_1
       rect:
         serializedVersion: 2
         x: 100
@@ -90,7 +90,7 @@ TextureImporter:
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: wall_2
+    - name: MuroEgizio_2
       rect:
         serializedVersion: 2
         x: 200
@@ -105,7 +105,7 @@ TextureImporter:
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: wall_3
+    - name: MuroEgizio_3
       rect:
         serializedVersion: 2
         x: 0
@@ -120,7 +120,7 @@ TextureImporter:
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: wall_4
+    - name: MuroEgizio_4
       rect:
         serializedVersion: 2
         x: 100
@@ -135,7 +135,7 @@ TextureImporter:
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: wall_5
+    - name: MuroEgizio_5
       rect:
         serializedVersion: 2
         x: 200
@@ -150,7 +150,7 @@ TextureImporter:
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: wall_6
+    - name: MuroEgizio_6
       rect:
         serializedVersion: 2
         x: 0
@@ -165,7 +165,7 @@ TextureImporter:
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: wall_7
+    - name: MuroEgizio_7
       rect:
         serializedVersion: 2
         x: 100
@@ -180,7 +180,7 @@ TextureImporter:
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: wall_8
+    - name: MuroEgizio_8
       rect:
         serializedVersion: 2
         x: 200
@@ -195,7 +195,7 @@ TextureImporter:
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: wall_9
+    - name: MuroEgizio_9
       rect:
         serializedVersion: 2
         x: 0

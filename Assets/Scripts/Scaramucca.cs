@@ -19,6 +19,7 @@ namespace IndianaBones
         Transform targetTr;
         public int RangeInterno;
         public int RangeOld = 0;
+        private Grid elementi;
 
         [Header("Level and Stats")]
         [Space(10)]
@@ -28,7 +29,7 @@ namespace IndianaBones
 
         void Start()
         {
-            Grid elementi = FindObjectOfType<Grid>();
+            elementi = FindObjectOfType<Grid>();
 
             xPosition = (int)this.transform.position.x;
             yPosition = (int)this.transform.position.y;
@@ -57,14 +58,24 @@ namespace IndianaBones
 
         }
 
+        public void OldValue()
+        {
+
+            xOld = (int)this.transform.position.x;
+            yOld = (int)this.transform.position.y;
+            elementi.scacchiera[xOld, yOld].status = 0;
+
+        }
+
         public void MovimentoAsseX()
         {
-            Grid elementi = FindObjectOfType<Grid>();
+            OldValue();
 
             if ((RangeInterno > 0) && (elementi.scacchiera[xPosition + 1, yPosition].status != 4))
 
             {
 
+                elementi.scacchiera[xPosition + 1, yPosition].status = 3;
                 xPosition += 1;
                 targetTr = elementi.scacchiera[xPosition, yPosition].transform;
                 RangeInterno--;
@@ -74,6 +85,7 @@ namespace IndianaBones
 
 
             {
+                elementi.scacchiera[xPosition - 1, yPosition].status = 3;
                 xPosition -= 1;
                 targetTr = elementi.scacchiera[xPosition, yPosition].transform;
                 RangeOld++;
@@ -92,11 +104,12 @@ namespace IndianaBones
 
         public void MovimentoAsseY()
         {
-            Grid elementi = FindObjectOfType<Grid>();
+            OldValue();
 
             if ((RangeInterno > 0) && (elementi.scacchiera[xPosition, yPosition + 1].status != 4))
             {
 
+                elementi.scacchiera[xPosition, yPosition + 1].status = 3;
                 yPosition += 1;
                 targetTr = elementi.scacchiera[xPosition, yPosition].transform;
                 RangeInterno--;
@@ -104,6 +117,7 @@ namespace IndianaBones
             }
             else if ((RangeInterno <= 0) && (elementi.scacchiera[xPosition, yPosition - 1].status != 4))
             {
+                elementi.scacchiera[xPosition, yPosition - 1].status = 3;
                 yPosition -= 1;
                 targetTr = elementi.scacchiera[xPosition, yPosition].transform;
                 RangeOld++;
