@@ -8,6 +8,19 @@ namespace IndianaBones
     public class GameController : MonoBehaviour
     {
 
+		// Singleton Implementation
+		protected static GameController _self;
+		public static GameController Self
+		{
+			get
+			{
+				if (_self == null)
+					_self = FindObjectOfType(typeof(GameController)) as GameController;
+				return _self;
+			}
+		}
+
+
         public int turno = 1;
         public int turnoNemici = 1;
         public Scrollbar vita;

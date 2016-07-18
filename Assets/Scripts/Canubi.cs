@@ -17,27 +17,26 @@ namespace IndianaBones
         public bool active = false;
         GameObject giocatore;
         public int distanzaAttivazione = 10;
-
+		private Grid elementi;
         
         [Header("Level and Stats")]
         [Space(10)]
-        
+		public int powerLevel;
         public List<EnemyLevels> levelsList = new List<EnemyLevels>();
         
 
         void Start()
-        {
+        {     
+			vita = levelsList [powerLevel].Life;
+			attacco = levelsList [powerLevel].Attack;
 
-            
-
-                Grid elementi = FindObjectOfType<Grid>();
+            elementi = FindObjectOfType<Grid>();
 
             xPosition = (int)this.transform.position.x;
             yPosition = (int)this.transform.position.y;
 
             targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-
-
+	
         }
 
 
@@ -45,6 +44,7 @@ namespace IndianaBones
         {
             lifePoints = 2;
         }
+
 
         public int ManhattanDist()
         {
@@ -54,10 +54,11 @@ namespace IndianaBones
             return (Mathf.Abs((int)giocatore.transform.position.x - (int)this.transform.position.x) + Mathf.Abs((int)giocatore.transform.position.y - (int)this.transform.position.y));
         }
 
+
         public void Posizione()
         {
             OldValue();
-            Grid elementi = FindObjectOfType<Grid>();
+            //Grid elementi = FindObjectOfType<Grid>();
             GameController gamec = FindObjectOfType<GameController>();
             Player player = FindObjectOfType<Player>();
             Canubi canubiEnemy = FindObjectOfType<Canubi>();
@@ -146,29 +147,37 @@ namespace IndianaBones
             gamec.turno = 1;
 
         }
+
+
         public void OldValue()
         {
-            Grid elementi = FindObjectOfType<Grid>();
+            //Grid elementi = FindObjectOfType<Grid>();
             xOld = (int)this.transform.position.x;
             yOld = (int)this.transform.position.y;
             elementi.scacchiera[xOld, yOld].status = 0;
 
         }
 
+
         void Update()
         {
             Player giocatore = FindObjectOfType<Player>();
 
             //nel caso in cui il valore Life del nemico è minore/uguale a zero vengono incrementati gli exp del player
-            foreach (var statistiche in levelsList)
-                if (statistiche.Life <= 0)
-                {
-                    giocatore.expCollected += statistiche.Exp;
+			foreach (var statistiche in levelsList) 
+				if (statistiche.Life <= 0) {
+					giocatore.expCollected += statistiche.Exp;
 
-                    //da aggiungere la distruzione del nemico da valutare con l'animazione relativa alla morte
-                }
+					//da aggiungere la distruzione del nemico da valutare con l'animazione relativa alla morte
+				}
+			
 
-            Grid elementi = FindObjectOfType<Grid>();
+			//Controlliamo se la vita va a zero e in tal caso aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
+		/*	if (vita <= 0) {
+				Player.Self.expCollected += levelsList[powerLevel].Exp;
+			}*/
+			
+            //Grid elementi = FindObjectOfType<Grid>();
 
             elementi.scacchiera[xPosition, yPosition].status = 3;
 

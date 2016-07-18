@@ -9,6 +9,20 @@ namespace IndianaBones
 
     public class Player : Character
     {
+
+		// Singleton Implementation
+		protected static Player _self;
+		public static Player Self
+		{
+			get
+			{
+				if (_self == null)
+					_self = FindObjectOfType(typeof(Player)) as Player;
+				return _self;
+			}
+		}
+
+
         public int proiettili = 5;
         public GameObject dente;
         public int x;
@@ -19,6 +33,7 @@ namespace IndianaBones
         private Animator animator;
         public Text numDenti;
         public GameObject child;
+		private Grid elementi;
 
 		[Header("Level and Stats")]
 		[Space(10)]
@@ -63,7 +78,7 @@ namespace IndianaBones
             xPosition = (int)this.transform.position.x;
             yPosition = (int)this.transform.position.y;
 
-            Grid elementi = FindObjectOfType<Grid>();
+            elementi = FindObjectOfType<Grid>();
             this.transform.position = elementi.scacchiera[xPosition, yPosition].transform.position;
             targetTr = elementi.scacchiera[xPosition, yPosition].transform;
 
@@ -97,7 +112,7 @@ namespace IndianaBones
 
         public void OldValue()
         {
-            Grid elementi = FindObjectOfType<Grid>();
+            //Grid elementi = FindObjectOfType<Grid>();
             xOld = (int)this.transform.position.x;
             yOld = (int)this.transform.position.y;
             elementi.scacchiera[xOld, yOld].status = 0;
@@ -106,7 +121,7 @@ namespace IndianaBones
 
         public void PickUp()
         {
-            Grid elementi = FindObjectOfType<Grid>();
+            //Grid elementi = FindObjectOfType<Grid>();
             if (elementi.scacchiera[xPosition, yPosition].status == -1)
                 proiettili += 5;
         }
@@ -158,7 +173,7 @@ namespace IndianaBones
 
            numDenti.text = (proiettili.ToString());
 
-            Grid elementi = FindObjectOfType<Grid>();
+            //Grid elementi = FindObjectOfType<Grid>();
 
             Vector3 distance = targetTr.position - this.transform.position;
             Vector3 direction = distance.normalized;
@@ -209,7 +224,7 @@ namespace IndianaBones
             }
                 
 
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+			if (Input.GetKeyDown(KeyCode.RightArrow))
             
                    if(elementi.scacchiera[xPosition+1,yPosition].status < 2)
                     if (gamec.turno == 1)
@@ -226,7 +241,7 @@ namespace IndianaBones
                 Debug.Log("sono qui");
                     }
 
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+			if (Input.GetKeyDown(KeyCode.LeftArrow))
                 if (xPosition > 0)
                     if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
                         if (gamec.turno == 1)
@@ -243,7 +258,7 @@ namespace IndianaBones
 
                     }
 
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+			if (Input.GetKeyDown(KeyCode.DownArrow))
                 if (yPosition > 0)
                     if (elementi.scacchiera[xPosition, yPosition -1].status < 2)
                         if (gamec.turno == 1)
@@ -260,7 +275,7 @@ namespace IndianaBones
 
                     }
 
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+			if (Input.GetKeyDown(KeyCode.UpArrow))
                 if (yPosition < 100)
                     if (elementi.scacchiera[xPosition, yPosition + 1].status < 2)
                         if (gamec.turno == 1)
