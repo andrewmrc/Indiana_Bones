@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 namespace IndianaBones
 {
@@ -12,11 +14,13 @@ namespace IndianaBones
         public int yPosition;
         public int xOld;
         public int yOld;
+        public int attacco = 1;
+        public int vita = 1;
         public int movimento = 0;
         public bool attivo = false;
         public int TipoMovimento = 1;
         public int RangePattuglia = 3;
-        Transform targetTr;
+        public Transform targetTr;
         public int RangeInterno;
         public int RangeOld = 0;
         private Grid elementi;
@@ -29,6 +33,9 @@ namespace IndianaBones
 
         void Start()
         {
+            vita = levelsList[powerLevel].Life;
+            attacco = levelsList[powerLevel].Attack;
+
             elementi = FindObjectOfType<Grid>();
 
             xPosition = (int)this.transform.position.x;
@@ -38,11 +45,81 @@ namespace IndianaBones
 
             RangeInterno = RangePattuglia;
 
-
+            
 
         }
 
-       
+        public void OnTriggerEnter2D(Collider2D coll)
+        {
+
+
+            if (coll.gameObject.name == "up")
+            {
+                if (Player.Self.croce == 1)
+                {
+
+                    vita -= Player.Self.currentAttack;
+
+                    //sottraggo vita al player
+
+                    Player.Self.currentLife -= attacco;
+
+                }
+            }
+            if (coll.gameObject.name == "down")
+            {
+                if (Player.Self.croce == 3)
+                {
+
+                    vita -= Player.Self.currentAttack;
+
+                    Player.Self.currentLife -= attacco;
+
+                }
+            }
+            if (coll.gameObject.name == "right")
+            {
+                if (Player.Self.croce == 2)
+                {
+
+                    vita -= Player.Self.currentAttack;
+
+                    Player.Self.currentLife -= attacco;
+
+                }
+            }
+            if (coll.gameObject.name == "left")
+            {
+                if (Player.Self.croce == 4)
+                {
+
+                    vita -= Player.Self.currentAttack;
+
+                    Player.Self.currentLife -= attacco;
+
+                }
+            }
+
+            
+        }
+
+        public void OnCollisionEnter2D(Collision2D coll)
+        {
+
+
+            if (coll.gameObject.name == "dente(Clone)")
+            {
+
+                vita -= Player.Self.currentAttack;
+
+                Destroy(coll.gameObject);
+
+
+
+
+            }
+
+        }
 
         public void MovimentoScaramucca()
         {
@@ -61,8 +138,8 @@ namespace IndianaBones
         public void OldValue()
         {
 
-            xOld = (int)this.transform.position.x;
-            yOld = (int)this.transform.position.y;
+            xOld = xPosition;
+            yOld = yPosition;
             elementi.scacchiera[xOld, yOld].status = 0;
 
         }
@@ -71,35 +148,42 @@ namespace IndianaBones
         {
             OldValue();
 
-            if ((RangeInterno > 0) && (elementi.scacchiera[xPosition + 1, yPosition].status != 4))
-
+            if (RangeInterno > 0)
             {
-
-                elementi.scacchiera[xPosition + 1, yPosition].status = 3;
-                xPosition += 1;
-                targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-                RangeInterno--;
-                RangeOld++;
-            }
-            else if ((RangeInterno <= 0) && (elementi.scacchiera[xPosition - 1, yPosition].status != 4))
-
-
-            {
-                elementi.scacchiera[xPosition - 1, yPosition].status = 3;
-                xPosition -= 1;
-                targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-                RangeOld++;
-                if ((RangeOld / 2) == RangePattuglia)
+                if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
                 {
-                    RangeInterno = RangePattuglia;
-                    RangeOld = 0;
+
+                    elementi.scacchiera[xPosition + 1, yPosition].status = 3;
+                    xPosition += 1;
+                    targetTr = elementi.scacchiera[xPosition, yPosition].transform;
+                    RangeInterno--;
+                    RangeOld++;
+                }
+            }
+            else if (RangeInterno <= 0)
+            {
+                if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
+
+
+                {
+                    elementi.scacchiera[xPosition - 1, yPosition].status = 3;
+                    xPosition -= 1;
+                    targetTr = elementi.scacchiera[xPosition, yPosition].transform;
+                    RangeOld++;
+                    if ((RangeOld / 2) == RangePattuglia)
+                    {
+                        RangeInterno = RangePattuglia;
+                        RangeOld = 0;
+
+                    }
+
+
+
 
                 }
-
-
-
-
             }
+
+            GameController.Self.turno = 1;
         }
 
         public void MovimentoAsseY()
@@ -134,12 +218,15 @@ namespace IndianaBones
         void Update()
         {
             //Controlliamo se la vita va a zero e in tal caso aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
-           /* if (this.levelsList[powerLevel].Life <= 0)
-            {
+             if (vita <= 0)
+             {
+                elementi.scacchiera[xPosition, yPosition].status = 0;
                 Player.Self.expCollected += levelsList[powerLevel].Exp;
-                //da aggiungere la distruzione del nemico da valutare con l'animazione relativa alla morte
+                Destroy(this.gameObject);
+            }
 
-            }*/
+            if (vita > 0)
+                elementi.scacchiera[xPosition, yPosition].status = 3;
 
             Vector3 distance = targetTr.position - this.transform.position;
             Vector3 direction = distance.normalized;

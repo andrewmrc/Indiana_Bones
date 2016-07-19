@@ -16,6 +16,7 @@ namespace IndianaBones
         bool onMove = true;
         bool onOff = false;
         bool click = true;
+        bool attacco = false;
 
         public int croce = 1;
 
@@ -47,6 +48,7 @@ namespace IndianaBones
         public Transform targetTr;
         private Animator animator;
         public Text numDenti;
+        public Text valoreVita;
         public GameObject child;
 		private Grid elementi;
 
@@ -108,22 +110,119 @@ namespace IndianaBones
        public void controlloVita(int attack)
         {
 			currentLife -= attack;
-            GameController gamec = FindObjectOfType<GameController>();
-            gamec.barraVita -= 0.20f;
+           // GameController gamec = FindObjectOfType<GameController>();
+           // gamec.barraVita -= 0.20f;
 
 
         }
-        
+
+
+        public void AttaccoADistanza()
+        {
+            if (croce == 1)
+            {
+                if (proiettili > 0)
+                {
+                    proiettili -= 1;
+
+                    bulletDir = 1;
+
+                    GameObject nuovoDente = Instantiate(dente);
+                    nuovoDente.transform.position = up.transform.position;
+                    
+                }
+
+            }
+
+            if (croce == 2)
+            {
+                if (proiettili > 0)
+                {
+                    proiettili -= 1;
+
+                    bulletDir = 3;
+
+                    GameObject nuovoDente = Instantiate(dente);
+                    nuovoDente.transform.position = right.transform.position;
+
+                }
+
+            }
+
+            if (croce == 3)
+            {
+                if (proiettili > 0)
+                {
+                    proiettili -= 1;
+
+                    bulletDir = 2;
+
+                    GameObject nuovoDente = Instantiate(dente);
+                    nuovoDente.transform.position = down.transform.position;
+
+                }
+
+            }
+
+            if (croce == 4)
+            {
+                if (proiettili > 0)
+                {
+                    proiettili -= 1;
+
+                    bulletDir = 4;
+
+                    GameObject nuovoDente = Instantiate(dente);
+                    nuovoDente.transform.position = left.transform.position;
+
+                }
+
+            }
+
+            
+        }
+
 
         public void Attacco()
         {
             if (croce == 1)
             {
+                up.GetComponent<BoxCollider2D>().enabled = true;
+                
+            }
+
+            if (croce == 2)
+            {
+                right.GetComponent<BoxCollider2D>().enabled = true;
 
             }
+
+            if (croce == 3)
+            {
+                down.GetComponent<BoxCollider2D>().enabled = true;
+
+            }
+
+            if (croce == 4)
+            {
+                left.GetComponent<BoxCollider2D>().enabled = true;
+
+            }
+
+            StartCoroutine(PostAttacco(0.2f));
         }
 
-        
+        IEnumerator PostAttacco(float seconds)
+        {
+
+
+
+            yield return new WaitForSeconds(seconds); ;
+            up.GetComponent<BoxCollider2D>().enabled = false;
+            right.GetComponent<BoxCollider2D>().enabled = false;
+            down.GetComponent<BoxCollider2D>().enabled = false;
+            left.GetComponent<BoxCollider2D>().enabled = false;
+        }
 
         public void OldValue()
         {
@@ -266,7 +365,8 @@ namespace IndianaBones
             x = xPosition;
             y = yPosition;
 
-           numDenti.text = (proiettili.ToString());
+            numDenti.text = (proiettili.ToString());
+            valoreVita.text = (currentLife.ToString());
 
             //Grid elementi = FindObjectOfType<Grid>();
 
@@ -284,9 +384,11 @@ namespace IndianaBones
 
 
             if (Input.GetKeyDown("space"))
-                //Attacco();
+            {
+                Attacco();
+            }
 
-                elementi.scacchiera[xPosition, yPosition].status = 1;
+                
 
             if (movimento == 1) //movimento la utilizzeranno solo i nemici per i loro turni
             {
@@ -318,6 +420,9 @@ namespace IndianaBones
                 click = true;
             }
 
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+                if (onOff == true)
+                    AttaccoADistanza();
 
             /*if (Input.GetKeyDown("a"))
                 if (gamec.turno == 1)

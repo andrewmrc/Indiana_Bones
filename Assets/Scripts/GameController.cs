@@ -23,8 +23,8 @@ namespace IndianaBones
 
         public int turno = 1;
         public int turnoNemici = 1;
-        public Scrollbar vita;
-        public float barraVita = 1.0f;
+        //public Scrollbar vita;
+       // public float barraVita = 1.0f;
 
         void Awake()
         {
@@ -42,14 +42,14 @@ namespace IndianaBones
             if (turno == 0 && turnoNemici == 1)
             {
                 turnoNemici = 0;
-                Scaramucca[] scaramuccche = FindObjectsOfType<Scaramucca>();
+                Scaramucca[] scaramucche = FindObjectsOfType<Scaramucca>();
 
-                foreach (Scaramucca scaramucca in scaramuccche)
+                foreach (Scaramucca scaramucca in scaramucche)
                 {
                     scaramucca.attivo = true;
                 }
 
-                Canubi[] AllCanubi = FindObjectsOfType<Canubi>();
+               Canubi[] AllCanubi = FindObjectsOfType<Canubi>();
 
                 foreach (Canubi canubi in AllCanubi)
                 {
@@ -59,8 +59,8 @@ namespace IndianaBones
                 turnoNemici = 1;
             }
 
-           Scrollbar nuovaVita = vita.GetComponent<Scrollbar>();
-           nuovaVita.size = barraVita;
+           //Scrollbar nuovaVita = vita.GetComponent<Scrollbar>();
+          // nuovaVita.size = barraVita;
            
 
 

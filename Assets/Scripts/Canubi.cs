@@ -185,7 +185,7 @@ namespace IndianaBones
 
         }
 
-        public void OnTriggerEnter2D(Collider2D coll) //da rimettere collider per usarlo
+        public void OnTriggerEnter2D(Collider2D coll) 
         {
 
 
@@ -194,7 +194,11 @@ namespace IndianaBones
                 if (Player.Self.croce == 1)
                 {
 
-                    Destroy(this.gameObject);
+                    vita -= Player.Self.currentAttack;
+
+                    //sottraggo vita al player
+
+                    Player.Self.currentLife -= attacco;
 
                 }
             }
@@ -203,7 +207,9 @@ namespace IndianaBones
                 if (Player.Self.croce == 3)
                 {
 
-                    Destroy(this.gameObject);
+                    vita -= Player.Self.currentAttack;
+
+                    Player.Self.currentLife -= attacco;
 
                 }
             }
@@ -212,7 +218,9 @@ namespace IndianaBones
                 if (Player.Self.croce == 2)
                 {
 
-                    Destroy(this.gameObject);
+                    vita -= Player.Self.currentAttack;
+
+                    Player.Self.currentLife -= attacco;
 
                 }
             }
@@ -221,10 +229,32 @@ namespace IndianaBones
                 if (Player.Self.croce == 4)
                 {
 
-                    Destroy(this.gameObject);
+                    vita -= Player.Self.currentAttack;
+
+                    Player.Self.currentLife -= attacco;
 
                 }
             }
+
+            
+        }
+
+        public void OnCollisionEnter2D(Collision2D coll)
+        {
+
+
+            if (coll.gameObject.name == "dente(Clone)")
+            {
+
+                vita -= Player.Self.currentAttack;
+
+                Destroy(coll.gameObject);
+
+
+
+
+            }
+
         }
 
         public void Valore3()
@@ -234,12 +264,14 @@ namespace IndianaBones
 
         public void OldValue()
         {
-            
-            xOld = (int)this.transform.position.x;
-            yOld = (int)this.transform.position.y;
+
+            xOld = xPosition;
+            yOld = yPosition;
             elementi.scacchiera[xOld, yOld].status = 0;
 
         }
+
+        
 
 
         void Update()
@@ -249,14 +281,16 @@ namespace IndianaBones
 			//Controlliamo se la vita va a zero e in tal caso aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
 			if (vita <= 0)
             {
-				Player.Self.expCollected += levelsList[powerLevel].Exp;
-                //da aggiungere la distruzione del nemico da valutare con l'animazione relativa alla morte
+
+                elementi.scacchiera[xPosition, yPosition].status = 0;
+                Player.Self.expCollected += levelsList[powerLevel].Exp;
+                Destroy(this.gameObject);
 
             }
 
 
-
-            elementi.scacchiera[xPosition, yPosition].status = 3;
+            if (vita > 0)
+                elementi.scacchiera[xPosition, yPosition].status = 3;
 
             if (ManhattanDist() < distanzaAttivazione)
                 active = true;
