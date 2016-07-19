@@ -10,9 +10,24 @@ namespace IndianaBones
     public class Player : Character
     {
 
-		// Singleton Implementation
-		protected static Player _self;
+
+
+        // Singleton Implementation
+        bool onMove = true;
+        bool onOff = false;
+        bool click = true;
+
+        public int croce = 1;
+
+        public GameObject up;
+        public GameObject down;
+        public GameObject right;
+        public GameObject left;
+
+
+        protected static Player _self;
 		public static Player Self
+
 		{
 			get
 			{
@@ -100,12 +115,15 @@ namespace IndianaBones
         }
         
 
-       /* public void Attacco()
+        public void Attacco()
         {
-            Grid elementi = FindObjectOfType<Grid>();
-            if (ManhattanDist() == 1)
-                Destroy(elementi.enemy);
-        }*/
+            if (croce == 1)
+            {
+
+            }
+        }
+
+        
 
         public void OldValue()
         {
@@ -157,10 +175,90 @@ namespace IndianaBones
 		}
 
 
+        public void RotazioneAttacco()
+        {
+            if(croce == 1)
+            {
+                RicoloraRosso();
+                SpriteRenderer colore = up.GetComponent<SpriteRenderer>();
+                colore.sprite = Resources.Load("green", typeof(Sprite)) as Sprite;
+            }
+
+            if (croce == 2)
+            {
+                RicoloraRosso();
+                SpriteRenderer colore = right.GetComponent<SpriteRenderer>();
+                colore.sprite = Resources.Load("green", typeof(Sprite)) as Sprite;
+            }
+
+            if (croce == 3)
+            {
+                RicoloraRosso();
+                SpriteRenderer colore = down.GetComponent<SpriteRenderer>();
+                colore.sprite = Resources.Load("green", typeof(Sprite)) as Sprite;
+            }
+
+            if (croce == 4)
+            {
+                RicoloraRosso();
+                SpriteRenderer colore = left.GetComponent<SpriteRenderer>();
+                colore.sprite = Resources.Load("green", typeof(Sprite)) as Sprite;
+            }
+
+        }
+
+
+
+        public void RicoloraRosso()
+        {
+            
+                SpriteRenderer colore = up.GetComponent<SpriteRenderer>();
+                colore.sprite = Resources.Load("red", typeof(Sprite)) as Sprite;
+            
+
+           
+            
+                SpriteRenderer colore1 = right.GetComponent<SpriteRenderer>();
+                colore1.sprite = Resources.Load("red", typeof(Sprite)) as Sprite;
+            
+
+            
+                SpriteRenderer colore2 = down.GetComponent<SpriteRenderer>();
+                colore2.sprite = Resources.Load("red", typeof(Sprite)) as Sprite;
+            
+
+            
+                SpriteRenderer colore3 = left.GetComponent<SpriteRenderer>();
+                colore3.sprite = Resources.Load("red", typeof(Sprite)) as Sprite;
+            
+
+        }
+
         void Update()
         {
-			//Check if the player have reached the required exp to level up
-			if (expCollected >= expToLevelUp) {
+			
+            if(onOff == true)
+            {
+                up.gameObject.SetActive(true);
+                down.gameObject.SetActive(true);
+                right.gameObject.SetActive(true);
+                left.gameObject.SetActive(true);
+                RotazioneAttacco();
+
+            }
+            else if (onOff == false)
+            {
+                up.gameObject.SetActive(false);
+                down.gameObject.SetActive(false);
+                right.gameObject.SetActive(false);
+                left.gameObject.SetActive(false);
+
+            }
+
+
+
+            //Check if the player have reached the required exp to level up
+            if (expCollected >= expToLevelUp) {
 				playerLevel++;
 				LevelUp ();
 			}
@@ -177,9 +275,10 @@ namespace IndianaBones
 
             transform.position = transform.position + direction *  speed * Time.deltaTime;
 
-            if (distance.magnitude < 0.20f)
+            if (distance.magnitude < 0.20f && click == true)
             {
                 transform.position = targetTr.position;
+                onMove = true;
 
             }
 
@@ -197,17 +296,30 @@ namespace IndianaBones
 
             GameController gamec = FindObjectOfType<GameController>();
 
-            Transform figlio = transform.FindChild("lancio");
+            /* Transform figlio = transform.FindChild("lancio");
 
-            if (Input.GetKeyDown(KeyCode.Keypad8))
+             if (Input.GetKeyDown(KeyCode.Keypad8))
+             {
+                 figlio.transform.localEulerAngles = new Vector3(0, 0, 90);
+                 //figlio.transform.Translate(0, 90, 0);
+                 Debug.Log("sono qui");
+             }*/
+
+            if (Input.GetKeyDown(KeyCode.Z) && onOff == false)
             {
-                figlio.transform.localEulerAngles = new Vector3(0, 0, 90);
-                //figlio.transform.Translate(0, 90, 0);
-                Debug.Log("sono qui");
+                onOff = true;
+                onMove = false;
+                click = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.Z) && onOff == true)
+            {
+                onOff = false;
+                onMove = true;
+                click = true;
             }
 
 
-            if (Input.GetKeyDown("a"))
+            /*if (Input.GetKeyDown("a"))
                 if (gamec.turno == 1)
                     if (proiettili > 0)
                 {
@@ -218,31 +330,37 @@ namespace IndianaBones
                         GameObject nuovoDente = Instantiate(dente);
                     nuovoDente.transform.position = new Vector2(child.transform.position.x,child.transform.position.y);
                 gamec.turno = 0;
-            }
-                
+            }*/
 
-			if (Input.GetKeyDown(KeyCode.RightArrow))
-            
-                   if(elementi.scacchiera[xPosition+1,yPosition].status < 2)
-                    if (gamec.turno == 1)
-                    {
+
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+
+                if (onMove == true)
+
+                    if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
+                        if (gamec.turno == 1)
+                        {
+                             onMove = false;
                             PickUp();
                             animator.SetBool("Walk", true);
                             StartCoroutine(Camminata(0.5f));
                             bulletDir = 3;
                             OldValue();
-                        xPosition += 1;
-                        targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-                        elementi.scacchiera[xPosition, yPosition].status = 4;
-                gamec.turno = 0;
-                Debug.Log("sono qui");
-                    }
+                            xPosition += 1;
+                            targetTr = elementi.scacchiera[xPosition, yPosition].transform;
+                            elementi.scacchiera[xPosition, yPosition].status = 4;
+                            gamec.turno = 0;
+                            Debug.Log("sono qui");
+                        }
 
+              
 			if (Input.GetKeyDown(KeyCode.LeftArrow))
-                if (xPosition > 0)
+                if (onMove == true)
+                    if (xPosition > 0)
                     if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
                         if (gamec.turno == 1)
                     {
+                            onMove = false;
                             PickUp();
                             animator.SetBool("Walk", true);
                             StartCoroutine(Camminata(0.5f));
@@ -253,13 +371,16 @@ namespace IndianaBones
                             elementi.scacchiera[xPosition, yPosition].status = 4;
                             gamec.turno = 0;
 
-                    }
+                            
+                        }
 
 			if (Input.GetKeyDown(KeyCode.DownArrow))
-                if (yPosition > 0)
+                if (onMove == true)
+                    if (yPosition > 0)
                     if (elementi.scacchiera[xPosition, yPosition -1].status < 2)
                         if (gamec.turno == 1)
                     {
+                            onMove = false;
                             PickUp();
                             animator.SetBool("Walk", true);
                             StartCoroutine(Camminata(0.5f));
@@ -272,23 +393,38 @@ namespace IndianaBones
 
                     }
 
-			if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            
+                if (onMove == true)
                 if (yPosition < 100)
                     if (elementi.scacchiera[xPosition, yPosition + 1].status < 2)
                         if (gamec.turno == 1)
-                    {
+                        {
+                            onMove = false;
                             PickUp();
                             animator.SetBool("Walk", true);
                             StartCoroutine(Camminata(0.5f));
                             bulletDir = 1;
-                        OldValue();
-                        yPosition += 1;
-                        targetTr = elementi.scacchiera[xPosition, yPosition].transform;
+                            OldValue();
+                            yPosition += 1;
+                            targetTr = elementi.scacchiera[xPosition, yPosition].transform;
                             elementi.scacchiera[xPosition, yPosition].status = 4;
                             gamec.turno = 0;
-                    }
+                        }
 
-            
+
+            if (Input.GetKeyDown(KeyCode.A))
+                if (croce > 1)
+                    croce--;
+                else
+                    croce = 4;
+
+            if (Input.GetKeyDown(KeyCode.S))
+                if (croce < 4)
+                    croce++;
+                else
+                    croce = 1;
+
 
         }
     }

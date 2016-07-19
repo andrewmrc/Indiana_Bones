@@ -61,7 +61,6 @@ namespace IndianaBones
         {
 
 
-
             if (coll.gameObject.name == "muro")
             {
 
@@ -71,10 +70,6 @@ namespace IndianaBones
 
 
             }
-
-            
-
-
 
         }
     }

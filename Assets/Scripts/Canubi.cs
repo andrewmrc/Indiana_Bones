@@ -185,6 +185,48 @@ namespace IndianaBones
 
         }
 
+        public void OnTriggerEnter2D(Collider2D coll) //da rimettere collider per usarlo
+        {
+
+
+            if (coll.gameObject.name == "up")
+            {
+                if (Player.Self.croce == 1)
+                {
+
+                    Destroy(this.gameObject);
+
+                }
+            }
+            if (coll.gameObject.name == "down")
+            {
+                if (Player.Self.croce == 3)
+                {
+
+                    Destroy(this.gameObject);
+
+                }
+            }
+            if (coll.gameObject.name == "right")
+            {
+                if (Player.Self.croce == 2)
+                {
+
+                    Destroy(this.gameObject);
+
+                }
+            }
+            if (coll.gameObject.name == "left")
+            {
+                if (Player.Self.croce == 4)
+                {
+
+                    Destroy(this.gameObject);
+
+                }
+            }
+        }
+
         public void Valore3()
         {
             elementi.scacchiera[xPosition, yPosition].status = 3;
