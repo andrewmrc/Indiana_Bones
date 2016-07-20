@@ -10,6 +10,7 @@ namespace IndianaBones
 
     public class Canubi : MonoBehaviour
     {
+        bool seen = false;
         public int xPosition;
         public int yPosition;
         public int xOld;
@@ -275,11 +276,20 @@ namespace IndianaBones
 
 
         void Update()
-        {     
-			
+        {
 
-			//Controlliamo se la vita va a zero e in tal caso aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
-			if (vita <= 0)
+            if (GetComponent<Renderer>().isVisible)
+            {
+                seen = true;
+            }
+
+            if (seen && !GetComponent<Renderer>().isVisible)
+            {
+                seen = false;
+            }
+
+            //Controlliamo se la vita va a zero e in tal caso aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
+            if (vita <= 0)
             {
 
                 elementi.scacchiera[xPosition, yPosition].status = 0;
@@ -308,7 +318,7 @@ namespace IndianaBones
 
             }
 
-            if (attivo == true)
+            if (attivo == true && seen == true)
             {
 
                 Posizione();

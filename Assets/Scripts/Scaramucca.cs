@@ -10,6 +10,7 @@ namespace IndianaBones
     public class Scaramucca : MonoBehaviour
     {
 
+        bool seen = false;
         public int xPosition;
         public int yPosition;
         public int xOld;
@@ -217,8 +218,18 @@ namespace IndianaBones
 
         void Update()
         {
+            if (GetComponent<Renderer>().isVisible)
+            {
+                seen = true;
+            }
+
+            if (seen && !GetComponent<Renderer>().isVisible)
+            {
+                seen = false;
+            }
+
             //Controlliamo se la vita va a zero e in tal caso aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
-             if (vita <= 0)
+            if (vita <= 0)
              {
                 elementi.scacchiera[xPosition, yPosition].status = 0;
                 Player.Self.expCollected += levelsList[powerLevel].Exp;
