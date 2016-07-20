@@ -12,6 +12,14 @@ public class Hotbar : MonoBehaviour
 	[SerializeField]
 	public int slotsInTotal;
 
+	public int inventoryObjectCount;
+	public int healthMilkPotionCount;
+	public int healthMozzyPotionCount;
+	public int manaPotionCount;
+	public int bombsCount;
+	public int poisonCount;
+
+	//public int abilityCount;
 
 	void Start()
 	{
