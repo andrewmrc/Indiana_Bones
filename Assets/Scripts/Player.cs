@@ -90,6 +90,7 @@ namespace IndianaBones
 			}
         }
 
+
         void Start()
         {
             xPosition = (int)this.transform.position.x;
@@ -99,12 +100,7 @@ namespace IndianaBones
             this.transform.position = elementi.scacchiera[xPosition, yPosition].transform.position;
             targetTr = elementi.scacchiera[xPosition, yPosition].transform;
 
-
-
-
-
         }
-
         
 
        public void controlloVita(int attack)
@@ -212,17 +208,21 @@ namespace IndianaBones
             StartCoroutine(PostAttacco(0.2f));
         }
 
+
         IEnumerator PostAttacco(float seconds)
         {
 
+            yield return new WaitForSeconds(seconds);
 
+			//Set false to the attack parameter of animation
+			animator.SetBool("Attack", false);
 
-            yield return new WaitForSeconds(seconds); ;
             up.GetComponent<BoxCollider2D>().enabled = false;
             right.GetComponent<BoxCollider2D>().enabled = false;
             down.GetComponent<BoxCollider2D>().enabled = false;
             left.GetComponent<BoxCollider2D>().enabled = false;
         }
+
 
         public void OldValue()
         {
@@ -314,18 +314,14 @@ namespace IndianaBones
                 SpriteRenderer colore = up.GetComponent<SpriteRenderer>();
                 colore.sprite = Resources.Load("red", typeof(Sprite)) as Sprite;
             
-
-           
             
                 SpriteRenderer colore1 = right.GetComponent<SpriteRenderer>();
                 colore1.sprite = Resources.Load("red", typeof(Sprite)) as Sprite;
             
-
             
                 SpriteRenderer colore2 = down.GetComponent<SpriteRenderer>();
                 colore2.sprite = Resources.Load("red", typeof(Sprite)) as Sprite;
             
-
             
                 SpriteRenderer colore3 = left.GetComponent<SpriteRenderer>();
                 colore3.sprite = Resources.Load("red", typeof(Sprite)) as Sprite;
@@ -385,6 +381,8 @@ namespace IndianaBones
 
             if (Input.GetKeyDown("space"))
             {
+				//Set true to the attack parameter of animation
+				animator.SetBool("Attack", true);
                 Attacco();
             }
 
@@ -438,84 +436,98 @@ namespace IndianaBones
             }*/
 
 
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+			if (Input.GetKeyDown (KeyCode.RightArrow)) {
+				//Flip the sprite of the player
+				gameObject.GetComponent<SpriteRenderer> ().flipX = false;
+			
+				if (onMove == true) {
+					if (elementi.scacchiera [xPosition + 1, yPosition].status < 2) {
+						if (gamec.turno == 1) {
+							onMove = false;
+							PickUp ();
+							animator.SetBool ("Walk", true);
+							StartCoroutine (Camminata (0.5f));
+							bulletDir = 3;
+							OldValue ();
+							xPosition += 1;
+							targetTr = elementi.scacchiera [xPosition, yPosition].transform;
+							elementi.scacchiera [xPosition, yPosition].status = 4;
+							gamec.turno = 0;
+							Debug.Log ("sono qui");
+						}
+					}
+				}
+			}
 
-                if (onMove == true)
 
-                    if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
-                        if (gamec.turno == 1)
-                        {
-                             onMove = false;
-                            PickUp();
-                            animator.SetBool("Walk", true);
-                            StartCoroutine(Camminata(0.5f));
-                            bulletDir = 3;
-                            OldValue();
-                            xPosition += 1;
-                            targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-                            elementi.scacchiera[xPosition, yPosition].status = 4;
-                            gamec.turno = 0;
-                            Debug.Log("sono qui");
-                        }
+			if (Input.GetKeyDown (KeyCode.LeftArrow)) {
+				//Flip the sprite of the player
+				gameObject.GetComponent<SpriteRenderer> ().flipX = true;
+			
+				if (onMove == true) {
+					if (xPosition > 0) {
+						if (elementi.scacchiera [xPosition - 1, yPosition].status < 2) {
+							if (gamec.turno == 1) {
+								onMove = false;
+								PickUp ();
+								animator.SetBool ("Walk", true);
+								StartCoroutine (Camminata (0.5f));
+								bulletDir = 4;
+								OldValue ();
+								xPosition -= 1;
+								targetTr = elementi.scacchiera [xPosition, yPosition].transform;
+								elementi.scacchiera [xPosition, yPosition].status = 4;
+								gamec.turno = 0;
+							}
+						} 
+					}
+				}
+			}
 
-              
-			if (Input.GetKeyDown(KeyCode.LeftArrow))
-                if (onMove == true)
-                    if (xPosition > 0)
-                    if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
-                        if (gamec.turno == 1)
-                    {
-                            onMove = false;
-                            PickUp();
-                            animator.SetBool("Walk", true);
-                            StartCoroutine(Camminata(0.5f));
-                            bulletDir = 4;
-                            OldValue();
-                        xPosition -= 1;
-                        targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-                            elementi.scacchiera[xPosition, yPosition].status = 4;
-                            gamec.turno = 0;
 
-                            
-                        }
+			if (Input.GetKeyDown (KeyCode.DownArrow)) {
+				if (onMove == true) {
+					if (yPosition > 0) {
+						if (elementi.scacchiera [xPosition, yPosition - 1].status < 2) {
+							if (gamec.turno == 1) {
+								onMove = false;
+								PickUp ();
+								animator.SetBool ("Walk", true);
+								StartCoroutine (Camminata (0.5f));
+								bulletDir = 2;
+								OldValue ();
+								yPosition -= 1;
+								targetTr = elementi.scacchiera [xPosition, yPosition].transform;
+								elementi.scacchiera [xPosition, yPosition].status = 4;
+								gamec.turno = 0;
+							}
+						}
+					}
+				}
+			}
 
-			if (Input.GetKeyDown(KeyCode.DownArrow))
-                if (onMove == true)
-                    if (yPosition > 0)
-                    if (elementi.scacchiera[xPosition, yPosition -1].status < 2)
-                        if (gamec.turno == 1)
-                    {
-                            onMove = false;
-                            PickUp();
-                            animator.SetBool("Walk", true);
-                            StartCoroutine(Camminata(0.5f));
-                            bulletDir = 2;
-                            OldValue();
-                        yPosition -= 1;
-                        targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-                            elementi.scacchiera[xPosition, yPosition].status = 4;
-                            gamec.turno = 0;
 
-                    }
-
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+			if (Input.GetKeyDown (KeyCode.UpArrow)) {
             
-                if (onMove == true)
-                if (yPosition < 100)
-                    if (elementi.scacchiera[xPosition, yPosition + 1].status < 2)
-                        if (gamec.turno == 1)
-                        {
-                            onMove = false;
-                            PickUp();
-                            animator.SetBool("Walk", true);
-                            StartCoroutine(Camminata(0.5f));
-                            bulletDir = 1;
-                            OldValue();
-                            yPosition += 1;
-                            targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-                            elementi.scacchiera[xPosition, yPosition].status = 4;
-                            gamec.turno = 0;
-                        }
+				if (onMove == true) {
+					if (yPosition < 100) {
+						if (elementi.scacchiera [xPosition, yPosition + 1].status < 2) {
+							if (gamec.turno == 1) {
+								onMove = false;
+								PickUp ();
+								animator.SetBool ("Walk", true);
+								StartCoroutine (Camminata (0.5f));
+								bulletDir = 1;
+								OldValue ();
+								yPosition += 1;
+								targetTr = elementi.scacchiera [xPosition, yPosition].transform;
+								elementi.scacchiera [xPosition, yPosition].status = 4;
+								gamec.turno = 0;
+							}
+						}
+					}
+				}
+			}
 
 
             if (Input.GetKeyDown(KeyCode.A))

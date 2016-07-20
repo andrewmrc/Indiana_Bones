@@ -25,7 +25,8 @@ namespace IndianaBones
         GameObject giocatore;
         public int distanzaAttivazione = 10;
 		private Grid elementi;
-        
+		private Animator animator;
+
         [Header("Level and Stats")]
         [Space(10)]
 
@@ -43,7 +44,11 @@ namespace IndianaBones
             yPosition = (int)this.transform.position.y;
 
             targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-	
+
+			//Get the animator component and set the parameter equal to the initial life value
+			animator = GetComponent<Animator>();
+			animator.SetFloat ("Life", vita);
+
         }
 
 
@@ -77,6 +82,10 @@ namespace IndianaBones
                                 if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
                                 {
                                     elementi.scacchiera[xPosition - 1, yPosition].status = 3;
+									
+									//Flip the sprite
+									gameObject.GetComponent<SpriteRenderer> ().flipX = false;
+
                                     xPosition -= 1;
                                 }
                                 else if (elementi.scacchiera[xPosition, yPosition + 1].status < 2)
@@ -89,6 +98,10 @@ namespace IndianaBones
                                 if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
                                 {
                                     elementi.scacchiera[xPosition + 1, yPosition].status = 3;
+
+									//Flip the sprite
+									gameObject.GetComponent<SpriteRenderer> ().flipX = true;
+
                                     xPosition += 1;
                                 }
                                 else if (elementi.scacchiera[xPosition, yPosition - 1].status < 2)
@@ -107,6 +120,10 @@ namespace IndianaBones
                                 if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
                                 { 
                                     elementi.scacchiera[xPosition - 1, yPosition].status = 3;
+
+									//Flip the sprite
+									gameObject.GetComponent<SpriteRenderer> ().flipX = true;
+
                                     xPosition -= 1;
                                 }
                                 else if (elementi.scacchiera[xPosition , yPosition+1].status < 2)
@@ -119,6 +136,10 @@ namespace IndianaBones
                                 if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
                                 { 
                                     elementi.scacchiera[xPosition + 1, yPosition].status = 3;
+									
+									//Flip the sprite
+									gameObject.GetComponent<SpriteRenderer> ().flipX = false;
+
                                     xPosition += 1;
                                 }
                                 else if (elementi.scacchiera[xPosition , yPosition-1].status < 2)
@@ -140,6 +161,10 @@ namespace IndianaBones
                                 else if (elementi.scacchiera[xPosition+1, yPosition].status < 2)
                                 {
                                     elementi.scacchiera[xPosition + 1, yPosition].status = 3;
+									
+									//Flip the sprite
+									gameObject.GetComponent<SpriteRenderer> ().flipX = true;
+
                                     xPosition += 1;
                                 }
                             if (Player.Self.yPosition > yPosition)
@@ -152,6 +177,10 @@ namespace IndianaBones
                                 else if (elementi.scacchiera[xPosition-1, yPosition].status < 2)
                                 {
                                     elementi.scacchiera[xPosition - 1, yPosition].status = 3;
+									
+									//Flip the sprite
+									gameObject.GetComponent<SpriteRenderer> ().flipX = false;
+
                                     xPosition -= 1;
                                 }
 
@@ -291,11 +320,8 @@ namespace IndianaBones
             //Controlliamo se la vita va a zero e in tal caso aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
             if (vita <= 0)
             {
-
-                elementi.scacchiera[xPosition, yPosition].status = 0;
-                Player.Self.expCollected += levelsList[powerLevel].Exp;
-                Destroy(this.gameObject);
-
+				Player.Self.expCollected += levelsList[powerLevel].Exp;
+				StartCoroutine (HandleDeath ());
             }
 
 
@@ -327,7 +353,16 @@ namespace IndianaBones
 
         }
 
+		IEnumerator HandleDeath(){
+			//Activate the death animation
+			animator.SetFloat ("Life", vita);
+			yield return new WaitForEndOfFrame();
+			print("current clip length = " + animator.GetCurrentAnimatorStateInfo(0).length);
+			yield return new WaitForSeconds (2f);
 
+			elementi.scacchiera[xPosition, yPosition].status = 0;
+			Destroy(this.gameObject);
+		}
 
     }
 }
