@@ -32,6 +32,11 @@ namespace IndianaBones
         public int powerLevel;
         public List<EnemyLevels> levelsList = new List<EnemyLevels>();
 
+        void Awake()
+        {
+            gameObject.tag = "Enemy";
+        }
+        
         void Start()
         {
             vita = levelsList[powerLevel].Life;
@@ -49,6 +54,12 @@ namespace IndianaBones
             
 
         }
+
+        public int ManhattanDist()
+        {
+            return (Mathf.Abs((int)Player.Self.transform.position.x - (int)this.transform.position.x) + Mathf.Abs((int)Player.Self.transform.position.y - (int)this.transform.position.y));
+        }
+
 
         public void OnTriggerEnter2D(Collider2D coll)
         {
@@ -184,7 +195,8 @@ namespace IndianaBones
                 }
             }
 
-            GameController.Self.turno = 1;
+            //GameController.Self.turno = 1;
+            GameController.Self.PassTurn();
         }
 
         public void MovimentoAsseY()
@@ -214,19 +226,52 @@ namespace IndianaBones
                 }
 
             }
+            GameController.Self.PassTurn();
         }
+
+        public void AttackHandler()
+        {
+            //Formula calcolo attacco 
+            //il risultato si sottrae alla vita del player
+            int damage = levelsList[powerLevel].Attack;
+            Player.Self.currentLife -= damage;
+            GameController.Self.PassTurn();
+        }
+
 
         void Update()
         {
-            if (GetComponent<Renderer>().isVisible)
+
+            if (gameObject.GetComponent<TurnHandler>().itsMyTurn)
             {
-                seen = true;
+                if (ManhattanDist() == 1)
+                {
+                    AttackHandler();
+                }
+                else
+                {
+                    MovimentoScaramucca();
+                }
             }
 
-            if (seen && !GetComponent<Renderer>().isVisible)
+
+            if (GetComponent<Renderer>().isVisible)
             {
+                if (!GameController.Self.charactersList.Contains(this.gameObject))
+                {
+                    GameController.Self.charactersList.Add(this.gameObject);
+                }
+                seen = true;
+            }
+            else if (!GetComponent<Renderer>().isVisible)
+            {
+                if (GameController.Self.charactersList.Contains(this.gameObject))
+                {
+                    GameController.Self.charactersList.Remove(this.gameObject);
+                }
                 seen = false;
             }
+
 
             //Controlliamo se la vita va a zero e in tal caso aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
             if (vita <= 0)

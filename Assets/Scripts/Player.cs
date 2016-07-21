@@ -12,11 +12,11 @@ namespace IndianaBones
 
 
 
-        // Singleton Implementation
         bool onMove = true;
         bool onOff = false;
-        bool click = true;
+        bool crossActive = false;
         bool attacco = false;
+        public bool endMove;
 
         public int croce = 1;
 
@@ -25,18 +25,18 @@ namespace IndianaBones
         public GameObject right;
         public GameObject left;
 
-
+        // Singleton Implementation
         protected static Player _self;
-		public static Player Self
+        public static Player Self
 
-		{
-			get
-			{
-				if (_self == null)
-					_self = FindObjectOfType(typeof(Player)) as Player;
-				return _self;
-			}
-		}
+        {
+            get
+            {
+                if (_self == null)
+                    _self = FindObjectOfType(typeof(Player)) as Player;
+                return _self;
+            }
+        }
 
 
         public int proiettili = 5;
@@ -50,44 +50,48 @@ namespace IndianaBones
         public Text numDenti;
         public Text valoreVita;
         public GameObject child;
-		private Grid elementi;
+        private Grid elementi;
 
-		[Header("Level and Stats")]
-		[Space(10)]
-		public int playerLevel = 1;
-		public int currentLife;
-		public int currentAttack;
-		public int currentMana;
+        [Header("Level and Stats")]
+        [Space(10)]
+        public int playerLevel = 1;
+        public int currentLife;
+        public int currentAttack;
+        public int currentMana;
 
-		public float expToLevelUp;
-		public int expCollected;
-		public int startingLife;
-		public int startingAttack;
-		public int startingMana;
+        public float expToLevelUp;
+        public int expCollected;
+        public int startingLife;
+        public int startingAttack;
+        public int startingMana;
 
-		//public List<PlayerLevels> levelsList = new List<PlayerLevels> ();
+        //public List<PlayerLevels> levelsList = new List<PlayerLevels> ();
 
-		public static Player Instance;
+        public static Player Instance;
 
         void Awake()
         {
-			//Metodo per passare l'oggetto da una scena all'altra
-			if (Instance == null) {
-				DontDestroyOnLoad (gameObject);
-				Instance = this;
-			} else if (Instance != this) {
-				Destroy (gameObject);
-			}
+            //Metodo per passare l'oggetto da una scena all'altra
+            if (Instance == null)
+            {
+                DontDestroyOnLoad(gameObject);
+                Instance = this;
+            }
+            else if (Instance != this)
+            {
+                Destroy(gameObject);
+            }
 
             animator = GetComponent<Animator>();
             animator.SetBool("Walk", false);
 
-			if (playerLevel == 1) {
-				//Set the starting stats of the player
-				currentLife = startingLife;
-				currentAttack = startingAttack;
-				currentMana = startingMana;
-			}
+            if (playerLevel == 1)
+            {
+                //Set the starting stats of the player
+                currentLife = startingLife;
+                currentAttack = startingAttack;
+                currentMana = startingMana;
+            }
         }
 
 
@@ -101,13 +105,13 @@ namespace IndianaBones
             targetTr = elementi.scacchiera[xPosition, yPosition].transform;
 
         }
-        
 
-       public void controlloVita(int attack)
+
+        public void controlloVita(int attack)
         {
-			currentLife -= attack;
-           // GameController gamec = FindObjectOfType<GameController>();
-           // gamec.barraVita -= 0.20f;
+            currentLife -= attack;
+            // GameController gamec = FindObjectOfType<GameController>();
+            // gamec.barraVita -= 0.20f;
 
 
         }
@@ -125,7 +129,7 @@ namespace IndianaBones
 
                     GameObject nuovoDente = Instantiate(dente);
                     nuovoDente.transform.position = up.transform.position;
-                    
+
                 }
 
             }
@@ -175,7 +179,7 @@ namespace IndianaBones
 
             }
 
-            
+
         }
 
 
@@ -184,7 +188,7 @@ namespace IndianaBones
             if (croce == 1)
             {
                 up.GetComponent<BoxCollider2D>().enabled = true;
-                
+
             }
 
             if (croce == 2)
@@ -214,8 +218,8 @@ namespace IndianaBones
 
             yield return new WaitForSeconds(seconds);
 
-			//Set false to the attack parameter of animation
-			animator.SetBool("Attack", false);
+            //Set false to the attack parameter of animation
+            animator.SetBool("Attack", false);
 
             up.GetComponent<BoxCollider2D>().enabled = false;
             right.GetComponent<BoxCollider2D>().enabled = false;
@@ -240,43 +244,47 @@ namespace IndianaBones
                 proiettili += 5;
         }
 
-		IEnumerator Camminata(float seconds){
-            
-            
+        IEnumerator Camminata(float seconds)
+        {
+
+
 
             yield return new WaitForSeconds(seconds); ;
-                animator.SetBool("Walk", false);
-                
-        
+            animator.SetBool("Walk", false);
+
+
         }
 
 
-		public void LevelUp () {
-			//Save the previous required exp
-			float expToPreviousLevelUp = expToLevelUp;
+        public void LevelUp()
+        {
+            //Save the previous required exp
+            float expToPreviousLevelUp = expToLevelUp;
 
-			//Set the new exp required to level up to the next level
-			expToLevelUp = expToPreviousLevelUp * 1.5f;
+            //Set the new exp required to level up to the next level
+            expToLevelUp = expToPreviousLevelUp * 1.5f;
 
-			//Increase Life each level up
-			currentLife++;
+            //Increase Life each level up
+            currentLife++;
 
-			//Increase Attack if the player level is pair
-			if (playerLevel % 2 == 0) {
-				currentAttack++;
-			}
+            //Increase Attack if the player level is pair
+            if (playerLevel % 2 == 0)
+            {
+                currentAttack++;
+            }
 
-			//Increase Mana if the player level is odd
-			if (playerLevel % 2 != 0) {
-				currentMana= currentMana+3;
-			}
-				
-		}
+            //Increase Mana if the player level is odd
+            if (playerLevel % 2 != 0)
+            {
+                currentMana = currentMana + 3;
+            }
+
+        }
 
 
         public void RotazioneAttacco()
         {
-            if(croce == 1)
+            if (croce == 1)
             {
                 RicoloraRosso();
                 SpriteRenderer colore = up.GetComponent<SpriteRenderer>();
@@ -310,239 +318,249 @@ namespace IndianaBones
 
         public void RicoloraRosso()
         {
-            
-                SpriteRenderer colore = up.GetComponent<SpriteRenderer>();
-                colore.sprite = Resources.Load("red", typeof(Sprite)) as Sprite;
-            
-            
-                SpriteRenderer colore1 = right.GetComponent<SpriteRenderer>();
-                colore1.sprite = Resources.Load("red", typeof(Sprite)) as Sprite;
-            
-            
-                SpriteRenderer colore2 = down.GetComponent<SpriteRenderer>();
-                colore2.sprite = Resources.Load("red", typeof(Sprite)) as Sprite;
-            
-            
-                SpriteRenderer colore3 = left.GetComponent<SpriteRenderer>();
-                colore3.sprite = Resources.Load("red", typeof(Sprite)) as Sprite;
-            
+
+            SpriteRenderer colore = up.GetComponent<SpriteRenderer>();
+            colore.sprite = Resources.Load("red", typeof(Sprite)) as Sprite;
+
+
+            SpriteRenderer colore1 = right.GetComponent<SpriteRenderer>();
+            colore1.sprite = Resources.Load("red", typeof(Sprite)) as Sprite;
+
+
+            SpriteRenderer colore2 = down.GetComponent<SpriteRenderer>();
+            colore2.sprite = Resources.Load("red", typeof(Sprite)) as Sprite;
+
+
+            SpriteRenderer colore3 = left.GetComponent<SpriteRenderer>();
+            colore3.sprite = Resources.Load("red", typeof(Sprite)) as Sprite;
+
 
         }
 
         void Update()
         {
-			
-            if(onOff == true)
+            if (gameObject.GetComponent<TurnHandler>().itsMyTurn)
             {
-                up.gameObject.SetActive(true);
-                down.gameObject.SetActive(true);
-                right.gameObject.SetActive(true);
-                left.gameObject.SetActive(true);
-                RotazioneAttacco();
-
-            }
-            else if (onOff == false)
-            {
-                up.gameObject.SetActive(false);
-                down.gameObject.SetActive(false);
-                right.gameObject.SetActive(false);
-                left.gameObject.SetActive(false);
-
-            }
-
-
-
-            //Check if the player have reached the required exp to level up
-            if (expCollected >= expToLevelUp) {
-				playerLevel++;
-				LevelUp ();
-			}
-
-            x = xPosition;
-            y = yPosition;
-
-            numDenti.text = (proiettili.ToString());
-            valoreVita.text = (currentLife.ToString());
-
-            //Grid elementi = FindObjectOfType<Grid>();
-
-            Vector3 distance = targetTr.position - this.transform.position;
-            Vector3 direction = distance.normalized;
-
-            transform.position = transform.position + direction *  speed * Time.deltaTime;
-
-            if (distance.magnitude < 0.20f && click == true)
-            {
-                transform.position = targetTr.position;
-                onMove = true;
-
-            }
-
-
-            if (Input.GetKeyDown("space"))
-            {
-				//Set true to the attack parameter of animation
-				animator.SetBool("Attack", true);
-                Attacco();
-            }
-
-                
-
-            if (movimento == 1) //movimento la utilizzeranno solo i nemici per i loro turni
-            {
-                elementi.scacchiera[xOld, yOld].status = 0;
-                
-            }
-
-            GameController gamec = FindObjectOfType<GameController>();
-
-            /* Transform figlio = transform.FindChild("lancio");
-
-             if (Input.GetKeyDown(KeyCode.Keypad8))
-             {
-                 figlio.transform.localEulerAngles = new Vector3(0, 0, 90);
-                 //figlio.transform.Translate(0, 90, 0);
-                 Debug.Log("sono qui");
-             }*/
-
-            if (Input.GetKeyDown(KeyCode.Z) && onOff == false)
-            {
-                onOff = true;
-                onMove = false;
-                click = false;
-            }
-            else if (Input.GetKeyDown(KeyCode.Z) && onOff == true)
-            {
-                onOff = false;
-                onMove = true;
-                click = true;
-            }
-
-            if (Input.GetKeyDown(KeyCode.LeftControl))
-                if (onOff == true)
-                    AttaccoADistanza();
-
-            /*if (Input.GetKeyDown("a"))
-                if (gamec.turno == 1)
-                    if (proiettili > 0)
+                if (Input.GetKey(KeyCode.RightArrow))
                 {
-                    proiettili -= 1;
+                    croce = 2;
+                    RotazioneAttacco();
+                    //Flip the sprite of the player
+                    gameObject.GetComponent<SpriteRenderer>().flipX = false;
 
-                        
-                        
-                        GameObject nuovoDente = Instantiate(dente);
-                    nuovoDente.transform.position = new Vector2(child.transform.position.x,child.transform.position.y);
-                gamec.turno = 0;
-            }*/
-
-
-			if (Input.GetKeyDown (KeyCode.RightArrow)) {
-				//Flip the sprite of the player
-				gameObject.GetComponent<SpriteRenderer> ().flipX = false;
-			
-				if (onMove == true) {
-					if (elementi.scacchiera [xPosition + 1, yPosition].status < 2) {
-						if (gamec.turno == 1) {
-							onMove = false;
-							PickUp ();
-							animator.SetBool ("Walk", true);
-							StartCoroutine (Camminata (0.5f));
-							bulletDir = 3;
-							OldValue ();
-							xPosition += 1;
-							targetTr = elementi.scacchiera [xPosition, yPosition].transform;
-							elementi.scacchiera [xPosition, yPosition].status = 4;
-							gamec.turno = 0;
-							Debug.Log ("sono qui");
-						}
-					}
-				}
-			}
+                    if (onMove == true)
+                    {
+                        if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
+                        {
+                            onMove = false;
+                            PickUp();
+                            animator.SetBool("Walk", true);
+                            StartCoroutine(Camminata(0.5f));
+                            bulletDir = 3;
+                            OldValue();
+                            xPosition += 1;
+                            targetTr = elementi.scacchiera[xPosition, yPosition].transform;
+                            elementi.scacchiera[xPosition, yPosition].status = 4;
+                            endMove = true;
+                        }
+                    }
+                }
 
 
-			if (Input.GetKeyDown (KeyCode.LeftArrow)) {
-				//Flip the sprite of the player
-				gameObject.GetComponent<SpriteRenderer> ().flipX = true;
-			
-				if (onMove == true) {
-					if (xPosition > 0) {
-						if (elementi.scacchiera [xPosition - 1, yPosition].status < 2) {
-							if (gamec.turno == 1) {
-								onMove = false;
-								PickUp ();
-								animator.SetBool ("Walk", true);
-								StartCoroutine (Camminata (0.5f));
-								bulletDir = 4;
-								OldValue ();
-								xPosition -= 1;
-								targetTr = elementi.scacchiera [xPosition, yPosition].transform;
-								elementi.scacchiera [xPosition, yPosition].status = 4;
-								gamec.turno = 0;
-							}
-						} 
-					}
-				}
-			}
-
-
-			if (Input.GetKeyDown (KeyCode.DownArrow)) {
-				if (onMove == true) {
-					if (yPosition > 0) {
-						if (elementi.scacchiera [xPosition, yPosition - 1].status < 2) {
-							if (gamec.turno == 1) {
-								onMove = false;
-								PickUp ();
-								animator.SetBool ("Walk", true);
-								StartCoroutine (Camminata (0.5f));
-								bulletDir = 2;
-								OldValue ();
-								yPosition -= 1;
-								targetTr = elementi.scacchiera [xPosition, yPosition].transform;
-								elementi.scacchiera [xPosition, yPosition].status = 4;
-								gamec.turno = 0;
-							}
-						}
-					}
-				}
-			}
-
-
-			if (Input.GetKeyDown (KeyCode.UpArrow)) {
-            
-				if (onMove == true) {
-					if (yPosition < 100) {
-						if (elementi.scacchiera [xPosition, yPosition + 1].status < 2) {
-							if (gamec.turno == 1) {
-								onMove = false;
-								PickUp ();
-								animator.SetBool ("Walk", true);
-								StartCoroutine (Camminata (0.5f));
-								bulletDir = 1;
-								OldValue ();
-								yPosition += 1;
-								targetTr = elementi.scacchiera [xPosition, yPosition].transform;
-								elementi.scacchiera [xPosition, yPosition].status = 4;
-								gamec.turno = 0;
-							}
-						}
-					}
-				}
-			}
-
-
-            if (Input.GetKeyDown(KeyCode.A))
-                if (croce > 1)
-                    croce--;
-                else
+                if (Input.GetKey(KeyCode.LeftArrow))
+                {
                     croce = 4;
+                    RotazioneAttacco();
+                    //Flip the sprite of the player
+                    gameObject.GetComponent<SpriteRenderer>().flipX = true;
 
-            if (Input.GetKeyDown(KeyCode.S))
-                if (croce < 4)
-                    croce++;
-                else
+                    if (onMove == true)
+                    {
+                        if (xPosition > 0)
+                        {
+                            if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
+                            {
+                                onMove = false;
+                                PickUp();
+                                animator.SetBool("Walk", true);
+                                StartCoroutine(Camminata(0.5f));
+                                bulletDir = 4;
+                                OldValue();
+                                xPosition -= 1;
+                                targetTr = elementi.scacchiera[xPosition, yPosition].transform;
+                                elementi.scacchiera[xPosition, yPosition].status = 4;
+                                endMove = true;
+
+                            }
+                        }
+                    }
+                }
+
+
+                if (Input.GetKey(KeyCode.DownArrow))
+                {
+                    croce = 3;
+                    RotazioneAttacco();
+                    if (onMove == true)
+                    {
+                        if (yPosition > 0)
+                        {
+                            if (elementi.scacchiera[xPosition, yPosition - 1].status < 2)
+                            {
+                                onMove = false;
+                                PickUp();
+                                animator.SetBool("Walk", true);
+                                StartCoroutine(Camminata(0.5f));
+                                bulletDir = 2;
+                                OldValue();
+                                yPosition -= 1;
+                                targetTr = elementi.scacchiera[xPosition, yPosition].transform;
+                                elementi.scacchiera[xPosition, yPosition].status = 4;
+                                endMove = true;
+
+                            }
+                        }
+                    }
+                }
+
+
+                if (Input.GetKey(KeyCode.UpArrow))
+                {
                     croce = 1;
+                    RotazioneAttacco();
+                    if (onMove == true)
+                    {
+                        if (yPosition < 100)
+                        {
+                            if (elementi.scacchiera[xPosition, yPosition + 1].status < 2)
+                            {
+                                onMove = false;
+                                PickUp();
+                                animator.SetBool("Walk", true);
+                                StartCoroutine(Camminata(0.5f));
+                                bulletDir = 1;
+                                OldValue();
+                                yPosition += 1;
+                                targetTr = elementi.scacchiera[xPosition, yPosition].transform;
+                                elementi.scacchiera[xPosition, yPosition].status = 4;
+                                endMove = true;
+                            }
+                        }
+                    }
+                }
 
+
+
+                if (onOff == true)
+                {
+                    up.gameObject.SetActive(true);
+                    down.gameObject.SetActive(true);
+                    right.gameObject.SetActive(true);
+                    left.gameObject.SetActive(true);
+                    RotazioneAttacco();
+
+                }
+                else if (onOff == false)
+                {
+                    up.gameObject.SetActive(false);
+                    down.gameObject.SetActive(false);
+                    right.gameObject.SetActive(false);
+                    left.gameObject.SetActive(false);
+
+                }
+
+
+
+                //Check if the player have reached the required exp to level up
+                if (expCollected >= expToLevelUp)
+                {
+                    playerLevel++;
+                    LevelUp();
+                }
+
+                x = xPosition;
+                y = yPosition;
+
+                numDenti.text = (proiettili.ToString());
+                valoreVita.text = (currentLife.ToString());
+
+                //Grid elementi = FindObjectOfType<Grid>();
+
+                Vector3 distance = targetTr.position - this.transform.position;
+                Vector3 direction = distance.normalized;
+
+                transform.position = transform.position + direction * speed * Time.deltaTime;
+
+
+                if (endMove)
+                {
+                    Debug.Log("Finito turno1");
+
+                    if (distance.magnitude < 0.20f && crossActive == false)
+                    {
+                        Debug.Log("Finito turno2");
+
+                        transform.position = targetTr.position;
+                        onMove = true;
+                        if (transform.position == targetTr.position)
+                        {
+                            endMove = false;
+                            GameController.Self.PassTurn();
+                            Debug.Log("Finito turno3");
+                        }
+                        
+                    }
+
+                }
+
+
+                if (Input.GetKeyDown("space"))
+                {
+                    //Set true to the attack parameter of animation
+                    animator.SetBool("Attack", true);
+                    Attacco();
+                }
+
+
+                if (movimento == 1) //movimento la utilizzeranno solo i nemici per i loro turni
+                {
+                    elementi.scacchiera[xOld, yOld].status = 0;
+
+                }
+
+                GameController gamec = FindObjectOfType<GameController>();
+
+                /* Transform figlio = transform.FindChild("lancio");
+
+                    if (Input.GetKeyDown(KeyCode.Keypad8))
+                    {
+                        figlio.transform.localEulerAngles = new Vector3(0, 0, 90);
+                        //figlio.transform.Translate(0, 90, 0);
+                        Debug.Log("sono qui");
+                    }*/
+
+                if (Input.GetKeyDown(KeyCode.Z) && onOff == false && endMove == false)
+                {
+                    onOff = true;
+                    onMove = false;
+                    crossActive = true;
+                }
+                else if (Input.GetKeyDown(KeyCode.Z) && onOff == true)
+                {
+                    onOff = false;
+                    onMove = true;
+                    crossActive = false;
+                }
+
+                if (Input.GetKeyDown(KeyCode.LeftControl))
+                    if (onOff == true)
+                        AttaccoADistanza();
+
+             
+            }
 
         }
+
+
     }
 }

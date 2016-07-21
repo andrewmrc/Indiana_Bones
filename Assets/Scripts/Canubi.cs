@@ -21,7 +21,8 @@ namespace IndianaBones
         public float speed = 2;
         public Transform targetTr;
         public bool attivo = false;
-        public bool active = false;
+        public bool rangeActive = false;
+        public bool onMove;
         GameObject giocatore;
         public int distanzaAttivazione = 10;
 		private Grid elementi;
@@ -32,6 +33,11 @@ namespace IndianaBones
 
 		public int powerLevel;
         public List<EnemyLevels> levelsList = new List<EnemyLevels>();
+
+        void Awake()
+        {
+            gameObject.tag = "Enemy";
+        }
 
         void Start()
         {     
@@ -52,25 +58,23 @@ namespace IndianaBones
         }
 
 
-       
-
-
         public int ManhattanDist()
         {
-            Player elementiPlayer = FindObjectOfType<Player>();
-            giocatore = elementiPlayer.gameObject;
-
-            return (Mathf.Abs((int)giocatore.transform.position.x - (int)this.transform.position.x) + Mathf.Abs((int)giocatore.transform.position.y - (int)this.transform.position.y));
+            return (Mathf.Abs((int)Player.Self.transform.position.x - (int)this.transform.position.x) + Mathf.Abs((int)Player.Self.transform.position.y - (int)this.transform.position.y));
         }
+
 
         public void Posizione()
         {
+            Debug.Log("posizione");
+
             OldValue();
-            
             //GameController gamec = FindObjectOfType<GameController>();
             //Canubi canubiEnemy = FindObjectOfType<Canubi>();
-            if (active == true)
+            if (rangeActive == true)
             {
+                Debug.Log("range");
+
                 if (vita > 0)
                 {
                     if (ManhattanDist() > 1)
@@ -82,9 +86,9 @@ namespace IndianaBones
                                 if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
                                 {
                                     elementi.scacchiera[xPosition - 1, yPosition].status = 3;
-									
-									//Flip the sprite
-									gameObject.GetComponent<SpriteRenderer> ().flipX = false;
+
+                                    //Flip the sprite
+                                    gameObject.GetComponent<SpriteRenderer>().flipX = false;
 
                                     xPosition -= 1;
                                 }
@@ -92,15 +96,15 @@ namespace IndianaBones
                                 {
                                     elementi.scacchiera[xPosition, yPosition + 1].status = 3;
                                     yPosition += 1;
-                                   }
+                                }
                             if (Player.Self.xPosition > xPosition)
 
                                 if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
                                 {
                                     elementi.scacchiera[xPosition + 1, yPosition].status = 3;
 
-									//Flip the sprite
-									gameObject.GetComponent<SpriteRenderer> ().flipX = true;
+                                    //Flip the sprite
+                                    gameObject.GetComponent<SpriteRenderer>().flipX = true;
 
                                     xPosition += 1;
                                 }
@@ -118,31 +122,31 @@ namespace IndianaBones
                         {
                             if (Player.Self.yPosition < yPosition)
                                 if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
-                                { 
+                                {
                                     elementi.scacchiera[xPosition - 1, yPosition].status = 3;
 
-									//Flip the sprite
-									gameObject.GetComponent<SpriteRenderer> ().flipX = true;
+                                    //Flip the sprite
+                                    gameObject.GetComponent<SpriteRenderer>().flipX = true;
 
                                     xPosition -= 1;
                                 }
-                                else if (elementi.scacchiera[xPosition , yPosition+1].status < 2)
-                                { 
+                                else if (elementi.scacchiera[xPosition, yPosition + 1].status < 2)
+                                {
                                     elementi.scacchiera[xPosition, yPosition + 1].status = 3;
                                     yPosition += 1;
                                 }
                             if (Player.Self.yPosition > yPosition)
 
                                 if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
-                                { 
+                                {
                                     elementi.scacchiera[xPosition + 1, yPosition].status = 3;
-									
-									//Flip the sprite
-									gameObject.GetComponent<SpriteRenderer> ().flipX = false;
+
+                                    //Flip the sprite
+                                    gameObject.GetComponent<SpriteRenderer>().flipX = false;
 
                                     xPosition += 1;
                                 }
-                                else if (elementi.scacchiera[xPosition , yPosition-1].status < 2)
+                                else if (elementi.scacchiera[xPosition, yPosition - 1].status < 2)
                                 {
                                     elementi.scacchiera[xPosition, yPosition - 1].status = 3;
                                     yPosition -= 1;
@@ -158,12 +162,12 @@ namespace IndianaBones
                                     elementi.scacchiera[xPosition, yPosition - 1].status = 3;
                                     yPosition -= 1;
                                 }
-                                else if (elementi.scacchiera[xPosition+1, yPosition].status < 2)
+                                else if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
                                 {
                                     elementi.scacchiera[xPosition + 1, yPosition].status = 3;
-									
-									//Flip the sprite
-									gameObject.GetComponent<SpriteRenderer> ().flipX = true;
+
+                                    //Flip the sprite
+                                    gameObject.GetComponent<SpriteRenderer>().flipX = true;
 
                                     xPosition += 1;
                                 }
@@ -174,12 +178,12 @@ namespace IndianaBones
                                     elementi.scacchiera[xPosition, yPosition + 1].status = 3;
                                     yPosition += 1;
                                 }
-                                else if (elementi.scacchiera[xPosition-1, yPosition].status < 2)
+                                else if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
                                 {
                                     elementi.scacchiera[xPosition - 1, yPosition].status = 3;
-									
-									//Flip the sprite
-									gameObject.GetComponent<SpriteRenderer> ().flipX = false;
+
+                                    //Flip the sprite
+                                    gameObject.GetComponent<SpriteRenderer>().flipX = false;
 
                                     xPosition -= 1;
                                 }
@@ -189,31 +193,35 @@ namespace IndianaBones
                         targetTr = elementi.scacchiera[xPosition, yPosition].transform;
                     }
 
-                    
 
 
-                    else if (ManhattanDist() == 1)
 
-                    {
-                        GameController.Self.turno = 1;
-                        foreach (var statistiche in levelsList)
-                        
-                         //viene richiamato il valore di attacco corrente del nemico e passato al metodo in Player
-                         //per essere sottratto alla sua vita  
-                        
-                        if (attacco == 1)
-                            Player.Self.controlloVita(statistiche.Attack);
-                        attacco = 0;
-                        GameController.Self.turno = 1;
-                    }
 
-                    
+                    /* else if (ManhattanDist() == 1)
+
+                     {
+                         GameController.Self.turno = 1;
+                         foreach (var statistiche in levelsList)
+
+                          //viene richiamato il valore di attacco corrente del nemico e passato al metodo in Player
+                          //per essere sottratto alla sua vita  
+
+                         if (attacco == 1)
+                             Player.Self.controlloVita(statistiche.Attack);
+                         attacco = 0;
+                         GameController.Self.turno = 1;
+                     }*/
+
+
                 }
-                
+
             }
-            GameController.Self.turno = 1;
+            //GameController.Self.turno = 1;
+            onMove = false;
+            GameController.Self.PassTurn();
 
         }
+
 
         public void OnTriggerEnter2D(Collider2D coll) 
         {
@@ -301,19 +309,54 @@ namespace IndianaBones
 
         }
 
-        
+        public void AttackHandler()
+        {
+            //Formula calcolo attacco canubi
+            //il risultato si sottrae alla vita del player
+            int damage = levelsList[powerLevel].Attack;
+            Player.Self.currentLife -= damage;
+            GameController.Self.PassTurn();
+        }
 
 
         void Update()
         {
+            if (gameObject.GetComponent<TurnHandler>().itsMyTurn && onMove == false)
+            {
+                //Debug.Log("Cambio turno");
+                //GameController.Self.PassTurn();
+
+                
+                if(ManhattanDist() == 1)
+                {
+                    Debug.Log("ATTACCO");
+
+                    AttackHandler();
+                } else
+                {
+                    onMove = true;
+                    if (onMove == true)
+                    {
+                        Debug.Log("MUOVO");
+                        Posizione();
+                    }
+                }
+            }
+
 
             if (GetComponent<Renderer>().isVisible)
             {
+                if (!GameController.Self.charactersList.Contains(this.gameObject))
+                {
+                    GameController.Self.charactersList.Add(this.gameObject);
+                }
                 seen = true;
-            }
-
-            if (seen && !GetComponent<Renderer>().isVisible)
+            } else if (!GetComponent<Renderer>().isVisible)
             {
+                if (GameController.Self.charactersList.Contains(this.gameObject))
+                {
+                    GameController.Self.charactersList.Remove(this.gameObject);
+                }
                 seen = false;
             }
 
@@ -329,7 +372,7 @@ namespace IndianaBones
                 elementi.scacchiera[xPosition, yPosition].status = 3;
 
             if (ManhattanDist() < distanzaAttivazione)
-                active = true;
+                rangeActive = true;
 
             
 
@@ -361,6 +404,7 @@ namespace IndianaBones
 			yield return new WaitForSeconds (2f);
 
 			elementi.scacchiera[xPosition, yPosition].status = 0;
+            GameController.Self.charactersList.Remove(this.gameObject);
 			Destroy(this.gameObject);
 		}
 

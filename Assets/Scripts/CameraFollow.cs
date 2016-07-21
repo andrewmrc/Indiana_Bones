@@ -13,7 +13,7 @@ namespace IndianaBones
 
         void Start()
         {
-           
+            transform.position = new Vector3(target.transform.position.x, target.transform.position.y);
         }
 
         // Update is called once per frame
