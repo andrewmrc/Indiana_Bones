@@ -12,10 +12,12 @@ namespace IndianaBones
 
 
 
-        bool onMove = true;
+        bool canMove = true;
         bool onOff = false;
         bool crossActive = false;
-        bool attacco = false;
+        //bool attacco = false;
+		bool isAttacking = false;
+
         public bool endMove;
 
         public int croce = 1;
@@ -107,6 +109,14 @@ namespace IndianaBones
         }
 
 
+		public void ResetPlayerVar(){
+			onOff = false;
+			crossActive = false;
+			canMove = true;
+			isAttacking = false;
+			CrossActivationHandler ();
+		}
+
         public void controlloVita(int attack)
         {
             currentLife -= attack;
@@ -179,31 +189,30 @@ namespace IndianaBones
 
             }
 
-
         }
 
 
         public void Attacco()
         {
-            if (croce == 1)
+			if (croce == 1 && canMove == true)
             {
                 up.GetComponent<BoxCollider2D>().enabled = true;
 
             }
 
-            if (croce == 2)
+			if (croce == 2 && canMove == true)
             {
                 right.GetComponent<BoxCollider2D>().enabled = true;
 
             }
 
-            if (croce == 3)
+			if (croce == 3 && canMove == true)
             {
                 down.GetComponent<BoxCollider2D>().enabled = true;
 
             }
 
-            if (croce == 4)
+			if (croce == 4 && canMove == true)
             {
                 left.GetComponent<BoxCollider2D>().enabled = true;
 
@@ -215,7 +224,7 @@ namespace IndianaBones
 
         IEnumerator PostAttacco(float seconds)
         {
-
+			isAttacking = false;
             yield return new WaitForSeconds(seconds);
 
             //Set false to the attack parameter of animation
@@ -225,6 +234,8 @@ namespace IndianaBones
             right.GetComponent<BoxCollider2D>().enabled = false;
             down.GetComponent<BoxCollider2D>().enabled = false;
             left.GetComponent<BoxCollider2D>().enabled = false;
+			GameController.Self.PassTurn ();
+
         }
 
 
@@ -256,6 +267,12 @@ namespace IndianaBones
         }
 
 
+		//Metodo chiamato dai nemici per incrementare gli exp del Player
+		public void IncreaseExp (int expToAdd){
+			expCollected += expToAdd;
+		}
+
+
         public void LevelUp()
         {
             //Save the previous required exp
@@ -265,18 +282,18 @@ namespace IndianaBones
             expToLevelUp = expToPreviousLevelUp * 1.5f;
 
             //Increase Life each level up
-            currentLife++;
+			startingLife++;
 
             //Increase Attack if the player level is pair
             if (playerLevel % 2 == 0)
             {
-                currentAttack++;
+				currentAttack++;
             }
 
             //Increase Mana if the player level is odd
             if (playerLevel % 2 != 0)
             {
-                currentMana = currentMana + 3;
+				currentMana = currentMana + 3;
             }
 
         }
@@ -337,10 +354,13 @@ namespace IndianaBones
 
         }
 
+
         void Update()
         {
-            if (gameObject.GetComponent<TurnHandler>().itsMyTurn)
+			if (gameObject.GetComponent<TurnHandler>().itsMyTurn && isAttacking == false)
             {
+				
+				//Movimento verso destra
                 if (Input.GetKey(KeyCode.RightArrow))
                 {
                     croce = 2;
@@ -348,11 +368,12 @@ namespace IndianaBones
                     //Flip the sprite of the player
                     gameObject.GetComponent<SpriteRenderer>().flipX = false;
 
-                    if (onMove == true)
+                    if (canMove == true)
                     {
                         if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
                         {
-                            onMove = false;
+							Debug.Log ("Muovi Destra");
+                            canMove = false;
                             PickUp();
                             animator.SetBool("Walk", true);
                             StartCoroutine(Camminata(0.5f));
@@ -362,11 +383,24 @@ namespace IndianaBones
                             targetTr = elementi.scacchiera[xPosition, yPosition].transform;
                             elementi.scacchiera[xPosition, yPosition].status = 4;
                             endMove = true;
-                        }
+						} 
                     }
                 }
 
 
+				//Attacco verso destra
+				if (Input.GetKey (KeyCode.RightArrow)) {
+					if (elementi.scacchiera [xPosition + 1, yPosition].status == 3 && isAttacking == false) {
+						Debug.Log ("Attacca Destra");
+						isAttacking = true;
+						//Set true to the attack parameter of animation
+						animator.SetBool ("Attack", true);
+						Attacco ();
+					}
+				}
+
+
+				//Movimento verso sinistra
                 if (Input.GetKey(KeyCode.LeftArrow))
                 {
                     croce = 4;
@@ -374,13 +408,15 @@ namespace IndianaBones
                     //Flip the sprite of the player
                     gameObject.GetComponent<SpriteRenderer>().flipX = true;
 
-                    if (onMove == true)
+                    if (canMove == true)
                     {
                         if (xPosition > 0)
                         {
                             if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
                             {
-                                onMove = false;
+								Debug.Log ("Muovi sinistra");
+
+                                canMove = false;
                                 PickUp();
                                 animator.SetBool("Walk", true);
                                 StartCoroutine(Camminata(0.5f));
@@ -391,23 +427,38 @@ namespace IndianaBones
                                 elementi.scacchiera[xPosition, yPosition].status = 4;
                                 endMove = true;
 
-                            }
+							} 
                         }
                     }
                 }
 
 
+				//Attacco verso sinistra
+				if (Input.GetKeyDown (KeyCode.LeftArrow)) {
+					if (elementi.scacchiera [xPosition - 1, yPosition].status == 3 && isAttacking == false) {
+						Debug.Log ("Attacca Sinistra");
+						isAttacking = true;
+						//Set true to the attack parameter of animation
+						animator.SetBool ("Attack", true);
+						Attacco ();
+					}
+				}
+
+
+				//Movimento verso il basso
                 if (Input.GetKey(KeyCode.DownArrow))
                 {
                     croce = 3;
                     RotazioneAttacco();
-                    if (onMove == true)
+                    if (canMove == true)
                     {
                         if (yPosition > 0)
                         {
                             if (elementi.scacchiera[xPosition, yPosition - 1].status < 2)
                             {
-                                onMove = false;
+								Debug.Log ("Muovi Giù");
+
+                                canMove = false;
                                 PickUp();
                                 animator.SetBool("Walk", true);
                                 StartCoroutine(Camminata(0.5f));
@@ -417,24 +468,38 @@ namespace IndianaBones
                                 targetTr = elementi.scacchiera[xPosition, yPosition].transform;
                                 elementi.scacchiera[xPosition, yPosition].status = 4;
                                 endMove = true;
-
-                            }
+							} 
                         }
                     }
                 }
 
 
-                if (Input.GetKey(KeyCode.UpArrow))
+				//Attacco verso il basso
+				if (Input.GetKeyDown (KeyCode.DownArrow)) {
+					if (elementi.scacchiera [xPosition, yPosition - 1].status == 3 && isAttacking == false) {
+						Debug.Log ("Attacca Giù");
+						isAttacking = true;
+						//Set true to the attack parameter of animation
+						animator.SetBool ("Attack", true);
+						Attacco ();
+					}
+				}
+
+
+				//Movimento verso l'alto
+				if (Input.GetKey(KeyCode.UpArrow))
                 {
                     croce = 1;
                     RotazioneAttacco();
-                    if (onMove == true)
+                    if (canMove == true)
                     {
                         if (yPosition < 100)
                         {
                             if (elementi.scacchiera[xPosition, yPosition + 1].status < 2)
                             {
-                                onMove = false;
+								Debug.Log ("Muovi Su");
+
+                                canMove = false;
                                 PickUp();
                                 animator.SetBool("Walk", true);
                                 StartCoroutine(Camminata(0.5f));
@@ -444,32 +509,23 @@ namespace IndianaBones
                                 targetTr = elementi.scacchiera[xPosition, yPosition].transform;
                                 elementi.scacchiera[xPosition, yPosition].status = 4;
                                 endMove = true;
-                            }
+							} 
                         }
                     }
                 }
 
 
-
-                if (onOff == true)
-                {
-                    up.gameObject.SetActive(true);
-                    down.gameObject.SetActive(true);
-                    right.gameObject.SetActive(true);
-                    left.gameObject.SetActive(true);
-                    RotazioneAttacco();
-
-                }
-                else if (onOff == false)
-                {
-                    up.gameObject.SetActive(false);
-                    down.gameObject.SetActive(false);
-                    right.gameObject.SetActive(false);
-                    left.gameObject.SetActive(false);
-
-                }
-
-
+				//Attacco verso l'alto
+				if (Input.GetKeyDown (KeyCode.UpArrow)) {
+					if (elementi.scacchiera [xPosition, yPosition + 1].status == 3 && isAttacking == false) {
+						Debug.Log ("Attacca Su");
+						isAttacking = true;
+						//Set true to the attack parameter of animation
+						animator.SetBool ("Attack", true);
+						Attacco ();
+					}
+				}
+            
 
                 //Check if the player have reached the required exp to level up
                 if (expCollected >= expToLevelUp)
@@ -494,19 +550,19 @@ namespace IndianaBones
 
                 if (endMove)
                 {
-                    Debug.Log("Finito turno1");
+                    //Debug.Log("Finito turno1");
 
                     if (distance.magnitude < 0.20f && crossActive == false)
                     {
-                        Debug.Log("Finito turno2");
+                        //Debug.Log("Finito turno2");
 
                         transform.position = targetTr.position;
-                        onMove = true;
+                        canMove = true;
                         if (transform.position == targetTr.position)
                         {
                             endMove = false;
                             GameController.Self.PassTurn();
-                            Debug.Log("Finito turno3");
+                            //Debug.Log("Finito turno3");
                         }
                         
                     }
@@ -516,9 +572,11 @@ namespace IndianaBones
 
                 if (Input.GetKeyDown("space"))
                 {
-                    //Set true to the attack parameter of animation
-                    animator.SetBool("Attack", true);
-                    Attacco();
+					if (canMove == true) {
+						//Set true to the attack parameter of animation
+						animator.SetBool ("Attack", true);
+						Attacco ();
+					}
                 }
 
 
@@ -542,24 +600,51 @@ namespace IndianaBones
                 if (Input.GetKeyDown(KeyCode.Z) && onOff == false && endMove == false)
                 {
                     onOff = true;
-                    onMove = false;
+					CrossActivationHandler ();
+                    canMove = false;
                     crossActive = true;
                 }
                 else if (Input.GetKeyDown(KeyCode.Z) && onOff == true)
                 {
                     onOff = false;
-                    onMove = true;
+					CrossActivationHandler ();
+                    canMove = true;
                     crossActive = false;
                 }
 
-                if (Input.GetKeyDown(KeyCode.LeftControl))
-                    if (onOff == true)
-                        AttaccoADistanza();
 
+				if (Input.GetKeyDown (KeyCode.LeftControl)) {
+					if (onOff == true) {
+						isAttacking = true;
+						AttaccoADistanza ();
+					}
+				}
              
             }
 
         }
+
+
+		public void CrossActivationHandler() {
+			//Attiva e disattiva visualizzazione croce
+			if (onOff == true)
+			{
+				up.gameObject.GetComponent<SpriteRenderer> ().enabled = true; 
+				down.gameObject.GetComponent<SpriteRenderer> ().enabled = true; 
+				right.gameObject.GetComponent<SpriteRenderer> ().enabled = true; 
+				left.gameObject.GetComponent<SpriteRenderer> ().enabled = true; 
+				RotazioneAttacco();
+
+			}
+			else if (onOff == false)
+			{
+				up.gameObject.GetComponent<SpriteRenderer> ().enabled = false; 
+				down.gameObject.GetComponent<SpriteRenderer> ().enabled = false; 
+				right.gameObject.GetComponent<SpriteRenderer> ().enabled = false; 
+				left.gameObject.GetComponent<SpriteRenderer> ().enabled = false; 
+
+			}
+		}
 
 
     }

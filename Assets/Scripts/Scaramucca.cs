@@ -15,7 +15,7 @@ namespace IndianaBones
         public int yPosition;
         public int xOld;
         public int yOld;
-        public int attacco = 1;
+        public int attackPower = 1;
         public int vita = 1;
         public int movimento = 0;
         public bool attivo = false;
@@ -25,6 +25,7 @@ namespace IndianaBones
         public int RangeInterno;
         public int RangeOld = 0;
         private Grid elementi;
+		private Animator animator;
 
         [Header("Level and Stats")]
         [Space(10)]
@@ -40,7 +41,7 @@ namespace IndianaBones
         void Start()
         {
             vita = levelsList[powerLevel].Life;
-            attacco = levelsList[powerLevel].Attack;
+            attackPower = levelsList[powerLevel].Attack;
 
             elementi = FindObjectOfType<Grid>();
 
@@ -51,7 +52,10 @@ namespace IndianaBones
 
             RangeInterno = RangePattuglia;
 
-            
+			//Get the animator component and set the parameter equal to the initial life value
+			animator = GetComponent<Animator>();
+			animator.SetFloat ("Life", vita);
+
 
         }
 
@@ -61,59 +65,49 @@ namespace IndianaBones
         }
 
 
-        public void OnTriggerEnter2D(Collider2D coll)
-        {
+		public void OnTriggerEnter2D(Collider2D coll) 
+		{
 
+			//Handle life subtraction
+			if (coll.gameObject.name == "up")
+			{
+				if (Player.Self.croce == 1)
+				{
 
-            if (coll.gameObject.name == "up")
-            {
-                if (Player.Self.croce == 1)
-                {
+					vita -= Player.Self.currentAttack;
 
-                    vita -= Player.Self.currentAttack;
+				}
+			}
+			if (coll.gameObject.name == "down")
+			{
+				if (Player.Self.croce == 3)
+				{
 
-                    //sottraggo vita al player
+					vita -= Player.Self.currentAttack;
 
-                    Player.Self.currentLife -= attacco;
+				}
+			}
+			if (coll.gameObject.name == "right")
+			{
+				if (Player.Self.croce == 2)
+				{
 
-                }
-            }
-            if (coll.gameObject.name == "down")
-            {
-                if (Player.Self.croce == 3)
-                {
+					vita -= Player.Self.currentAttack;
 
-                    vita -= Player.Self.currentAttack;
+				}
+			}
+			if (coll.gameObject.name == "left")
+			{
+				if (Player.Self.croce == 4)
+				{
 
-                    Player.Self.currentLife -= attacco;
+					vita -= Player.Self.currentAttack;
 
-                }
-            }
-            if (coll.gameObject.name == "right")
-            {
-                if (Player.Self.croce == 2)
-                {
+				}
+			}
 
-                    vita -= Player.Self.currentAttack;
+		}
 
-                    Player.Self.currentLife -= attacco;
-
-                }
-            }
-            if (coll.gameObject.name == "left")
-            {
-                if (Player.Self.croce == 4)
-                {
-
-                    vita -= Player.Self.currentAttack;
-
-                    Player.Self.currentLife -= attacco;
-
-                }
-            }
-
-            
-        }
 
         public void OnCollisionEnter2D(Collision2D coll)
         {
@@ -124,27 +118,17 @@ namespace IndianaBones
 
                 vita -= Player.Self.currentAttack;
 
-                Destroy(coll.gameObject);
-
-
-
-
             }
 
         }
 
         public void MovimentoScaramucca()
         {
-            if (attivo == true)
-            {
-                if (TipoMovimento == 1)
-                    MovimentoAsseY();
-
-                else if (TipoMovimento == 2)
-                    MovimentoAsseX();
-            }
-
-
+			if (TipoMovimento == 1) {
+				MovimentoAsseY ();
+			} else if (TipoMovimento == 2) {
+				MovimentoAsseX ();
+			}
         }
 
         public void OldValue()
@@ -195,9 +179,11 @@ namespace IndianaBones
                 }
             }
 
-            //GameController.Self.turno = 1;
             GameController.Self.PassTurn();
+			StartCoroutine (ResetMyColor ());
+
         }
+
 
         public void MovimentoAsseY()
         {
@@ -227,23 +213,46 @@ namespace IndianaBones
 
             }
             GameController.Self.PassTurn();
+			StartCoroutine (ResetMyColor ());
+
         }
 
-        public void AttackHandler()
-        {
-            //Formula calcolo attacco 
-            //il risultato si sottrae alla vita del player
-            int damage = levelsList[powerLevel].Attack;
-            Player.Self.currentLife -= damage;
-            GameController.Self.PassTurn();
-        }
+
+		public void AttackHandler()
+		{
+			//Formula calcolo attackPower Canubi
+			int randomX = Random.Range(1, 3);
+			int damage = (int)(attackPower*randomX);
+			//Sottrae vita al player
+			Player.Self.currentLife -= damage;
+			Debug.Log("attackPower di: " + this.gameObject.name + "-> toglie al Player: " + damage);
+			Player.Self.gameObject.GetComponent<SpriteRenderer> ().color = new Color32 (255, 0, 0, 255);
+			StartCoroutine (ResetPlayerColor ());
+			//Passa il turno
+			GameController.Self.PassTurn();
+			StartCoroutine (ResetMyColor ());
+
+		}
+
+
+		IEnumerator ResetPlayerColor (){
+			yield return new WaitForSeconds (0.3f);
+			Player.Self.gameObject.GetComponent<SpriteRenderer> ().color = new Color32 (255, 255, 255, 255);
+		}
+
+		IEnumerator ResetMyColor (){
+			yield return new WaitForSeconds (0.2f);
+			gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255 ,255);
+		}
 
 
         void Update()
         {
 
-            if (gameObject.GetComponent<TurnHandler>().itsMyTurn)
+            if (vita > 0 && gameObject.GetComponent<TurnHandler>().itsMyTurn)
             {
+				gameObject.GetComponent<SpriteRenderer>().color = new Color32(0, 255, 0 ,255);
+
                 if (ManhattanDist() == 1)
                 {
                     AttackHandler();
@@ -274,12 +283,11 @@ namespace IndianaBones
 
 
             //Controlliamo se la vita va a zero e in tal caso aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
-            if (vita <= 0)
-             {
-                elementi.scacchiera[xPosition, yPosition].status = 0;
-                Player.Self.expCollected += levelsList[powerLevel].Exp;
-                Destroy(this.gameObject);
-            }
+			if (vita <= 0)
+			{
+				StartCoroutine (HandleDeath ());
+			}
+
 
             if (vita > 0)
                 elementi.scacchiera[xPosition, yPosition].status = 3;
@@ -295,13 +303,33 @@ namespace IndianaBones
 
             }
 
+			/*
             if (attivo == true)
             {
 
                 MovimentoScaramucca();
                 attivo = false;
-            }
+            }*/
         }
+
+
+		IEnumerator HandleDeath(){
+			//Activate the death animation
+			animator.SetFloat ("Life", vita);
+			if (gameObject.GetComponent<TurnHandler> ().itsMyTurn) {
+				GameController.Self.PassTurn ();
+			}
+			yield return new WaitForEndOfFrame();
+			print("current clip length = " + animator.GetCurrentAnimatorStateInfo(0).length);
+			yield return new WaitForSeconds (1.2f);
+
+			GameController.Self.charactersList.Remove(this.gameObject);
+			Player.Self.IncreaseExp(levelsList[powerLevel].Exp);
+			elementi.scacchiera[xPosition, yPosition].status = 0;
+
+			Destroy (this.gameObject);
+
+		}
     }
 }
 

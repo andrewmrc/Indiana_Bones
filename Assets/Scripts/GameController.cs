@@ -50,42 +50,8 @@ namespace IndianaBones
         {
        
 
-
-
-            //Player elementi = FindObjectOfType<Player>();
-
-            /*
-            if (elementi.movimento == 0)
-                turno = 0;
-            if (turno == 0 && turnoNemici == 1)
-            {
-                turnoNemici = 0;
-                Scaramucca[] scaramucche = FindObjectsOfType<Scaramucca>();
-
-                foreach (Scaramucca scaramucca in scaramucche)
-                {
-                    
-                    scaramucca.attivo = true;
-                }
-
-               Canubi[] AllCanubi = FindObjectsOfType<Canubi>();
-
-                foreach (Canubi canubi in AllCanubi)
-                {
-                    canubi.attivo = true;
-                }
-
-                turnoNemici = 1;
-                turno = 1;
-            }*/
-
-            //Scrollbar nuovaVita = vita.GetComponent<Scrollbar>();
-            // nuovaVita.size = barraVita;
-
-
-
-
         }
+
 
         public void PassTurn()
         {
@@ -99,21 +65,30 @@ namespace IndianaBones
                     Debug.Log("Ha passato il turno: " + charactersList[i].gameObject.name);
 
                     charactersList[i].gameObject.GetComponent<TurnHandler>().itsMyTurn = false;
-                    if(i + 1 < charactersList.Count) { 
-                        charactersList[i + 1].gameObject.GetComponent<TurnHandler>().itsMyTurn = true;
-                        Debug.Log("E' il turno di: " + charactersList[i + 1].gameObject.name);
-                    } else
-                    {
-                        charactersList[0].gameObject.GetComponent<TurnHandler>().itsMyTurn = true;
-                        Debug.Log("E' il turno di: " + charactersList[0].gameObject.name);
+					StartCoroutine (WaitToNextTurn (i));
 
-                    }
+                    
                     break;
 
                 }
             }
 
         }
+
+
+		IEnumerator WaitToNextTurn (int i) {
+			yield return new WaitForSeconds (0.2f);
+			Debug.Log ("WaitToNextTurn");
+			if(i + 1 < charactersList.Count) { 
+				charactersList[i + 1].gameObject.GetComponent<TurnHandler>().itsMyTurn = true;
+				Debug.Log("E' il turno di: " + charactersList[i + 1].gameObject.name);
+			} else
+			{
+				charactersList[0].gameObject.GetComponent<TurnHandler>().itsMyTurn = true;
+				Debug.Log("E' il turno di: " + charactersList[0].gameObject.name);
+
+			}
+		}
 
     }
 }

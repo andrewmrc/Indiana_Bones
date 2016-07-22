@@ -16,7 +16,7 @@ namespace IndianaBones
         public int xOld;
         public int yOld;
         public int movimento = 0;
-        public int attacco = 1;
+        public int attackPower = 1;
         public int vita = 1;
         public float speed = 2;
         public Transform targetTr;
@@ -42,7 +42,7 @@ namespace IndianaBones
         void Start()
         {     
 			vita = levelsList [powerLevel].Life;
-			attacco = levelsList [powerLevel].Attack;
+			attackPower = levelsList [powerLevel].Attack;
 
             elementi = FindObjectOfType<Grid>();
 
@@ -203,12 +203,12 @@ namespace IndianaBones
                          GameController.Self.turno = 1;
                          foreach (var statistiche in levelsList)
 
-                          //viene richiamato il valore di attacco corrente del nemico e passato al metodo in Player
+                          //viene richiamato il valore di attackPower corrente del nemico e passato al metodo in Player
                           //per essere sottratto alla sua vita  
 
-                         if (attacco == 1)
+                         if (attackPower == 1)
                              Player.Self.controlloVita(statistiche.Attack);
-                         attacco = 0;
+                         attackPower = 0;
                          GameController.Self.turno = 1;
                      }*/
 
@@ -219,6 +219,7 @@ namespace IndianaBones
             //GameController.Self.turno = 1;
             onMove = false;
             GameController.Self.PassTurn();
+			StartCoroutine (ResetMyColor ());
 
         }
 
@@ -226,17 +227,13 @@ namespace IndianaBones
         public void OnTriggerEnter2D(Collider2D coll) 
         {
 
-
+			//Handle life subtraction
             if (coll.gameObject.name == "up")
             {
                 if (Player.Self.croce == 1)
                 {
 
                     vita -= Player.Self.currentAttack;
-
-                    //sottraggo vita al player
-
-                    Player.Self.currentLife -= attacco;
 
                 }
             }
@@ -247,8 +244,6 @@ namespace IndianaBones
 
                     vita -= Player.Self.currentAttack;
 
-                    Player.Self.currentLife -= attacco;
-
                 }
             }
             if (coll.gameObject.name == "right")
@@ -258,8 +253,6 @@ namespace IndianaBones
 
                     vita -= Player.Self.currentAttack;
 
-                    Player.Self.currentLife -= attacco;
-
                 }
             }
             if (coll.gameObject.name == "left")
@@ -268,8 +261,6 @@ namespace IndianaBones
                 {
 
                     vita -= Player.Self.currentAttack;
-
-                    Player.Self.currentLife -= attacco;
 
                 }
             }
@@ -285,11 +276,6 @@ namespace IndianaBones
             {
 
                 vita -= Player.Self.currentAttack;
-
-                Destroy(coll.gameObject);
-
-
-
 
             }
 
@@ -311,21 +297,40 @@ namespace IndianaBones
 
         public void AttackHandler()
         {
-            //Formula calcolo attacco canubi
-            //il risultato si sottrae alla vita del player
-            int damage = levelsList[powerLevel].Attack;
-            Player.Self.currentLife -= damage;
+            //Formula calcolo attacco Canubi
+			int randomX = Random.Range(1, 3);
+			int damage = (int)(attackPower*randomX);
+			//Sottrae vita al player
+			Player.Self.currentLife -= damage;
+			Debug.Log("Attacco di: " + this.gameObject.name + "-> toglie al Player: " + damage);
+			Player.Self.gameObject.GetComponent<SpriteRenderer> ().color = new Color32 (255, 0, 0, 255);
+			StartCoroutine (ResetPlayerColor ());
+			//Passa il turno
             GameController.Self.PassTurn();
+			StartCoroutine (ResetMyColor ());
+
         }
+
+
+		IEnumerator ResetPlayerColor (){
+			yield return new WaitForSeconds (0.3f);
+			Player.Self.gameObject.GetComponent<SpriteRenderer> ().color = new Color32 (255, 255, 255, 255);
+		}
+
+		IEnumerator ResetMyColor (){
+			yield return new WaitForSeconds (0.2f);
+			gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255 ,255);
+		}
+
 
 
         void Update()
         {
-            if (gameObject.GetComponent<TurnHandler>().itsMyTurn && onMove == false)
+            if (vita > 0 && gameObject.GetComponent<TurnHandler>().itsMyTurn && onMove == false)
             {
                 //Debug.Log("Cambio turno");
                 //GameController.Self.PassTurn();
-
+				gameObject.GetComponent<SpriteRenderer>().color = new Color32(0, 255, 0 ,255);
                 
                 if(ManhattanDist() == 1)
                 {
@@ -363,7 +368,6 @@ namespace IndianaBones
             //Controlliamo se la vita va a zero e in tal caso aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
             if (vita <= 0)
             {
-				Player.Self.expCollected += levelsList[powerLevel].Exp;
 				StartCoroutine (HandleDeath ());
             }
 
@@ -399,13 +403,19 @@ namespace IndianaBones
 		IEnumerator HandleDeath(){
 			//Activate the death animation
 			animator.SetFloat ("Life", vita);
+			if (gameObject.GetComponent<TurnHandler> ().itsMyTurn) {
+				GameController.Self.PassTurn ();
+			}
 			yield return new WaitForEndOfFrame();
 			print("current clip length = " + animator.GetCurrentAnimatorStateInfo(0).length);
 			yield return new WaitForSeconds (2f);
 
-			elementi.scacchiera[xPosition, yPosition].status = 0;
             GameController.Self.charactersList.Remove(this.gameObject);
-			Destroy(this.gameObject);
+			Player.Self.IncreaseExp(levelsList[powerLevel].Exp);
+			elementi.scacchiera[xPosition, yPosition].status = 0;
+
+			Destroy (this.gameObject);
+
 		}
 
     }

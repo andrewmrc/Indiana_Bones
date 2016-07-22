@@ -40,13 +40,9 @@ namespace IndianaBones
                     break;
             }
 
-          
-
-            
-            
-
 
         }
+
 
         void Update()
         {
@@ -60,26 +56,23 @@ namespace IndianaBones
             }
         }
 
+
         public void OnCollisionEnter2D(Collision2D coll)
         {
 
 
-            if (coll.gameObject.name == "muro")
+			if (coll.gameObject.name == "muro" || coll.gameObject.tag == "Enemy" || coll.gameObject.tag == "Colonne")
             {
+				Debug.Log ("Nome oggetto toccato: " + coll.gameObject.name);
+				GameController.Self.PassTurn ();
+				Player.Self.ResetPlayerVar ();
 
-           
                 Destroy(this.gameObject);
-                
-
-
 
             }
 
         }
 
-        public void OnDestroy()
-        {
-            GameController.Self.turno = 0;
-        }
+        
     }
 }
