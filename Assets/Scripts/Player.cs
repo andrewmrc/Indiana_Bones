@@ -102,6 +102,9 @@ namespace IndianaBones
             xPosition = (int)this.transform.position.x;
             yPosition = (int)this.transform.position.y;
 
+           // xOld = xPosition;
+            //yOld = yPosition;
+
             elementi = FindObjectOfType<Grid>();
             this.transform.position = elementi.scacchiera[xPosition, yPosition].transform.position;
             targetTr = elementi.scacchiera[xPosition, yPosition].transform;
@@ -242,8 +245,8 @@ namespace IndianaBones
         public void OldValue()
         {
             //Grid elementi = FindObjectOfType<Grid>();
-            xOld = (int)this.transform.position.x;
-            yOld = (int)this.transform.position.y;
+            xOld = xPosition;
+            yOld = yPosition;
             elementi.scacchiera[xOld, yOld].status = 0;
 
         }
