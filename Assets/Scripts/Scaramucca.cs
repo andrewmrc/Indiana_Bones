@@ -122,6 +122,7 @@ namespace IndianaBones
 
         }
 
+
         public void MovimentoScaramucca()
         {
 			if (TipoMovimento == 1) {
@@ -130,6 +131,7 @@ namespace IndianaBones
 				MovimentoAsseX ();
 			}
         }
+
 
         public void OldValue()
         {
@@ -140,27 +142,32 @@ namespace IndianaBones
 
         }
 
+
         public void MovimentoAsseX()
         {
             OldValue();
 
             if (RangeInterno > 0)
             {
-                if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
-                {
-
-                    elementi.scacchiera[xPosition + 1, yPosition].status = 3;
-                    xPosition += 1;
-                    targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-                    RangeInterno--;
-                    RangeOld++;
-                }
+				if (elementi.scacchiera [xPosition + 1, yPosition].status < 2) {
+					elementi.scacchiera [xPosition + 1, yPosition].status = 3;
+					xPosition += 1;
+					targetTr = elementi.scacchiera [xPosition, yPosition].transform;
+					RangeInterno--;
+					RangeOld++;
+				} else if (elementi.scacchiera [xPosition - 1, yPosition].status < 2) {
+					elementi.scacchiera [xPosition - 1, yPosition].status = 3;
+					xPosition -= 1;
+					targetTr = elementi.scacchiera [xPosition, yPosition].transform;
+					RangeInterno = 0;
+					RangeOld++;
+				} else {
+					Debug.Log (this.gameObject.name +" salta questo turno perchè circondata da ostacoli!");
+				}
             }
             else if (RangeInterno <= 0)
             {
                 if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
-
-
                 {
                     elementi.scacchiera[xPosition - 1, yPosition].status = 3;
                     xPosition -= 1;
@@ -173,10 +180,15 @@ namespace IndianaBones
 
                     }
 
-
-
-
-                }
+				} else if (elementi.scacchiera [xPosition + 1, yPosition].status < 2) {
+					elementi.scacchiera [xPosition + 1, yPosition].status = 3;
+					xPosition += 1;
+					targetTr = elementi.scacchiera [xPosition, yPosition].transform;
+					RangeInterno = RangePattuglia;
+					RangeOld = 0;
+				} else {
+					Debug.Log (this.gameObject.name +" salta questo turno perchè circondata da ostacoli!");
+				}
             }
 
             GameController.Self.PassTurn();
@@ -189,27 +201,45 @@ namespace IndianaBones
         {
             OldValue();
 
-            if ((RangeInterno > 0) && (elementi.scacchiera[xPosition, yPosition + 1].status != 4))
+            if ((RangeInterno > 0))
             {
-
-                elementi.scacchiera[xPosition, yPosition + 1].status = 3;
-                yPosition += 1;
-                targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-                RangeInterno--;
-                RangeOld++;
+				if (elementi.scacchiera [xPosition, yPosition + 1].status < 2) {
+					elementi.scacchiera [xPosition, yPosition + 1].status = 3;
+					yPosition += 1;
+					targetTr = elementi.scacchiera [xPosition, yPosition].transform;
+					RangeInterno--;
+					RangeOld++;
+				} else if (elementi.scacchiera [xPosition, yPosition - 1].status < 2) {
+					elementi.scacchiera [xPosition, yPosition - 1].status = 3;
+					yPosition -= 1;
+					targetTr = elementi.scacchiera [xPosition, yPosition].transform;
+					RangeInterno = 0;
+					RangeOld++;
+				} else {
+					Debug.Log (this.gameObject.name +" salta questo turno perchè circondata da ostacoli!");
+				}
             }
-            else if ((RangeInterno <= 0) && (elementi.scacchiera[xPosition, yPosition - 1].status != 4))
+            else if ((RangeInterno <= 0))
             {
-                elementi.scacchiera[xPosition, yPosition - 1].status = 3;
-                yPosition -= 1;
-                targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-                RangeOld++;
-                if ((RangeOld / 2) == RangePattuglia)
-                {
-                    RangeInterno = RangePattuglia;
-                    RangeOld = 0;
+				if (elementi.scacchiera [xPosition, yPosition - 1].status < 2) {
+					elementi.scacchiera [xPosition, yPosition - 1].status = 3;
+					yPosition -= 1;
+					targetTr = elementi.scacchiera [xPosition, yPosition].transform;
+					RangeOld++;
+					if ((RangeOld / 2) == RangePattuglia) {
+						RangeInterno = RangePattuglia;
+						RangeOld = 0;
 
-                }
+					}
+				} else if (elementi.scacchiera [xPosition, yPosition + 1].status < 2) {
+					elementi.scacchiera [xPosition, yPosition + 1].status = 3;
+					yPosition += 1;
+					targetTr = elementi.scacchiera [xPosition, yPosition].transform;
+					RangeInterno = RangePattuglia;
+					RangeOld = 0;
+				} else {
+					Debug.Log (this.gameObject.name +" salta questo turno perchè circondata da ostacoli!");
+				}
 
             }
             GameController.Self.PassTurn();
@@ -330,6 +360,7 @@ namespace IndianaBones
 			Destroy (this.gameObject);
 
 		}
+
     }
 }
 

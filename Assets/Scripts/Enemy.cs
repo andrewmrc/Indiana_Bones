@@ -120,14 +120,14 @@ namespace IndianaBones
                         if (attacco == 1)
                             player.controlloVita(statistiche.Attack);
                         attacco = 0;
-                        gamec.turno = 1;
+                        ///gamec.turno = 1;
                     }
 
 
                 }
                 
             }
-            gamec.turno = 1;
+           // gamec.turno = 1;
 
         }
         public void OldValue()

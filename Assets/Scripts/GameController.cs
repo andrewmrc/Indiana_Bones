@@ -21,9 +21,9 @@ namespace IndianaBones
             }
         }
 
-
-        public int turno = 1;
-        public int turnoNemici = 1;
+		public float delayTurni = 0.2f;
+        //public int turno = 1;
+        //public int turnoNemici = 1;
         //public Scrollbar vita;
         // public float barraVita = 1.0f;
         public List<GameObject> charactersList = new List<GameObject>();
@@ -77,7 +77,7 @@ namespace IndianaBones
 
 
 		IEnumerator WaitToNextTurn (int i) {
-			yield return new WaitForSeconds (0.2f);
+			yield return new WaitForSeconds (delayTurni);
 			Debug.Log ("WaitToNextTurn");
 			if(i + 1 < charactersList.Count) { 
 				charactersList[i + 1].gameObject.GetComponent<TurnHandler>().itsMyTurn = true;

@@ -390,7 +390,7 @@ namespace IndianaBones
 
 				//Attacco verso destra
 				if (Input.GetKey (KeyCode.RightArrow)) {
-					if (elementi.scacchiera [xPosition + 1, yPosition].status == 3 && isAttacking == false) {
+					if (elementi.scacchiera [xPosition + 1, yPosition].status == 3 && isAttacking == false && canMove == true) {
 						Debug.Log ("Attacca Destra");
 						isAttacking = true;
 						//Set true to the attack parameter of animation
@@ -435,7 +435,7 @@ namespace IndianaBones
 
 				//Attacco verso sinistra
 				if (Input.GetKeyDown (KeyCode.LeftArrow)) {
-					if (elementi.scacchiera [xPosition - 1, yPosition].status == 3 && isAttacking == false) {
+					if (elementi.scacchiera [xPosition - 1, yPosition].status == 3 && isAttacking == false && canMove == true) {
 						Debug.Log ("Attacca Sinistra");
 						isAttacking = true;
 						//Set true to the attack parameter of animation
@@ -476,7 +476,7 @@ namespace IndianaBones
 
 				//Attacco verso il basso
 				if (Input.GetKeyDown (KeyCode.DownArrow)) {
-					if (elementi.scacchiera [xPosition, yPosition - 1].status == 3 && isAttacking == false) {
+					if (elementi.scacchiera [xPosition, yPosition - 1].status == 3 && isAttacking == false && canMove == true) {
 						Debug.Log ("Attacca Giù");
 						isAttacking = true;
 						//Set true to the attack parameter of animation
@@ -517,7 +517,7 @@ namespace IndianaBones
 
 				//Attacco verso l'alto
 				if (Input.GetKeyDown (KeyCode.UpArrow)) {
-					if (elementi.scacchiera [xPosition, yPosition + 1].status == 3 && isAttacking == false) {
+					if (elementi.scacchiera [xPosition, yPosition + 1].status == 3 && isAttacking == false && canMove == true) {
 						Debug.Log ("Attacca Su");
 						isAttacking = true;
 						//Set true to the attack parameter of animation
