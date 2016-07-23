@@ -26,7 +26,15 @@ namespace IndianaBones
             this.transform.position = elementi.scacchiera[x, y].transform.position;
         }
 
-        // Update is called once per frame
+
+        IEnumerator ResetPlayerColor()
+        {
+            yield return new WaitForSeconds(0.3f);
+            Player.Self.gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+
+        }
+
+
         void Update()
         {
             
@@ -34,11 +42,9 @@ namespace IndianaBones
             Grid elementi = FindObjectOfType<Grid>();
             if (Player.Self.transform.position == elementi.scacchiera[x, y].transform.position)
             {
-                //objPlayer.xPosition -= 1;
-                //objPlayer.xOld -= 1;
-                //inserito un valore di default per il danno trappola da rivedere se si vuole 
-                //avere un aumento del danno per livello come nel caso dei nemici
-                // objPlayer.controlloVita(1);
+                Player.Self.gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 0, 0, 255);
+                StartCoroutine(ResetPlayerColor());
+
                 Player.Self.currentLife -= DannoBucoNero;
 
                 Player.Self.transform.position = elementi.scacchiera[Player.Self.xOld, Player.Self.yOld].transform.position;
