@@ -6,16 +6,18 @@ namespace IndianaBones
 
     public class trappolaSxDx : MonoBehaviour
     {
-       Transform player;
+       
        int x;
        int y;
-        
+
+        public int DannoTrappola = 1;
+
+
         void Start()
         {
             
 
-            Player objPlayer = FindObjectOfType<Player>();
-            player = objPlayer.gameObject.transform;
+            
 
             x = (int)this.transform.position.x;
             y = (int)this.transform.position.y;
@@ -27,18 +29,20 @@ namespace IndianaBones
         // Update is called once per frame
         void Update()
         {
-            Player objPlayer = FindObjectOfType<Player>();
+            
 
             Grid elementi = FindObjectOfType<Grid>();
-            if (player.transform.position == elementi.scacchiera[x+1,y].transform.position)
+            if (Player.Self.transform.position == elementi.scacchiera[x+1,y].transform.position)
             {
-                objPlayer.xPosition += 1;
-                objPlayer.xOld += 1;
+                Player.Self.currentLife -= DannoTrappola;
+
+                Player.Self.xPosition += 1;
+                Player.Self.xOld += 1;
                 //inserito un valore di default per il danno trappola da rivedere se si vuole 
                 //avere un aumento del danno per livello come nel caso dei nemici
-                objPlayer.controlloVita(1);
-                player.transform.position = elementi.scacchiera[x + 2, y].transform.position;
-                objPlayer.targetTr = elementi.scacchiera[x+2, y].transform;
+                
+                Player.Self.transform.position = elementi.scacchiera[x + 2, y].transform.position;
+                Player.Self.targetTr = elementi.scacchiera[x+2, y].transform;
                
                 
                 SpriteRenderer muro = elementi.scacchiera[x+1, y].GetComponent<SpriteRenderer>();
