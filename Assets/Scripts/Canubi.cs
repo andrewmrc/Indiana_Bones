@@ -66,7 +66,6 @@ namespace IndianaBones
 
         public void Posizione()
         {
-            Debug.Log("posizione");
 
             OldValue();
             //GameController gamec = FindObjectOfType<GameController>();
@@ -113,10 +112,6 @@ namespace IndianaBones
                                     elementi.scacchiera[xPosition, yPosition - 1].status = 3;
                                     yPosition -= 1;
                                 }
-
-
-
-
                         }
                         else if (Player.Self.yPosition == yPosition)
                         {
@@ -191,32 +186,13 @@ namespace IndianaBones
                         }
 
                         targetTr = elementi.scacchiera[xPosition, yPosition].transform;
+						Debug.Log(this.gameObject.name + "ha deciso di muoversi sulla cella: " + targetTr);
+
                     }
-
-
-
-
-
-                    /* else if (ManhattanDist() == 1)
-
-                     {
-                         GameController.Self.turno = 1;
-                         foreach (var statistiche in levelsList)
-
-                          //viene richiamato il valore di attackPower corrente del nemico e passato al metodo in Player
-                          //per essere sottratto alla sua vita  
-
-                         if (attackPower == 1)
-                             Player.Self.controlloVita(statistiche.Attack);
-                         attackPower = 0;
-                         GameController.Self.turno = 1;
-                     }*/
-
 
                 }
 
             }
-            //GameController.Self.turno = 1;
             onMove = false;
             GameController.Self.PassTurn();
 			StartCoroutine (ResetMyColor ());
@@ -368,6 +344,7 @@ namespace IndianaBones
             //Controlliamo se la vita va a zero e in tal caso aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
             if (vita <= 0)
             {
+				GameController.Self.charactersList.Remove(this.gameObject);
 				StartCoroutine (HandleDeath ());
             }
 
@@ -408,9 +385,8 @@ namespace IndianaBones
 			}
 			yield return new WaitForEndOfFrame();
 			print("current clip length = " + animator.GetCurrentAnimatorStateInfo(0).length);
-			yield return new WaitForSeconds (2f);
+			yield return new WaitForSeconds (2.5f);
 
-            GameController.Self.charactersList.Remove(this.gameObject);
 			Player.Self.IncreaseExp(levelsList[powerLevel].Exp);
 			elementi.scacchiera[xPosition, yPosition].status = 0;
 
