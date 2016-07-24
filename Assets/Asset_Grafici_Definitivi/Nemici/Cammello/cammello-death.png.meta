@@ -1,9 +1,17 @@
 fileFormatVersion: 2
 guid: 6ee752e93aa0d324ca095061a3e38540
-timeCreated: 1469003843
+timeCreated: 1469325561
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: cammello-death_0
+    21300002: cammello-death_1
+    21300004: cammello-death_2
+    21300006: cammello-death_3
+    21300008: cammello-death_4
+    21300010: cammello-death_5
+    21300012: cammello-death_6
+    21300014: cammello-death_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,7 +38,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -38,7 +46,7 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -49,7 +57,273 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: cammello-death_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -36, y: 26}
+        - {x: -41, y: 26}
+        - {x: -39, y: 26}
+        - {x: -35, y: 31}
+        - {x: -35, y: 37}
+        - {x: -39, y: 41}
+        - {x: -40, y: 41}
+        - {x: -50, y: 32}
+        - {x: -50, y: 13}
+        - {x: -49, y: 7}
+        - {x: -42, y: -38}
+        - {x: 40, y: -38}
+        - {x: 50, y: -21}
+        - {x: 50, y: 23}
+        - {x: 41, y: 31}
+        - {x: 23, y: 36}
+        - {x: -31, y: 31}
+    - name: cammello-death_1
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -50, y: 38}
+        - {x: -50, y: -32}
+        - {x: -49, y: -38}
+        - {x: 45, y: -38}
+        - {x: 50, y: -36}
+        - {x: 50, y: 38}
+    - name: cammello-death_2
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 27, y: -38}
+        - {x: 30, y: -37}
+        - {x: 30, y: -34}
+        - {x: 27, y: -33}
+        - {x: 25, y: -35}
+      - - {x: 11, y: -31}
+        - {x: 12, y: -34}
+        - {x: 21, y: -36}
+        - {x: 38, y: -35}
+        - {x: 50, y: -18}
+        - {x: 50, y: 15}
+        - {x: 44, y: 34}
+        - {x: 24, y: 36}
+        - {x: -30, y: 31}
+        - {x: -35, y: 26}
+        - {x: -40, y: 26}
+        - {x: -38, y: 26}
+        - {x: -34, y: 31}
+        - {x: -34, y: 37}
+        - {x: -37, y: 41}
+        - {x: -39, y: 41}
+        - {x: -49, y: 39}
+        - {x: -49, y: -16}
+        - {x: -44, y: -37}
+        - {x: 1, y: -37}
+        - {x: 8, y: -34}
+        - {x: 11, y: -30}
+        - {x: 16, y: -28}
+        - {x: 13, y: -29}
+    - name: cammello-death_3
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 50, y: -9}
+        - {x: 50, y: 38}
+        - {x: -48, y: 38}
+        - {x: -49, y: 37}
+        - {x: -50, y: 32}
+        - {x: -50, y: 3}
+        - {x: -40, y: -36}
+        - {x: -38, y: -38}
+        - {x: 38, y: -38}
+        - {x: 45, y: -37}
+        - {x: 38, y: -26}
+        - {x: 35, y: -25}
+        - {x: 37, y: -24}
+    - name: cammello-death_4
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 32, y: -15}
+        - {x: 35, y: -13}
+        - {x: 35, y: -10}
+        - {x: 38, y: -7}
+        - {x: 38, y: -5}
+        - {x: 36, y: -3}
+        - {x: 36, y: 4}
+        - {x: 38, y: -5}
+        - {x: 37, y: -10}
+        - {x: 40, y: -16}
+        - {x: 49, y: -8}
+        - {x: 49, y: 15}
+        - {x: 34, y: 38}
+        - {x: 25, y: 34}
+        - {x: -31, y: 31}
+        - {x: -36, y: 26}
+        - {x: -41, y: 26}
+        - {x: -39, y: 26}
+        - {x: -35, y: 31}
+        - {x: -35, y: 37}
+        - {x: -39, y: 41}
+        - {x: -40, y: 41}
+        - {x: -50, y: 39}
+        - {x: -50, y: -38}
+        - {x: 43, y: -38}
+        - {x: 44, y: -30}
+        - {x: 36, y: -22}
+        - {x: 15, y: -22}
+    - name: cammello-death_5
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 4, y: -5}
+        - {x: 4, y: -7}
+        - {x: 5, y: -10}
+        - {x: 18, y: -7}
+        - {x: 19, y: -4}
+        - {x: 18, y: -1}
+        - {x: 14, y: -1}
+        - {x: 17, y: 0}
+        - {x: 19, y: 2}
+        - {x: 18, y: 5}
+        - {x: 19, y: 3}
+        - {x: 21, y: 1}
+        - {x: 24, y: 2}
+        - {x: 24, y: 6}
+        - {x: 24, y: 4}
+        - {x: 29, y: -2}
+        - {x: 31, y: -2}
+        - {x: 32, y: 1}
+        - {x: 45, y: -2}
+        - {x: 47, y: 0}
+        - {x: 47, y: 11}
+        - {x: 35, y: 33}
+        - {x: 22, y: 38}
+        - {x: -50, y: 38}
+        - {x: -50, y: -38}
+        - {x: 43, y: -38}
+        - {x: 43, y: -30}
+        - {x: 34, y: -19}
+        - {x: 2, y: -11}
+      - - {x: -18, y: -21}
+        - {x: -15, y: -20}
+        - {x: -15, y: -17}
+        - {x: -18, y: -16}
+        - {x: -20, y: -18}
+      - - {x: 4, y: -12}
+        - {x: 1, y: -15}
+        - {x: 3, y: -18}
+        - {x: 6, y: -18}
+        - {x: 9, y: -17}
+        - {x: 9, y: -14}
+        - {x: 7, y: -12}
+      - - {x: 13, y: -12}
+        - {x: 12, y: -14}
+        - {x: 13, y: -17}
+        - {x: 17, y: -17}
+        - {x: 20, y: -16}
+        - {x: 20, y: -13}
+        - {x: 18, y: -12}
+    - name: cammello-death_6
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -39, y: -14}
+        - {x: -42, y: -24}
+        - {x: -42, y: -38}
+        - {x: 42, y: -38}
+        - {x: 42, y: -15}
+        - {x: 32, y: -14}
+      - - {x: -19, y: 15}
+        - {x: -21, y: 12}
+        - {x: -21, y: 2}
+        - {x: -10, y: 2}
+        - {x: -9, y: 5}
+        - {x: -12, y: 14}
+        - {x: -15, y: 15}
+      - - {x: -31, y: 31}
+        - {x: -36, y: 26}
+        - {x: -41, y: 26}
+        - {x: -39, y: 26}
+        - {x: -35, y: 31}
+        - {x: -35, y: 37}
+        - {x: -39, y: 41}
+        - {x: -40, y: 41}
+        - {x: -50, y: 32}
+        - {x: -50, y: 18}
+        - {x: -45, y: 14}
+        - {x: -30, y: 3}
+        - {x: -20, y: 3}
+        - {x: -2, y: 16}
+        - {x: -2, y: 30}
+        - {x: -10, y: 31}
+    - name: cammello-death_7
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -34, y: -5}
+        - {x: -47, y: -5}
+        - {x: -47, y: -32}
+        - {x: -46, y: -37}
+        - {x: -45, y: -38}
+        - {x: 42, y: -38}
+        - {x: 42, y: -21}
+        - {x: -21, y: -6}
     outline: []
   spritePackingTag: 
   userData: 

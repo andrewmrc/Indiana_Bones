@@ -84,8 +84,6 @@ namespace IndianaBones
                 Destroy(gameObject);
             }
 
-            animator = GetComponent<Animator>();
-            animator.SetBool("Walk", false);
 
             if (playerLevel == 1)
             {
@@ -94,6 +92,11 @@ namespace IndianaBones
                 currentAttack = startingAttack;
                 currentMana = startingMana;
             }
+
+			//Settiamo l'animator e i parametri per le animazioni
+			animator = GetComponent<Animator>();
+			animator.SetBool("Walk", false);
+
         }
 
 
@@ -108,7 +111,6 @@ namespace IndianaBones
             elementi = FindObjectOfType<Grid>();
             this.transform.position = elementi.scacchiera[xPosition, yPosition].transform.position;
             targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-
         }
 
 
@@ -132,65 +134,42 @@ namespace IndianaBones
 
         public void AttaccoADistanza()
         {
-            if (croce == 1)
-            {
-                if (proiettili > 0)
-                {
-                    proiettili -= 1;
+			if (proiettili > 0) {
+				GameObject nuovoDente;
+				switch (croce) {
 
-                    bulletDir = 1;
+				case 1:
+					proiettili -= 1;
+					bulletDir = 1;
+					nuovoDente = Instantiate (dente);
+					nuovoDente.transform.position = up.transform.position;
+					break;
 
-                    GameObject nuovoDente = Instantiate(dente);
-                    nuovoDente.transform.position = up.transform.position;
+				case 2:
+					proiettili -= 1;
+					bulletDir = 3;
+					nuovoDente = Instantiate (dente);
+					nuovoDente.transform.position = right.transform.position;
+					break;
 
-                }
+				case 3:
+					proiettili -= 1;
+					nuovoDente = Instantiate (dente);
+					nuovoDente.transform.position = down.transform.position;
+					bulletDir = 2;
+					break;
 
-            }
+				case 4:
+					proiettili -= 1;
+					nuovoDente = Instantiate (dente);
+					nuovoDente.transform.position = left.transform.position;
+					bulletDir = 4;
+					break;
 
-            if (croce == 2)
-            {
-                if (proiettili > 0)
-                {
-                    proiettili -= 1;
+				}
 
-                    bulletDir = 3;
+			}
 
-                    GameObject nuovoDente = Instantiate(dente);
-                    nuovoDente.transform.position = right.transform.position;
-
-                }
-
-            }
-
-            if (croce == 3)
-            {
-                if (proiettili > 0)
-                {
-                    proiettili -= 1;
-
-                    bulletDir = 2;
-
-                    GameObject nuovoDente = Instantiate(dente);
-                    nuovoDente.transform.position = down.transform.position;
-
-                }
-
-            }
-
-            if (croce == 4)
-            {
-                if (proiettili > 0)
-                {
-                    proiettili -= 1;
-
-                    bulletDir = 4;
-
-                    GameObject nuovoDente = Instantiate(dente);
-                    nuovoDente.transform.position = left.transform.position;
-
-                }
-
-            }
 
         }
 
@@ -227,7 +206,6 @@ namespace IndianaBones
 
         IEnumerator PostAttacco(float seconds)
         {
-			isAttacking = false;
             yield return new WaitForSeconds(seconds);
 
             //Set false to the attack parameter of animation
@@ -238,6 +216,7 @@ namespace IndianaBones
             down.GetComponent<BoxCollider2D>().enabled = false;
             left.GetComponent<BoxCollider2D>().enabled = false;
 			GameController.Self.PassTurn ();
+			ResetPlayerVar ();
 
         }
 
@@ -260,13 +239,8 @@ namespace IndianaBones
 
         IEnumerator Camminata(float seconds)
         {
-
-
-
             yield return new WaitForSeconds(seconds); ;
             animator.SetBool("Walk", false);
-
-
         }
 
 
@@ -302,32 +276,32 @@ namespace IndianaBones
         }
 
 
-        public void RotazioneAttacco()
+        public void AttackDirection()
         {
             if (croce == 1)
             {
-                RicoloraRosso();
+                ResetCrossColor();
                 SpriteRenderer colore = up.GetComponent<SpriteRenderer>();
                 colore.sprite = Resources.Load("green", typeof(Sprite)) as Sprite;
             }
 
             if (croce == 2)
             {
-                RicoloraRosso();
+                ResetCrossColor();
                 SpriteRenderer colore = right.GetComponent<SpriteRenderer>();
                 colore.sprite = Resources.Load("green", typeof(Sprite)) as Sprite;
             }
 
             if (croce == 3)
             {
-                RicoloraRosso();
+                ResetCrossColor();
                 SpriteRenderer colore = down.GetComponent<SpriteRenderer>();
                 colore.sprite = Resources.Load("green", typeof(Sprite)) as Sprite;
             }
 
             if (croce == 4)
             {
-                RicoloraRosso();
+                ResetCrossColor();
                 SpriteRenderer colore = left.GetComponent<SpriteRenderer>();
                 colore.sprite = Resources.Load("green", typeof(Sprite)) as Sprite;
             }
@@ -336,7 +310,7 @@ namespace IndianaBones
 
 
 
-        public void RicoloraRosso()
+        public void ResetCrossColor()
         {
 
             SpriteRenderer colore = up.GetComponent<SpriteRenderer>();
@@ -361,18 +335,18 @@ namespace IndianaBones
 
         void Update()
         {
-			if (gameObject.GetComponent<TurnHandler>().itsMyTurn && isAttacking == false)
+			if (currentLife > 0 && gameObject.GetComponent<TurnHandler>().itsMyTurn && isAttacking == false)
             {
 				
 				//Movimento verso destra
                 if (Input.GetKey(KeyCode.RightArrow))
                 {
                     croce = 2;
-                    RotazioneAttacco();
+                    AttackDirection();
                     //Flip the sprite of the player
                     gameObject.GetComponent<SpriteRenderer>().flipX = false;
 
-                    if (canMove == true)
+					if (canMove == true && isAttacking == false)
                     {
                         if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
                         {
@@ -380,7 +354,7 @@ namespace IndianaBones
                             canMove = false;
                             PickUp();
                             animator.SetBool("Walk", true);
-                            StartCoroutine(Camminata(0.5f));
+                            //StartCoroutine(Camminata(0.5f));
                             bulletDir = 3;
                             OldValue();
                             xPosition += 1;
@@ -394,8 +368,8 @@ namespace IndianaBones
 
 				//Attacco verso destra
 				if (Input.GetKey (KeyCode.RightArrow)) {
-					if (elementi.scacchiera [xPosition + 1, yPosition].status == 3 && isAttacking == false && endMove == false) {
-						Debug.Log ("Attacca Destra");
+					if (elementi.scacchiera [xPosition + 1, yPosition].status == 3 && isAttacking == false && endMove == false && canMove) {
+						Debug.Log ("Player Attacca Destra");
 						isAttacking = true;
 						//Set true to the attack parameter of animation
 						animator.SetBool ("Attack", true);
@@ -408,11 +382,11 @@ namespace IndianaBones
                 if (Input.GetKey(KeyCode.LeftArrow))
                 {
                     croce = 4;
-                    RotazioneAttacco();
+                    AttackDirection();
                     //Flip the sprite of the player
                     gameObject.GetComponent<SpriteRenderer>().flipX = true;
 
-                    if (canMove == true)
+					if (canMove == true && isAttacking == false)
                     {
                         if (xPosition > 0)
                         {
@@ -423,7 +397,7 @@ namespace IndianaBones
                                 canMove = false;
                                 PickUp();
                                 animator.SetBool("Walk", true);
-                                StartCoroutine(Camminata(0.5f));
+                                //StartCoroutine(Camminata(0.5f));
                                 bulletDir = 4;
                                 OldValue();
                                 xPosition -= 1;
@@ -439,8 +413,8 @@ namespace IndianaBones
 
 				//Attacco verso sinistra
 				if (Input.GetKeyDown (KeyCode.LeftArrow)) {
-					if (elementi.scacchiera [xPosition - 1, yPosition].status == 3 && isAttacking == false && endMove == false) {
-						Debug.Log ("Attacca Sinistra");
+					if (elementi.scacchiera [xPosition - 1, yPosition].status == 3 && isAttacking == false && endMove == false && canMove) {
+						Debug.Log ("Player Attacca Sinistra");
 						isAttacking = true;
 						//Set true to the attack parameter of animation
 						animator.SetBool ("Attack", true);
@@ -453,8 +427,8 @@ namespace IndianaBones
                 if (Input.GetKey(KeyCode.DownArrow))
                 {
                     croce = 3;
-                    RotazioneAttacco();
-                    if (canMove == true)
+                    AttackDirection();
+					if (canMove == true && isAttacking == false)
                     {
                         if (yPosition > 0)
                         {
@@ -465,7 +439,7 @@ namespace IndianaBones
                                 canMove = false;
                                 PickUp();
                                 animator.SetBool("Walk", true);
-                                StartCoroutine(Camminata(0.5f));
+                                //StartCoroutine(Camminata(0.5f));
                                 bulletDir = 2;
                                 OldValue();
                                 yPosition -= 1;
@@ -480,8 +454,8 @@ namespace IndianaBones
 
 				//Attacco verso il basso
 				if (Input.GetKeyDown (KeyCode.DownArrow)) {
-					if (elementi.scacchiera [xPosition, yPosition - 1].status == 3 && isAttacking == false && endMove == false) {
-						Debug.Log ("Attacca Giù");
+					if (elementi.scacchiera [xPosition, yPosition - 1].status == 3 && isAttacking == false && endMove == false && canMove) {
+						Debug.Log ("Player Attacca Giù");
 						isAttacking = true;
 						//Set true to the attack parameter of animation
 						animator.SetBool ("Attack", true);
@@ -494,8 +468,8 @@ namespace IndianaBones
 				if (Input.GetKey(KeyCode.UpArrow))
                 {
                     croce = 1;
-                    RotazioneAttacco();
-                    if (canMove == true)
+                    AttackDirection();
+					if (canMove == true && isAttacking == false)
                     {
                         if (yPosition < 100)
                         {
@@ -506,7 +480,7 @@ namespace IndianaBones
                                 canMove = false;
                                 PickUp();
                                 animator.SetBool("Walk", true);
-                                StartCoroutine(Camminata(0.5f));
+                                //StartCoroutine(Camminata(0.5f));
                                 bulletDir = 1;
                                 OldValue();
                                 yPosition += 1;
@@ -521,8 +495,8 @@ namespace IndianaBones
 
 				//Attacco verso l'alto
 				if (Input.GetKeyDown (KeyCode.UpArrow)) {
-					if (elementi.scacchiera [xPosition, yPosition + 1].status == 3 && isAttacking == false && endMove == false) {
-						Debug.Log ("Attacca Su");
+					if (elementi.scacchiera [xPosition, yPosition + 1].status == 3 && isAttacking == false && endMove == false && canMove) {
+						Debug.Log ("Player Attacca Su");
 						isAttacking = true;
 						//Set true to the attack parameter of animation
 						animator.SetBool ("Attack", true);
@@ -541,32 +515,27 @@ namespace IndianaBones
                 x = xPosition;
                 y = yPosition;
 
-                numDenti.text = (proiettili.ToString());
-                valoreVita.text = (currentLife.ToString());
-
-                //Grid elementi = FindObjectOfType<Grid>();
-
                 Vector3 distance = targetTr.position - this.transform.position;
                 Vector3 direction = distance.normalized;
 
                 transform.position = transform.position + direction * speed * Time.deltaTime;
 
 
+				//Gestisce il fine turno dopo un movimento
                 if (endMove)
                 {
-                    //Debug.Log("Finito turno1");
-
+					//Centra il player nella casella di destinazione alla fine di un movimento
                     if (distance.magnitude < 0.20f && crossActive == false)
                     {
-                        //Debug.Log("Finito turno2");
 
                         transform.position = targetTr.position;
-                        canMove = true;
                         if (transform.position == targetTr.position)
                         {
                             endMove = false;
+							canMove = true;
+							animator.SetBool("Walk", false);
                             GameController.Self.PassTurn();
-                            //Debug.Log("Finito turno3");
+                            Debug.Log("Finito turno con movimento del Player");
                         }
                         
                     }
@@ -618,13 +587,26 @@ namespace IndianaBones
 
 
 				if (Input.GetKeyDown (KeyCode.LeftControl)) {
-					if (onOff == true) {
+					if (onOff == true && proiettili > 0) {
 						isAttacking = true;
 						AttaccoADistanza ();
 					}
 				}
              
             }
+
+			//Aggiorna la UI: vita/munizioni
+			numDenti.text = (proiettili.ToString());
+			valoreVita.text = (currentLife.ToString());
+
+			if (currentLife <= 0) {
+				currentLife = 0;
+				//Activate the death animation
+				animator.SetFloat ("Life", currentLife);
+
+				//Attivare pop up che chiede se si vuole continuare il gioco o ricominciare
+
+			}
 
         }
 
@@ -637,7 +619,7 @@ namespace IndianaBones
 				down.gameObject.GetComponent<SpriteRenderer> ().enabled = true; 
 				right.gameObject.GetComponent<SpriteRenderer> ().enabled = true; 
 				left.gameObject.GetComponent<SpriteRenderer> ().enabled = true; 
-				RotazioneAttacco();
+				AttackDirection();
 
 			}
 			else if (onOff == false)

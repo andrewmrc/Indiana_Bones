@@ -17,10 +17,11 @@ namespace IndianaBones
         
         public bool attivo = false;
         
-        
         public Transform targetTr;
         
         private Grid elementi;
+
+		private Animator animator;
 
         [Header("Level and Stats")]
         [Space(10)]
@@ -47,9 +48,9 @@ namespace IndianaBones
 
             elementi.scacchiera[xPosition, yPosition].status = 3;
 
-
-
-
+			//Get the animator component and set the parameter equal to the initial life value
+			animator = GetComponent<Animator>();
+			animator.SetFloat ("Life", vita);
 
         }
 
@@ -95,17 +96,20 @@ namespace IndianaBones
             StartCoroutine(ResetMyColor());
         }
 
+
         IEnumerator ResetPlayerColor()
         {
             yield return new WaitForSeconds(0.3f);
             Player.Self.gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
         }
 
+
         IEnumerator ResetMyColor()
         {
             yield return new WaitForSeconds(0.2f);
             gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
         }
+
 
         public void OnTriggerEnter2D(Collider2D coll)
         {
@@ -150,35 +154,11 @@ namespace IndianaBones
 
         }
 
-        IEnumerator HandleDeath()
-        {
-            //Activate the death animation
-           // animator.SetFloat("Life", vita);
-            if (gameObject.GetComponent<TurnHandler>().itsMyTurn)
-            {
-                GameController.Self.PassTurn();
-            }
-            //yield return new WaitForEndOfFrame();
-           // print("current clip length = " + animator.GetCurrentAnimatorStateInfo(0).length);
-            yield return new WaitForSeconds(1.2f);
-
-            GameController.Self.charactersList.Remove(this.gameObject);
-            Player.Self.IncreaseExp(levelsList[powerLevel].Exp);
-            elementi.scacchiera[xPosition, yPosition].status = 0;
-
-            Destroy(this.gameObject);
-
-        }
 
         void Update()
         {
-            if (vita <= 0)
-            {
-                StartCoroutine(HandleDeath());
-            }
 
-
-            if (vita > 0 &&  gameObject.GetComponent<TurnHandler>().itsMyTurn)
+			if (vita > 0 &&  gameObject.GetComponent<TurnHandler>().itsMyTurn)
             {
                 gameObject.GetComponent<SpriteRenderer>().color = new Color32(0, 255, 0, 255);
 
@@ -216,18 +196,43 @@ namespace IndianaBones
                 }
                 seen = false;
             }
+        
 
-
-            //Controlliamo se la vita va a zero e in tal caso aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
-           
-
-            
-                
-
-            
-
+			//Controlliamo se la vita va a zero e chiamiamo il metodo che gestisce questo evento
+			if (vita <= 0)
+			{
+				Debug.Log ("Questo Cammello è sconfitto");
+				GameController.Self.charactersList.Remove(this.gameObject);
+				//Settiamo lo status cella a 10 così il player non può ataccare nè camminare su questa casella fino a che questo nemico non sparisce dalla scena
+				elementi.scacchiera[xPosition, yPosition].status = 10;
+				StartCoroutine(HandleDeath());
+			}
             
         }
+
+
+		IEnumerator HandleDeath()
+		{
+			//Activate the death animation
+			animator.SetFloat("Life", vita);
+			if (gameObject.GetComponent<TurnHandler>().itsMyTurn)
+			{
+				GameController.Self.PassTurn();
+			}
+			yield return new WaitForEndOfFrame();
+			// print("current clip length = " + animator.GetCurrentAnimatorStateInfo(0).length);
+			yield return new WaitForSeconds(2f);
+
+			//Aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
+			Player.Self.IncreaseExp(levelsList[powerLevel].Exp);
+
+			Destroy(this.gameObject);
+			elementi.scacchiera[xPosition, yPosition].status = 0;
+
+		}
+
+
+
     }
 }
 
