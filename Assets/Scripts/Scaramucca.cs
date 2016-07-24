@@ -312,7 +312,7 @@ namespace IndianaBones
             }
 
 
-            //Controlliamo se la vita va a zero e in tal caso aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
+			//Controlliamo se la vita va a zero e chiamiamo il metodo che gestisce questo evento
 			if (vita <= 0)
 			{
 				GameController.Self.charactersList.Remove(this.gameObject);
