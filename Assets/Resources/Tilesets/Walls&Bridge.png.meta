@@ -1,39 +1,45 @@
 fileFormatVersion: 2
 guid: 18d8eadce1113ea4d9272141c993edb8
-timeCreated: 1469191629
-licenseType: Pro
+timeCreated: 1469452296
+licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Tailmap01_0
-    21300002: Tailmap01_1
-    21300004: Tailmap01_2
-    21300006: Tailmap01_3
-    21300008: Tailmap01_4
-    21300010: Tailmap01_5
-    21300012: Tailmap01_6
-    21300014: Tailmap01_7
-    21300016: Tailmap01_8
-    21300018: Tailmap01_9
-    21300020: Tailmap01_10
-    21300022: Tailmap01_11
-    21300024: Tailmap01_12
-    21300026: Tailmap01_13
-    21300028: Tailmap01_14
-    21300030: Tailmap01_15
-    21300032: Tailmap01_16
-    21300034: Tailmap01_17
-    21300036: Tailmap01_18
-    21300038: Tailmap01_19
-    21300040: Tailmap01_20
-    21300042: Tailmap01_21
-    21300044: Tailmap01_22
-    21300046: Tailmap01_23
-    21300048: Tailmap01_24
-    21300050: Tailmap01_25
-    21300052: Tailmap01_26
-    21300054: Tailmap01_27
-    21300056: Tailmap01_28
-    21300058: Tailmap01_29
+    21300000: Bridge_Type1_Up
+    21300002: Bridge_Type2_MiddleVert1
+    21300004: Bridge_Type2_MiddleOriz1
+    21300006: Bridge_Type2_MiddleAngle2
+    21300008: Wall_Normal_1
+    21300010: Wall_Normal_2
+    21300012: Wall_Normal_3
+    21300014: Wall_Geroglifici_1
+    21300016: Wall_Geroglifici_2
+    21300018: Wall_Geroglifici_3
+    21300020: Bridge_Type1_Middle
+    21300022: Bridge_Type2_MiddleVert2
+    21300024: Bridge_Type2_MiddleAngle1
+    21300026: Bridge_Type2_MiddleOriz2
+    21300028: Wall_Normal_4
+    21300030: Wall_Normal_5
+    21300032: Wall_Geroglifici_3
+    21300034: Wall_Geroglifici_4
+    21300036: Wall_Geroglifici_5
+    21300038: Wall_Geroglifici_6
+    21300040: Bridge_Type1_Down
+    21300042: Bridge_Type1_Middle2
+    21300044: Bridge_Type1_Middle3
+    21300046: Bridge_Type1_Middle4
+    21300048: Wall_Normal_7
+    21300050: Wall_Geroglifici_5
+    21300052: Wall_Geroglifici_6
+    21300054: Wall_Geroglifici_7
+    21300056: Wall_Geroglifici_8
+    21300058: Wall_Geroglifici_Rotto
+    21300060: Wall_Normal_6
+    21300062: Wall_Normal_8
+    21300064: Wall_Normal_9
+    21300066: Wall_Geroglifici_9
+    21300068: Wall_Normal_Rotto
+    21300070: Tailmap01_31
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -80,7 +86,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Tailmap01_0
+    - name: Bridge_Type1_Up
       rect:
         serializedVersion: 2
         x: 0
@@ -88,14 +94,14 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_1
+    - name: Bridge_Type2_MiddleVert1
       rect:
         serializedVersion: 2
         x: 100
@@ -103,14 +109,14 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_2
+    - name: Bridge_Type2_MiddleOriz1
       rect:
         serializedVersion: 2
         x: 200
@@ -118,14 +124,14 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_3
+    - name: Bridge_Type2_MiddleAngle2
       rect:
         serializedVersion: 2
         x: 300
@@ -133,14 +139,14 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_4
+    - name: Wall_Normal_1
       rect:
         serializedVersion: 2
         x: 400
@@ -148,14 +154,14 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_5
+    - name: Wall_Normal_2
       rect:
         serializedVersion: 2
         x: 500
@@ -163,14 +169,14 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_6
+    - name: Wall_Normal_3
       rect:
         serializedVersion: 2
         x: 600
@@ -178,14 +184,14 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_7
+    - name: Wall_Geroglifici_1
       rect:
         serializedVersion: 2
         x: 700
@@ -193,14 +199,14 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_8
+    - name: Wall_Geroglifici_2
       rect:
         serializedVersion: 2
         x: 800
@@ -208,29 +214,44 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_9
+    - name: Wall_Geroglifici_3
       rect:
         serializedVersion: 2
-        x: 0
+        x: 900
+        y: 300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -50, y: 50}
+        - {x: -50, y: -50}
+        - {x: 50, y: -50}
+        - {x: 50, y: 50}
+    - name: Bridge_Type1_Middle
+      rect:
+        serializedVersion: 2
+        x: 1
         y: 200
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_10
+    - name: Bridge_Type2_MiddleVert2
       rect:
         serializedVersion: 2
         x: 100
@@ -238,14 +259,14 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_11
+    - name: Bridge_Type2_MiddleAngle1
       rect:
         serializedVersion: 2
         x: 200
@@ -253,14 +274,14 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_12
+    - name: Bridge_Type2_MiddleOriz2
       rect:
         serializedVersion: 2
         x: 300
@@ -268,14 +289,14 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_13
+    - name: Wall_Normal_4
       rect:
         serializedVersion: 2
         x: 400
@@ -283,14 +304,14 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_14
+    - name: Wall_Normal_5
       rect:
         serializedVersion: 2
         x: 500
@@ -298,14 +319,14 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_15
+    - name: Wall_Normal_6
       rect:
         serializedVersion: 2
         x: 600
@@ -313,14 +334,14 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_16
+    - name: Wall_Geroglifici_4
       rect:
         serializedVersion: 2
         x: 700
@@ -328,14 +349,14 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_17
+    - name: Wall_Geroglifici_5
       rect:
         serializedVersion: 2
         x: 800
@@ -343,14 +364,29 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_18
+    - name: Wall_Geroglifici_6
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -50, y: 50}
+        - {x: -50, y: -50}
+        - {x: 50, y: -50}
+        - {x: 50, y: 50}
+    - name: Bridge_Type1_Down
       rect:
         serializedVersion: 2
         x: 0
@@ -358,30 +394,29 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_19
+    - name: Bridge_Type1_Middle2
       rect:
         serializedVersion: 2
-        x: 100
+        x: 101
         y: 100
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -47, y: 50}
-        - {x: -50, y: 46}
+      - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_20
+    - name: Bridge_Type1_Middle3
       rect:
         serializedVersion: 2
         x: 200
@@ -389,7 +424,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -47, y: 50}
@@ -397,7 +432,7 @@ TextureImporter:
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_21
+    - name: Bridge_Type1_Middle4
       rect:
         serializedVersion: 2
         x: 300
@@ -405,7 +440,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
@@ -413,7 +448,7 @@ TextureImporter:
         - {x: 50, y: -50}
         - {x: 50, y: 39}
         - {x: 49, y: 50}
-    - name: Tailmap01_22
+    - name: Wall_Normal_7
       rect:
         serializedVersion: 2
         x: 400
@@ -421,14 +456,14 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_23
+    - name: Wall_Normal_8
       rect:
         serializedVersion: 2
         x: 500
@@ -436,14 +471,14 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_24
+    - name: Wall_Normal_9
       rect:
         serializedVersion: 2
         x: 600
@@ -451,14 +486,14 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_25
+    - name: Wall_Geroglifici_7
       rect:
         serializedVersion: 2
         x: 700
@@ -466,14 +501,14 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_26
+    - name: Wall_Geroglifici_8
       rect:
         serializedVersion: 2
         x: 800
@@ -481,14 +516,29 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_27
+    - name: Wall_Geroglifici_9
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -50, y: 50}
+        - {x: -50, y: -50}
+        - {x: 50, y: -50}
+        - {x: 50, y: 50}
+    - name: Wall_Normal_Rotto
       rect:
         serializedVersion: 2
         x: 400
@@ -496,14 +546,14 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: Tailmap01_28
+    - name: Tailmap01_31
       rect:
         serializedVersion: 2
         x: 600
@@ -513,12 +563,8 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 46, y: 50}
-        - {x: 46, y: -50}
-        - {x: 50, y: -50}
-        - {x: 50, y: 50}
-    - name: Tailmap01_29
+      outline: []
+    - name: Wall_Geroglifici_Rotto
       rect:
         serializedVersion: 2
         x: 700
@@ -526,7 +572,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -50, y: 50}

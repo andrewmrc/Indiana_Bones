@@ -9,12 +9,12 @@ namespace IndianaBones
        
         int x;
         int y;
+		Grid myGrid;
 
         public int DannoBucoNero = 1;
 
         void Start()
         {
-
 
            // Player objPlayer = FindObjectOfType<Player>();
            // player = objPlayer.gameObject.transform;
@@ -22,8 +22,8 @@ namespace IndianaBones
             x = (int)this.transform.position.x;
             y = (int)this.transform.position.y;
 
-            Grid elementi = FindObjectOfType<Grid>();
-            this.transform.position = elementi.scacchiera[x, y].transform.position;
+            myGrid = FindObjectOfType<Grid>();
+            this.transform.position = myGrid.scacchiera[x, y].transform.position;
         }
 
 
@@ -36,34 +36,24 @@ namespace IndianaBones
 
 
         void Update()
-        {
-            
-
-            Grid elementi = FindObjectOfType<Grid>();
-            if (Player.Self.transform.position == elementi.scacchiera[x, y].transform.position)
+        {         
+            if (Player.Self.transform.position == myGrid.scacchiera[x, y].transform.position)
             {
                 Player.Self.gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 0, 0, 255);
                 StartCoroutine(ResetPlayerColor());
 
                 Player.Self.currentLife -= DannoBucoNero;
 
-                Player.Self.transform.position = elementi.scacchiera[Player.Self.xOld, Player.Self.yOld].transform.position;
+                Player.Self.transform.position = myGrid.scacchiera[Player.Self.xOld, Player.Self.yOld].transform.position;
 
-                Player.Self.targetTr = elementi.scacchiera[Player.Self.xOld, Player.Self.yOld].transform;
+                Player.Self.targetTr = myGrid.scacchiera[Player.Self.xOld, Player.Self.yOld].transform;
 
                 Player.Self.xPosition = Player.Self.xOld;
                 Player.Self.yPosition = Player.Self.yOld;
 
-               
-
-
-                
-
-
-              //  SpriteRenderer muro = elementi.scacchiera[x - 1, y].GetComponent<SpriteRenderer>();
-              //  muro.sprite = Resources.Load("buco", typeof(Sprite)) as Sprite;
             }
         }
+
 
     }
 }

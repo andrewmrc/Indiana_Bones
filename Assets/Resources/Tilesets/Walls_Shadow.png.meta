@@ -1,23 +1,19 @@
 fileFormatVersion: 2
-guid: 4cb70ec1be3f9ee42ba5efc22a0e1454
-timeCreated: 1468872437
+guid: c906c73fd196a5546af06fc9aa1b88ec
+timeCreated: 1469452587
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: MuroEgizio_0
-    21300002: MuroEgizio_1
-    21300004: MuroEgizio_2
-    21300006: MuroEgizio_3
-    21300008: MuroEgizio_4
-    21300010: MuroEgizio_5
-    21300012: MuroEgizio_6
-    21300014: MuroEgizio_7
-    21300016: MuroEgizio_8
-    21300018: MuroEgizio_9
+    21300000: Walls_Shadow_0
+    21300002: Walls_Shadow_1
+    21300004: Walls_Shadow_2
+    21300006: Walls_Shadow_3
+    21300008: Walls_Shadow_4
+    21300010: Walls_Shadow_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -60,52 +56,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: MuroEgizio_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 300
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -50, y: 50}
-        - {x: -50, y: -50}
-        - {x: 50, y: -50}
-        - {x: 50, y: 50}
-    - name: MuroEgizio_1
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 300
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -50, y: 50}
-        - {x: -50, y: -50}
-        - {x: 50, y: -50}
-        - {x: 50, y: 50}
-    - name: MuroEgizio_2
-      rect:
-        serializedVersion: 2
-        x: 200
-        y: 300
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -50, y: 50}
-        - {x: -50, y: -50}
-        - {x: 50, y: -50}
-        - {x: 50, y: 50}
-    - name: MuroEgizio_3
+    - name: Walls_Shadow_0
       rect:
         serializedVersion: 2
         x: 0
@@ -120,7 +71,7 @@ TextureImporter:
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: MuroEgizio_4
+    - name: Walls_Shadow_1
       rect:
         serializedVersion: 2
         x: 100
@@ -135,22 +86,7 @@ TextureImporter:
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: MuroEgizio_5
-      rect:
-        serializedVersion: 2
-        x: 200
-        y: 200
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -50, y: 50}
-        - {x: -50, y: -50}
-        - {x: 50, y: -50}
-        - {x: 50, y: 50}
-    - name: MuroEgizio_6
+    - name: Walls_Shadow_2
       rect:
         serializedVersion: 2
         x: 0
@@ -165,7 +101,7 @@ TextureImporter:
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: MuroEgizio_7
+    - name: Walls_Shadow_3
       rect:
         serializedVersion: 2
         x: 100
@@ -180,11 +116,11 @@ TextureImporter:
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: MuroEgizio_8
+    - name: Walls_Shadow_4
       rect:
         serializedVersion: 2
-        x: 200
-        y: 100
+        x: 0
+        y: 0
         width: 100
         height: 100
       alignment: 0
@@ -195,10 +131,10 @@ TextureImporter:
         - {x: -50, y: -50}
         - {x: 50, y: -50}
         - {x: 50, y: 50}
-    - name: MuroEgizio_9
+    - name: Walls_Shadow_5
       rect:
         serializedVersion: 2
-        x: 0
+        x: 100
         y: 0
         width: 100
         height: 100

@@ -9,20 +9,18 @@ namespace IndianaBones
        
         int x;
         int y;
+		Grid myGrid;
 
         public int DannoPiscina = 1;
         bool attiva = true;
         void Start()
         {
 
-
-           
-
             x = (int)this.transform.position.x;
             y = (int)this.transform.position.y;
 
-            Grid elementi = FindObjectOfType<Grid>();
-            this.transform.position = elementi.scacchiera[x, y].transform.position;
+            myGrid = FindObjectOfType<Grid>();
+            this.transform.position = myGrid.scacchiera[x, y].transform.position;
         }
 
 
@@ -37,10 +35,8 @@ namespace IndianaBones
         void Update()
         {
             
-
-            Grid elementi = FindObjectOfType<Grid>();
             
-            if (attiva == true && Player.Self.transform.position == elementi.scacchiera[x, y].transform.position)
+            if (attiva == true && Player.Self.transform.position == myGrid.scacchiera[x, y].transform.position)
             {
                 attiva = false;
 
@@ -52,7 +48,7 @@ namespace IndianaBones
 
             }
 
-            else if (Player.Self.transform.position != elementi.scacchiera[x, y].transform.position)
+            else if (Player.Self.transform.position != myGrid.scacchiera[x, y].transform.position)
                 attiva = true;
         }
 
