@@ -335,6 +335,10 @@ namespace IndianaBones
 
         void Update()
         {
+
+			x = xPosition;
+			y = yPosition;
+
 			if (currentLife > 0 && gameObject.GetComponent<TurnHandler>().itsMyTurn && isAttacking == false)
             {
 				
@@ -512,8 +516,7 @@ namespace IndianaBones
                     LevelUp();
                 }
 
-                x = xPosition;
-                y = yPosition;
+               
 
                 Vector3 distance = targetTr.position - this.transform.position;
                 Vector3 direction = distance.normalized;
@@ -534,6 +537,8 @@ namespace IndianaBones
                             endMove = false;
 							canMove = true;
 							animator.SetBool("Walk", false);
+							//elementi.scacchiera[xPosition, yPosition].status = 4;
+
                             GameController.Self.PassTurn();
                             Debug.Log("Finito turno con movimento del Player");
                         }

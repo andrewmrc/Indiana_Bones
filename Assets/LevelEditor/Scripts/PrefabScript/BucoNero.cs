@@ -7,8 +7,8 @@ namespace IndianaBones
     public class BucoNero : MonoBehaviour
     {
        
-        int x;
-        int y;
+        public int x;
+        public int y;
 		Grid myGrid;
 
         public int DannoBucoNero = 1;
@@ -50,6 +50,8 @@ namespace IndianaBones
 
                 Player.Self.xPosition = Player.Self.xOld;
                 Player.Self.yPosition = Player.Self.yOld;
+				myGrid.scacchiera[Player.Self.xPosition, Player.Self.yPosition].status = 4;
+				myGrid.scacchiera[x,y].status = 0;
 
             }
         }
