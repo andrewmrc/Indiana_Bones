@@ -25,7 +25,7 @@ namespace IndianaBones
         public int distanzaAttivazione = 10;
 		private Grid elementi;
 		private Animator animator;
-
+		bool isAttacking = false;
        
         int prestabilito = 1;
        
@@ -60,8 +60,6 @@ namespace IndianaBones
 			animator = GetComponent<Animator>();
 			//animator.SetFloat ("Life", vita);
 
-            
-
         }
 
 
@@ -70,33 +68,40 @@ namespace IndianaBones
             return (Mathf.Abs((int)Player.Self.transform.position.x - (int)this.transform.position.x) + Mathf.Abs((int)Player.Self.transform.position.y - (int)this.transform.position.y));
         }
 
-        public void AttaccoADistanza()
+
+		IEnumerator AttaccoADistanza()
         {
-
-            GameController.Self.PassTurn();
-
+			Debug.Log ("La mummia ha deciso di attaccare");
+			isAttacking = true;
+			//Set true to the attack parameter of animation
+			animator.SetBool ("Attack", true);
+			yield return new WaitForEndOfFrame();
+			yield return new WaitForSeconds (0.5f);
             GameObject carta;
 
             BoxCollider2D bc = GetComponent<BoxCollider2D>();
             bc.enabled = false;      
                   
-                    carta = Instantiate(cartaIgienica);
-                    carta.transform.position = this.transform.position;
+            carta = Instantiate(cartaIgienica);
+            carta.transform.position = this.transform.position;
 
+			//Set false to the attack parameter of animation
+			animator.SetBool("Attack", false);
 
             StartCoroutine(ResetMyColor());
             StartCoroutine(EnabledCollider());
-            
 
-            
 
         }
+
 
         public int Casuale()
         {
             return Random.Range(1, 4);
 
         }
+
+
         //gestisce i tre tipi di movimento della mummia, se il player non è nella sua linea di tiro ne fa partire uno random
         public void GestoreMovimenti()
         {
@@ -106,23 +111,23 @@ namespace IndianaBones
                 {
                     case 1:
                         
-                            Posizione();
-                        
+                        Posizione();        
                         break;
+
                     case 2:
                      
-                            MovimentoPrestabilito();
-                    
+                        MovimentoPrestabilito();  
                         break;
+
                     case 3:
                       
-                            Fermo();
-                      
+                        Fermo();
                         break;
 
                 }
            
         }
+
 
         public void MovimentoPrestabilito()
         {
@@ -212,19 +217,19 @@ namespace IndianaBones
         //controlla se il player è nella sua linea di tiro
         public void APortatadiTiro()
         {
-            if (direzioneLancio == 0)
+			if (direzioneLancio == 0 && isAttacking == false)
             {
                 if (Player.Self.xPosition == this.xPosition)
                 {
                     if (Player.Self.yPosition > this.yPosition)
                     {
                         direzioneLancio = 1;
-                        AttaccoADistanza();
+						StartCoroutine(AttaccoADistanza());
                     }
                     else if (Player.Self.yPosition < this.yPosition)
                     {
                         direzioneLancio = 2;
-                        AttaccoADistanza();
+						StartCoroutine(AttaccoADistanza());
                     }
                 }
 
@@ -233,12 +238,12 @@ namespace IndianaBones
                     if (Player.Self.xPosition > this.xPosition)
                     {
                         direzioneLancio = 3;
-                        AttaccoADistanza();
+						StartCoroutine(AttaccoADistanza());
                     }
                     else if (Player.Self.xPosition < this.xPosition)
                     {
                         direzioneLancio = 4;
-                        AttaccoADistanza();
+						StartCoroutine(AttaccoADistanza());
                     }
                 }
                 else
@@ -457,6 +462,7 @@ namespace IndianaBones
 
         }
 
+		/*
         public void AttackHandler()
         {
             //Formula calcolo attacco Canubi
@@ -471,7 +477,7 @@ namespace IndianaBones
             GameController.Self.PassTurn();
 			StartCoroutine (ResetMyColor ());
 
-        }
+        }*/
 
 
 		IEnumerator ResetPlayerColor (){
@@ -480,6 +486,7 @@ namespace IndianaBones
 		}
 
 		IEnumerator ResetMyColor (){
+			Debug.Log ("Resetta il colore mummia");
 			yield return new WaitForSeconds (0.2f);
 			gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255 ,255);
 		}
@@ -496,13 +503,18 @@ namespace IndianaBones
 
         void Update()
         {
-            if (vita > 0 && gameObject.GetComponent<TurnHandler>().itsMyTurn)
+			if (vita > 0 && gameObject.GetComponent<TurnHandler>().itsMyTurn && !isAttacking)
             {
                
 				gameObject.GetComponent<SpriteRenderer>().color = new Color32(0, 255, 0 ,255);
 
                 APortatadiTiro();
             }
+
+
+			if (!gameObject.GetComponent<TurnHandler> ().itsMyTurn) {
+				isAttacking = false;
+			}
 
 
             if (GetComponent<Renderer>().isVisible)
@@ -550,10 +562,9 @@ namespace IndianaBones
                 transform.position = targetTr.position;
 
             }
-
-         
-
+				
         }
+
 
 		IEnumerator HandleDeath(){
 			//Activate the death animation
@@ -568,7 +579,6 @@ namespace IndianaBones
 			//Aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
 			Player.Self.IncreaseExp(levelsList[powerLevel].Exp);
 
-			
 			elementi.scacchiera[xPosition, yPosition].status = 0;
             Destroy(this.gameObject);
 

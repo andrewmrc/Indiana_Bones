@@ -7,15 +7,9 @@ namespace IndianaBones
     public class CartaIgienica : MonoBehaviour
     {
 
-       
-        
         public float forza = 0.5f;
-
         bool seen = false;
 
-
-
-     
 
         // Update is called once per frame
         void FixedUpdate()
@@ -46,15 +40,11 @@ namespace IndianaBones
 
         void Update()
         {
-            if (GetComponent<Renderer>().isVisible)
-                seen = true;
-
-            if (seen && !GetComponent<Renderer>().isVisible)
-            {
-                Destroy(gameObject);
-
-                
-            }
+			if (!GetComponent<Renderer> ().isVisible) {
+				Debug.Log ("Carta igienica uscita dallo schermo -> Mummia passa il turno");
+				GameController.Self.PassTurn ();
+				Destroy(this.gameObject);
+			}
         }
 
 
@@ -66,18 +56,16 @@ namespace IndianaBones
             {
 				Debug.Log ("Nome oggetto toccato: " + coll.gameObject.name);
 
-                //Player.Self.ResetPlayerVar ();
-
+				GameController.Self.PassTurn ();
 
                 Destroy(this.gameObject);
 
-            }
-
-            if (coll.gameObject.tag == "Player")
-            {
+			} else if (coll.gameObject.tag == "Player") {
 
                 Player.Self.currentLife -= elementi.attackPower;
-                    Destroy(this.gameObject);
+				GameController.Self.PassTurn ();
+
+				Destroy(this.gameObject);
             }
 
         }

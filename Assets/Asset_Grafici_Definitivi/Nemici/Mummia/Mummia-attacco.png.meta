@@ -1,13 +1,17 @@
 fileFormatVersion: 2
 guid: 9d581eb56d90fc546bc1371d06a4476d
-timeCreated: 1469003843
+timeCreated: 1469403951
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Mummia-attacco_0
+    21300002: Mummia-attacco_1
+    21300004: Mummia-attacco_2
+    21300006: Mummia-attacco_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -30,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -38,7 +42,7 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -49,7 +53,86 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Mummia-attacco_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -23, y: 50}
+        - {x: -30, y: 44}
+        - {x: -30, y: -41}
+        - {x: -21, y: -50}
+        - {x: 35, y: -50}
+        - {x: 35, y: -9}
+        - {x: 34, y: 1}
+        - {x: 16, y: 50}
+    - name: Mummia-attacco_1
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -30, y: -30}
+        - {x: -1, y: -50}
+        - {x: 35, y: -50}
+        - {x: 35, y: -25}
+        - {x: 27, y: 30}
+        - {x: 16, y: 50}
+        - {x: -24, y: 50}
+        - {x: -30, y: 49}
+      - - {x: 25, y: 22}
+        - {x: 27, y: 20}
+        - {x: 30, y: 21}
+        - {x: 30, y: 24}
+        - {x: 28, y: 26}
+        - {x: 25, y: 25}
+    - name: Mummia-attacco_2
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -24, y: 50}
+        - {x: -30, y: 47}
+        - {x: -30, y: -46}
+        - {x: -27, y: -50}
+        - {x: 35, y: -50}
+        - {x: 35, y: 50}
+    - name: Mummia-attacco_3
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -27, y: 50}
+        - {x: -30, y: 46}
+        - {x: -30, y: -21}
+        - {x: -6, y: -50}
+        - {x: 35, y: -50}
+        - {x: 35, y: 9}
+        - {x: 11, y: 50}
     outline: []
   spritePackingTag: 
   userData: 

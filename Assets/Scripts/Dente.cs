@@ -5,17 +5,10 @@ namespace IndianaBones
 {
 
     public class Dente : MonoBehaviour
-    {
-
-       
-        
+    {  
+		
         public float forza = 0.5f;
-
         bool seen = false;
-
-
-
-     
 
         // Update is called once per frame
         void FixedUpdate()
@@ -46,14 +39,14 @@ namespace IndianaBones
 
         void Update()
         {
-            if (GetComponent<Renderer>().isVisible)
-                seen = true;
+			if (!GetComponent<Renderer> ().isVisible) {
+				Debug.Log ("Dente uscito dallo schermo -> Player passa il turno");
+				GameController.Self.PassTurn ();
+				Player.Self.ResetPlayerVar ();
 
-            if (seen && !GetComponent<Renderer>().isVisible)
-            {
-                Destroy(gameObject);
+				Destroy(this.gameObject);
+			}
                 
-            }
         }
 
 
