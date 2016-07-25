@@ -52,7 +52,7 @@ namespace IndianaBones
         public Text numDenti;
         public Text valoreVita;
         public GameObject child;
-        private Grid elementi;
+		public Grid elementi;
 
         [Header("Level and Stats")]
         [Space(10)]
@@ -111,6 +111,8 @@ namespace IndianaBones
             elementi = FindObjectOfType<Grid>();
             this.transform.position = elementi.scacchiera[xPosition, yPosition].transform.position;
             targetTr = elementi.scacchiera[xPosition, yPosition].transform;
+			elementi.scacchiera[xPosition, yPosition].status = 4;
+
         }
 
 
@@ -122,13 +124,23 @@ namespace IndianaBones
 			CrossActivationHandler ();
 		}
 
+
+		public void UpdatePlayer () {
+			xPosition = (int)this.transform.position.x;
+			yPosition = (int)this.transform.position.y;
+			valoreVita = GameObject.Find ("VitaText").GetComponent<Text>();
+			numDenti = GameObject.Find ("DentiText").GetComponent<Text> ();
+			elementi = FindObjectOfType<Grid>();
+			targetTr = elementi.scacchiera[(int)GameController.Self.startPoint.transform.position.x, (int)GameController.Self.startPoint.transform.position.y].transform;
+			elementi.scacchiera[xPosition, yPosition].status = 4;
+			OldValue ();
+		}
+
         public void controlloVita(int attack)
         {
             currentLife -= attack;
             // GameController gamec = FindObjectOfType<GameController>();
             // gamec.barraVita -= 0.20f;
-
-
         }
 
 
@@ -516,7 +528,9 @@ namespace IndianaBones
                     LevelUp();
                 }
 
-               
+				if (elementi == null) {
+					UpdatePlayer ();
+				}
 
                 Vector3 distance = targetTr.position - this.transform.position;
                 Vector3 direction = distance.normalized;

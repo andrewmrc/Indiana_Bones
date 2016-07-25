@@ -27,10 +27,17 @@ namespace IndianaBones
         //public Scrollbar vita;
         // public float barraVita = 1.0f;
         public List<GameObject> charactersList = new List<GameObject>();
+		public GameObject startPoint;
+		public GameObject endPoint;
+
 
         void Start()
         {
             charactersList.Add(Player.Self.gameObject);
+			startPoint = GameObject.Find ("StartPoint");
+			if (startPoint != null) {
+				Player.Self.transform.position = startPoint.transform.position;
+			}
             //Inseriamo tutti i nemici visibili nella lista e facciamo uno shuffle
             //charactersList.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
             /*for(int i = 1; i < charactersList.Count; i++)

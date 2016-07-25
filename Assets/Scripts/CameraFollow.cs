@@ -9,7 +9,9 @@ namespace IndianaBones
 
         public Transform target;
 
-       
+		void Awake () {
+			target = GameObject.FindGameObjectWithTag ("Player").transform;
+		}
 
         void Start()
         {
