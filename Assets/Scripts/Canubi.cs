@@ -27,6 +27,7 @@ namespace IndianaBones
         public int distanzaAttivazione = 10;
 		private Grid elementi;
 		private Animator animator;
+        
 
         [Header("Level and Stats")]
         [Space(10)]
@@ -63,6 +64,11 @@ namespace IndianaBones
             return (Mathf.Abs((int)Player.Self.transform.position.x - (int)this.transform.position.x) + Mathf.Abs((int)Player.Self.transform.position.y - (int)this.transform.position.y));
         }
 
+        public void AggiornamentoBarraVitaNemico()
+        {
+            EnemyScrollBar elementi = FindObjectOfType<EnemyScrollBar>();  
+          elementi.EnemyLifeBar.text = "Canubi : " + vita.ToString();
+        } 
 
         public void Posizione()
         {
@@ -210,6 +216,7 @@ namespace IndianaBones
                 {
 
                     vita -= Player.Self.currentAttack;
+                    AggiornamentoBarraVitaNemico();
 
                 }
             }
@@ -219,6 +226,8 @@ namespace IndianaBones
                 {
 
                     vita -= Player.Self.currentAttack;
+                    AggiornamentoBarraVitaNemico();
+
 
                 }
             }
@@ -228,6 +237,7 @@ namespace IndianaBones
                 {
 
                     vita -= Player.Self.currentAttack;
+                    AggiornamentoBarraVitaNemico();
 
                 }
             }
@@ -237,6 +247,7 @@ namespace IndianaBones
                 {
 
                     vita -= Player.Self.currentAttack;
+                    AggiornamentoBarraVitaNemico();
 
                 }
             }
@@ -252,6 +263,7 @@ namespace IndianaBones
             {
 
                 vita -= Player.Self.currentAttack;
+                AggiornamentoBarraVitaNemico();
 
             }
 

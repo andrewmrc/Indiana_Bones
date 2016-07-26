@@ -60,7 +60,11 @@ namespace IndianaBones
         }
 
 
-        
+        public void AggiornamentoBarraVitaNemico()
+        {
+            EnemyScrollBar elementi = FindObjectOfType<EnemyScrollBar>();
+            elementi.EnemyLifeBar.text = "Cammello : " + vita.ToString();
+        }
 
         public void OnCollisionEnter2D(Collision2D coll)
         {
@@ -70,6 +74,8 @@ namespace IndianaBones
             {
 
                 vita -= Player.Self.currentAttack;
+
+                AggiornamentoBarraVitaNemico();
 
                 Destroy(coll.gameObject);
 
@@ -121,6 +127,8 @@ namespace IndianaBones
                 {
 
                     vita -= Player.Self.currentAttack;
+                    AggiornamentoBarraVitaNemico();
+
 
                 }
             }
@@ -130,6 +138,7 @@ namespace IndianaBones
                 {
 
                     vita -= Player.Self.currentAttack;
+                    AggiornamentoBarraVitaNemico();
 
                 }
             }
@@ -139,6 +148,7 @@ namespace IndianaBones
                 {
 
                     vita -= Player.Self.currentAttack;
+                    AggiornamentoBarraVitaNemico();
 
                 }
             }
@@ -148,6 +158,7 @@ namespace IndianaBones
                 {
 
                     vita -= Player.Self.currentAttack;
+                    AggiornamentoBarraVitaNemico();
 
                 }
             }

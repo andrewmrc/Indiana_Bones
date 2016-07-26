@@ -101,6 +101,11 @@ namespace IndianaBones
 
         }
 
+        public void AggiornamentoBarraVitaNemico()
+        {
+            EnemyScrollBar elementi = FindObjectOfType<EnemyScrollBar>();
+            elementi.EnemyLifeBar.text = "Mummia : " + vita.ToString();
+        }
 
         //gestisce i tre tipi di movimento della mummia, se il player non è nella sua linea di tiro ne fa partire uno random
         public void GestoreMovimenti()
@@ -401,6 +406,7 @@ namespace IndianaBones
                 {
 
                     vita -= Player.Self.currentAttack;
+                    AggiornamentoBarraVitaNemico();
 
                 }
             }
@@ -410,6 +416,7 @@ namespace IndianaBones
                 {
 
                     vita -= Player.Self.currentAttack;
+                    AggiornamentoBarraVitaNemico();
 
                 }
             }
@@ -419,6 +426,7 @@ namespace IndianaBones
                 {
 
                     vita -= Player.Self.currentAttack;
+                    AggiornamentoBarraVitaNemico();
 
                 }
             }
@@ -428,6 +436,7 @@ namespace IndianaBones
                 {
 
                     vita -= Player.Self.currentAttack;
+                    AggiornamentoBarraVitaNemico();
 
                 }
             }
@@ -443,6 +452,8 @@ namespace IndianaBones
             {
 
                 vita -= Player.Self.currentAttack;
+
+                AggiornamentoBarraVitaNemico();
 
             }
 

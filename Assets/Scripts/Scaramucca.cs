@@ -65,7 +65,13 @@ namespace IndianaBones
         }
 
 
-		public void OnTriggerEnter2D(Collider2D coll) 
+        public void AggiornamentoBarraVitaNemico()
+        {
+            EnemyScrollBar elementi = FindObjectOfType<EnemyScrollBar>();
+            elementi.EnemyLifeBar.text = "Scaramucca : " + vita.ToString();
+        }
+
+        public void OnTriggerEnter2D(Collider2D coll) 
 		{
 
 			//Handle life subtraction
@@ -75,8 +81,10 @@ namespace IndianaBones
 				{
 
 					vita -= Player.Self.currentAttack;
+                    AggiornamentoBarraVitaNemico();
 
-				}
+
+                }
 			}
 			if (coll.gameObject.name == "down")
 			{
@@ -84,8 +92,10 @@ namespace IndianaBones
 				{
 
 					vita -= Player.Self.currentAttack;
+                    AggiornamentoBarraVitaNemico();
 
-				}
+
+                }
 			}
 			if (coll.gameObject.name == "right")
 			{
@@ -93,8 +103,9 @@ namespace IndianaBones
 				{
 
 					vita -= Player.Self.currentAttack;
+                    AggiornamentoBarraVitaNemico();
 
-				}
+                }
 			}
 			if (coll.gameObject.name == "left")
 			{
@@ -102,8 +113,10 @@ namespace IndianaBones
 				{
 
 					vita -= Player.Self.currentAttack;
+                    AggiornamentoBarraVitaNemico();
 
-				}
+
+                }
 			}
 
 		}
@@ -117,6 +130,8 @@ namespace IndianaBones
             {
 
                 vita -= Player.Self.currentAttack;
+
+                AggiornamentoBarraVitaNemico();
 
             }
 
