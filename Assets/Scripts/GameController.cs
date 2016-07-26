@@ -29,7 +29,7 @@ namespace IndianaBones
         public List<GameObject> charactersList = new List<GameObject>();
 		public GameObject startPoint;
 		public GameObject endPoint;
-
+		float backupDelay;
 
         void Start()
         {
@@ -48,14 +48,19 @@ namespace IndianaBones
                     Debug.Log("Rimuovo: " + charactersList[i].gameObject.name);
                 }*/
             //}
-           
+			backupDelay = delayTurni;
         }
 
 
 
         void Update()
         {
-       
+			//Velocizza i turni quando in scena c'è solo il Player
+			if (charactersList.Count == 1) {
+				delayTurni = 0;
+			} else {
+				delayTurni = backupDelay;
+			}
 
         }
 
