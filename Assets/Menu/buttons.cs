@@ -13,7 +13,7 @@ public class buttons : MonoBehaviour
     }
 	public void goToNextLevel()
     {
-        SceneManager.LoadScene("ScenaProva");
+        SceneManager.LoadScene("Tutorial");
     }
     public void exitToWindows()
     {
