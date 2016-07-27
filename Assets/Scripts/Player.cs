@@ -109,7 +109,7 @@ namespace IndianaBones
             //yOld = yPosition;
 
 			valoreVita = GameObject.Find ("VitaText").GetComponent<Text>();
-			numDenti = GameObject.Find ("DentiText").GetComponent<Text> ();
+			numDenti = GameObject.Find ("CounterDentiText").GetComponent<Text> ();
 
             elementi = FindObjectOfType<Grid>();
             this.transform.position = elementi.scacchiera[xPosition, yPosition].transform.position;
@@ -132,7 +132,7 @@ namespace IndianaBones
 			xPosition = (int)this.transform.position.x;
 			yPosition = (int)this.transform.position.y;
 			valoreVita = GameObject.Find ("VitaText").GetComponent<Text>();
-			numDenti = GameObject.Find ("DentiText").GetComponent<Text> ();
+			numDenti = GameObject.Find ("CounterDentiText").GetComponent<Text> ();
 			elementi = FindObjectOfType<Grid>();
 			targetTr = elementi.scacchiera[(int)GameController.Self.startPoint.transform.position.x, (int)GameController.Self.startPoint.transform.position.y].transform;
 			elementi.scacchiera[xPosition, yPosition].status = 4;

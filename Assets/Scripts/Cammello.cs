@@ -23,6 +23,8 @@ namespace IndianaBones
 
 		private Animator animator;
 
+		GameObject healthBar;
+
         [Header("Level and Stats")]
         [Space(10)]
 
@@ -48,6 +50,8 @@ namespace IndianaBones
 
             elementi.scacchiera[xPosition, yPosition].status = 3;
 
+			healthBar = GameObject.FindGameObjectWithTag ("EnemyHealthBar");
+
 			//Get the animator component and set the parameter equal to the initial life value
 			animator = GetComponent<Animator>();
 			animator.SetFloat ("Life", vita);
@@ -60,11 +64,16 @@ namespace IndianaBones
         }
 
 
-        public void AggiornamentoBarraVitaNemico()
-        {
-            EnemyScrollBar elementi = FindObjectOfType<EnemyScrollBar>();
-            elementi.EnemyLifeBar.text = "Cammello : " + vita.ToString();
-        }
+		IEnumerator UpdateHealthBar()
+		{
+			healthBar.SetActive (true);
+			healthBar.GetComponent<Slider> ().maxValue = levelsList[powerLevel].Life;
+			healthBar.transform.GetChild(2).GetComponent<Text>().text = vita.ToString();
+			healthBar.GetComponent<Slider> ().value = vita;
+			yield return new WaitForSeconds (0.5f);
+			healthBar.SetActive (false);
+
+		}
 
         public void OnCollisionEnter2D(Collision2D coll)
         {
@@ -75,7 +84,7 @@ namespace IndianaBones
 
                 vita -= Player.Self.currentAttack;
 
-                AggiornamentoBarraVitaNemico();
+				StartCoroutine(UpdateHealthBar());
 
                 Destroy(coll.gameObject);
 
@@ -127,7 +136,7 @@ namespace IndianaBones
                 {
 
                     vita -= Player.Self.currentAttack;
-                    AggiornamentoBarraVitaNemico();
+					StartCoroutine(UpdateHealthBar());
 
 
                 }
@@ -138,7 +147,7 @@ namespace IndianaBones
                 {
 
                     vita -= Player.Self.currentAttack;
-                    AggiornamentoBarraVitaNemico();
+					StartCoroutine(UpdateHealthBar());
 
                 }
             }
@@ -148,7 +157,7 @@ namespace IndianaBones
                 {
 
                     vita -= Player.Self.currentAttack;
-                    AggiornamentoBarraVitaNemico();
+					StartCoroutine(UpdateHealthBar());
 
                 }
             }
@@ -158,7 +167,7 @@ namespace IndianaBones
                 {
 
                     vita -= Player.Self.currentAttack;
-                    AggiornamentoBarraVitaNemico();
+					StartCoroutine(UpdateHealthBar());
 
                 }
             }

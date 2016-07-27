@@ -26,6 +26,7 @@ namespace IndianaBones
         public int RangeOld = 0;
         private Grid elementi;
 		private Animator animator;
+		GameObject healthBar;
 
         [Header("Level and Stats")]
         [Space(10)]
@@ -52,6 +53,8 @@ namespace IndianaBones
 
             RangeInterno = RangePattuglia;
 
+			healthBar = GameObject.FindGameObjectWithTag ("EnemyHealthBar");
+
 			//Get the animator component and set the parameter equal to the initial life value
 			animator = GetComponent<Animator>();
 			animator.SetFloat ("Life", vita);
@@ -65,11 +68,14 @@ namespace IndianaBones
         }
 
 
-        public void AggiornamentoBarraVitaNemico()
-        {
-            EnemyScrollBar elementi = FindObjectOfType<EnemyScrollBar>();
-            elementi.EnemyLifeBar.text = "Scaramucca : " + vita.ToString();
-        }
+		IEnumerator UpdateHealthBar()
+		{
+			healthBar.SetActive (true);
+			healthBar.transform.GetChild(2).GetComponent<Text>().text = vita.ToString();
+			yield return new WaitForSeconds (0.5f);
+			healthBar.SetActive (false);
+
+		}
 
         public void OnTriggerEnter2D(Collider2D coll) 
 		{
@@ -81,7 +87,7 @@ namespace IndianaBones
 				{
 
 					vita -= Player.Self.currentAttack;
-                    AggiornamentoBarraVitaNemico();
+					StartCoroutine(UpdateHealthBar());
 
 
                 }
@@ -92,7 +98,7 @@ namespace IndianaBones
 				{
 
 					vita -= Player.Self.currentAttack;
-                    AggiornamentoBarraVitaNemico();
+					StartCoroutine(UpdateHealthBar());
 
 
                 }
@@ -103,7 +109,7 @@ namespace IndianaBones
 				{
 
 					vita -= Player.Self.currentAttack;
-                    AggiornamentoBarraVitaNemico();
+					StartCoroutine(UpdateHealthBar());
 
                 }
 			}
@@ -113,7 +119,7 @@ namespace IndianaBones
 				{
 
 					vita -= Player.Self.currentAttack;
-                    AggiornamentoBarraVitaNemico();
+					StartCoroutine(UpdateHealthBar());
 
 
                 }
@@ -131,7 +137,7 @@ namespace IndianaBones
 
                 vita -= Player.Self.currentAttack;
 
-                AggiornamentoBarraVitaNemico();
+				StartCoroutine(UpdateHealthBar());
 
             }
 
