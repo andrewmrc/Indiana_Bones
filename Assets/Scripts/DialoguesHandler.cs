@@ -35,13 +35,15 @@ public class DialoguesHandler : MonoBehaviour {
 		textVisualized.GetComponent<Text> ().text = dialogues [count];
 		indianaChar.GetComponent<Image> ().sprite = indianaExpression [count];
 		npcChar.GetComponent<Image> ().sprite = npcExpression [count];
-		//npcChar.GetComponent<Image> ().SetNativeSize ();
+		npcChar.GetComponent<Image> ().SetNativeSize ();
+        indianaChar.GetComponent<Image>().SetNativeSize();
 
-	}
+
+    }
 
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
 		if (Input.GetKeyDown ("space")) {
 			if (count < dialogues.Count-1) { 
 				Debug.Log ("Stamp dialogo!");
