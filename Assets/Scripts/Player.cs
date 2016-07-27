@@ -108,6 +108,9 @@ namespace IndianaBones
            // xOld = xPosition;
             //yOld = yPosition;
 
+			valoreVita = GameObject.Find ("VitaText").GetComponent<Text>();
+			numDenti = GameObject.Find ("DentiText").GetComponent<Text> ();
+
             elementi = FindObjectOfType<Grid>();
             this.transform.position = elementi.scacchiera[xPosition, yPosition].transform.position;
             targetTr = elementi.scacchiera[xPosition, yPosition].transform;
