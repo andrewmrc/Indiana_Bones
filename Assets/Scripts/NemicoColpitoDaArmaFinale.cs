@@ -20,7 +20,7 @@ namespace IndianaBones
             if (coll.gameObject.name == "armaFinale(Clone)")
             {
                 
-                    vita = 0;
+                   // vita = 0;
             
             }
             
