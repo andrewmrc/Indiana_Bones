@@ -97,7 +97,8 @@ namespace IndianaBones
 
         public int Casuale()
         {
-            return Random.Range(1, 4);
+            return Random.Range(1, 3);
+           
 
         }
 
@@ -120,21 +121,20 @@ namespace IndianaBones
                         break;
 
                     case 2:
-                     
-                        MovimentoPrestabilito();  
-                        break;
 
-                    case 3:
+                    Fermo();
+                    break;
+
+                
                       
-                        Fermo();
-                        break;
+                        
 
                 }
            
         }
 
 
-        public void MovimentoPrestabilito()
+     /*   public void MovimentoPrestabilito()
         {
             OldValue();
             
@@ -208,7 +208,7 @@ namespace IndianaBones
             StartCoroutine(ResetMyColor());
 
             GameController.Self.PassTurn();
-        }
+        } */
 
 
         public void Fermo()
@@ -243,12 +243,14 @@ namespace IndianaBones
                     if (Player.Self.xPosition > this.xPosition)
                     {
                         direzioneLancio = 3;
-						StartCoroutine(AttaccoADistanza());
+                        gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                        StartCoroutine(AttaccoADistanza());
                     }
                     else if (Player.Self.xPosition < this.xPosition)
                     {
                         direzioneLancio = 4;
-						StartCoroutine(AttaccoADistanza());
+                        gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                        StartCoroutine(AttaccoADistanza());
                     }
                 }
                 else
@@ -286,6 +288,13 @@ namespace IndianaBones
 
                                     xPosition -= 1;
                                 }
+
+                                else if ((elementi.scacchiera[xPosition, yPosition - 1].status < 1))
+                                {
+                                    elementi.scacchiera[xPosition, yPosition - 1].status = 3;
+                                    yPosition -= 1;
+                                }
+
                                 else if (elementi.scacchiera[xPosition, yPosition + 1].status < 1)
                                 {
                                     elementi.scacchiera[xPosition, yPosition + 1].status = 3;
