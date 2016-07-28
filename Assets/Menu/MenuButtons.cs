@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class buttons : MonoBehaviour
+public class MenuButtons : MonoBehaviour
 {
     public Button butto;
 
@@ -11,14 +11,17 @@ public class buttons : MonoBehaviour
     {
         //butto.Select();
     }
+
 	public void goToNextLevel()
     {
         SceneManager.LoadScene("Tutorial");
     }
+
     public void exitToWindows()
     {
         Application.Quit();
     }
+
     public void goToCredits()
     {
         SceneManager.LoadScene("Credits");
@@ -28,4 +31,11 @@ public class buttons : MonoBehaviour
     {
         SceneManager.LoadScene("Menu");
     }
+
+	public void reloadScene ()
+	{
+		Scene thisScene = SceneManager.GetActiveScene ();
+		SceneManager.LoadScene (thisScene.name);
+	}
+
 }

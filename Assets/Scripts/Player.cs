@@ -56,7 +56,7 @@ namespace IndianaBones
 		public Text manaText;
 		public Text playerLevelText;
 		public Text expCollText;
-
+		public GameObject canvasGameOver;
         public GameObject child;
 		public Grid elementi;
 
@@ -90,6 +90,7 @@ namespace IndianaBones
                 Destroy(gameObject);
             }
 
+			canvasGameOver = GameObject.FindGameObjectWithTag ("CanvasGameOver");
 
             if (playerLevel == 1)
             {
@@ -110,9 +111,6 @@ namespace IndianaBones
         {
             xPosition = (int)this.transform.position.x;
             yPosition = (int)this.transform.position.y;
-
-           // xOld = xPosition;
-            //yOld = yPosition;
 
             elementi = FindObjectOfType<Grid>();
             this.transform.position = elementi.scacchiera[xPosition, yPosition].transform.position;
@@ -676,10 +674,16 @@ namespace IndianaBones
 				animator.SetFloat ("Life", currentLife);
 
 				//Attivare pop up che chiede se si vuole continuare il gioco o ricominciare
-
+				StartCoroutine("ActivateGameOverPanel");
 			}
 
         }
+
+
+		IEnumerator ActivateGameOverPanel (){
+			yield return new WaitForSeconds (1f);
+			canvasGameOver.SetActive (true);
+		}
 
 
 		public void CrossActivationHandler() {
