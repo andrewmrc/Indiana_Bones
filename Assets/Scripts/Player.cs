@@ -34,6 +34,11 @@ namespace IndianaBones
 
         public int croce = 1;
 
+        AudioSource audioPlayer;
+        //inserisco le clip audio in previsione che i designer possano sostituirle con delle altre
+        public AudioClip SFX_LancioDente;
+
+
         public GameObject up;
         public GameObject down;
         public GameObject right;
@@ -117,6 +122,10 @@ namespace IndianaBones
             targetTr = elementi.scacchiera[xPosition, yPosition].transform;
 			elementi.scacchiera[xPosition, yPosition].status = 4;
 			SetPlayerUI ();
+
+            audioPlayer = GetComponent<AudioSource>();
+
+            
         }
 
 
@@ -172,28 +181,36 @@ namespace IndianaBones
 				switch (croce) {
 
 				case 1:
-					proiettili -= 1;
+                        audioPlayer.clip = SFX_LancioDente;
+                        audioPlayer.Play();
+                        proiettili -= 1;
 					bulletDir = 1;
 					nuovoDente = Instantiate (dente);
 					nuovoDente.transform.position = up.transform.position;
 					break;
 
 				case 2:
-					proiettili -= 1;
+                        audioPlayer.clip = SFX_LancioDente;
+                        audioPlayer.Play();
+                        proiettili -= 1;
 					bulletDir = 3;
 					nuovoDente = Instantiate (dente);
 					nuovoDente.transform.position = right.transform.position;
 					break;
 
 				case 3:
-					proiettili -= 1;
+                        audioPlayer.clip = SFX_LancioDente;
+                        audioPlayer.Play();
+                        proiettili -= 1;
 					nuovoDente = Instantiate (dente);
 					nuovoDente.transform.position = down.transform.position;
 					bulletDir = 2;
 					break;
 
 				case 4:
-					proiettili -= 1;
+                        audioPlayer.clip = SFX_LancioDente;
+                        audioPlayer.Play();
+                        proiettili -= 1;
 					nuovoDente = Instantiate (dente);
 					nuovoDente.transform.position = left.transform.position;
 					bulletDir = 4;

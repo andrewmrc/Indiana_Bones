@@ -34,6 +34,10 @@ namespace IndianaBones
         public int powerLevel;
         public List<EnemyLevels> levelsList = new List<EnemyLevels>();
 
+        public AudioClip SFX_Attack;
+        public AudioClip SFX_Death;
+        AudioSource audioScaramucca;
+
         void Awake()
         {
             gameObject.tag = "Enemy";
@@ -58,6 +62,8 @@ namespace IndianaBones
 			//Get the animator component and set the parameter equal to the initial life value
 			animator = GetComponent<Animator>();
 			animator.SetFloat ("Life", vita);
+
+            audioScaramucca = GetComponent<AudioSource>();
 
 
         }
@@ -276,8 +282,12 @@ namespace IndianaBones
 
 		public void AttackHandler()
 		{
-			//Formula calcolo attackPower Scaramucca
-			int randomX = Random.Range(1, 3);
+            audioScaramucca.Stop();
+            audioScaramucca.clip = SFX_Attack;
+            audioScaramucca.Play();
+
+            //Formula calcolo attackPower Scaramucca
+            int randomX = Random.Range(1, 3);
 			int damage = (int)(attackPower*randomX/2);
 			//Sottrae vita al player
 			Player.Self.currentLife -= damage;
@@ -341,7 +351,8 @@ namespace IndianaBones
 			//Controlliamo se la vita va a zero e chiamiamo il metodo che gestisce questo evento
 			if (vita <= 0)
 			{
-				GameController.Self.charactersList.Remove(this.gameObject);
+                
+                GameController.Self.charactersList.Remove(this.gameObject);
 				//Settiamo lo status cella a 10 così il player non può ataccare nè camminare su questa casella fino a che questo nemico non sparisce dalla scena
 				elementi.scacchiera[xPosition, yPosition].status = 10;
 				StartCoroutine (HandleDeath ());
@@ -373,8 +384,13 @@ namespace IndianaBones
 
 
 		IEnumerator HandleDeath(){
-			//Activate the death animation
-			animator.SetFloat ("Life", vita);
+
+            audioScaramucca.Stop();
+            audioScaramucca.clip = SFX_Death;
+            audioScaramucca.Play();
+
+            //Activate the death animation
+            animator.SetFloat ("Life", vita);
 			if (gameObject.GetComponent<TurnHandler> ().itsMyTurn) {
 				GameController.Self.PassTurn ();
 			}

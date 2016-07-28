@@ -31,6 +31,10 @@ namespace IndianaBones
         public int powerLevel;
         public List<EnemyLevels> levelsList = new List<EnemyLevels>();
 
+        AudioSource audioCamel;
+        public AudioClip SFX_Death;
+        public AudioClip SFX_Attack;
+
         void Awake()
         {
             gameObject.tag = "Enemy";
@@ -55,6 +59,8 @@ namespace IndianaBones
 			//Get the animator component and set the parameter equal to the initial life value
 			animator = GetComponent<Animator>();
 			animator.SetFloat ("Life", vita);
+
+            audioCamel = GetComponent<AudioSource>();
 
         }
 
@@ -103,8 +109,12 @@ namespace IndianaBones
 
 		public void AttackHandler()
 		{
-			//Formula calcolo attacco Canubi
-			int randomX = Random.Range(1, 3);
+            
+            audioCamel.clip = SFX_Attack;
+            audioCamel.Play();
+
+            //Formula calcolo attacco Canubi
+            int randomX = Random.Range(1, 3);
 			int damage = (int)(attackPower*randomX/2);
 			//Sottrae vita al player
 			Player.Self.currentLife -= damage;
@@ -240,8 +250,12 @@ namespace IndianaBones
 
 		IEnumerator HandleDeath()
 		{
-			//Activate the death animation
-			animator.SetFloat("Life", vita);
+            audioCamel.Stop();
+            audioCamel.clip = SFX_Death;
+            audioCamel.Play();
+
+            //Activate the death animation
+            animator.SetFloat("Life", vita);
 			if (gameObject.GetComponent<TurnHandler>().itsMyTurn)
 			{
 				GameController.Self.PassTurn();

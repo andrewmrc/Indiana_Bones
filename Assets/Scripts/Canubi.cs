@@ -27,6 +27,10 @@ namespace IndianaBones
         public int distanzaAttivazione = 10;
 		private Grid elementi;
 		private Animator animator;
+
+        public AudioClip SFX_Attack;
+        public AudioClip SFX_Death;
+        AudioSource audioCanubi;
         
 		GameObject healthBar;
 
@@ -58,6 +62,8 @@ namespace IndianaBones
 			//Get the animator component and set the parameter equal to the initial life value
 			animator = GetComponent<Animator>();
 			animator.SetFloat ("Life", vita);
+
+            audioCanubi = GetComponent<AudioSource>();
 
         }
 
@@ -311,6 +317,8 @@ namespace IndianaBones
 
         public void AttackHandler()
         {
+            audioCanubi.clip = SFX_Attack;
+            audioCanubi.Play();
             //Formula calcolo attacco Canubi
 			int randomX = Random.Range(1, 3);
 			int damage = (int)(attackPower*randomX/2);
@@ -419,8 +427,13 @@ namespace IndianaBones
         }
 
 		IEnumerator HandleDeath(){
-			//Activate the death animation
-			animator.SetFloat ("Life", vita);
+
+            audioCanubi.Stop();
+            audioCanubi.clip = SFX_Death;
+            audioCanubi.Play();
+
+            //Activate the death animation
+            animator.SetFloat ("Life", vita);
 			if (gameObject.GetComponent<TurnHandler> ().itsMyTurn) {
 				GameController.Self.PassTurn ();
 			}

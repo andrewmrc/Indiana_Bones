@@ -29,6 +29,10 @@ namespace IndianaBones
         public int powerLevel;
         public List<EnemyLevels> levelsList = new List<EnemyLevels>();
 
+        AudioSource audioCat;
+        public AudioClip SFX_Death;
+        public AudioClip SFX_Attack;
+
         void Awake()
         {
             gameObject.tag = "Enemy";
@@ -52,6 +56,8 @@ namespace IndianaBones
 			animator = GetComponent<Animator>();
 			animator.SetFloat ("Life", vita);
 
+            audioCat = GetComponent<AudioSource>();
+
         }
 
         public int ManhattanDist()
@@ -62,8 +68,8 @@ namespace IndianaBones
 
         public void AggiornamentoBarraVitaNemico()
         {
-            EnemyScrollBar elementi = FindObjectOfType<EnemyScrollBar>();
-            elementi.EnemyLifeBar.text = "Gatto : " + vita.ToString();
+           // EnemyScrollBar elementi = FindObjectOfType<EnemyScrollBar>();
+           // elementi.EnemyLifeBar.text = "Gatto : " + vita.ToString();
         }
 
         public void OnCollisionEnter2D(Collision2D coll)
@@ -90,6 +96,10 @@ namespace IndianaBones
 
         public void AttackHandler()
         {
+
+            audioCat.clip = SFX_Attack;
+            audioCat.Play();
+
             //Formula calcolo attacco 
             //il risultato si sottrae alla vita del player
 
@@ -223,8 +233,11 @@ namespace IndianaBones
 
 		IEnumerator HandleDeath()
 		{
-			//Activate the death animation
-			animator.SetFloat("Life", vita);
+            audioCat.Stop();
+            audioCat.clip = SFX_Death;
+            audioCat.Play();
+            //Activate the death animation
+            animator.SetFloat("Life", vita);
 			if (gameObject.GetComponent<TurnHandler>().itsMyTurn)
 			{
 				GameController.Self.PassTurn();
