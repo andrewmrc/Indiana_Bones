@@ -141,9 +141,10 @@ namespace IndianaBones
 						itemsOnButton [i].gameObject.GetComponent<SlotButtonHandler> ().itemOnThisButton = itemName;
 						itemsOnButton [i].gameObject.GetComponent<SlotButtonHandler> ().itemIndex = i;
 
-						transform.GetChild (i).GetChild (1).GetComponent<Text> ().text = itemCount.ToString ();
+						transform.GetChild (i).GetChild (1).GetComponent<Text> ().text = ("x"+itemCount.ToString ());
 
 						transform.GetChild (i).GetChild (0).GetComponent<Image> ().sprite = itemSprite;
+						transform.GetChild (i).GetChild (0).GetComponent<Image> ().color = Color.white;
 						transform.GetChild (i).GetChild (0).GetComponent<Image> ().SetNativeSize ();
 						freeSlotsCount++;
 						break;
@@ -159,7 +160,7 @@ namespace IndianaBones
 		public void UpdateItemQuantity (string itemName, int itemCount) {
 			for (int i = 0; i < itemsOnButton.Count; i++) {
 				if (itemsOnButton [i].gameObject.GetComponent<SlotButtonHandler> ().itemOnThisButton == itemName) {
-					transform.GetChild (i).GetChild (1).GetComponent<Text> ().text = itemCount.ToString ();
+					transform.GetChild (i).GetChild (1).GetComponent<Text> ().text = ("x"+itemCount.ToString ());
 				}
 			}
 
@@ -179,9 +180,10 @@ namespace IndianaBones
 					Debug.Log ("Use MILK");
 					healthMilkPotionCount--;
 					Player.Self.currentLife += 5;
-					transform.GetChild (itemIndex).GetChild (1).GetComponent<Text> ().text = healthMilkPotionCount.ToString ();
+					transform.GetChild (itemIndex).GetChild (1).GetComponent<Text> ().text = ("x"+healthMilkPotionCount.ToString ());
 					if (healthMilkPotionCount <= 0) {
 						transform.GetChild (itemIndex).GetChild (0).GetComponent<Image> ().sprite = null;
+						transform.GetChild (itemIndex).GetChild (0).GetComponent<Image> ().color = new Color32(255,255,255,0);
 						transform.GetChild (itemIndex).GetChild (0).GetComponent<RectTransform> ().sizeDelta = new Vector2 (50, 50);
 						healthMilk = false;
 						itemsOnButton [itemIndex].gameObject.GetComponent<SlotButtonHandler> ().slotOccupied = false;
@@ -194,9 +196,10 @@ namespace IndianaBones
 					Debug.Log ("Use MOZZARELLA");
 					healthMozzyPotionCount--;
 					Player.Self.currentLife += 10;
-					transform.GetChild (itemIndex).GetChild (1).GetComponent<Text> ().text = healthMozzyPotionCount.ToString ();
+					transform.GetChild (itemIndex).GetChild (1).GetComponent<Text> ().text = ("x"+healthMozzyPotionCount.ToString ());
 					if (healthMozzyPotionCount <= 0) {
 						transform.GetChild (itemIndex).GetChild (0).GetComponent<Image> ().sprite = null;
+						transform.GetChild (itemIndex).GetChild (0).GetComponent<Image> ().color = new Color32(255,255,255,0);
 						transform.GetChild (itemIndex).GetChild (0).GetComponent<RectTransform> ().sizeDelta = new Vector2 (50, 50);
 						healthMozzy = false;
 						itemsOnButton [itemIndex].gameObject.GetComponent<SlotButtonHandler> ().slotOccupied = false;
@@ -209,9 +212,10 @@ namespace IndianaBones
 					Debug.Log ("Use MANA POTION");
 					manaPotionCount--;
 					Player.Self.currentMana += 5;
-					transform.GetChild (itemIndex).GetChild (1).GetComponent<Text> ().text = manaPotionCount.ToString ();
+					transform.GetChild (itemIndex).GetChild (1).GetComponent<Text> ().text = ("x"+manaPotionCount.ToString ());
 					if (manaPotionCount <= 0) {
 						transform.GetChild (itemIndex).GetChild (0).GetComponent<Image> ().sprite = null;
+						transform.GetChild (itemIndex).GetChild (0).GetComponent<Image> ().color = new Color32(255,255,255,0);
 						transform.GetChild (itemIndex).GetChild (0).GetComponent<RectTransform> ().sizeDelta = new Vector2 (50, 50);
 						manaPotion = false;
 						itemsOnButton [itemIndex].gameObject.GetComponent<SlotButtonHandler> ().slotOccupied = false;

@@ -70,9 +70,12 @@ namespace IndianaBones
 
 		IEnumerator UpdateHealthBar()
 		{
+			healthBar.GetComponentInParent<Mask> ().enabled = false;
 			healthBar.SetActive (true);
 			healthBar.GetComponent<Slider> ().maxValue = levelsList[powerLevel].Life;
-			healthBar.transform.GetChild(2).GetComponent<Text>().text = vita.ToString();
+			healthBar.transform.GetChild(3).GetComponent<Text>().text = (vita.ToString() + "/" + levelsList[powerLevel].Life.ToString());
+			healthBar.transform.GetChild(1).GetComponent<Text>().text = ("Lv. " + powerLevel.ToString());
+			healthBar.transform.GetChild(4).GetChild(0).GetComponent<Image>().sprite = Resources.Load("Icons/Head_Canubi", typeof(Sprite)) as Sprite;
 			healthBar.GetComponent<Slider> ().value = vita;
 			yield return new WaitForSeconds (0.5f);
 			healthBar.SetActive (false);
@@ -224,46 +227,47 @@ namespace IndianaBones
             {
                 if (Player.Self.croce == 1)
                 {
-
-                    vita -= Player.Self.currentAttack;
-					StartCoroutine(UpdateHealthBar());
-
+					HandleDamageFromPlayer ();
                 }
             }
             if (coll.gameObject.name == "down")
             {
                 if (Player.Self.croce == 3)
                 {
-
-                    vita -= Player.Self.currentAttack;
-					StartCoroutine(UpdateHealthBar());
-
-
+					HandleDamageFromPlayer ();
                 }
             }
             if (coll.gameObject.name == "right")
             {
                 if (Player.Self.croce == 2)
                 {
-
-                    vita -= Player.Self.currentAttack;
-					StartCoroutine(UpdateHealthBar());
-
+					HandleDamageFromPlayer ();
                 }
             }
             if (coll.gameObject.name == "left")
             {
                 if (Player.Self.croce == 4)
                 {
-
-                    vita -= Player.Self.currentAttack;
-					StartCoroutine(UpdateHealthBar());
-
+					HandleDamageFromPlayer ();
                 }
             }
 
             
         }
+
+
+		public void HandleDamageFromPlayer () {
+
+			//Formula calcolo attacco Player
+			int randomX = Random.Range(1, 3);
+			int damage = (int)(Player.Self.currentAttack*randomX/2);
+			//Sottrae vita a questo nemico
+			vita -= damage;
+			Debug.Log("Questo nemico: " + this.gameObject.name + "-> subisce dal Player un totale danni di: " + damage);
+			StartCoroutine(UpdateHealthBar());
+
+		}
+
 
         public void OnCollisionEnter2D(Collision2D coll)
         {
@@ -297,7 +301,7 @@ namespace IndianaBones
         {
             //Formula calcolo attacco Canubi
 			int randomX = Random.Range(1, 3);
-			int damage = (int)(attackPower*randomX);
+			int damage = (int)(attackPower*randomX/2);
 			//Sottrae vita al player
 			Player.Self.currentLife -= damage;
 			Debug.Log("Attacco di: " + this.gameObject.name + "-> toglie al Player: " + damage);
@@ -324,7 +328,7 @@ namespace IndianaBones
 
         void Update()
         {
-            if (vita > 0 && gameObject.GetComponent<TurnHandler>().itsMyTurn && onMove == false)
+			if (vita > 0 && gameObject.GetComponent<TurnHandler>().itsMyTurn && onMove == false)
             {
                 //Debug.Log("Cambio turno");
                 //GameController.Self.PassTurn();
@@ -347,7 +351,7 @@ namespace IndianaBones
             }
 
 
-            if (GetComponent<Renderer>().isVisible)
+			if (GetComponent<Renderer>().isVisible && rangeActive)
             {
                 if (!GameController.Self.charactersList.Contains(this.gameObject))
                 {

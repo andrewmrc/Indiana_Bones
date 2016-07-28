@@ -12,7 +12,7 @@ namespace IndianaBones
 
         bool seen = false;
         
-        public int attacco = 1;
+        public int attackPower = 1;
         public int vita = 1;
         
         public bool attivo = false;
@@ -39,7 +39,7 @@ namespace IndianaBones
         void Start()
         {
             vita = levelsList[powerLevel].Life;
-            attacco = levelsList[powerLevel].Attack;
+			attackPower = levelsList[powerLevel].Attack;
 
             elementi = FindObjectOfType<Grid>();
 
@@ -66,14 +66,18 @@ namespace IndianaBones
 
 		IEnumerator UpdateHealthBar()
 		{
+			healthBar.GetComponentInParent<Mask> ().enabled = false;
 			healthBar.SetActive (true);
 			healthBar.GetComponent<Slider> ().maxValue = levelsList[powerLevel].Life;
-			healthBar.transform.GetChild(2).GetComponent<Text>().text = vita.ToString();
+			healthBar.transform.GetChild(3).GetComponent<Text>().text = (vita.ToString() + "/" + levelsList[powerLevel].Life.ToString());
+			healthBar.transform.GetChild(1).GetComponent<Text>().text = ("Lv. " + powerLevel.ToString());
+			healthBar.transform.GetChild(4).GetChild(0).GetComponent<Image>().sprite = Resources.Load("Icons/Head_Cammello", typeof(Sprite)) as Sprite;
 			healthBar.GetComponent<Slider> ().value = vita;
 			yield return new WaitForSeconds (0.5f);
 			healthBar.SetActive (false);
 
 		}
+
 
         public void OnCollisionEnter2D(Collision2D coll)
         {
@@ -97,19 +101,21 @@ namespace IndianaBones
 
     
 
-        public void AttackHandler()
-        {
-            //Formula calcolo attacco 
-            //il risultato si sottrae alla vita del player
+		public void AttackHandler()
+		{
+			//Formula calcolo attacco Canubi
+			int randomX = Random.Range(1, 3);
+			int damage = (int)(attackPower*randomX/2);
+			//Sottrae vita al player
+			Player.Self.currentLife -= damage;
+			Debug.Log("Attacco di: " + this.gameObject.name + "-> toglie al Player: " + damage);
+			Player.Self.gameObject.GetComponent<SpriteRenderer> ().color = new Color32 (255, 0, 0, 255);
+			StartCoroutine (ResetPlayerColor ());
+			//Passa il turno
+			GameController.Self.PassTurn();
+			StartCoroutine (ResetMyColor ());
 
-            int damage = levelsList[powerLevel].Attack;
-            Player.Self.currentLife -= damage;
-            Debug.Log("attackPower di: " + this.gameObject.name + "-> toglie al Player: " + damage);
-            Player.Self.gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 0, 0, 255);
-            StartCoroutine(ResetPlayerColor());
-            GameController.Self.PassTurn();
-            StartCoroutine(ResetMyColor());
-        }
+		}
 
 
         IEnumerator ResetPlayerColor()
@@ -126,53 +132,54 @@ namespace IndianaBones
         }
 
 
-        public void OnTriggerEnter2D(Collider2D coll)
-        {
+		public void OnTriggerEnter2D(Collider2D coll) 
+		{
 
-            //Handle life subtraction
-            if (coll.gameObject.name == "up")
-            {
-                if (Player.Self.croce == 1)
-                {
+			//Handle life subtraction
+			if (coll.gameObject.name == "up")
+			{
+				if (Player.Self.croce == 1)
+				{
+					HandleDamageFromPlayer ();
+				}
+			}
+			if (coll.gameObject.name == "down")
+			{
+				if (Player.Self.croce == 3)
+				{
+					HandleDamageFromPlayer ();
+				}
+			}
+			if (coll.gameObject.name == "right")
+			{
+				if (Player.Self.croce == 2)
+				{
+					HandleDamageFromPlayer ();
+				}
+			}
+			if (coll.gameObject.name == "left")
+			{
+				if (Player.Self.croce == 4)
+				{
+					HandleDamageFromPlayer ();
+				}
+			}
 
-                    vita -= Player.Self.currentAttack;
-					StartCoroutine(UpdateHealthBar());
+
+		}
 
 
-                }
-            }
-            if (coll.gameObject.name == "down")
-            {
-                if (Player.Self.croce == 3)
-                {
+		public void HandleDamageFromPlayer () {
 
-                    vita -= Player.Self.currentAttack;
-					StartCoroutine(UpdateHealthBar());
+			//Formula calcolo attacco Player
+			int randomX = Random.Range(1, 3);
+			int damage = (int)(Player.Self.currentAttack*randomX/2);
+			//Sottrae vita a questo nemico
+			vita -= damage;
+			Debug.Log("Questo nemico: " + this.gameObject.name + "-> subisce dal Player un totale danni di: " + damage);
+			StartCoroutine(UpdateHealthBar());
 
-                }
-            }
-            if (coll.gameObject.name == "right")
-            {
-                if (Player.Self.croce == 2)
-                {
-
-                    vita -= Player.Self.currentAttack;
-					StartCoroutine(UpdateHealthBar());
-
-                }
-            }
-            if (coll.gameObject.name == "left")
-            {
-                if (Player.Self.croce == 4)
-                {
-
-                    vita -= Player.Self.currentAttack;
-					StartCoroutine(UpdateHealthBar());
-
-                }
-            }
-
-        }
+		}
 
 
         void Update()

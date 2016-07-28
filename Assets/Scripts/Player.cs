@@ -10,6 +10,18 @@ namespace IndianaBones
     public class Player : Character
     {
 
+		// Singleton Implementation
+		protected static Player _self;
+		public static Player Self
+
+		{
+			get
+			{
+				if (_self == null)
+					_self = FindObjectOfType(typeof(Player)) as Player;
+				return _self;
+			}
+		}
 
 
         bool canMove = true;
@@ -27,19 +39,9 @@ namespace IndianaBones
         public GameObject right;
         public GameObject left;
 
-        // Singleton Implementation
-        protected static Player _self;
-        public static Player Self
-
-        {
-            get
-            {
-                if (_self == null)
-                    _self = FindObjectOfType(typeof(Player)) as Player;
-                return _self;
-            }
-        }
-
+		GameObject healthBar;
+		GameObject manaBar;
+		GameObject expBar;      
 
         public int proiettili = 5;
         public GameObject dente;
@@ -49,8 +51,12 @@ namespace IndianaBones
         public float speed = 2;
         public Transform targetTr;
         private Animator animator;
-        public Text numDenti;
-        public Text valoreVita;
+        public Text nDenti;
+        public Text healthText;
+		public Text manaText;
+		public Text playerLevelText;
+		public Text expCollText;
+
         public GameObject child;
 		public Grid elementi;
 
@@ -108,15 +114,48 @@ namespace IndianaBones
            // xOld = xPosition;
             //yOld = yPosition;
 
-			valoreVita = GameObject.Find ("VitaText").GetComponent<Text>();
-			numDenti = GameObject.Find ("CounterDentiText").GetComponent<Text> ();
-
             elementi = FindObjectOfType<Grid>();
             this.transform.position = elementi.scacchiera[xPosition, yPosition].transform.position;
             targetTr = elementi.scacchiera[xPosition, yPosition].transform;
 			elementi.scacchiera[xPosition, yPosition].status = 4;
-
+			SetPlayerUI ();
         }
+
+
+		public void SetPlayerUI () {
+			//Prepara la UI
+			healthText = GameObject.Find ("VitaText").GetComponent<Text>();
+			manaText = GameObject.Find ("ManaText").GetComponent<Text>();
+			nDenti = GameObject.Find ("CounterDentiText").GetComponent<Text> ();
+			playerLevelText = GameObject.Find ("PlayerLevelText").GetComponent<Text> ();
+			healthBar = GameObject.FindGameObjectWithTag ("PlayerHealthBar");
+			manaBar = GameObject.FindGameObjectWithTag ("PlayerManaBar");
+			expBar = GameObject.FindGameObjectWithTag ("PlayerExpBar");
+			expCollText = expBar.transform.GetChild(1).GetComponent<Text> ();
+			expCollText.gameObject.SetActive (false);
+
+			healthBar.GetComponent<Slider> ().maxValue = startingLife;
+			healthBar.GetComponent<Slider> ().value = startingLife;
+
+			manaBar.GetComponent<Slider> ().maxValue = startingMana;
+			manaBar.GetComponent<Slider> ().value = startingMana;
+
+			expBar.GetComponent<Slider> ().maxValue = expToLevelUp;
+			expBar.GetComponent<Slider> ().value = expCollected;
+		}
+
+
+		public void UpdatePlayer () {
+			SetPlayerUI ();
+			xPosition = (int)this.transform.position.x;
+			yPosition = (int)this.transform.position.y;
+			healthText = GameObject.Find ("VitaText").GetComponent<Text>();
+			nDenti = GameObject.Find ("CounterDentiText").GetComponent<Text> ();
+			elementi = FindObjectOfType<Grid>();
+			targetTr = elementi.scacchiera[(int)GameController.Self.startPoint.transform.position.x, (int)GameController.Self.startPoint.transform.position.y].transform;
+			elementi.scacchiera[xPosition, yPosition].status = 4;
+			OldValue ();
+		}
 
 
 		public void ResetPlayerVar(){
@@ -126,25 +165,6 @@ namespace IndianaBones
 			isAttacking = false;
 			CrossActivationHandler ();
 		}
-
-
-		public void UpdatePlayer () {
-			xPosition = (int)this.transform.position.x;
-			yPosition = (int)this.transform.position.y;
-			valoreVita = GameObject.Find ("VitaText").GetComponent<Text>();
-			numDenti = GameObject.Find ("CounterDentiText").GetComponent<Text> ();
-			elementi = FindObjectOfType<Grid>();
-			targetTr = elementi.scacchiera[(int)GameController.Self.startPoint.transform.position.x, (int)GameController.Self.startPoint.transform.position.y].transform;
-			elementi.scacchiera[xPosition, yPosition].status = 4;
-			OldValue ();
-		}
-
-        public void controlloVita(int attack)
-        {
-            currentLife -= attack;
-            // GameController gamec = FindObjectOfType<GameController>();
-            // gamec.barraVita -= 0.20f;
-        }
 
 
         public void AttaccoADistanza()
@@ -245,12 +265,14 @@ namespace IndianaBones
 
         }
 
+
         public void PickUp()
         {
             //Grid elementi = FindObjectOfType<Grid>();
             if (elementi.scacchiera[xPosition, yPosition].status == -1)
                 proiettili += 5;
         }
+
 
         IEnumerator Camminata(float seconds)
         {
@@ -260,11 +282,23 @@ namespace IndianaBones
 
 
 		//Metodo chiamato dai nemici per incrementare gli exp del Player
-		public void IncreaseExp (int expToAdd){
+		public void IncreaseExp(int expToAdd){
 			expCollected += expToAdd;
+			StartCoroutine (ExpUIHandler (expToAdd));
 		}
 
 
+		//Gestisce la visibilità dei punti exp nella UI
+		public IEnumerator ExpUIHandler (int expValue){
+			Debug.Log ("UI EXP");
+			expCollText.gameObject.SetActive (true);
+			expCollText.text = ("  +"+ expValue +" exp");
+			yield return new WaitForSeconds (1f);
+			expCollText.gameObject.SetActive (false);
+		}
+
+
+		//Gestisce il level up del player
         public void LevelUp()
         {
             //Save the previous required exp
@@ -275,6 +309,7 @@ namespace IndianaBones
 
             //Increase Life each level up
 			startingLife++;
+			currentLife = startingLife;
 
             //Increase Attack if the player level is pair
             if (playerLevel % 2 == 0)
@@ -285,9 +320,24 @@ namespace IndianaBones
             //Increase Mana if the player level is odd
             if (playerLevel % 2 != 0)
             {
-				currentMana = currentMana + 3;
+				//currentMana = currentMana + 3;
+				startingMana = startingMana + 3;
+				currentMana = startingMana;
             }
 
+			//Update exp collected starting from zero
+			expCollected = expCollected - (int) expToPreviousLevelUp;
+			if (expCollected < 0) {
+				expCollected = 0;
+			}
+
+			//Aggiorna le barre con i nuovi valori max
+			healthBar.GetComponent<Slider> ().maxValue = startingLife;
+			manaBar.GetComponent<Slider> ().maxValue = currentMana;
+			expBar.GetComponent<Slider> ().maxValue = expToLevelUp;
+
+			//Ricarica i denti
+			proiettili = 5;
         }
 
 
@@ -345,7 +395,6 @@ namespace IndianaBones
 
 
         }
-
 
 
         void Update()
@@ -581,17 +630,7 @@ namespace IndianaBones
 
                 }
 
-                GameController gamec = FindObjectOfType<GameController>();
-
-                /* Transform figlio = transform.FindChild("lancio");
-
-                    if (Input.GetKeyDown(KeyCode.Keypad8))
-                    {
-                        figlio.transform.localEulerAngles = new Vector3(0, 0, 90);
-                        //figlio.transform.Translate(0, 90, 0);
-                        Debug.Log("sono qui");
-                    }*/
-
+                
                 if (Input.GetKeyDown(KeyCode.Z) && onOff == false && endMove == false)
                 {
                     onOff = true;
@@ -617,10 +656,18 @@ namespace IndianaBones
              
             }
 
-			//Aggiorna la UI: vita/munizioni
-			numDenti.text = (proiettili.ToString());
-			valoreVita.text = (currentLife.ToString());
 
+			//Aggiorna la UI: vita/mana/exp/munizioni
+			nDenti.text = (proiettili.ToString());
+			healthText.text = (currentLife.ToString() + "/" + startingLife.ToString());
+			manaText.text = (currentMana.ToString() + "/" + startingMana.ToString());
+			playerLevelText.text = ("Lv. " + playerLevel.ToString());
+			healthBar.GetComponent<Slider> ().value = currentLife;
+			manaBar.GetComponent<Slider> ().value = currentMana;
+			expBar.GetComponent<Slider> ().value = expCollected;
+
+
+			//Gestisce la morte del player
 			if (currentLife <= 0) {
 				currentLife = 0;
 				//Activate the death animation

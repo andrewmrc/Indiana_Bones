@@ -7,7 +7,7 @@ namespace IndianaBones
     
 
     public class Enemy : Character
-    {
+    {/*
         public int attacco = 1;
         public int vita = 1;
         public float speed = 2;
@@ -162,6 +162,6 @@ namespace IndianaBones
             }
         }
 
-
+*/
     }
 }
