@@ -41,7 +41,6 @@ namespace IndianaBones
         {         
             if (Player.Self.transform.position == myGrid.scacchiera[x, y].transform.position)
             {
-				
                 Player.Self.gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 0, 0, 255);
                 StartCoroutine(ResetPlayerColor());
 
@@ -54,6 +53,8 @@ namespace IndianaBones
 				Player.Self.SetPlayerCellStatus ();
 
 				myGrid.scacchiera[x,y].status = 1;
+				Player.Self.xPosition = Player.Self.xOld;
+				Player.Self.yPosition = Player.Self.yOld;
 
             }
         }
