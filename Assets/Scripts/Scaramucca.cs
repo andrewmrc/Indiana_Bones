@@ -75,7 +75,7 @@ namespace IndianaBones
 			healthBar.GetComponent<Slider> ().maxValue = levelsList[powerLevel].Life;
 			healthBar.transform.GetChild(3).GetComponent<Text>().text = (vita.ToString() + "/" + levelsList[powerLevel].Life.ToString());
 			healthBar.transform.GetChild(1).GetComponent<Text>().text = ("Lv. " + powerLevel.ToString());
-			healthBar.transform.GetChild(4).GetChild(0).GetComponent<Image>().sprite = Resources.Load("Icons/Head_Scaramucca", typeof(Sprite)) as Sprite;
+			healthBar.transform.GetChild(4).GetChild(0).GetComponent<Image>().sprite = Resources.Load("EnemyIcons/Head_Scaramucca", typeof(Sprite)) as Sprite;
 			healthBar.GetComponent<Slider> ().value = vita;
 			yield return new WaitForSeconds (0.5f);
 			healthBar.SetActive (false);
@@ -175,13 +175,13 @@ namespace IndianaBones
 
             if (RangeInterno > 0)
             {
-				if (elementi.scacchiera [xPosition + 1, yPosition].status < 2) {
+				if (elementi.scacchiera [xPosition + 1, yPosition].status < 1) {
 					elementi.scacchiera [xPosition + 1, yPosition].status = 3;
 					xPosition += 1;
 					targetTr = elementi.scacchiera [xPosition, yPosition].transform;
 					RangeInterno--;
 					RangeOld++;
-				} else if (elementi.scacchiera [xPosition - 1, yPosition].status < 2) {
+				} else if (elementi.scacchiera [xPosition - 1, yPosition].status < 1) {
 					elementi.scacchiera [xPosition - 1, yPosition].status = 3;
 					xPosition -= 1;
 					targetTr = elementi.scacchiera [xPosition, yPosition].transform;
@@ -193,7 +193,7 @@ namespace IndianaBones
             }
             else if (RangeInterno <= 0)
             {
-                if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
+                if (elementi.scacchiera[xPosition - 1, yPosition].status < 1)
                 {
                     elementi.scacchiera[xPosition - 1, yPosition].status = 3;
                     xPosition -= 1;
@@ -206,7 +206,7 @@ namespace IndianaBones
 
                     }
 
-				} else if (elementi.scacchiera [xPosition + 1, yPosition].status < 2) {
+				} else if (elementi.scacchiera [xPosition + 1, yPosition].status < 1) {
 					elementi.scacchiera [xPosition + 1, yPosition].status = 3;
 					xPosition += 1;
 					targetTr = elementi.scacchiera [xPosition, yPosition].transform;
@@ -229,13 +229,13 @@ namespace IndianaBones
 
             if ((RangeInterno > 0))
             {
-				if (elementi.scacchiera [xPosition, yPosition + 1].status < 2) {
+				if (elementi.scacchiera [xPosition, yPosition + 1].status < 1) {
 					elementi.scacchiera [xPosition, yPosition + 1].status = 3;
 					yPosition += 1;
 					targetTr = elementi.scacchiera [xPosition, yPosition].transform;
 					RangeInterno--;
 					RangeOld++;
-				} else if (elementi.scacchiera [xPosition, yPosition - 1].status < 2) {
+				} else if (elementi.scacchiera [xPosition, yPosition - 1].status < 1) {
 					elementi.scacchiera [xPosition, yPosition - 1].status = 3;
 					yPosition -= 1;
 					targetTr = elementi.scacchiera [xPosition, yPosition].transform;
@@ -247,7 +247,7 @@ namespace IndianaBones
             }
             else if ((RangeInterno <= 0))
             {
-				if (elementi.scacchiera [xPosition, yPosition - 1].status < 2) {
+				if (elementi.scacchiera [xPosition, yPosition - 1].status < 1) {
 					elementi.scacchiera [xPosition, yPosition - 1].status = 3;
 					yPosition -= 1;
 					targetTr = elementi.scacchiera [xPosition, yPosition].transform;
@@ -257,7 +257,7 @@ namespace IndianaBones
 						RangeOld = 0;
 
 					}
-				} else if (elementi.scacchiera [xPosition, yPosition + 1].status < 2) {
+				} else if (elementi.scacchiera [xPosition, yPosition + 1].status < 1) {
 					elementi.scacchiera [xPosition, yPosition + 1].status = 3;
 					yPosition += 1;
 					targetTr = elementi.scacchiera [xPosition, yPosition].transform;

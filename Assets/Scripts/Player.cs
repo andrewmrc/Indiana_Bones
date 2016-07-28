@@ -258,13 +258,15 @@ namespace IndianaBones
 
         public void OldValue()
         {
-            //Grid elementi = FindObjectOfType<Grid>();
-            xOld = xPosition;
+			xOld = xPosition;
             yOld = yPosition;
-            elementi.scacchiera[xOld, yOld].status = 0;
-
+			elementi.scacchiera[x, y].status = 0;
         }
 
+
+		public void SetPlayerCellStatus (){
+			elementi.scacchiera[xOld, yOld].status = 4;
+		}
 
         public void PickUp()
         {
@@ -623,12 +625,12 @@ namespace IndianaBones
 					}
                 }
 
-
+				/*
                 if (movimento == 1) //movimento la utilizzeranno solo i nemici per i loro turni
                 {
                     elementi.scacchiera[xOld, yOld].status = 0;
 
-                }
+                }*/
 
                 
                 if (Input.GetKeyDown(KeyCode.Z) && onOff == false && endMove == false)

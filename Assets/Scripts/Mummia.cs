@@ -277,7 +277,7 @@ namespace IndianaBones
                         if ((Player.Self.xPosition != xPosition) && (Player.Self.yPosition != yPosition))
                         {
                             if (Player.Self.xPosition < xPosition)
-                                if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
+                                if (elementi.scacchiera[xPosition - 1, yPosition].status < 1)
                                 {
                                     elementi.scacchiera[xPosition - 1, yPosition].status = 3;
 
@@ -286,14 +286,14 @@ namespace IndianaBones
 
                                     xPosition -= 1;
                                 }
-                                else if (elementi.scacchiera[xPosition, yPosition + 1].status < 2)
+                                else if (elementi.scacchiera[xPosition, yPosition + 1].status < 1)
                                 {
                                     elementi.scacchiera[xPosition, yPosition + 1].status = 3;
                                     yPosition += 1;
                                 }
                             if (Player.Self.xPosition > xPosition)
 
-                                if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
+                                if (elementi.scacchiera[xPosition + 1, yPosition].status < 1)
                                 {
                                     elementi.scacchiera[xPosition + 1, yPosition].status = 3;
 
@@ -302,7 +302,7 @@ namespace IndianaBones
 
                                     xPosition += 1;
                                 }
-                                else if (elementi.scacchiera[xPosition, yPosition - 1].status < 2)
+                                else if (elementi.scacchiera[xPosition, yPosition - 1].status < 1)
                                 {
                                     elementi.scacchiera[xPosition, yPosition - 1].status = 3;
                                     yPosition -= 1;
@@ -311,7 +311,7 @@ namespace IndianaBones
                         else if (Player.Self.yPosition == yPosition)
                         {
 							if (Player.Self.xPosition < xPosition)
-                                if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
+                                if (elementi.scacchiera[xPosition - 1, yPosition].status < 1)
                                 {
                                     elementi.scacchiera[xPosition - 1, yPosition].status = 3;
 
@@ -320,14 +320,14 @@ namespace IndianaBones
 
                                     xPosition -= 1;
                                 }
-                                else if (elementi.scacchiera[xPosition, yPosition + 1].status < 2)
+                                else if (elementi.scacchiera[xPosition, yPosition + 1].status < 1)
                                 {
                                     elementi.scacchiera[xPosition, yPosition + 1].status = 3;
                                     yPosition += 1;
                                 }
 							if (Player.Self.xPosition > xPosition)
 
-                                if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
+                                if (elementi.scacchiera[xPosition + 1, yPosition].status < 1)
                                 {
                                     elementi.scacchiera[xPosition + 1, yPosition].status = 3;
 
@@ -336,7 +336,7 @@ namespace IndianaBones
 
                                     xPosition += 1;
                                 }
-                                else if (elementi.scacchiera[xPosition, yPosition - 1].status < 2)
+                                else if (elementi.scacchiera[xPosition, yPosition - 1].status < 1)
                                 {
                                     elementi.scacchiera[xPosition, yPosition - 1].status = 3;
                                     yPosition -= 1;
@@ -347,12 +347,12 @@ namespace IndianaBones
                         else if (Player.Self.xPosition == xPosition)
                         {
                             if (Player.Self.yPosition < yPosition)
-                                if (elementi.scacchiera[xPosition, yPosition - 1].status < 2)
+                                if (elementi.scacchiera[xPosition, yPosition - 1].status < 1)
                                 {
                                     elementi.scacchiera[xPosition, yPosition - 1].status = 3;
                                     yPosition -= 1;
                                 }
-                                else if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
+                                else if (elementi.scacchiera[xPosition + 1, yPosition].status < 1)
                                 {
                                     elementi.scacchiera[xPosition + 1, yPosition].status = 3;
 
@@ -363,12 +363,12 @@ namespace IndianaBones
                                 }
                             if (Player.Self.yPosition > yPosition)
 
-                                if (elementi.scacchiera[xPosition, yPosition + 1].status < 2)
+                                if (elementi.scacchiera[xPosition, yPosition + 1].status < 1)
                                 {
                                     elementi.scacchiera[xPosition, yPosition + 1].status = 3;
                                     yPosition += 1;
                                 }
-                                else if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
+                                else if (elementi.scacchiera[xPosition - 1, yPosition].status < 1)
                                 {
                                     elementi.scacchiera[xPosition - 1, yPosition].status = 3;
 

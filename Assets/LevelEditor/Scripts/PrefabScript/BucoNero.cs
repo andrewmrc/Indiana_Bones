@@ -24,6 +24,8 @@ namespace IndianaBones
 
             myGrid = FindObjectOfType<Grid>();
             this.transform.position = myGrid.scacchiera[x, y].transform.position;
+			myGrid.scacchiera[x, y].status = 1;
+
         }
 
 
@@ -39,6 +41,7 @@ namespace IndianaBones
         {         
             if (Player.Self.transform.position == myGrid.scacchiera[x, y].transform.position)
             {
+				
                 Player.Self.gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 0, 0, 255);
                 StartCoroutine(ResetPlayerColor());
 
@@ -48,10 +51,9 @@ namespace IndianaBones
 
                 Player.Self.targetTr = myGrid.scacchiera[Player.Self.xOld, Player.Self.yOld].transform;
 
-                Player.Self.xPosition = Player.Self.xOld;
-                Player.Self.yPosition = Player.Self.yOld;
-				myGrid.scacchiera[Player.Self.xPosition, Player.Self.yPosition].status = 4;
-				myGrid.scacchiera[x,y].status = 0;
+				Player.Self.SetPlayerCellStatus ();
+
+				myGrid.scacchiera[x,y].status = 1;
 
             }
         }
