@@ -27,6 +27,7 @@ namespace IndianaBones
         private Grid elementi;
 		private Animator animator;
 		GameObject healthBar;
+        bool isDestroyed;
 
         [Header("Level and Stats")]
         [Space(10)]
@@ -34,8 +35,7 @@ namespace IndianaBones
         public int powerLevel;
         public List<EnemyLevels> levelsList = new List<EnemyLevels>();
 
-        public AudioClip SFX_Attack;
-        public AudioClip SFX_Death;
+        
         AudioSource audioScaramucca;
 
         void Awake()
@@ -282,9 +282,7 @@ namespace IndianaBones
 
 		public void AttackHandler()
 		{
-            audioScaramucca.Stop();
-            audioScaramucca.clip = SFX_Attack;
-            audioScaramucca.Play();
+            
 
             //Formula calcolo attackPower Scaramucca
             int randomX = Random.Range(1, 3);
@@ -351,7 +349,14 @@ namespace IndianaBones
 			//Controlliamo se la vita va a zero e chiamiamo il metodo che gestisce questo evento
 			if (vita <= 0)
 			{
-                
+                if (isDestroyed == false)
+                {
+                    isDestroyed = true;
+                    StartCoroutine(PlayDeath());
+                }
+
+
+
                 GameController.Self.charactersList.Remove(this.gameObject);
 				//Settiamo lo status cella a 10 così il player non può ataccare nè camminare su questa casella fino a che questo nemico non sparisce dalla scena
 				elementi.scacchiera[xPosition, yPosition].status = 10;
@@ -373,21 +378,24 @@ namespace IndianaBones
 
             }
 
-			/*
-            if (attivo == true)
-            {
-
-                MovimentoScaramucca();
-                attivo = false;
-            }*/
+			
         }
 
 
-		IEnumerator HandleDeath(){
+        IEnumerator PlayDeath()
+        {
 
             audioScaramucca.Stop();
-            audioScaramucca.clip = SFX_Death;
+            audioScaramucca.clip = AudioContainer.Self.SFX_Scaramucca_Death;
             audioScaramucca.Play();
+            yield return new WaitForSeconds(2.7f);
+            audioScaramucca.Stop();
+        }
+
+
+        IEnumerator HandleDeath(){
+
+           
 
             //Activate the death animation
             animator.SetFloat ("Life", vita);

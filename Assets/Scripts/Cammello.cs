@@ -24,6 +24,7 @@ namespace IndianaBones
 		private Animator animator;
 
 		GameObject healthBar;
+        bool isDestroyed;
 
         [Header("Level and Stats")]
         [Space(10)]
@@ -110,7 +111,7 @@ namespace IndianaBones
 		public void AttackHandler()
 		{
             
-            audioCamel.clip = SFX_Attack;
+            audioCamel.clip = AudioContainer.Self.SFX_Camel_Attack;
             audioCamel.Play();
 
             //Formula calcolo attacco Canubi
@@ -237,7 +238,14 @@ namespace IndianaBones
 			//Controlliamo se la vita va a zero e chiamiamo il metodo che gestisce questo evento
 			if (vita <= 0)
 			{
-				Debug.Log ("Questo Cammello è sconfitto");
+                if (isDestroyed == false)
+                {
+                    isDestroyed = true;
+                    StartCoroutine(PlayDeath());
+                }
+
+
+                Debug.Log ("Questo Cammello è sconfitto");
 				GameController.Self.charactersList.Remove(this.gameObject);
 				//Settiamo lo status cella a 10 così il player non può ataccare nè camminare su questa casella fino a che questo nemico non sparisce dalla scena
 				elementi.scacchiera[xPosition, yPosition].status = 10;
@@ -246,13 +254,21 @@ namespace IndianaBones
             
         }
 
+        IEnumerator PlayDeath()
+        {
 
-		IEnumerator HandleDeath()
-		{
             audioCamel.Stop();
-            audioCamel.clip = SFX_Death;
+            audioCamel.clip = AudioContainer.Self.SFX_Camel_Death;
             audioCamel.Play();
+            yield return new WaitForSeconds(2.7f);
+            audioCamel.Stop();
+        }
 
+
+
+        IEnumerator HandleDeath()
+		{
+            
             //Activate the death animation
             animator.SetFloat("Life", vita);
 			if (gameObject.GetComponent<TurnHandler>().itsMyTurn)

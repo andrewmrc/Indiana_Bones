@@ -391,13 +391,14 @@ namespace IndianaBones
             //Controlliamo se la vita va a zero e chiamiamo il metodo che gestisce questo evento
             if (vita <= 0 )
             {
-                if (isDestroyed == false)
-                {
-                    isDestroyed = true;
-                    audioCanubi.Stop();
-                    audioCanubi.clip = AudioContainer.Self.SFX_Canubi_Death;
-                    audioCanubi.Play();
-                }
+                
+                    if (isDestroyed == false)
+                    {
+                        isDestroyed = true;
+                        StartCoroutine(PlayDeath());
+                    }
+
+                
 
                 GameController.Self.charactersList.Remove(this.gameObject);
 				//Settiamo lo status cella a 10 così il player non può ataccare nè camminare su questa casella fino a che questo nemico non sparisce dalla scena
@@ -434,9 +435,18 @@ namespace IndianaBones
 
         }
 
-        
+        IEnumerator PlayDeath()
+        {
 
-		IEnumerator HandleDeath(){
+            audioCanubi.Stop();
+            audioCanubi.clip = AudioContainer.Self.SFX_Canubi_Death;
+            audioCanubi.Play();
+            yield return new WaitForSeconds(2.5f);
+            audioCanubi.Stop();
+        }
+
+
+        IEnumerator HandleDeath(){
 
            
 

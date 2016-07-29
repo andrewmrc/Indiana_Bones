@@ -21,6 +21,11 @@ public class AudioContainer : MonoBehaviour {
     public AudioClip SFX_Canubi_Death;
     public AudioClip SFX_Cat_Attack;
     public AudioClip SFX_Cat_Death;
+    public AudioClip SFX_Camel_Attack;
+    public AudioClip SFX_Camel_Death;
+    public AudioClip SFX_Scaramucca_Attack;
+    public AudioClip SFX_Scaramucca_Death;
+
 
 
     // Use this for initialization
