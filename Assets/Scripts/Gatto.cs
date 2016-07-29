@@ -33,6 +33,8 @@ namespace IndianaBones
 
         bool isDestroyed;
 
+        SpriteRenderer feedback;
+
         void Awake()
         {
             gameObject.tag = "Enemy";
@@ -57,6 +59,8 @@ namespace IndianaBones
 			animator.SetFloat ("Life", vita);
 
             audioCat = GetComponent<AudioSource>();
+
+            feedback = this.transform.GetChild(0).GetComponent<SpriteRenderer>();
 
         }
 
@@ -106,7 +110,8 @@ namespace IndianaBones
             int damage = levelsList[powerLevel].Attack;
             Player.Self.currentLife -= damage;
             Debug.Log("attackPower di: " + this.gameObject.name + "-> toglie al Player: " + damage);
-            Player.Self.gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 0, 0, 255);
+            this.transform.GetChild(0).transform.position = Player.Self.transform.position;
+            feedback.enabled = true;
             StartCoroutine(ResetPlayerColor());
             GameController.Self.PassTurn();
             StartCoroutine(ResetMyColor());
@@ -116,7 +121,7 @@ namespace IndianaBones
         IEnumerator ResetPlayerColor()
         {
             yield return new WaitForSeconds(0.3f);
-            Player.Self.gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+            feedback.enabled = false;
         }
 
 

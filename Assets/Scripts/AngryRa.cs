@@ -8,7 +8,7 @@ namespace IndianaBones
 {
     
 
-    public class Canubi : MonoBehaviour
+    public class AngryRa : MonoBehaviour
     {
         bool seen = false;
         public int xPosition;
@@ -31,7 +31,7 @@ namespace IndianaBones
         SpriteRenderer feedback;
 
 
-        AudioSource audioCanubi;
+        AudioSource audioAngryRa;
         
 		GameObject healthBar;
 
@@ -64,7 +64,7 @@ namespace IndianaBones
 			animator = GetComponent<Animator>();
 			animator.SetFloat ("Life", vita);
 
-            audioCanubi = GetComponent<AudioSource>();
+            audioAngryRa = GetComponent<AudioSource>();
 
             feedback = this.transform.GetChild(0).GetComponent<SpriteRenderer>();
 
@@ -96,8 +96,7 @@ namespace IndianaBones
         {
 
             OldValue();
-            //GameController gamec = FindObjectOfType<GameController>();
-            //Canubi canubiEnemy = FindObjectOfType<Canubi>();
+            
             if (rangeActive == true)
             {
                 Debug.Log("range");
@@ -321,9 +320,9 @@ namespace IndianaBones
 
         public void AttackHandler()
         {
-            audioCanubi.clip = AudioContainer.Self.SFX_Canubi_Attack;
-            audioCanubi.Play();
-            //Formula calcolo attacco Canubi
+            audioAngryRa.clip = AudioContainer.Self.SFX_AngryRa_Attack;
+            audioAngryRa.Play();
+            //Formula calcolo attacco AngryRa
 			int randomX = Random.Range(1, 3);
 			int damage = (int)(attackPower*randomX/2);
 			//Sottrae vita al player
@@ -437,16 +436,7 @@ namespace IndianaBones
         }
 
 
-        /*
-        IEnumerator PlayDeath()
-        {
-
-            audioCanubi.Stop();
-            audioCanubi.clip = AudioContainer.Self.SFX_Canubi_Death;
-            audioCanubi.Play();
-            yield return new WaitForSeconds(2.5f);
-            audioCanubi.Stop();
-        }*/
+        
 
 
         IEnumerator HandleDeath(){
@@ -458,9 +448,9 @@ namespace IndianaBones
 				GameController.Self.PassTurn ();
 			}
 
-            audioCanubi.Stop();
-            audioCanubi.clip = AudioContainer.Self.SFX_Canubi_Death;
-            audioCanubi.Play();
+            audioAngryRa.Stop();
+            audioAngryRa.clip = AudioContainer.Self.SFX_AngryRa_Death;
+            audioAngryRa.Play();
 
             yield return new WaitForEndOfFrame();
 			//print("current clip length = " + animator.GetCurrentAnimatorStateInfo(0).length);
@@ -473,7 +463,7 @@ namespace IndianaBones
 			elementi.scacchiera[xPosition, yPosition].status = 0;
 
 			//Chiama la funzione di drop item
-			DropHandler.Self.DropItems("Canubi", this.transform.position.x, this.transform.position.y);
+			DropHandler.Self.DropItems("AngryRa", this.transform.position.x, this.transform.position.y);
 		}
 
     }
