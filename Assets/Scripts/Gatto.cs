@@ -23,6 +23,8 @@ namespace IndianaBones
 
 		private Animator animator;
 
+        GameObject healthBar;
+
         [Header("Level and Stats")]
         [Space(10)]
 
@@ -54,8 +56,10 @@ namespace IndianaBones
 
             elementi.scacchiera[xPosition, yPosition].status = 3;
 
-			//Get the animator component and set the parameter equal to the initial life value
-			animator = GetComponent<Animator>();
+            healthBar = GameObject.FindGameObjectWithTag("EnemyHealthBar");
+
+            //Get the animator component and set the parameter equal to the initial life value
+            animator = GetComponent<Animator>();
 			animator.SetFloat ("Life", vita);
 
             audioCat = GetComponent<AudioSource>();
@@ -69,13 +73,21 @@ namespace IndianaBones
             return (Mathf.Abs((int)Player.Self.transform.position.x - (int)this.transform.position.x) + Mathf.Abs((int)Player.Self.transform.position.y - (int)this.transform.position.y));
         }
 
-
-        public void AggiornamentoBarraVitaNemico()
+        IEnumerator UpdateHealthBar()
         {
-           // EnemyScrollBar elementi = FindObjectOfType<EnemyScrollBar>();
-           // elementi.EnemyLifeBar.text = "Gatto : " + vita.ToString();
-        }
+            healthBar.GetComponentInParent<Mask>().enabled = false;
+            healthBar.SetActive(true);
+            healthBar.GetComponent<Slider>().maxValue = levelsList[powerLevel].Life;
+            healthBar.transform.GetChild(3).GetComponent<Text>().text = (vita.ToString() + "/" + levelsList[powerLevel].Life.ToString());
+            healthBar.transform.GetChild(1).GetComponent<Text>().text = ("Lv. " + powerLevel.ToString());
+            healthBar.transform.GetChild(4).GetChild(0).GetComponent<Image>().sprite = Resources.Load("EnemyIcons/Head_Gatto", typeof(Sprite)) as Sprite;
+            healthBar.GetComponent<Slider>().value = vita;
+            yield return new WaitForSeconds(0.7f);
+            healthBar.SetActive(false);
+            feedback.enabled = false;
 
+        }
+        
         public void OnCollisionEnter2D(Collision2D coll)
         {
 
@@ -83,14 +95,21 @@ namespace IndianaBones
             if (coll.gameObject.name == "dente(Clone)")
             {
 
+                feedback.enabled = true;
                 vita -= Player.Self.currentAttack;
 
-                AggiornamentoBarraVitaNemico();
+                StartCoroutine(UpdateHealthBar());
 
                 Destroy(coll.gameObject);
 
+            }
 
+            else if (coll.gameObject.tag == "Molotov")
+            {
+                feedback.enabled = true;
+                vita -= 4;
 
+                StartCoroutine(UpdateHealthBar());
 
             }
 
@@ -110,8 +129,7 @@ namespace IndianaBones
             int damage = levelsList[powerLevel].Attack;
             Player.Self.currentLife -= damage;
             Debug.Log("attackPower di: " + this.gameObject.name + "-> toglie al Player: " + damage);
-            this.transform.GetChild(0).transform.position = Player.Self.transform.position;
-            feedback.enabled = true;
+            Player.Self.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
             StartCoroutine(ResetPlayerColor());
             GameController.Self.PassTurn();
             StartCoroutine(ResetMyColor());
@@ -121,7 +139,7 @@ namespace IndianaBones
         IEnumerator ResetPlayerColor()
         {
             yield return new WaitForSeconds(0.3f);
-            feedback.enabled = false;
+            Player.Self.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         }
 
 
@@ -141,8 +159,7 @@ namespace IndianaBones
                 if (Player.Self.croce == 1)
                 {
 
-                    vita -= Player.Self.currentAttack;
-                    AggiornamentoBarraVitaNemico();
+                    HandleDamageFromPlayer();
 
                 }
             }
@@ -151,8 +168,7 @@ namespace IndianaBones
                 if (Player.Self.croce == 3)
                 {
 
-                    vita -= Player.Self.currentAttack;
-                    AggiornamentoBarraVitaNemico();
+                    HandleDamageFromPlayer();
 
                 }
             }
@@ -161,8 +177,7 @@ namespace IndianaBones
                 if (Player.Self.croce == 2)
                 {
 
-                    vita -= Player.Self.currentAttack;
-                    AggiornamentoBarraVitaNemico();
+                    HandleDamageFromPlayer();
 
                 }
             }
@@ -171,8 +186,7 @@ namespace IndianaBones
                 if (Player.Self.croce == 4)
                 {
 
-                    vita -= Player.Self.currentAttack;
-                    AggiornamentoBarraVitaNemico();
+                    HandleDamageFromPlayer();
 
                 }
             }
@@ -239,22 +253,22 @@ namespace IndianaBones
 
         }
 
-
-      /*  IEnumerator PlayDeath()
+        public void HandleDamageFromPlayer()
         {
+            //Attiva il proprio feedback
+            feedback.enabled = true;
 
-            audioCat.Stop();
-            audioCat.clip = AudioContainer.Self.SFX_Cat_Death;
-            audioCat.Play();
-            yield return new WaitForSeconds(2f);
-            audioCat.Stop();
-        }*/
+            //Formula calcolo attacco Player
+            int randomX = Random.Range(1, 3);
+            int damage = (int)(Player.Self.currentAttack * randomX / 2);
+            //Sottrae vita a questo nemico
+            vita -= damage;
+            Debug.Log("Questo nemico: " + this.gameObject.name + "-> subisce dal Player un totale danni di: " + damage);
+            StartCoroutine(UpdateHealthBar());
 
+        }
 
-
-
-
-            IEnumerator HandleDeath()
+        IEnumerator HandleDeath()
 		{
             
             //Activate the death animation

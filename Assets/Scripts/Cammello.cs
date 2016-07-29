@@ -102,10 +102,17 @@ namespace IndianaBones
 
                 Destroy(coll.gameObject);
 
+            }
 
+            else if (coll.gameObject.tag == "Molotov")
+            {
+                feedback.enabled = true;
+                vita -= 4;
 
+                StartCoroutine(UpdateHealthBar());
 
             }
+
 
         }
 

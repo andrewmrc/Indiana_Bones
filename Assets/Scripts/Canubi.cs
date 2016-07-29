@@ -88,8 +88,9 @@ namespace IndianaBones
 			healthBar.GetComponent<Slider> ().value = vita;
 			yield return new WaitForSeconds (0.7f);
 			healthBar.SetActive (false);
+            feedback.enabled = false;
 
-		}
+        }
 
 
         public void Posizione()
@@ -278,10 +279,11 @@ namespace IndianaBones
 
 
 		public void HandleDamageFromPlayer () {
+            //Attiva il proprio feedback
+            feedback.enabled = true;
 
-			
             //Formula calcolo attacco Player
-			int randomX = Random.Range(1, 3);
+            int randomX = Random.Range(1, 3);
 			int damage = (int)(Player.Self.currentAttack*randomX/2);
 			//Sottrae vita a questo nemico
 			vita -= damage;
@@ -297,9 +299,17 @@ namespace IndianaBones
 
             if (coll.gameObject.name == "dente(Clone)")
             {
-
+                feedback.enabled = true;
                 vita -= Player.Self.currentAttack;
 				StartCoroutine(UpdateHealthBar());
+
+            }
+            else if (coll.gameObject.tag == "Molotov")
+            {
+                feedback.enabled = true;
+                vita -= 4;
+
+                StartCoroutine(UpdateHealthBar());
 
             }
 
@@ -329,10 +339,9 @@ namespace IndianaBones
 			//Sottrae vita al player
 			Player.Self.currentLife -= damage;
 			Debug.Log("Attacco di: " + this.gameObject.name + "-> toglie al Player: " + damage);
-            this.transform.GetChild(0).transform.position = Player.Self.transform.position;
-            feedback.enabled = true;
-            
-			StartCoroutine (ResetPlayerColor ());
+            Player.Self.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+
+            StartCoroutine (ResetPlayerColor ());
 			//Passa il turno
             GameController.Self.PassTurn();
 			StartCoroutine (ResetMyColor ());
@@ -342,7 +351,7 @@ namespace IndianaBones
 
 		IEnumerator ResetPlayerColor (){
 			yield return new WaitForSeconds (0.3f);
-            feedback.enabled = false;
+            Player.Self.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         }
 
 		IEnumerator ResetMyColor (){
@@ -435,19 +444,6 @@ namespace IndianaBones
             }
 
         }
-
-
-        /*
-        IEnumerator PlayDeath()
-        {
-
-            audioCanubi.Stop();
-            audioCanubi.clip = AudioContainer.Self.SFX_Canubi_Death;
-            audioCanubi.Play();
-            yield return new WaitForSeconds(2.5f);
-            audioCanubi.Stop();
-        }*/
-
 
         IEnumerator HandleDeath(){
 

@@ -67,6 +67,15 @@ namespace IndianaBones
 
 				Destroy(this.gameObject);
             }
+            else if (coll.gameObject.tag == "Enemy")
+            {
+
+                
+                GameController.Self.PassTurn();
+
+                Destroy(this.gameObject);
+            }
+
 
         }
 

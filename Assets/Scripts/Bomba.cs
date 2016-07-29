@@ -14,6 +14,11 @@ namespace IndianaBones
         float forza = 0.1f;
         bool seen = false;
 
+        void Awake()
+        {
+            gameObject.tag = "Molotov";
+        }
+
         void Start () {
 
             elementi = FindObjectOfType<Grid>();
