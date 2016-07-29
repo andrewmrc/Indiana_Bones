@@ -389,18 +389,16 @@ namespace IndianaBones
 
 
             //Controlliamo se la vita va a zero e chiamiamo il metodo che gestisce questo evento
-			if (vita <= 0 && isDestroyed == false)
+			if (vita <= 0)
             {
-				isDestroyed = true;
 				GameController.Self.charactersList.Remove(this.gameObject);
+                if (isDestroyed == false) {
+                    isDestroyed = true;
 
-                   
-                //StartCoroutine(PlayDeath());
-                
-
-				//Settiamo lo status cella a 10 così il player non può ataccare nè camminare su questa casella fino a che questo nemico non sparisce dalla scena
-				elementi.scacchiera[xPosition, yPosition].status = 10;
-				StartCoroutine (HandleDeath ());
+                    //Settiamo lo status cella a 10 così il player non può ataccare nè camminare su questa casella fino a che questo nemico non sparisce dalla scena
+                    elementi.scacchiera[xPosition, yPosition].status = 10;
+				    StartCoroutine (HandleDeath ());
+                }
             }
 
 
@@ -432,6 +430,8 @@ namespace IndianaBones
 
         }
 
+
+        /*
         IEnumerator PlayDeath()
         {
 
@@ -440,21 +440,23 @@ namespace IndianaBones
             audioCanubi.Play();
             yield return new WaitForSeconds(2.5f);
             audioCanubi.Stop();
-        }
+        }*/
 
 
         IEnumerator HandleDeath(){
 
-			audioCanubi.Stop();
-			audioCanubi.clip = AudioContainer.Self.SFX_Canubi_Death;
-			audioCanubi.Play();
 
             //Activate the death animation
             animator.SetFloat ("Life", vita);
 			if (gameObject.GetComponent<TurnHandler> ().itsMyTurn) {
 				GameController.Self.PassTurn ();
 			}
-			yield return new WaitForEndOfFrame();
+
+            audioCanubi.Stop();
+            audioCanubi.clip = AudioContainer.Self.SFX_Canubi_Death;
+            audioCanubi.Play();
+
+            yield return new WaitForEndOfFrame();
 			//print("current clip length = " + animator.GetCurrentAnimatorStateInfo(0).length);
 			yield return new WaitForSeconds (1.3f);
 

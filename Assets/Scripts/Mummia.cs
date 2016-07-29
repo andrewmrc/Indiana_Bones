@@ -26,7 +26,10 @@ namespace IndianaBones
 		private Grid elementi;
 		private Animator animator;
 		bool isAttacking = false;
-       
+        bool isDestroyed;
+
+        AudioSource audioMummy;
+
         int prestabilito = 1;
        
         public int direzioneLancio = 0;
@@ -58,7 +61,8 @@ namespace IndianaBones
 
 			//Get the animator component and set the parameter equal to the initial life value
 			animator = GetComponent<Animator>();
-			//animator.SetFloat ("Life", vita);
+            //animator.SetFloat ("Life", vita);
+            audioMummy = GetComponent<AudioSource>();
 
         }
 
@@ -71,7 +75,10 @@ namespace IndianaBones
 
 		IEnumerator AttaccoADistanza()
         {
-			Debug.Log ("La mummia ha deciso di attaccare");
+            audioMummy.clip = AudioContainer.Self.SFX_Mummy_Attack;
+            audioMummy.Play();
+
+            Debug.Log ("La mummia ha deciso di attaccare");
 			isAttacking = true;
 			//Set true to the attack parameter of animation
 			animator.SetBool ("Attack", true);
@@ -557,10 +564,15 @@ namespace IndianaBones
             //Controlliamo se la vita va a zero e chiamiamo il metodo che gestisce questo evento
             if (vita <= 0)
             {
-				GameController.Self.charactersList.Remove(this.gameObject);
-				//Settiamo lo status cella a 10 così il player non può ataccare nè camminare su questa casella fino a che questo nemico non sparisce dalla scena
-				elementi.scacchiera[xPosition, yPosition].status = 10;
-				StartCoroutine (HandleDeath ());
+                GameController.Self.charactersList.Remove(this.gameObject);
+                if (isDestroyed == false)
+                {
+                    isDestroyed = true;
+
+                    //Settiamo lo status cella a 10 così il player non può ataccare nè camminare su questa casella fino a che questo nemico non sparisce dalla scena
+                    elementi.scacchiera[xPosition, yPosition].status = 10;
+                    StartCoroutine(HandleDeath());
+                }
             }
 
 
@@ -592,7 +604,12 @@ namespace IndianaBones
 			if (gameObject.GetComponent<TurnHandler> ().itsMyTurn) {
 				GameController.Self.PassTurn ();
 			}
-			yield return new WaitForEndOfFrame();
+
+            audioMummy.Stop();
+            audioMummy.clip = AudioContainer.Self.SFX_Mummy_Death;
+            audioMummy.Play();
+
+            yield return new WaitForEndOfFrame();
 			//print("current clip length = " + animator.GetCurrentAnimatorStateInfo(0).length);
 			yield return new WaitForSeconds (2.5f);
 

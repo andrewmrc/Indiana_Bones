@@ -15,6 +15,12 @@ namespace IndianaBones
 
         AudioSource audioVaso;
 
+        void Awake()
+        {
+            gameObject.tag = "Enemy";
+        }
+
+
         void Start()
         {
             elementi = FindObjectOfType<Grid>();
@@ -28,6 +34,27 @@ namespace IndianaBones
             
 
         }
+
+        public void OnCollisionEnter2D(Collision2D coll)
+        {
+
+
+            if (coll.gameObject.name == "dente(Clone)")
+            {
+
+                DannoPerDistruggerlo -= Player.Self.currentAttack;
+
+                
+
+                Destroy(coll.gameObject);
+
+
+
+
+            }
+
+        }
+
 
         public void OnTriggerEnter2D(Collider2D coll)
         {

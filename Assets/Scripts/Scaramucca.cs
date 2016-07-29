@@ -346,22 +346,19 @@ namespace IndianaBones
             }
 
 
-			//Controlliamo se la vita va a zero e chiamiamo il metodo che gestisce questo evento
-			if (vita <= 0)
-			{
+            //Controlliamo se la vita va a zero e chiamiamo il metodo che gestisce questo evento
+            if (vita <= 0)
+            {
+                GameController.Self.charactersList.Remove(this.gameObject);
                 if (isDestroyed == false)
                 {
                     isDestroyed = true;
-                    StartCoroutine(PlayDeath());
+
+                    //Settiamo lo status cella a 10 così il player non può ataccare nè camminare su questa casella fino a che questo nemico non sparisce dalla scena
+                    elementi.scacchiera[xPosition, yPosition].status = 10;
+                    StartCoroutine(HandleDeath());
                 }
-
-
-
-                GameController.Self.charactersList.Remove(this.gameObject);
-				//Settiamo lo status cella a 10 così il player non può ataccare nè camminare su questa casella fino a che questo nemico non sparisce dalla scena
-				elementi.scacchiera[xPosition, yPosition].status = 10;
-				StartCoroutine (HandleDeath ());
-			}
+            }
 
 
             if (vita > 0)
@@ -382,7 +379,7 @@ namespace IndianaBones
         }
 
 
-        IEnumerator PlayDeath()
+        /*IEnumerator PlayDeath()
         {
 
             audioScaramucca.Stop();
@@ -390,7 +387,7 @@ namespace IndianaBones
             audioScaramucca.Play();
             yield return new WaitForSeconds(2.7f);
             audioScaramucca.Stop();
-        }
+        }*/
 
 
         IEnumerator HandleDeath(){
@@ -402,7 +399,12 @@ namespace IndianaBones
 			if (gameObject.GetComponent<TurnHandler> ().itsMyTurn) {
 				GameController.Self.PassTurn ();
 			}
-			yield return new WaitForEndOfFrame();
+
+            audioScaramucca.Stop();
+            audioScaramucca.clip = AudioContainer.Self.SFX_Scaramucca_Death;
+            audioScaramucca.Play();
+
+            yield return new WaitForEndOfFrame();
 			//print("current clip length = " + animator.GetCurrentAnimatorStateInfo(0).length);
 			yield return new WaitForSeconds (1.5f);
 

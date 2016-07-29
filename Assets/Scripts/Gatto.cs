@@ -216,28 +216,26 @@ namespace IndianaBones
                 }
                 seen = false;
             }
-        
 
-			//Controlliamo se la vita va a zero e chiamiamo il metodo che gestisce questo evento
-			if (vita <= 0)
-			{
+
+            //Controlliamo se la vita va a zero e chiamiamo il metodo che gestisce questo evento
+            if (vita <= 0)
+            {
+                GameController.Self.charactersList.Remove(this.gameObject);
                 if (isDestroyed == false)
                 {
                     isDestroyed = true;
-                    StartCoroutine(PlayDeath());
-                }
 
-                Debug.Log ("Questo Cammello è sconfitto");
-				GameController.Self.charactersList.Remove(this.gameObject);
-				//Settiamo lo status cella a 10 così il player non può ataccare nè camminare su questa casella fino a che questo nemico non sparisce dalla scena
-				elementi.scacchiera[xPosition, yPosition].status = 10;
-				StartCoroutine(HandleDeath());
-			}
-            
+                    //Settiamo lo status cella a 10 così il player non può ataccare nè camminare su questa casella fino a che questo nemico non sparisce dalla scena
+                    elementi.scacchiera[xPosition, yPosition].status = 10;
+                    StartCoroutine(HandleDeath());
+                }
+            }
+
         }
 
 
-        IEnumerator PlayDeath()
+      /*  IEnumerator PlayDeath()
         {
 
             audioCat.Stop();
@@ -245,7 +243,7 @@ namespace IndianaBones
             audioCat.Play();
             yield return new WaitForSeconds(2f);
             audioCat.Stop();
-        }
+        }*/
 
 
 
@@ -260,7 +258,12 @@ namespace IndianaBones
 			{
 				GameController.Self.PassTurn();
 			}
-			yield return new WaitForEndOfFrame();
+
+            audioCat.Stop();
+            audioCat.clip = AudioContainer.Self.SFX_Cat_Death;
+            audioCat.Play();
+
+            yield return new WaitForEndOfFrame();
 			// print("current clip length = " + animator.GetCurrentAnimatorStateInfo(0).length);
 			yield return new WaitForSeconds(2f);
 

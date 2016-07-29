@@ -33,8 +33,7 @@ namespace IndianaBones
         public List<EnemyLevels> levelsList = new List<EnemyLevels>();
 
         AudioSource audioCamel;
-        public AudioClip SFX_Death;
-        public AudioClip SFX_Attack;
+        
 
         void Awake()
         {
@@ -238,23 +237,20 @@ namespace IndianaBones
 			//Controlliamo se la vita va a zero e chiamiamo il metodo che gestisce questo evento
 			if (vita <= 0)
 			{
-				GameController.Self.charactersList.Remove(this.gameObject);
-
+                GameController.Self.charactersList.Remove(this.gameObject);
                 if (isDestroyed == false)
                 {
                     isDestroyed = true;
-                    StartCoroutine(PlayDeath());
-                }
 
-                Debug.Log ("Questo Cammello è sconfitto");
-				//Settiamo lo status cella a 10 così il player non può ataccare nè camminare su questa casella fino a che questo nemico non sparisce dalla scena
-				elementi.scacchiera[xPosition, yPosition].status = 10;
-				StartCoroutine(HandleDeath());
-			}
+                    //Settiamo lo status cella a 10 così il player non può ataccare nè camminare su questa casella fino a che questo nemico non sparisce dalla scena
+                    elementi.scacchiera[xPosition, yPosition].status = 10;
+                    StartCoroutine(HandleDeath());
+                }
+            }
             
         }
 
-        IEnumerator PlayDeath()
+        /*IEnumerator PlayDeath()
         {
 
             audioCamel.Stop();
@@ -262,7 +258,7 @@ namespace IndianaBones
             audioCamel.Play();
             yield return new WaitForSeconds(2.7f);
             audioCamel.Stop();
-        }
+        }*/
 
 
 
@@ -275,7 +271,12 @@ namespace IndianaBones
 			{
 				GameController.Self.PassTurn();
 			}
-			yield return new WaitForEndOfFrame();
+
+            audioCamel.Stop();
+            audioCamel.clip = AudioContainer.Self.SFX_Camel_Death;
+            audioCamel.Play();
+
+            yield return new WaitForEndOfFrame();
 			// print("current clip length = " + animator.GetCurrentAnimatorStateInfo(0).length);
 			yield return new WaitForSeconds(1.5f);
 
