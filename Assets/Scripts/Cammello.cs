@@ -199,20 +199,19 @@ namespace IndianaBones
             {
                 gameObject.GetComponent<SpriteRenderer>().color = new Color32(0, 255, 0, 255);
 
-                if (ManhattanDist() == 1)
-                {
-                    AttackHandler();
+				if (ManhattanDist () > 1) {
+					if (Player.Self.xPosition > xPosition) {
+						gameObject.GetComponent<SpriteRenderer> ().flipX = true;
+					} else {
+						gameObject.GetComponent<SpriteRenderer> ().flipX = false;
+					}
+				} 
 
-                    if (Player.Self.xPosition > xPosition)
-                        gameObject.GetComponent<SpriteRenderer>().flipX = true;
-                    else
-                        gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                }
-                else
-                {
+				if (ManhattanDist() == 1) {
+                    AttackHandler();
+                } else {
                     GameController.Self.PassTurn();
                     StartCoroutine(ResetMyColor());
-
                 }
             }
 

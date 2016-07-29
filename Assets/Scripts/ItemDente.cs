@@ -4,7 +4,7 @@ using System.Collections;
 namespace IndianaBones
 {
 
-    public class denteSpawn : MonoBehaviour
+    public class ItemDente : MonoBehaviour
     {
 
         public Transform targetTr;
@@ -20,17 +20,6 @@ namespace IndianaBones
         void Update()
         {
 
-
-
-
-            /*
-            
-
-            
-            Vector3 direction = distance.normalized;
-
-            transform.position = transform.position + direction * 2 * speed * Time.deltaTime;*/
-
 			targetTr = Player.Self.transform;
             Vector3 distance = targetTr.position - this.transform.position;
 
@@ -38,7 +27,8 @@ namespace IndianaBones
             {
                 Destroy(this.gameObject);
                 transform.position = targetTr.position;
-				Player.Self.proiettili += 1;
+				int valueDenti = Random.Range (1, 3);
+				Player.Self.proiettili += valueDenti;
 
             }
 

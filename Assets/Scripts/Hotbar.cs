@@ -76,13 +76,15 @@ namespace IndianaBones
 		{
 			for (int i = 0; i < slotsInTotal; i++)
 			{
-				if (Input.GetKeyDown(keyCodesForSlots[i]))
-				{
-					if (transform.GetChild (i).childCount != 0) {
-							//transform.GetChild (i).GetComponent<Image> ().color = new Color32 (0, 160, 255, 255);
-							//transform.GetChild (i).GetComponent<Button> ().onClick.Invoke();
-							Debug.Log ("i: " + i);
-							ActivateItem (i);
+				if(Input.GetKeyDown(keyCodesForSlots[i])){
+					if (Player.Self.GetComponent<TurnHandler>().itsMyTurn)
+					{
+						if (transform.GetChild (i).childCount != 0) {
+								//transform.GetChild (i).GetComponent<Image> ().color = new Color32 (0, 160, 255, 255);
+								//transform.GetChild (i).GetComponent<Button> ().onClick.Invoke();
+								Debug.Log ("i: " + i);
+								ActivateItem (i);
+						}
 					}
 				}
 			}
@@ -180,6 +182,10 @@ namespace IndianaBones
 					Debug.Log ("Use MILK");
 					healthMilkPotionCount--;
 					Player.Self.currentLife += 5;
+					if (Player.Self.currentLife > Player.Self.startingLife) {
+						Player.Self.currentLife = Player.Self.startingLife;
+					}
+					GameController.Self.PassTurn ();
 					transform.GetChild (itemIndex).GetChild (1).GetComponent<Text> ().text = ("x"+healthMilkPotionCount.ToString ());
 					if (healthMilkPotionCount <= 0) {
 						transform.GetChild (itemIndex).GetChild (0).GetComponent<Image> ().sprite = null;
@@ -196,6 +202,10 @@ namespace IndianaBones
 					Debug.Log ("Use MOZZARELLA");
 					healthMozzyPotionCount--;
 					Player.Self.currentLife += 10;
+					if (Player.Self.currentLife > Player.Self.startingLife) {
+						Player.Self.currentLife = Player.Self.startingLife;
+					}
+					GameController.Self.PassTurn ();
 					transform.GetChild (itemIndex).GetChild (1).GetComponent<Text> ().text = ("x"+healthMozzyPotionCount.ToString ());
 					if (healthMozzyPotionCount <= 0) {
 						transform.GetChild (itemIndex).GetChild (0).GetComponent<Image> ().sprite = null;
@@ -212,6 +222,10 @@ namespace IndianaBones
 					Debug.Log ("Use MANA POTION");
 					manaPotionCount--;
 					Player.Self.currentMana += 5;
+					if (Player.Self.currentMana > Player.Self.startingMana) {
+						Player.Self.currentMana = Player.Self.startingMana;
+					}
+					GameController.Self.PassTurn ();
 					transform.GetChild (itemIndex).GetChild (1).GetComponent<Text> ().text = ("x"+manaPotionCount.ToString ());
 					if (manaPotionCount <= 0) {
 						transform.GetChild (itemIndex).GetChild (0).GetComponent<Image> ().sprite = null;
