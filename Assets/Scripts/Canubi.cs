@@ -83,7 +83,7 @@ namespace IndianaBones
 			healthBar.transform.GetChild(1).GetComponent<Text>().text = ("Lv. " + powerLevel.ToString());
 			healthBar.transform.GetChild(4).GetChild(0).GetComponent<Image>().sprite = Resources.Load("EnemyIcons/Head_Canubi", typeof(Sprite)) as Sprite;
 			healthBar.GetComponent<Slider> ().value = vita;
-			yield return new WaitForSeconds (0.5f);
+			yield return new WaitForSeconds (0.7f);
 			healthBar.SetActive (false);
 
 		}

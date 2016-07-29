@@ -14,7 +14,7 @@ namespace IndianaBones
 		void Start () {
 			eventSystem = GameObject.Find ("EventSystem");
 			eventSystem.GetComponent<EventSystem> ().firstSelectedGameObject = this.transform.GetChild (1).gameObject;
-			this.gameObject.transform.parent.gameObject.SetActive (false);
+			//this.gameObject.transform.parent.gameObject.SetActive (false);
 			//this.gameObject.SetActive (false);
 
 		}

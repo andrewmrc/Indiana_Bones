@@ -31,6 +31,7 @@ namespace IndianaBones
 		bool isAttacking = false;
 
         public bool endMove;
+		bool isDead;
 
         public int croce = 1;
 
@@ -64,6 +65,7 @@ namespace IndianaBones
 		public GameObject canvasGameOver;
         public GameObject child;
 		public Grid elementi;
+		GameObject canvasUI;
 
         [Header("Level and Stats")]
         [Space(10)]
@@ -95,8 +97,6 @@ namespace IndianaBones
                 Destroy(gameObject);
             }
 
-			canvasGameOver = GameObject.FindGameObjectWithTag ("CanvasGameOver");
-
             if (playerLevel == 1)
             {
                 //Set the starting stats of the player
@@ -114,18 +114,21 @@ namespace IndianaBones
 
         void Start()
         {
+			/*
             xPosition = (int)this.transform.position.x;
             yPosition = (int)this.transform.position.y;
 
             elementi = FindObjectOfType<Grid>();
             this.transform.position = elementi.scacchiera[xPosition, yPosition].transform.position;
             targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-			elementi.scacchiera[xPosition, yPosition].status = 4;
-			SetPlayerUI ();
+			elementi.scacchiera[xPosition, yPosition].status = 4;*/
 
-            audioPlayer = GetComponent<AudioSource>();
+			//Settiamo tutti i parametri e le reference per il player
+			UpdatePlayer ();
 
-            
+			//Troviamo il componente AudioSource sul Player
+			audioPlayer = GetComponent<AudioSource>();
+						       
         }
 
 
@@ -141,6 +144,9 @@ namespace IndianaBones
 			expCollText = expBar.transform.GetChild(1).GetComponent<Text> ();
 			expCollText.gameObject.SetActive (false);
 
+			healthText = GameObject.Find ("VitaText").GetComponent<Text>();
+			nDenti = GameObject.Find ("CounterDentiText").GetComponent<Text> ();
+
 			healthBar.GetComponent<Slider> ().maxValue = startingLife;
 			healthBar.GetComponent<Slider> ().value = startingLife;
 
@@ -149,19 +155,25 @@ namespace IndianaBones
 
 			expBar.GetComponent<Slider> ().maxValue = expToLevelUp;
 			expBar.GetComponent<Slider> ().value = expCollected;
+
+			canvasUI = GameObject.FindGameObjectWithTag ("CanvasUI");
+
+			canvasGameOver = GameObject.FindGameObjectWithTag ("CanvasGameOver");
+			canvasGameOver.SetActive (false);
+			Debug.Log ("Scena caricata, Player UI recuperata");
 		}
 
 
 		public void UpdatePlayer () {
-			SetPlayerUI ();
 			xPosition = (int)this.transform.position.x;
 			yPosition = (int)this.transform.position.y;
-			healthText = GameObject.Find ("VitaText").GetComponent<Text>();
-			nDenti = GameObject.Find ("CounterDentiText").GetComponent<Text> ();
 			elementi = FindObjectOfType<Grid>();
 			targetTr = elementi.scacchiera[(int)GameController.Self.startPoint.transform.position.x, (int)GameController.Self.startPoint.transform.position.y].transform;
 			elementi.scacchiera[xPosition, yPosition].status = 4;
 			OldValue ();
+			gameObject.GetComponent<TurnHandler> ().itsMyTurn = true;
+			SetPlayerUI ();
+			Debug.Log ("Scena caricata, Player Reference recuperate");
 		}
 
 
@@ -183,7 +195,7 @@ namespace IndianaBones
 				case 1:
                         audioPlayer.clip = SFX_LancioDente;
                         audioPlayer.Play();
-                        proiettili -= 1;
+                    proiettili -= 1;
 					bulletDir = 1;
 					nuovoDente = Instantiate (dente);
 					nuovoDente.transform.position = up.transform.position;
@@ -192,7 +204,7 @@ namespace IndianaBones
 				case 2:
                         audioPlayer.clip = SFX_LancioDente;
                         audioPlayer.Play();
-                        proiettili -= 1;
+                    proiettili -= 1;
 					bulletDir = 3;
 					nuovoDente = Instantiate (dente);
 					nuovoDente.transform.position = right.transform.position;
@@ -201,7 +213,7 @@ namespace IndianaBones
 				case 3:
                         audioPlayer.clip = SFX_LancioDente;
                         audioPlayer.Play();
-                        proiettili -= 1;
+                    proiettili -= 1;
 					nuovoDente = Instantiate (dente);
 					nuovoDente.transform.position = down.transform.position;
 					bulletDir = 2;
@@ -210,7 +222,7 @@ namespace IndianaBones
 				case 4:
                         audioPlayer.clip = SFX_LancioDente;
                         audioPlayer.Play();
-                        proiettili -= 1;
+                    proiettili -= 1;
 					nuovoDente = Instantiate (dente);
 					nuovoDente.transform.position = left.transform.position;
 					bulletDir = 4;
@@ -640,13 +652,6 @@ namespace IndianaBones
 					}
                 }
 
-				/*
-                if (movimento == 1) //movimento la utilizzeranno solo i nemici per i loro turni
-                {
-                    elementi.scacchiera[xOld, yOld].status = 0;
-
-                }*/
-
                 
                 if (Input.GetKeyDown(KeyCode.Z) && onOff == false && endMove == false)
                 {
@@ -685,8 +690,9 @@ namespace IndianaBones
 
 
 			//Gestisce la morte del player
-			if (currentLife <= 0) {
+			if (currentLife <= 0 && isDead == false) {
 				currentLife = 0;
+				isDead = true;
 				//Activate the death animation
 				animator.SetFloat ("Life", currentLife);
 
@@ -698,8 +704,16 @@ namespace IndianaBones
 
 
 		IEnumerator ActivateGameOverPanel (){
-			yield return new WaitForSeconds (1f);
+			Debug.Log ("GAME OVER PANEL");
+			canvasUI.SetActive (false);
+			yield return new WaitForSeconds (2f);
 			canvasGameOver.SetActive (true);
+			currentLife = startingLife;
+			currentMana = startingMana;
+			proiettili = 5;
+			isDead = false;
+			animator.SetFloat ("Life", currentLife);
+			gameObject.GetComponent<TurnHandler> ().itsMyTurn = false;
 		}
 
 

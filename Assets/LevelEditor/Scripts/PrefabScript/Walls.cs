@@ -19,7 +19,7 @@ namespace IndianaBones
 			myGrid.scacchiera[x, y].status = 2;
 			myGrid.scacchiera[x, y].gameObject.AddComponent<BoxCollider2D>();
 
-			Debug.Log ("Tile Name: " + tileName);
+			//Debug.Log ("Tile Name: " + tileName);
 			SpriteRenderer wall = myGrid.scacchiera[x, y].GetComponent<SpriteRenderer>();
 			wall.sprite = gameObject.GetComponent<SpriteRenderer> ().sprite;
 			this.transform.position = new Vector2(x, y);

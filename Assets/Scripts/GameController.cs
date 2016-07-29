@@ -31,10 +31,13 @@ namespace IndianaBones
 		public GameObject endPoint;
 		float backupDelay;
 
+		void Awake(){
+			//startPoint = GameObject.FindGameObjectWithTag ("StartPoint");
+		}
+
         void Start()
         {
             charactersList.Add(Player.Self.gameObject);
-			startPoint = GameObject.Find ("StartPoint");
 			if (startPoint != null) {
 				Player.Self.transform.position = startPoint.transform.position;
 			}
