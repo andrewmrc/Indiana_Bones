@@ -23,11 +23,12 @@ namespace IndianaBones
 
 
 		//public List<GameObject> itemsList = new List<GameObject>();
-
+		/*
 		[Header("Canubi")]
 		[Space(10)]
 		public int minDropRate;
 		public int maxDropRate;
+		*/
 
 		[Header("Items")]
 		[Space(10)]
@@ -82,17 +83,26 @@ namespace IndianaBones
 
 			case "Scaramucca":
 				
-				if (randomValue > 0 && randomValue < 20) {
+				if (randomValue > 0 && randomValue < 40) {
 					//Drop Latte
+					Instantiate (milk).gameObject.transform.position = new Vector2 (xPosition, yPosition);
 
-				} else if ((randomValue > 20 && randomValue < 40)) {
+				} else if ((randomValue > 40 && randomValue < 60)) {
+					//Drop Mozzarella
+					Instantiate (mozzarella).gameObject.transform.position = new Vector2 (xPosition, yPosition);
+
+				} else if ((randomValue > 60 && randomValue < 70)) {
 					//Drop Pozione Mana
+					Instantiate (manaPotion).gameObject.transform.position = new Vector2 (xPosition, yPosition);
 
-				} else if ((randomValue > 40 && randomValue < 80)) {
+				} else if ((randomValue > 70 && randomValue < 90)) {
 					//Drop Denti
+					Debug.Log ("Denti Droppati");
+					Instantiate (dente).gameObject.transform.position = new Vector2 (xPosition, yPosition);
 
-				} else if ((randomValue > 80 && randomValue < 100)) {
+				} else if ((randomValue > 90 && randomValue < 100)) {
 					//Non droppa niente
+					Debug.Log ("NIENTE DROP");
 
 				}
 
@@ -103,15 +113,24 @@ namespace IndianaBones
 				
 				if (randomValue > 0 && randomValue < 20) {
 					//Drop Latte
+					Instantiate(milk).gameObject.transform.position = new Vector2(xPosition,yPosition);
 
-				} else if ((randomValue > 20 && randomValue < 40)) {
+				} else if ((randomValue > 20 && randomValue < 30)) {
+					//Drop Mozzarella
+					Instantiate (mozzarella).gameObject.transform.position = new Vector2 (xPosition, yPosition);
+
+				} else if ((randomValue > 30 && randomValue < 70)) {
 					//Drop Pozione Mana
+					Instantiate (manaPotion).gameObject.transform.position = new Vector2 (xPosition, yPosition);
 
-				} else if ((randomValue > 40 && randomValue < 80)) {
+				} else if ((randomValue > 70 && randomValue < 90)) {
 					//Drop Denti
+					Debug.Log ("Denti Droppati");
+					Instantiate (dente).gameObject.transform.position = new Vector2 (xPosition, yPosition);
 
-				} else if ((randomValue > 80 && randomValue < 100)) {
+				} else if ((randomValue > 90 && randomValue < 100)) {
 					//Non droppa niente
+					Debug.Log ("NIENTE DROP");
 
 				}
 
@@ -122,15 +141,24 @@ namespace IndianaBones
 				
 				if (randomValue > 0 && randomValue < 20) {
 					//Drop Latte
+					Instantiate (milk).gameObject.transform.position = new Vector2 (xPosition, yPosition);
 
-				} else if ((randomValue > 20 && randomValue < 40)) {
+				} else if ((randomValue > 20 && randomValue < 50)) {
+					//Drop Mozzarella
+					Instantiate (mozzarella).gameObject.transform.position = new Vector2 (xPosition, yPosition);
+
+				} else if ((randomValue > 50 && randomValue < 70)) {
 					//Drop Pozione Mana
+					Instantiate (manaPotion).gameObject.transform.position = new Vector2 (xPosition, yPosition);
 
-				} else if ((randomValue > 40 && randomValue < 80)) {
+				} else if ((randomValue > 70 && randomValue < 90)) {
 					//Drop Denti
+					Debug.Log ("Denti Droppati");
+					Instantiate (dente).gameObject.transform.position = new Vector2 (xPosition, yPosition);
 
-				} else if ((randomValue > 80 && randomValue < 100)) {
+				} else if ((randomValue > 90 && randomValue < 100)) {
 					//Non droppa niente
+					Debug.Log ("NIENTE DROP");
 
 				}
 
@@ -141,35 +169,49 @@ namespace IndianaBones
 
 				if (randomValue > 0 && randomValue < 20) {
 					//Drop Latte
+					Instantiate(milk).gameObject.transform.position = new Vector2(xPosition,yPosition);
 
 				} else if ((randomValue > 20 && randomValue < 40)) {
+					//Drop Mozzarella
+					Instantiate (mozzarella).gameObject.transform.position = new Vector2 (xPosition, yPosition);
+
+				} else if ((randomValue > 40 && randomValue < 60)) {
 					//Drop Pozione Mana
+					Instantiate (manaPotion).gameObject.transform.position = new Vector2 (xPosition, yPosition);
 
-				} else if ((randomValue > 40 && randomValue < 80)) {
+				} else if ((randomValue > 60 && randomValue < 90)) {
 					//Drop Denti
+					Debug.Log ("Denti Droppati");
+					Instantiate (dente).gameObject.transform.position = new Vector2 (xPosition, yPosition);
 
-				} else if ((randomValue > 80 && randomValue < 100)) {
+				} else if ((randomValue > 90 && randomValue < 100)) {
 					//Non droppa niente
+					Debug.Log ("NIENTE DROP");
 
 				}
+
 				break;
 
 
 			case "Vaso":
 
-				if (randomValue > 0 && randomValue < 20) {
+				if (randomValue > 0 && randomValue < 25) {
 					//Drop Latte
+					Instantiate(milk).gameObject.transform.position = new Vector2(xPosition,yPosition);
 
-				} else if ((randomValue > 20 && randomValue < 40)) {
+				} else if ((randomValue > 25 && randomValue < 50)) {
 					//Drop Pozione Mana
+					Instantiate (manaPotion).gameObject.transform.position = new Vector2 (xPosition, yPosition);
 
-				} else if ((randomValue > 40 && randomValue < 80)) {
+				} else if ((randomValue > 50 && randomValue < 70)) {
 					//Drop Denti
+					Instantiate (dente).gameObject.transform.position = new Vector2 (xPosition, yPosition);
 
-				} else if ((randomValue > 80 && randomValue < 100)) {
+				} else if ((randomValue > 70 && randomValue < 100)) {
 					//Non droppa niente
 
 				}
+
 				break;
 
 

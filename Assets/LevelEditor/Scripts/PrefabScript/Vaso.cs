@@ -101,6 +101,9 @@ namespace IndianaBones
             elementi.scacchiera[x, y].status = 0;
             Destroy(this.gameObject);
 
+			//Chiama la funzione di drop item
+			DropHandler.Self.DropItems("Cammello", this.transform.position.x, this.transform.position.y);
+
         }
 
         void Update()
