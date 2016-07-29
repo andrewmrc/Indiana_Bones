@@ -30,8 +30,8 @@ namespace IndianaBones
         public List<EnemyLevels> levelsList = new List<EnemyLevels>();
 
         AudioSource audioCat;
-        public AudioClip SFX_Death;
-        public AudioClip SFX_Attack;
+
+        bool isDestroyed;
 
         void Awake()
         {
@@ -97,7 +97,7 @@ namespace IndianaBones
         public void AttackHandler()
         {
 
-            audioCat.clip = SFX_Attack;
+            audioCat.clip = AudioContainer.Self.SFX_Cat_Attack;
             audioCat.Play();
 
             //Formula calcolo attacco 
@@ -221,7 +221,13 @@ namespace IndianaBones
 			//Controlliamo se la vita va a zero e chiamiamo il metodo che gestisce questo evento
 			if (vita <= 0)
 			{
-				Debug.Log ("Questo Cammello è sconfitto");
+                if (isDestroyed == false)
+                {
+                    isDestroyed = true;
+                    StartCoroutine(PlayDeath());
+                }
+
+                Debug.Log ("Questo Cammello è sconfitto");
 				GameController.Self.charactersList.Remove(this.gameObject);
 				//Settiamo lo status cella a 10 così il player non può ataccare nè camminare su questa casella fino a che questo nemico non sparisce dalla scena
 				elementi.scacchiera[xPosition, yPosition].status = 10;
@@ -231,11 +237,23 @@ namespace IndianaBones
         }
 
 
-		IEnumerator HandleDeath()
-		{
+        IEnumerator PlayDeath()
+        {
+
             audioCat.Stop();
-            audioCat.clip = SFX_Death;
+            audioCat.clip = AudioContainer.Self.SFX_Cat_Death;
             audioCat.Play();
+            yield return new WaitForSeconds(2f);
+            audioCat.Stop();
+        }
+
+
+
+
+
+            IEnumerator HandleDeath()
+		{
+            
             //Activate the death animation
             animator.SetFloat("Life", vita);
 			if (gameObject.GetComponent<TurnHandler>().itsMyTurn)

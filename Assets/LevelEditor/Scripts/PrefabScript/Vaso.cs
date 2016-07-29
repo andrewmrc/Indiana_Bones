@@ -8,9 +8,12 @@ namespace IndianaBones
     {
         int x;
         int y;
+        bool isDestroyed;
 
         public int DannoPerDistruggerlo = 1;
         Grid elementi;
+
+        AudioSource audioVaso;
 
         void Start()
         {
@@ -21,8 +24,8 @@ namespace IndianaBones
             elementi.scacchiera[x, y].name = "vaso";
 
 
+            audioVaso = this.GetComponent<AudioSource>();
             
-
 
         }
 
@@ -85,12 +88,27 @@ namespace IndianaBones
             gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
         }
 
+        IEnumerator HandleDestroy()
+        {
+
+            audioVaso.clip = AudioContainer.Self.SFX_RotturaVaso;
+            audioVaso.Play();
+
+
+            yield return new WaitForSeconds(0.6f);
+
+
+            elementi.scacchiera[x, y].status = 0;
+            Destroy(this.gameObject);
+
+        }
+
         void Update()
         {
-            if (DannoPerDistruggerlo <= 0)
-            {
-                elementi.scacchiera[x, y].status = 0;
-                Destroy(this.gameObject);
+            if (DannoPerDistruggerlo <= 0 && isDestroyed == false)
+            { 
+                isDestroyed = true;
+                StartCoroutine(HandleDestroy());
             }
         }
 

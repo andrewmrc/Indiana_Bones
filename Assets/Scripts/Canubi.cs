@@ -27,9 +27,9 @@ namespace IndianaBones
         public int distanzaAttivazione = 10;
 		private Grid elementi;
 		private Animator animator;
+        bool isDestroyed;
 
-        public AudioClip SFX_Attack;
-        public AudioClip SFX_Death;
+
         AudioSource audioCanubi;
         
 		GameObject healthBar;
@@ -317,7 +317,7 @@ namespace IndianaBones
 
         public void AttackHandler()
         {
-            audioCanubi.clip = SFX_Attack;
+            audioCanubi.clip = AudioContainer.Self.SFX_Canubi_Attack;
             audioCanubi.Play();
             //Formula calcolo attacco Canubi
 			int randomX = Random.Range(1, 3);
@@ -389,9 +389,17 @@ namespace IndianaBones
 
 
             //Controlliamo se la vita va a zero e chiamiamo il metodo che gestisce questo evento
-            if (vita <= 0)
+            if (vita <= 0 )
             {
-				GameController.Self.charactersList.Remove(this.gameObject);
+                if (isDestroyed == false)
+                {
+                    isDestroyed = true;
+                    audioCanubi.Stop();
+                    audioCanubi.clip = AudioContainer.Self.SFX_Canubi_Death;
+                    audioCanubi.Play();
+                }
+
+                GameController.Self.charactersList.Remove(this.gameObject);
 				//Settiamo lo status cella a 10 così il player non può ataccare nè camminare su questa casella fino a che questo nemico non sparisce dalla scena
 				elementi.scacchiera[xPosition, yPosition].status = 10;
 				StartCoroutine (HandleDeath ());
@@ -426,11 +434,11 @@ namespace IndianaBones
 
         }
 
+        
+
 		IEnumerator HandleDeath(){
 
-            audioCanubi.Stop();
-            audioCanubi.clip = SFX_Death;
-            audioCanubi.Play();
+           
 
             //Activate the death animation
             animator.SetFloat ("Life", vita);
