@@ -404,6 +404,8 @@ namespace IndianaBones
 			Destroy (this.gameObject);
 			elementi.scacchiera[xPosition, yPosition].status = 0;
 
+			//Chiama la funzione di drop item
+			DropHandler.Self.DropItems("Scaramucca", this.transform.position.x, this.transform.position.y);
 		}
 
     }

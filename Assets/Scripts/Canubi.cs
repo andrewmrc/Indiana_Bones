@@ -447,7 +447,7 @@ namespace IndianaBones
 			}
 			yield return new WaitForEndOfFrame();
 			//print("current clip length = " + animator.GetCurrentAnimatorStateInfo(0).length);
-			yield return new WaitForSeconds (2.5f);
+			yield return new WaitForSeconds (1.3f);
 
 			//Aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
 			Player.Self.IncreaseExp(levelsList[powerLevel].Exp);
