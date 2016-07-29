@@ -66,6 +66,7 @@ namespace IndianaBones
         public GameObject child;
 		public Grid elementi;
 		GameObject canvasUI;
+		SpriteRenderer feedback;
 
         [Header("Level and Stats")]
         [Space(10)]
@@ -376,28 +377,28 @@ namespace IndianaBones
             {
                 ResetCrossColor();
                 SpriteRenderer colore = up.GetComponent<SpriteRenderer>();
-                colore.sprite = Resources.Load("green", typeof(Sprite)) as Sprite;
+				colore.sprite = Resources.Load("Freccia_On", typeof(Sprite)) as Sprite;
             }
 
             if (croce == 2)
             {
                 ResetCrossColor();
                 SpriteRenderer colore = right.GetComponent<SpriteRenderer>();
-                colore.sprite = Resources.Load("green", typeof(Sprite)) as Sprite;
+				colore.sprite = Resources.Load("Freccia_On", typeof(Sprite)) as Sprite;
             }
 
             if (croce == 3)
             {
                 ResetCrossColor();
                 SpriteRenderer colore = down.GetComponent<SpriteRenderer>();
-                colore.sprite = Resources.Load("green", typeof(Sprite)) as Sprite;
+				colore.sprite = Resources.Load("Freccia_On", typeof(Sprite)) as Sprite;
             }
 
             if (croce == 4)
             {
                 ResetCrossColor();
                 SpriteRenderer colore = left.GetComponent<SpriteRenderer>();
-                colore.sprite = Resources.Load("green", typeof(Sprite)) as Sprite;
+				colore.sprite = Resources.Load("Freccia_On", typeof(Sprite)) as Sprite;
             }
 
         }
@@ -408,19 +409,19 @@ namespace IndianaBones
         {
 
             SpriteRenderer colore = up.GetComponent<SpriteRenderer>();
-            colore.sprite = Resources.Load("red", typeof(Sprite)) as Sprite;
+            colore.sprite = Resources.Load("Freccia_Off", typeof(Sprite)) as Sprite;
 
 
             SpriteRenderer colore1 = right.GetComponent<SpriteRenderer>();
-            colore1.sprite = Resources.Load("red", typeof(Sprite)) as Sprite;
+			colore1.sprite = Resources.Load("Freccia_Off", typeof(Sprite)) as Sprite;
 
 
             SpriteRenderer colore2 = down.GetComponent<SpriteRenderer>();
-            colore2.sprite = Resources.Load("red", typeof(Sprite)) as Sprite;
+			colore2.sprite = Resources.Load("Freccia_Off", typeof(Sprite)) as Sprite;
 
 
             SpriteRenderer colore3 = left.GetComponent<SpriteRenderer>();
-            colore3.sprite = Resources.Load("red", typeof(Sprite)) as Sprite;
+			colore3.sprite = Resources.Load("Freccia_Off", typeof(Sprite)) as Sprite;
 
 
         }

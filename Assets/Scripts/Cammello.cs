@@ -84,6 +84,7 @@ namespace IndianaBones
 			healthBar.GetComponent<Slider> ().value = vita;
 			yield return new WaitForSeconds (0.7f);
 			healthBar.SetActive (false);
+			feedback.enabled = false;
 
 		}
 
@@ -94,7 +95,7 @@ namespace IndianaBones
 
             if (coll.gameObject.name == "dente(Clone)")
             {
-
+				feedback.enabled = true;
                 vita -= Player.Self.currentAttack;
 
 				StartCoroutine(UpdateHealthBar());
@@ -122,8 +123,7 @@ namespace IndianaBones
 			//Sottrae vita al player
 			Player.Self.currentLife -= damage;
 			Debug.Log("Attacco di: " + this.gameObject.name + "-> toglie al Player: " + damage);
-            this.transform.GetChild(0).transform.position = Player.Self.transform.position;
-            feedback.enabled = true;
+			Player.Self.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
             StartCoroutine (ResetPlayerColor ());
 			//Passa il turno
 			GameController.Self.PassTurn();
@@ -135,7 +135,7 @@ namespace IndianaBones
         IEnumerator ResetPlayerColor()
         {
             yield return new WaitForSeconds(0.3f);
-            feedback.enabled = false;
+			Player.Self.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         }
 
 
@@ -184,6 +184,8 @@ namespace IndianaBones
 
 
 		public void HandleDamageFromPlayer () {
+			//Attiva il proprio feedback
+			feedback.enabled = true;
 
 			//Formula calcolo attacco Player
 			int randomX = Random.Range(1, 3);

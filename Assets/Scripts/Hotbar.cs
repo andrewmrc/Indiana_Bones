@@ -131,7 +131,37 @@ namespace IndianaBones
 					AddItem (itemSprite, itemName, manaPotionCount);
 				}
 				break;
+
+
+			case "Bomb":
+				if (bombsCount > 0) {
+					bombsCount++;
+					UpdateItemQuantity (itemName, bombsCount);
+				} else {
+					bomb = true;
+					bombsCount++;
+					//indexSlotMana = freeSlotsCount;
+					AddItem (itemSprite, itemName, bombsCount);
+				}
+				break;
+
+
+			case "Poison":
+				if (poisonCount > 0) {
+					poisonCount++;
+					UpdateItemQuantity (itemName, poisonCount);
+				} else {
+					poison = true;
+					poisonCount++;
+					//indexSlotMana = freeSlotsCount;
+					AddItem (itemSprite, itemName, poisonCount);
+				}
+				break;
+
+
 			}
+
+
 		}
 
 
@@ -237,6 +267,43 @@ namespace IndianaBones
 					} 
 					break;
 
+
+				case "Bomb":
+					Debug.Log ("Use Bomb");
+					bombsCount--;
+					//Inserire effetto script della bomba
+
+					GameController.Self.PassTurn (); // forse passerà il turno dopo che la bomba ha colpito
+
+					transform.GetChild (itemIndex).GetChild (1).GetComponent<Text> ().text = ("x"+bombsCount.ToString ());
+					if (bombsCount <= 0) {
+						transform.GetChild (itemIndex).GetChild (0).GetComponent<Image> ().sprite = null;
+						transform.GetChild (itemIndex).GetChild (0).GetComponent<Image> ().color = new Color32(255,255,255,0);
+						transform.GetChild (itemIndex).GetChild (0).GetComponent<RectTransform> ().sizeDelta = new Vector2 (50, 50);
+						bomb = false;
+						itemsOnButton [itemIndex].gameObject.GetComponent<SlotButtonHandler> ().slotOccupied = false;
+
+					} 
+					break;
+
+
+				case "Poison":
+					Debug.Log ("Use Poison");
+					poisonCount--;
+					//Inserire effetto script veleno
+
+					GameController.Self.PassTurn (); //il turno passa dopo che il veleno si attiva
+
+					transform.GetChild (itemIndex).GetChild (1).GetComponent<Text> ().text = ("x"+manaPotionCount.ToString ());
+					if (manaPotionCount <= 0) {
+						transform.GetChild (itemIndex).GetChild (0).GetComponent<Image> ().sprite = null;
+						transform.GetChild (itemIndex).GetChild (0).GetComponent<Image> ().color = new Color32(255,255,255,0);
+						transform.GetChild (itemIndex).GetChild (0).GetComponent<RectTransform> ().sizeDelta = new Vector2 (50, 50);
+						manaPotion = false;
+						itemsOnButton [itemIndex].gameObject.GetComponent<SlotButtonHandler> ().slotOccupied = false;
+
+					} 
+					break;
 				}
 
 
