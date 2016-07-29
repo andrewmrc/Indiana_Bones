@@ -389,18 +389,15 @@ namespace IndianaBones
 
 
             //Controlliamo se la vita va a zero e chiamiamo il metodo che gestisce questo evento
-            if (vita <= 0 )
+			if (vita <= 0 && isDestroyed == false)
             {
-                
-                    if (isDestroyed == false)
-                    {
-                        isDestroyed = true;
-                        StartCoroutine(PlayDeath());
-                    }
+				isDestroyed = true;
+				GameController.Self.charactersList.Remove(this.gameObject);
 
+                   
+                //StartCoroutine(PlayDeath());
                 
 
-                GameController.Self.charactersList.Remove(this.gameObject);
 				//Settiamo lo status cella a 10 così il player non può ataccare nè camminare su questa casella fino a che questo nemico non sparisce dalla scena
 				elementi.scacchiera[xPosition, yPosition].status = 10;
 				StartCoroutine (HandleDeath ());
@@ -448,7 +445,9 @@ namespace IndianaBones
 
         IEnumerator HandleDeath(){
 
-           
+			audioCanubi.Stop();
+			audioCanubi.clip = AudioContainer.Self.SFX_Canubi_Death;
+			audioCanubi.Play();
 
             //Activate the death animation
             animator.SetFloat ("Life", vita);

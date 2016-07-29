@@ -238,15 +238,15 @@ namespace IndianaBones
 			//Controlliamo se la vita va a zero e chiamiamo il metodo che gestisce questo evento
 			if (vita <= 0)
 			{
+				GameController.Self.charactersList.Remove(this.gameObject);
+
                 if (isDestroyed == false)
                 {
                     isDestroyed = true;
                     StartCoroutine(PlayDeath());
                 }
 
-
                 Debug.Log ("Questo Cammello è sconfitto");
-				GameController.Self.charactersList.Remove(this.gameObject);
 				//Settiamo lo status cella a 10 così il player non può ataccare nè camminare su questa casella fino a che questo nemico non sparisce dalla scena
 				elementi.scacchiera[xPosition, yPosition].status = 10;
 				StartCoroutine(HandleDeath());
