@@ -75,15 +75,18 @@ namespace IndianaBones
 
         IEnumerator UpdateHealthBar()
         {
+			if (healthBar == null) {
+				healthBar = GameObject.FindGameObjectWithTag ("EnemyHealthBar");
+			}
             healthBar.GetComponentInParent<Mask>().enabled = false;
-            healthBar.SetActive(true);
+            //healthBar.SetActive(true);
             healthBar.GetComponent<Slider>().maxValue = levelsList[powerLevel].Life;
             healthBar.transform.GetChild(3).GetComponent<Text>().text = (vita.ToString() + "/" + levelsList[powerLevel].Life.ToString());
             healthBar.transform.GetChild(1).GetComponent<Text>().text = ("Lv. " + powerLevel.ToString());
             healthBar.transform.GetChild(4).GetChild(0).GetComponent<Image>().sprite = Resources.Load("EnemyIcons/Head_Gatto", typeof(Sprite)) as Sprite;
             healthBar.GetComponent<Slider>().value = vita;
             yield return new WaitForSeconds(0.7f);
-            healthBar.SetActive(false);
+            //healthBar.SetActive(false);
             feedback.enabled = false;
 
         }

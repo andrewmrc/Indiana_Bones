@@ -743,8 +743,9 @@ namespace IndianaBones
 
 		IEnumerator ActivateGameOverPanel (){
 			Debug.Log ("GAME OVER PANEL");
+			yield return new WaitForSeconds (1f);
 			canvasUI.SetActive (false);
-			yield return new WaitForSeconds (2f);
+			yield return new WaitForSeconds (1f);
 			canvasGameOver.SetActive (true);
 			currentLife = startingLife;
 			currentMana = startingMana;
