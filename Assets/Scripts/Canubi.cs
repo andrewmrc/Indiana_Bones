@@ -274,7 +274,23 @@ namespace IndianaBones
                 }
             }
 
-            
+            //Special Weapons
+			if (coll.gameObject.tag == "Molotov")
+			{
+				feedback.enabled = true;
+				vita -= 4;
+
+				StartCoroutine(UpdateHealthBar());
+
+			}
+			if (coll.gameObject.tag == "Veleno")
+			{
+				feedback.enabled = true;
+				vita -= 4;
+
+				StartCoroutine(UpdateHealthBar());
+
+			}
         }
 
 
@@ -300,16 +316,12 @@ namespace IndianaBones
             if (coll.gameObject.name == "dente(Clone)")
             {
                 feedback.enabled = true;
-                vita -= Player.Self.currentAttack;
-				StartCoroutine(UpdateHealthBar());
-
-            }
-            else if (coll.gameObject.tag == "Molotov")
-            {
-                feedback.enabled = true;
-                vita -= 4;
-
-                StartCoroutine(UpdateHealthBar());
+				//Formula calcolo attacco Player
+				int randomX = Random.Range(1, 3);
+				int damage = (int)(Player.Self.currentAttack*randomX/2);
+				//Sottrae vita a questo nemico
+				vita -= damage+1;
+				Debug.Log("Questo nemico: " + this.gameObject.name + "-> subisce dal Player un totale danni di: " + damage);
 
             }
 
@@ -339,6 +351,8 @@ namespace IndianaBones
 			//Sottrae vita al player
 			Player.Self.currentLife -= damage;
 			Debug.Log("Attacco di: " + this.gameObject.name + "-> toglie al Player: " + damage);
+
+			//Attiva feedback sul Player
             Player.Self.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
 
             StartCoroutine (ResetPlayerColor ());

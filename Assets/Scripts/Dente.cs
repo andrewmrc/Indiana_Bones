@@ -6,18 +6,20 @@ namespace IndianaBones
 
     public class Dente : MonoBehaviour
     {  
-		
+		Rigidbody2D rb;
         public float forza = 0.5f;
         bool seen = false;
+
+		void Start (){
+			rb = GetComponent<Rigidbody2D>();
+
+		}
 
         // Update is called once per frame
         void FixedUpdate()
         {
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
-            Player objPlayer = FindObjectOfType<Player>();
-
-            switch (objPlayer.bulletDir)
+			switch (Player.Self.bulletDir)
             {
                 case 1:
                     rb.AddForce(transform.up * forza, ForceMode2D.Impulse); 

@@ -4,7 +4,7 @@ using System.Collections;
 namespace IndianaBones
 {
 
-    public class Bomba : Character {
+	public class Bomba : MonoBehaviour {
 
         Grid elementi;
         Rigidbody2D rb;
@@ -13,6 +13,7 @@ namespace IndianaBones
 
         float forza = 0.1f;
         bool seen = false;
+		bool started;
 
         void Awake()
         {
@@ -31,9 +32,7 @@ namespace IndianaBones
         {
              
 
-            Player objPlayer = FindObjectOfType<Player>();
-
-            switch (objPlayer.bulletDir)
+			switch (Player.Self.bulletDir)
             {
                 case 1:
                     rb.AddForce(transform.up * forza, ForceMode2D.Impulse);
@@ -59,16 +58,27 @@ namespace IndianaBones
        
     IEnumerator DestroyBomb()
         {
-        yield return new WaitForSeconds(0.85f);
-        
-            rb.drag = 500;
-            bc.enabled = true;
+			if (started == false) {
+				started = true;
+				yield return new WaitForSeconds (0.85f);
+	        
+				rb.drag = 500;
+				bc.enabled = true;
 
-            yield return new WaitForSeconds(0.4f);
-            GameController.Self.PassTurn();
-            Destroy(this.gameObject);
-            Debug.LogWarning("sono qui");
-        }
+				//Attiviamo la sprite dell'esplosione
+				this.gameObject.transform.GetChild (0).GetComponent<SpriteRenderer> ().enabled = true;
+
+				yield return new WaitForSeconds (0.4f);
+				GameController.Self.PassTurn ();
+				Player.Self.ResetPlayerVar ();
+
+				yield return new WaitForSeconds (1f);
+
+				Destroy (this.gameObject);
+			}
+
+
+		}
 
 
         public void OnCollisionEnter2D(Collision2D coll)
@@ -76,18 +86,25 @@ namespace IndianaBones
 
             if (coll.gameObject.tag == "Walls" || coll.gameObject.tag == "Colonne")
             {
-                
-                GameController.Self.PassTurn();
-                Player.Self.ResetPlayerVar();
+				Debug.Log ("Nome oggetto toccato: " + coll.gameObject.name);
+				GameController.Self.PassTurn ();
+				Player.Self.ResetPlayerVar ();
 
-                Destroy(this.gameObject);
+				Destroy(this.gameObject);
 
             }
            
         }
 
         void Update () {
+			//Controlla se la bomba esce dallo schermo
+			if (!GetComponent<Renderer> ().isVisible) {
+				Debug.Log ("Bomba uscita dallo schermo -> Player passa il turno");
+				GameController.Self.PassTurn ();
+				Player.Self.ResetPlayerVar ();
 
+				Destroy(this.gameObject);
+			}
            
         }
 }

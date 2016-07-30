@@ -50,7 +50,11 @@ namespace IndianaBones
 		GameObject expBar;      
 
         public int proiettili = 5;
+
         public GameObject dente;
+		public GameObject molotov;
+		public GameObject poison;
+
         public int x;
         public int y;
         public int bulletDir = 3;
@@ -66,7 +70,7 @@ namespace IndianaBones
         public GameObject child;
 		public Grid elementi;
 		GameObject canvasUI;
-		SpriteRenderer feedback;
+		//SpriteRenderer feedback;
 
         [Header("Level and Stats")]
         [Space(10)]
@@ -98,6 +102,7 @@ namespace IndianaBones
                 Destroy(gameObject);
             }
 
+			//Settiamo i parametri di inizio gioco
             if (playerLevel == 1)
             {
                 //Set the starting stats of the player
@@ -184,6 +189,34 @@ namespace IndianaBones
 			canMove = true;
 			isAttacking = false;
 			CrossActivationHandler ();
+		}
+
+
+		public void OnTriggerEnter2D(Collider2D coll) 
+		{
+
+			//Special weapons
+			if (coll.gameObject.tag == "Molotov")
+			{
+				this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+				currentLife -= 4;
+				StartCoroutine(FeedbackOff());
+
+			}
+			else if (coll.gameObject.tag == "Veleno")
+			{
+				this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+				currentLife -= 4;
+				StartCoroutine(FeedbackOff());
+
+			}
+
+		}
+
+
+		IEnumerator FeedbackOff (){
+			yield return new WaitForSeconds (0.3f);
+			this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
 		}
 
 
@@ -739,6 +772,95 @@ namespace IndianaBones
 			}
 		}
 
+
+		//Gestisce il lancio dell'oggetto bomba
+		public void MolotovAttack()
+		{
+			canMove = false;
+			GameObject newMolotov;
+			switch (croce) {
+
+			case 1:
+				audioPlayer.clip = SFX_LancioDente;
+				audioPlayer.Play();
+				bulletDir = 1;
+				newMolotov = Instantiate (molotov);
+				newMolotov.transform.position = up.transform.position;
+				break;
+
+			case 2:
+				audioPlayer.clip = SFX_LancioDente;
+				audioPlayer.Play();
+				bulletDir = 3;
+				newMolotov = Instantiate (molotov);
+				newMolotov.transform.position = right.transform.position;
+				break;
+
+			case 3:
+				audioPlayer.clip = SFX_LancioDente;
+				audioPlayer.Play();
+				newMolotov = Instantiate (molotov);
+				newMolotov.transform.position = down.transform.position;
+				bulletDir = 2;
+				break;
+
+			case 4:
+				audioPlayer.clip = SFX_LancioDente;
+				audioPlayer.Play();
+				newMolotov = Instantiate (molotov);
+				newMolotov.transform.position = left.transform.position;
+				bulletDir = 4;
+				break;
+
+			}
+
+
+		}
+
+
+		//Gestisce il lancio dell'oggetto bomba
+		public void PoisonAttack()
+		{
+			canMove = false;
+			GameObject newPoison;
+			switch (croce) {
+
+			case 1:
+				audioPlayer.clip = SFX_LancioDente;
+				audioPlayer.Play();
+				bulletDir = 1;
+				newPoison = Instantiate (poison);
+				newPoison.transform.position = up.transform.position;
+				break;
+
+			case 2:
+				audioPlayer.clip = SFX_LancioDente;
+				audioPlayer.Play();
+				bulletDir = 3;
+				newPoison = Instantiate (poison);
+				newPoison.transform.position = right.transform.position;
+				break;
+
+			case 3:
+				audioPlayer.clip = SFX_LancioDente;
+				audioPlayer.Play();
+				newPoison = Instantiate (poison);
+				newPoison.transform.position = down.transform.position;
+				bulletDir = 2;
+				break;
+
+			case 4:
+				audioPlayer.clip = SFX_LancioDente;
+				audioPlayer.Play();
+				newPoison = Instantiate (poison);
+				newPoison.transform.position = left.transform.position;
+				bulletDir = 4;
+				break;
+
+			}
+
+
+		}
 
     }
 }

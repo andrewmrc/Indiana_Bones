@@ -66,10 +66,24 @@ namespace IndianaBones
 		public int indexSlotPoison;
 		public int indexSlotEscapeRope;
 */
+		public static Hotbar Instance;
+
+		void Awake () {
+
+			//Metodo per passare l'oggetto da una scena all'altra
+			if (Instance == null) {
+				DontDestroyOnLoad (gameObject);
+				Instance = this;
+			} else if (Instance != this) {
+				Destroy (gameObject);
+			}
+
+		}
 
 		void Start()
 		{
-			GetTotalSlots ();
+			//GetTotalSlots ();
+			slotsInTotal = 5;
 		}
 
 		void Update()
@@ -223,7 +237,7 @@ namespace IndianaBones
 						transform.GetChild (itemIndex).GetChild (0).GetComponent<RectTransform> ().sizeDelta = new Vector2 (50, 50);
 						healthMilk = false;
 						itemsOnButton [itemIndex].gameObject.GetComponent<SlotButtonHandler> ().slotOccupied = false;
-
+						freeSlotsCount--;
 					} 
 					break;
 
@@ -243,7 +257,7 @@ namespace IndianaBones
 						transform.GetChild (itemIndex).GetChild (0).GetComponent<RectTransform> ().sizeDelta = new Vector2 (50, 50);
 						healthMozzy = false;
 						itemsOnButton [itemIndex].gameObject.GetComponent<SlotButtonHandler> ().slotOccupied = false;
-
+						freeSlotsCount--;
 					} 
 					break;
 				
@@ -263,7 +277,7 @@ namespace IndianaBones
 						transform.GetChild (itemIndex).GetChild (0).GetComponent<RectTransform> ().sizeDelta = new Vector2 (50, 50);
 						manaPotion = false;
 						itemsOnButton [itemIndex].gameObject.GetComponent<SlotButtonHandler> ().slotOccupied = false;
-
+						freeSlotsCount--;
 					} 
 					break;
 
@@ -271,9 +285,9 @@ namespace IndianaBones
 				case "Bomb":
 					Debug.Log ("Use Bomb");
 					bombsCount--;
-					//Inserire effetto script della bomba
 
-					GameController.Self.PassTurn (); // forse passerà il turno dopo che la bomba ha colpito
+					//Inserire effetto script della bomba
+					Player.Self.MolotovAttack();
 
 					transform.GetChild (itemIndex).GetChild (1).GetComponent<Text> ().text = ("x"+bombsCount.ToString ());
 					if (bombsCount <= 0) {
@@ -282,7 +296,7 @@ namespace IndianaBones
 						transform.GetChild (itemIndex).GetChild (0).GetComponent<RectTransform> ().sizeDelta = new Vector2 (50, 50);
 						bomb = false;
 						itemsOnButton [itemIndex].gameObject.GetComponent<SlotButtonHandler> ().slotOccupied = false;
-
+						freeSlotsCount--;
 					} 
 					break;
 
@@ -290,9 +304,9 @@ namespace IndianaBones
 				case "Poison":
 					Debug.Log ("Use Poison");
 					poisonCount--;
-					//Inserire effetto script veleno
 
-					GameController.Self.PassTurn (); //il turno passa dopo che il veleno si attiva
+					//Inserire effetto script veleno
+					Player.Self.PoisonAttack();
 
 					transform.GetChild (itemIndex).GetChild (1).GetComponent<Text> ().text = ("x"+manaPotionCount.ToString ());
 					if (manaPotionCount <= 0) {
@@ -301,7 +315,7 @@ namespace IndianaBones
 						transform.GetChild (itemIndex).GetChild (0).GetComponent<RectTransform> ().sizeDelta = new Vector2 (50, 50);
 						manaPotion = false;
 						itemsOnButton [itemIndex].gameObject.GetComponent<SlotButtonHandler> ().slotOccupied = false;
-
+						freeSlotsCount--;
 					} 
 					break;
 				}

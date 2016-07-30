@@ -41,6 +41,8 @@ namespace IndianaBones
 
             if (coll.gameObject.name == "dente(Clone)")
             {
+				gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 0, 0, 255);
+				StartCoroutine(ResetMyColor());
 
                 DannoPerDistruggerlo -= Player.Self.currentAttack;
 
