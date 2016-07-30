@@ -325,7 +325,7 @@ namespace IndianaBones
 				//Sottrae vita a questo nemico
 				vita -= damage+1;
 				Debug.Log("Questo nemico: " + this.gameObject.name + "-> subisce dal Player un totale danni di: " + damage);
-
+				StartCoroutine(UpdateHealthBar());
 
             }
 
