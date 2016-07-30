@@ -32,6 +32,7 @@ namespace IndianaBones
 
         public bool endMove;
 		public bool isDead;
+		bool isLevelUp;
 
         public int croce = 1;
 
@@ -48,6 +49,7 @@ namespace IndianaBones
 		GameObject healthBar;
 		GameObject manaBar;
 		GameObject expBar;      
+		GameObject levelUpImage;
 
         public int proiettili = 5;
 
@@ -366,13 +368,28 @@ namespace IndianaBones
 
 
 		//Gestisce il level up del player
-        public void LevelUp()
+		IEnumerator LevelUp()
         {
+			//Increase the player level
+			playerLevel++;
+
+			//Activate the feedback image
+			if (levelUpImage == null) {
+				levelUpImage = GameObject.FindGameObjectWithTag ("LevelUpIcon");
+			}
+			levelUpImage.GetComponent<Image>().enabled = true;
+
             //Save the previous required exp
             float expToPreviousLevelUp = expToLevelUp;
 
             //Set the new exp required to level up to the next level
             expToLevelUp = expToPreviousLevelUp * 1.5f;
+
+			//Update exp collected starting from zero
+			expCollected = expCollected - (int) expToPreviousLevelUp;
+			if (expCollected < 0) {
+				expCollected = 0;
+			}
 
             //Increase Life each level up
 			startingLife++;
@@ -392,11 +409,6 @@ namespace IndianaBones
 				currentMana = startingMana;
             }
 
-			//Update exp collected starting from zero
-			expCollected = expCollected - (int) expToPreviousLevelUp;
-			if (expCollected < 0) {
-				expCollected = 0;
-			}
 
 			//Aggiorna le barre con i nuovi valori max
 			healthBar.GetComponent<Slider> ().maxValue = startingLife;
@@ -405,6 +417,12 @@ namespace IndianaBones
 
 			//Ricarica i denti
 			proiettili = 5;
+
+			//Deactivate the feedback image
+			yield return new WaitForSeconds (1.5f);
+			levelUpImage.GetComponent<Image>().enabled = false;
+			isLevelUp = false;
+
         }
 
 
@@ -641,11 +659,16 @@ namespace IndianaBones
             
 
                 //Check if the player have reached the required exp to level up
-                if (expCollected >= expToLevelUp)
+				if (expCollected >= expToLevelUp && isLevelUp == false)
                 {
-                    playerLevel++;
-                    LevelUp();
+					isLevelUp = true;
+					StartCoroutine (LevelUp ());
                 }
+
+				//Debug button to level up rapidly
+				if (Input.GetKeyDown (KeyCode.L)) {
+					expCollected = (int)expToLevelUp+100;
+				}
 
 				if (elementi == null) {
 					UpdatePlayer ();
