@@ -31,7 +31,7 @@ namespace IndianaBones
 		bool isAttacking = false;
 
         public bool endMove;
-		bool isDead;
+		public bool isDead;
 
         public int croce = 1;
 
@@ -138,8 +138,28 @@ namespace IndianaBones
         }
 
 
+		public void UpdatePlayer () {
+			xPosition = (int)this.transform.position.x;
+			yPosition = (int)this.transform.position.y;
+			elementi = FindObjectOfType<Grid>();
+			targetTr = elementi.scacchiera[(int)GameController.Self.startPoint.transform.position.x, (int)GameController.Self.startPoint.transform.position.y].transform;
+			elementi.scacchiera[xPosition, yPosition].status = 4;
+			OldValue ();
+			gameObject.GetComponent<TurnHandler> ().itsMyTurn = true;
+			SetPlayerUI ();
+			Debug.Log ("Scena caricata, Player Reference recuperate");
+		}
+
+
 		public void SetPlayerUI () {
 			//Prepara la UI
+			if (canvasUI == null) {
+				canvasUI = GameObject.FindGameObjectWithTag ("CanvasUI");
+			}
+			canvasUI.SetActive (true);
+			if (canvasGameOver == null) {
+				canvasGameOver = GameObject.FindGameObjectWithTag ("CanvasGameOver");
+			}
 			healthText = GameObject.Find ("VitaText").GetComponent<Text>();
 			manaText = GameObject.Find ("ManaText").GetComponent<Text>();
 			nDenti = GameObject.Find ("CounterDentiText").GetComponent<Text> ();
@@ -162,24 +182,8 @@ namespace IndianaBones
 			expBar.GetComponent<Slider> ().maxValue = expToLevelUp;
 			expBar.GetComponent<Slider> ().value = expCollected;
 
-			canvasUI = GameObject.FindGameObjectWithTag ("CanvasUI");
-
-			canvasGameOver = GameObject.FindGameObjectWithTag ("CanvasGameOver");
 			canvasGameOver.SetActive (false);
 			Debug.Log ("Scena caricata, Player UI recuperata");
-		}
-
-
-		public void UpdatePlayer () {
-			xPosition = (int)this.transform.position.x;
-			yPosition = (int)this.transform.position.y;
-			elementi = FindObjectOfType<Grid>();
-			targetTr = elementi.scacchiera[(int)GameController.Self.startPoint.transform.position.x, (int)GameController.Self.startPoint.transform.position.y].transform;
-			elementi.scacchiera[xPosition, yPosition].status = 4;
-			OldValue ();
-			gameObject.GetComponent<TurnHandler> ().itsMyTurn = true;
-			SetPlayerUI ();
-			Debug.Log ("Scena caricata, Player Reference recuperate");
 		}
 
 

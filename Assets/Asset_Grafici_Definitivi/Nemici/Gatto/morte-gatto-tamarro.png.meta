@@ -1,13 +1,26 @@
 fileFormatVersion: 2
 guid: bbe85d9f05338cc42b03dd4ed58eae35
-timeCreated: 1469877428
+timeCreated: 1469881782
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: morte-gatto-tamarro_0
+    21300002: morte-gatto-tamarro_1
+    21300004: morte-gatto-tamarro_2
+    21300006: morte-gatto-tamarro_3
+    21300008: morte-gatto-tamarro_4
+    21300010: morte-gatto-tamarro_5
+    21300012: morte-gatto-tamarro_6
+    21300014: morte-gatto-tamarro_7
+    21300016: morte-gatto-tamarro_8
+    21300018: morte-gatto-tamarro_9
+    21300020: morte-gatto-tamarro_10
+    21300022: morte-gatto-tamarro_11
+    21300024: morte-gatto-tamarro_12
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -30,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -38,7 +51,7 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -49,7 +62,297 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: morte-gatto-tamarro_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 27, y: -2}
+        - {x: 3, y: 40}
+        - {x: -6, y: 50}
+        - {x: -27, y: 50}
+        - {x: -27, y: -49}
+        - {x: 34, y: -49}
+        - {x: 35, y: -45}
+        - {x: 35, y: -36}
+        - {x: 34, y: -18}
+    - name: morte-gatto-tamarro_1
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 27, y: -2}
+        - {x: 3, y: 40}
+        - {x: -6, y: 50}
+        - {x: -21, y: 50}
+        - {x: -22, y: 49}
+        - {x: -27, y: 36}
+        - {x: -27, y: -26}
+        - {x: -24, y: -49}
+        - {x: 33, y: -49}
+        - {x: 35, y: -43}
+        - {x: 34, y: -18}
+    - name: morte-gatto-tamarro_2
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 27, y: -2}
+        - {x: 3, y: 40}
+        - {x: -6, y: 50}
+        - {x: -21, y: 50}
+        - {x: -22, y: 49}
+        - {x: -27, y: 36}
+        - {x: -27, y: -26}
+        - {x: -24, y: -49}
+        - {x: 33, y: -49}
+        - {x: 35, y: -43}
+        - {x: 34, y: -18}
+    - name: morte-gatto-tamarro_3
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 27, y: -2}
+        - {x: 3, y: 40}
+        - {x: -6, y: 50}
+        - {x: -21, y: 50}
+        - {x: -22, y: 49}
+        - {x: -27, y: 36}
+        - {x: -27, y: -26}
+        - {x: -24, y: -49}
+        - {x: 33, y: -49}
+        - {x: 35, y: -43}
+        - {x: 34, y: -18}
+    - name: morte-gatto-tamarro_4
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 27, y: -2}
+        - {x: 3, y: 40}
+        - {x: -6, y: 50}
+        - {x: -21, y: 50}
+        - {x: -22, y: 49}
+        - {x: -27, y: 36}
+        - {x: -27, y: -26}
+        - {x: -24, y: -49}
+        - {x: 33, y: -49}
+        - {x: 35, y: -43}
+        - {x: 34, y: -18}
+    - name: morte-gatto-tamarro_5
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 27, y: -2}
+        - {x: 3, y: 40}
+        - {x: -6, y: 50}
+        - {x: -21, y: 50}
+        - {x: -22, y: 49}
+        - {x: -27, y: 36}
+        - {x: -27, y: -26}
+        - {x: -24, y: -49}
+        - {x: 33, y: -49}
+        - {x: 35, y: -43}
+        - {x: 34, y: -18}
+    - name: morte-gatto-tamarro_6
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -27, y: 50}
+        - {x: -27, y: -49}
+        - {x: 35, y: -49}
+        - {x: 35, y: -2}
+        - {x: 11, y: 50}
+    - name: morte-gatto-tamarro_7
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 3, y: 33}
+        - {x: -26, y: 33}
+        - {x: -26, y: -49}
+        - {x: 35, y: -49}
+        - {x: 35, y: -9}
+        - {x: 8, y: 32}
+      - - {x: -15, y: 43}
+        - {x: -12, y: 44}
+        - {x: -12, y: 47}
+        - {x: -15, y: 48}
+        - {x: -17, y: 46}
+    - name: morte-gatto-tamarro_8
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -24, y: 30}
+        - {x: -24, y: -49}
+        - {x: 35, y: -49}
+        - {x: 35, y: -14}
+        - {x: 7, y: 30}
+      - - {x: -15, y: 43}
+        - {x: -12, y: 44}
+        - {x: -12, y: 47}
+        - {x: -15, y: 48}
+        - {x: -17, y: 46}
+    - name: morte-gatto-tamarro_9
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 5, y: 24}
+        - {x: -24, y: 24}
+        - {x: -24, y: -49}
+        - {x: 27, y: -49}
+        - {x: 35, y: -48}
+        - {x: 35, y: -17}
+        - {x: 32, y: -3}
+        - {x: 19, y: 5}
+        - {x: 23, y: 15}
+      - - {x: -15, y: 43}
+        - {x: -12, y: 44}
+        - {x: -12, y: 47}
+        - {x: -15, y: 48}
+        - {x: -17, y: 46}
+    - name: morte-gatto-tamarro_10
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 33, y: -25}
+        - {x: 34, y: -16}
+        - {x: 20, y: -7}
+        - {x: -2, y: -7}
+        - {x: -18, y: -25}
+        - {x: -18, y: -46}
+        - {x: -10, y: -49}
+        - {x: 23, y: -49}
+        - {x: 34, y: -48}
+        - {x: 35, y: -43}
+        - {x: 35, y: -33}
+        - {x: 30, y: -27}
+      - - {x: -15, y: 43}
+        - {x: -12, y: 44}
+        - {x: -12, y: 47}
+        - {x: -15, y: 48}
+        - {x: -17, y: 46}
+    - name: morte-gatto-tamarro_11
+      rect:
+        serializedVersion: 2
+        x: 1100
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -5, y: -29}
+        - {x: -14, y: -29}
+        - {x: -17, y: -33}
+        - {x: -18, y: -36}
+        - {x: -18, y: -46}
+        - {x: -9, y: -49}
+        - {x: 18, y: -49}
+        - {x: 33, y: -48}
+        - {x: 35, y: -44}
+        - {x: 35, y: -36}
+        - {x: 30, y: -33}
+      - - {x: 21, y: -30}
+        - {x: 24, y: -29}
+        - {x: 24, y: -26}
+        - {x: 21, y: -25}
+        - {x: 19, y: -27}
+      - - {x: -15, y: 43}
+        - {x: -12, y: 44}
+        - {x: -12, y: 47}
+        - {x: -15, y: 48}
+        - {x: -17, y: 46}
+    - name: morte-gatto-tamarro_12
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -15, y: 43}
+        - {x: -12, y: 44}
+        - {x: -12, y: 47}
+        - {x: -15, y: 48}
+        - {x: -17, y: 46}
     outline: []
   spritePackingTag: 
   userData: 

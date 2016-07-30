@@ -66,19 +66,6 @@ namespace IndianaBones
 		public int indexSlotPoison;
 		public int indexSlotEscapeRope;
 */
-		public static Hotbar Instance;
-
-		void Awake () {
-
-			//Metodo per passare l'oggetto da una scena all'altra
-			if (Instance == null) {
-				DontDestroyOnLoad (gameObject);
-				Instance = this;
-			} else if (Instance != this) {
-				Destroy (gameObject);
-			}
-
-		}
 
 		void Start()
 		{
