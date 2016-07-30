@@ -485,7 +485,7 @@ namespace IndianaBones
 
         IEnumerator EnabledCollider()
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.4f);
             BoxCollider2D bc = GetComponent<BoxCollider2D>();
             bc.enabled = true;
             direzioneLancio = 0;
