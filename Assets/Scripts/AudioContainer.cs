@@ -29,6 +29,9 @@ public class AudioContainer : MonoBehaviour {
     public AudioClip SFX_Mummy_Death;
     public AudioClip SFX_AngryRa_Attack;
     public AudioClip SFX_AngryRa_Death;
+    public AudioClip SFX_Faraona_Attack;
+    public AudioClip SFX_Faraona_Death;
+
 
 
 
