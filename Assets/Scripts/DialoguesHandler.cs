@@ -10,6 +10,7 @@ public class DialoguesHandler : MonoBehaviour {
 	public List<string> dialogues = new List<string>();
 	public List<Sprite> indianaExpression = new List<Sprite>();
 	public List<Sprite> npcExpression = new List<Sprite>();
+	public List<Color32> textColors = new List<Color32>();
 
 	public GameObject textVisualized;
 	public GameObject indianaChar;
@@ -33,6 +34,7 @@ public class DialoguesHandler : MonoBehaviour {
 		//Time.timeScale = 0f;
 		textVisualized = this.transform.GetChild (0).GetChild(0).gameObject;
 		textVisualized.GetComponent<Text> ().text = dialogues [count];
+		textVisualized.GetComponent<Text> ().color = textColors [count];
 		indianaChar.GetComponent<Image> ().sprite = indianaExpression [count];
 		npcChar.GetComponent<Image> ().sprite = npcExpression [count];
 		npcChar.GetComponent<Image> ().SetNativeSize ();
@@ -49,6 +51,7 @@ public class DialoguesHandler : MonoBehaviour {
 				Debug.Log ("Stamp dialogo!");
 				count++;
 				textVisualized.GetComponent<Text> ().text = dialogues [count];
+				textVisualized.GetComponent<Text> ().color = textColors [count];
 				indianaChar.GetComponent<Image> ().sprite = indianaExpression [count];
 				npcChar.GetComponent<Image> ().sprite = npcExpression [count];
 			}else {
