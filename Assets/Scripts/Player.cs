@@ -58,8 +58,7 @@ namespace IndianaBones
 		public GameObject poison;
 		public GameObject feverAttack;
 
-        public int x;
-        public int y;
+        public int keyScarabeo;
         public int bulletDir = 3;
         public float speed = 2;
         public Transform targetTr;
