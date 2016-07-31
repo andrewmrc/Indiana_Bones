@@ -105,17 +105,7 @@ namespace IndianaBones
 		{
 			if (Player.Self.currentMana >= manaCostFever) {
 				Debug.Log ("Fever ability activated");
-
-				playerXPos = (int)Player.Self.transform.position.x;
-				playerYPos = (int)Player.Self.transform.position.y;
-				Player.Self.elementi.scacchiera [playerXPos, playerYPos].status = 0;
-				Player.Self.transform.position = GameController.Self.startPoint.transform.position;
-				Player.Self.targetTr = GameController.Self.startPoint.transform; //Player.Self.elementi.scacchiera [(int)GameController.Self.startPoint.transform.position.x, (int)GameController.Self.startPoint.transform.position.y].transform;
-				Player.Self.xOld = (int)GameController.Self.startPoint.transform.position.x;
-				Player.Self.xOld = (int)GameController.Self.startPoint.transform.position.y;
-				Player.Self.xPosition = (int)GameController.Self.startPoint.transform.position.x;
-				Player.Self.yPosition = (int)GameController.Self.startPoint.transform.position.y;
-				Player.Self.elementi.scacchiera [Player.Self.xPosition, Player.Self.yPosition].status = 4;
+				Player.Self.FeverAttack ();
 
 			} else {
 				Debug.Log ("Non basta il mana per l'attivazione");

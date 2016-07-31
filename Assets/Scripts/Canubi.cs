@@ -329,7 +329,13 @@ namespace IndianaBones
 				Debug.Log("Questo nemico: " + this.gameObject.name + "-> subisce dal Player un totale danni di: " + damage);
 				StartCoroutine(UpdateHealthBar());
 
-            }
+			} else if (coll.gameObject.tag == "FeverAttack")
+			{
+				feedback.enabled = true;
+				//Azzera vita a questo nemico
+				vita = 0;
+				StartCoroutine(UpdateHealthBar());
+			}
 
         }
 
@@ -482,9 +488,6 @@ namespace IndianaBones
 			//print("current clip length = " + animator.GetCurrentAnimatorStateInfo(0).length);
 			yield return new WaitForSeconds (1.3f);
 
-            //Abilitiamo la maschera
-            healthBar.GetComponentInParent<Mask>().enabled = true;
-
             //Aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
             Player.Self.IncreaseExp(levelsList[powerLevel].Exp);
             Destroy (this.gameObject);
@@ -492,6 +495,9 @@ namespace IndianaBones
 
 			//Chiama la funzione di drop item
 			DropHandler.Self.DropItems("Canubi", this.transform.position.x, this.transform.position.y);
+
+			//Abilitiamo la maschera
+			healthBar.GetComponentInParent<Mask>().enabled = true;
 		}
 
     }

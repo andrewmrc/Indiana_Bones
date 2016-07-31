@@ -109,7 +109,13 @@ namespace IndianaBones
 				Debug.Log("Questo nemico: " + this.gameObject.name + "-> subisce dal Player un totale danni di: " + damage);
 				StartCoroutine(UpdateHealthBar());
 
-            }
+			} else if (coll.gameObject.tag == "FeverAttack")
+			{
+				feedback.enabled = true;
+				//Azzera vita a questo nemico
+				vita = 0;
+				StartCoroutine(UpdateHealthBar());
+			}
 
             
         }

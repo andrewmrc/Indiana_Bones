@@ -17,7 +17,7 @@ namespace IndianaBones
         {
 
             //Da inserire all'interno dell'OnTriggerEnter2D di tutti i nemici
-            if (coll.gameObject.name == "armaFinale(Clone)")
+            if (coll.gameObject.tag == "FeverAttack")
             {
                 
                    // vita = 0;

@@ -56,6 +56,7 @@ namespace IndianaBones
         public GameObject dente;
 		public GameObject molotov;
 		public GameObject poison;
+		public GameObject feverAttack;
 
         public int x;
         public int y;
@@ -279,8 +280,8 @@ namespace IndianaBones
 
 		IEnumerator SetAnimationFalse (){
 			yield return new WaitForSeconds (0.5f);
-
 			animator.SetBool("DistanceAttack", false);
+			animator.SetBool("FeverAttack", false);
 		}
 
         public void Attacco()
@@ -812,6 +813,7 @@ namespace IndianaBones
 		//Gestisce il lancio dell'oggetto bomba
 		public void MolotovAttack()
 		{
+			animator.SetBool("DistanceAttack", true);
 			canMove = false;
 			GameObject newMolotov;
 			switch (croce) {
@@ -850,6 +852,7 @@ namespace IndianaBones
 
 			}
 
+			StartCoroutine (SetAnimationFalse ());
 
 		}
 
@@ -857,6 +860,7 @@ namespace IndianaBones
 		//Gestisce il lancio dell'oggetto bomba
 		public void PoisonAttack()
 		{
+			animator.SetBool("DistanceAttack", true);
 			canMove = false;
 			GameObject newPoison;
 			switch (croce) {
@@ -895,8 +899,57 @@ namespace IndianaBones
 
 			}
 
+			StartCoroutine (SetAnimationFalse ());
 
 		}
+
+
+		//Gestisce l'attacco ammiccante
+		public void FeverAttack()
+		{
+			animator.SetBool("FeverAttack", true);
+			canMove = false;
+			GameObject newFinalAttack;
+			switch (croce) {
+
+			case 1:
+				audioPlayer.clip = SFX_LancioDente;
+				audioPlayer.Play();
+				bulletDir = 1;
+				newFinalAttack = Instantiate (feverAttack);
+				newFinalAttack.transform.position = up.transform.position;
+				break;
+
+			case 2:
+				audioPlayer.clip = SFX_LancioDente;
+				audioPlayer.Play();
+				bulletDir = 3;
+				newFinalAttack = Instantiate (feverAttack);
+				newFinalAttack.transform.position = right.transform.position;
+				break;
+
+			case 3:
+				audioPlayer.clip = SFX_LancioDente;
+				audioPlayer.Play();
+				newFinalAttack = Instantiate (feverAttack);
+				newFinalAttack.transform.position = down.transform.position;
+				bulletDir = 2;
+				break;
+
+			case 4:
+				audioPlayer.clip = SFX_LancioDente;
+				audioPlayer.Play();
+				newFinalAttack = Instantiate (feverAttack);
+				newFinalAttack.transform.position = left.transform.position;
+				bulletDir = 4;
+				break;
+
+			}
+
+			StartCoroutine (SetAnimationFalse ());
+
+		}
+
 
     }
 }
