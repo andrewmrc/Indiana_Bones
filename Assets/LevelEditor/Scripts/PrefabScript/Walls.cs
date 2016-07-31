@@ -10,9 +10,11 @@ namespace IndianaBones
 		int y;
 		string tileName;
 
+		Grid myGrid;
+
 		void Start()
 		{
-			Grid myGrid = FindObjectOfType<Grid>();
+			myGrid = FindObjectOfType<Grid>();
 			x = (int)this.transform.position.x;
 			y = (int)this.transform.position.y;
 			tileName = this.gameObject.GetComponent<SpriteRenderer>().sprite.name;
@@ -28,6 +30,7 @@ namespace IndianaBones
 			Destroy(this.gameObject);
 
 		}
+
 
 	}
 }
