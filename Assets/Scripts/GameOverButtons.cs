@@ -9,10 +9,16 @@ namespace IndianaBones
 	public class GameOverButtons : MonoBehaviour {
 
 		public GameObject eventSystem;
+		public GameObject canvasUI;
+
+		void Awake (){
+			canvasUI = GameObject.FindGameObjectWithTag ("CanvasUI");
+			eventSystem = GameObject.Find ("EventSystem");
+
+		}
 
 		// Use this for initialization
 		void Start () {
-			eventSystem = GameObject.Find ("EventSystem");
 			eventSystem.GetComponent<EventSystem> ().firstSelectedGameObject = this.transform.GetChild (1).gameObject;
 			//this.gameObject.transform.parent.gameObject.SetActive (false);
 			//this.gameObject.SetActive (false);
@@ -21,6 +27,8 @@ namespace IndianaBones
 		
 		public void ExitToMenu()
 		{
+			ElementsReference.Self.canvasUI.SetActive (true);
+			ElementsReference.Self.canvasUI.GetComponent<CanvasGroup>().alpha = 0;
 			SceneManager.LoadScene("Menu");
 		}
 

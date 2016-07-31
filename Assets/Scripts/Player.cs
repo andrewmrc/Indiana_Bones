@@ -775,6 +775,7 @@ namespace IndianaBones
 			Debug.Log ("GAME OVER PANEL");
 			yield return new WaitForSeconds (1f);
 			canvasUI.SetActive (false);
+			//canvasUI.GetComponent<CanvasGroup>().alpha = 0;
 			yield return new WaitForSeconds (1f);
 			canvasGameOver.SetActive (true);
 			currentLife = startingLife;
