@@ -83,13 +83,40 @@ namespace IndianaBones
 						if (transform.GetChild (i).childCount != 0) {
 								//transform.GetChild (i).GetComponent<Image> ().color = new Color32 (0, 160, 255, 255);
 								//transform.GetChild (i).GetComponent<Button> ().onClick.Invoke();
-								Debug.Log ("i: " + i);
+							if (i <= 4) {
+								Debug.Log ("Item i: " + i);
 								ActivateItem (i);
+							} 
 						}
 					}
 				}
 			}
 
+
+			for (int i = 5; i < 8; i++)
+			{
+				if(Input.GetKeyDown(keyCodesForSlots[i])){
+					if (Player.Self.GetComponent<TurnHandler>().itsMyTurn)
+					{
+						if (transform.GetChild (i).childCount != 0) {
+							//transform.GetChild (i).GetComponent<Image> ().color = new Color32 (0, 160, 255, 255);
+							//transform.GetChild (i).GetComponent<Button> ().onClick.Invoke();
+							if (i >= 5) {
+								Debug.Log ("Ability i: " + i);
+								ActivateAbility (i);
+							}
+						}
+					}
+				}
+			}
+
+
+		}
+
+
+		public int GetTotalSlots()
+		{
+			return slotsInTotal = transform.childCount;
 		}
 
 
@@ -315,11 +342,42 @@ namespace IndianaBones
 		}
 
 
+		public void ActivateAbility (int keyCode){
+			Debug.Log ("Try activate ability");
 
-		public int GetTotalSlots()
-		{
-			return slotsInTotal = transform.childCount;
+			if (itemsOnButton [keyCode].gameObject.GetComponent<SlotButtonHandler> ().slotOccupied) {
+				string itemName = itemsOnButton [keyCode].gameObject.GetComponent<SlotButtonHandler> ().itemOnThisButton;
+				//int itemIndex = itemsOnButton [keyCode].gameObject.GetComponent<SlotButtonHandler> ().itemIndex;
+				Debug.Log ("Searching ability");
+
+				switch (itemName) {
+
+				case "Restore":
+					AbilityHandler.Self.Restore ();
+
+					break;
+
+
+				case "Fever":
+					AbilityHandler.Self.Fever ();
+
+					break;
+
+
+				case "EscapeRope":
+					AbilityHandler.Self.EscapeRope ();
+
+					break;
+
+
+				}
+
+			}
+
 		}
+
+
+
 
 
 	}

@@ -237,6 +237,7 @@ namespace IndianaBones
                         audioPlayer.Play();
                     proiettili -= 1;
 					bulletDir = 1;
+
 					nuovoDente = Instantiate (dente);
 					nuovoDente.transform.position = up.transform.position;
 					break;
@@ -272,9 +273,15 @@ namespace IndianaBones
 
 			}
 
-
+			StartCoroutine (SetAnimationFalse ());
         }
 
+
+		IEnumerator SetAnimationFalse (){
+			yield return new WaitForSeconds (0.5f);
+
+			animator.SetBool("DistanceAttack", false);
+		}
 
         public void Attacco()
         {
@@ -733,6 +740,7 @@ namespace IndianaBones
 				if (Input.GetKeyDown (KeyCode.LeftControl)) {
 					if (onOff == true && proiettili > 0) {
 						isAttacking = true;
+						animator.SetBool("DistanceAttack", true);
 						AttaccoADistanza ();
 					}
 				}

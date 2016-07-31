@@ -39,10 +39,7 @@ namespace IndianaBones
 
 		public void AttackHandler()
 		{
-			//Formula calcolo attacco 
-			//il risultato si sottrae alla vita del player
-
-
+			Debug.Log ("Gli spuntoni trappola stanno danneggiando il player");
 			Player.Self.currentLife -= trapDamage;
 
 			Player.Self.gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 0, 0, 255);
@@ -71,12 +68,14 @@ namespace IndianaBones
 			}
 
 
-			if (playerTurnsCount == nTrapTurn) {
+			if (playerTurnsCount == nTrapTurn && itsDangerous == false) {
 				itsDangerous = true;
 				SpriteRenderer spuntoni = GetComponent<SpriteRenderer>();
 				spuntoni.sprite = Resources.Load("Spuntoni_on", typeof(Sprite)) as Sprite;
 
-			} else if (playerTurnsCount == nTrapTurn + nTrapTurnStay) {
+			} 
+
+			if (playerTurnsCount >= nTrapTurn + nTrapTurnStay) {
 				StartCoroutine (DeactivateTrap());
 
 			}
@@ -84,8 +83,9 @@ namespace IndianaBones
 
 			if (Player.Self.transform.position == elementi.scacchiera[xPosition, yPosition].transform.position && itsDangerous)
 			{
-				playerTurnsCount += nTrapTurnStay;
 				itsDangerous = false;
+				//Resetta la trappola dopo aver colpito il player
+				//playerTurnsCount += nTrapTurnStay;
 				AttackHandler();
 			}
 
