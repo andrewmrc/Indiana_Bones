@@ -32,6 +32,8 @@ public class AudioContainer : MonoBehaviour {
     public AudioClip SFX_Faraona_Attack;
     public AudioClip SFX_Faraona_Death;
 
+    public AudioClip SFX_Temple_Door;
+
 
 
 
