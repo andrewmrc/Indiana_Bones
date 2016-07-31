@@ -484,8 +484,11 @@ namespace IndianaBones
 			//print("current clip length = " + animator.GetCurrentAnimatorStateInfo(0).length);
 			yield return new WaitForSeconds (1.3f);
 
-			//Aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
-			Player.Self.IncreaseExp(levelsList[powerLevel].Exp);
+            //Abilitiamo la maschera
+            healthBar.GetComponentInParent<Mask>().enabled = true;
+
+            //Aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
+            Player.Self.IncreaseExp(levelsList[powerLevel].Exp);
 
 			Destroy (this.gameObject);
 			elementi.scacchiera[xPosition, yPosition].status = 0;
