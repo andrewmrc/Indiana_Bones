@@ -295,12 +295,12 @@ namespace IndianaBones
 					//Inserire effetto script veleno
 					Player.Self.PoisonAttack();
 
-					transform.GetChild (itemIndex).GetChild (1).GetComponent<Text> ().text = ("x"+manaPotionCount.ToString ());
-					if (manaPotionCount <= 0) {
+					transform.GetChild (itemIndex).GetChild (1).GetComponent<Text> ().text = ("x"+poisonCount.ToString ());
+					if (poisonCount <= 0) {
 						transform.GetChild (itemIndex).GetChild (0).GetComponent<Image> ().sprite = null;
 						transform.GetChild (itemIndex).GetChild (0).GetComponent<Image> ().color = new Color32(255,255,255,0);
 						transform.GetChild (itemIndex).GetChild (0).GetComponent<RectTransform> ().sizeDelta = new Vector2 (50, 50);
-						manaPotion = false;
+						poison = false;
 						itemsOnButton [itemIndex].gameObject.GetComponent<SlotButtonHandler> ().slotOccupied = false;
 						freeSlotsCount--;
 					} 

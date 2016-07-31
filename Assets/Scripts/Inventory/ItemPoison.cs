@@ -22,7 +22,7 @@ namespace IndianaBones
 				Debug.Log ("Oggetto raccolto: " + gameObject.name);
 				//Raccoglie questo oggetto e lo passa ad un metodo della hotbar
 				//Se c'è già un oggetto di questo tipo lo somma altrimenti lo aggiunge al primo slot libero
-				//Se la hotbar è piena l'oggetto resta a terra
+				//Se la hotbar è piena l'oggetto resta a terra a meno che non ne abbiamo già uno di questo tipo
 				if (Hotbar.Self.freeSlotsCount < Hotbar.Self.slotsInTotal) {
 					Hotbar.Self.CheckItem ("Poison", this.gameObject.GetComponent<SpriteRenderer> ().sprite);
 					Destroy(this.gameObject);
@@ -30,9 +30,7 @@ namespace IndianaBones
 					Hotbar.Self.CheckItem ("Poison", this.gameObject.GetComponent<SpriteRenderer> ().sprite);
 					Destroy(this.gameObject);
 				}
-
-				Destroy (this.gameObject);
-
+					
 			}
 		}
 
