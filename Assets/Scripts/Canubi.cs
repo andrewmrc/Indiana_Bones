@@ -92,6 +92,8 @@ namespace IndianaBones
 			yield return new WaitForSeconds (0.7f);
 			//healthBar.SetActive (false);
             feedback.enabled = false;
+            //Abilitiamo la maschera
+            healthBar.GetComponentInParent<Mask>().enabled = true;
 
         }
 
