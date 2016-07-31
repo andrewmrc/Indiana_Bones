@@ -334,7 +334,7 @@ namespace IndianaBones
         {
 			xOld = xPosition;
             yOld = yPosition;
-			elementi.scacchiera[x, y].status = 0;
+			elementi.scacchiera[xPosition, yPosition].status = 0;
         }
 
 
@@ -491,10 +491,34 @@ namespace IndianaBones
 
         void Update()
         {
+			//Aggiorna la UI: vita/mana/exp/munizioni
+			nDenti.text = (proiettili.ToString());
+			healthText.text = (currentLife.ToString() + "/" + startingLife.ToString());
+			manaText.text = (currentMana.ToString() + "/" + startingMana.ToString());
+			playerLevelText.text = ("Lv. " + playerLevel.ToString());
+			healthBar.GetComponent<Slider> ().value = currentLife;
+			manaBar.GetComponent<Slider> ().value = currentMana;
+			expBar.GetComponent<Slider> ().value = expCollected;
 
-			x = xPosition;
-			y = yPosition;
 
+			//Check if the player have reached the required exp to level up
+			if (expCollected >= expToLevelUp && isLevelUp == false)
+			{
+				isLevelUp = true;
+				StartCoroutine (LevelUp ());
+			}
+
+			//Debug button to level up rapidly
+			if (Input.GetKeyDown (KeyCode.L)) {
+				expCollected = (int)expToLevelUp+100;
+			}
+
+			if (elementi == null) {
+				UpdatePlayer ();
+			}
+
+
+			//Gestisce turno player
 			if (currentLife > 0 && gameObject.GetComponent<TurnHandler>().itsMyTurn && isAttacking == false)
             {
 				
@@ -665,23 +689,42 @@ namespace IndianaBones
 				}
             
 
-                //Check if the player have reached the required exp to level up
-				if (expCollected >= expToLevelUp && isLevelUp == false)
-                {
-					isLevelUp = true;
-					StartCoroutine (LevelUp ());
-                }
-
-				//Debug button to level up rapidly
-				if (Input.GetKeyDown (KeyCode.L)) {
-					expCollected = (int)expToLevelUp+100;
+				if (Input.GetKeyDown("space"))
+				{
+					if (endMove == false) {
+						//Set true to the attack parameter of animation
+						animator.SetBool ("Attack", true);
+						Attacco ();
+					}
 				}
 
-				if (elementi == null) {
-					UpdatePlayer ();
+
+				if (Input.GetKeyDown(KeyCode.Z) && onOff == false && endMove == false)
+				{
+					onOff = true;
+					CrossActivationHandler ();
+					canMove = false;
+					crossActive = true;
+				}
+				else if (Input.GetKeyDown(KeyCode.Z) && onOff == true)
+				{
+					onOff = false;
+					CrossActivationHandler ();
+					canMove = true;
+					crossActive = false;
 				}
 
-                Vector3 distance = targetTr.position - this.transform.position;
+
+				if (Input.GetKeyDown (KeyCode.LeftControl)) {
+					if (onOff == true && proiettili > 0) {
+						isAttacking = true;
+						animator.SetBool("DistanceAttack", true);
+						AttaccoADistanza ();
+					}
+				}
+					
+
+				Vector3 distance = targetTr.position - Player.Self.transform.position;
                 Vector3 direction = distance.normalized;
 
                 transform.position = transform.position + direction * speed * Time.deltaTime;
@@ -709,53 +752,9 @@ namespace IndianaBones
                     }
 
                 }
-
-
-                if (Input.GetKeyDown("space"))
-                {
-					if (endMove == false) {
-						//Set true to the attack parameter of animation
-						animator.SetBool ("Attack", true);
-						Attacco ();
-					}
-                }
-
-                
-                if (Input.GetKeyDown(KeyCode.Z) && onOff == false && endMove == false)
-                {
-                    onOff = true;
-					CrossActivationHandler ();
-                    canMove = false;
-                    crossActive = true;
-                }
-                else if (Input.GetKeyDown(KeyCode.Z) && onOff == true)
-                {
-                    onOff = false;
-					CrossActivationHandler ();
-                    canMove = true;
-                    crossActive = false;
-                }
-
-
-				if (Input.GetKeyDown (KeyCode.LeftControl)) {
-					if (onOff == true && proiettili > 0) {
-						isAttacking = true;
-						animator.SetBool("DistanceAttack", true);
-						AttaccoADistanza ();
-					}
-				}
+					
              
             }
-
-
-			//Aggiorna la UI: vita/mana/exp/munizioni
-			nDenti.text = (proiettili.ToString());
-			healthText.text = (currentLife.ToString() + "/" + startingLife.ToString());
-			manaText.text = (currentMana.ToString() + "/" + startingMana.ToString());
-			playerLevelText.text = ("Lv. " + playerLevel.ToString());
-			healthBar.GetComponent<Slider> ().value = currentLife;
-			manaBar.GetComponent<Slider> ().value = currentMana;
-			expBar.GetComponent<Slider> ().value = expCollected;
 
 
 			//Gestisce la morte del player
