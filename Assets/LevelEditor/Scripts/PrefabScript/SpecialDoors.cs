@@ -11,6 +11,16 @@ namespace IndianaBones
 
         Grid elementi;
 
+		void Awake () {
+			if (this.gameObject.name.Contains ("Ankh")) {
+				this.tag = "Door_Ankh";
+			} else if (this.gameObject.name.Contains ("Eye")) {
+				this.tag = "Door_Eye";
+			} else if (this.gameObject.name.Contains ("Bird")) {
+				this.tag = "Door_Bird";
+			}
+		}
+
         void Start()
         {
             elementi = FindObjectOfType<Grid>();

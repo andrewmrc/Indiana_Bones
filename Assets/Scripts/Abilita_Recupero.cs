@@ -7,12 +7,13 @@ namespace IndianaBones
     public class Abilita_Recupero : MonoBehaviour
     {
 
-        public int puntiRecupero = 1;
+        public int manaCost = 1;
+		public int healthQuantity = 1;
 
         public void TravasoPuntiRecupero()
         {
-            Player.Self.currentLife += puntiRecupero;
-            Player.Self.currentMana -= puntiRecupero;
+			Player.Self.currentLife += healthQuantity;
+			Player.Self.currentMana -= manaCost;
         }
 
     }
