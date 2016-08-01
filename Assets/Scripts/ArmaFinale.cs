@@ -11,19 +11,22 @@ namespace IndianaBones
         public float forza = 5f;
         bool seen = false;
 
-        
+		Grid elementi;
+		Rigidbody2D rb;
+		BoxCollider2D bc;
 
-        // Update is called once per frame
+		void Start () {
 
+			elementi = FindObjectOfType<Grid>();
+			rb = GetComponent<Rigidbody2D>();
+			bc = GetComponent<BoxCollider2D>();
+
+		}
         
 
         void FixedUpdate()
         {
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-
-            Player objPlayer = FindObjectOfType<Player>();
-
-            switch (objPlayer.bulletDir)
+			switch (Player.Self.bulletDir)
             {
                 case 1:
                     rb.AddForce(transform.up * forza, ForceMode2D.Impulse);

@@ -68,6 +68,8 @@ namespace IndianaBones
 					if (Player.Self.currentMana < 0) {
 						Player.Self.currentMana = 0;
 					}
+					GameController.Self.PassTurn ();
+					Player.Self.ResetPlayerVar ();
 				} else {
 					Debug.Log ("La vita è già al massimo!");
 				}
@@ -83,6 +85,10 @@ namespace IndianaBones
 			if (Player.Self.currentMana >= manaCostEscape) {
 				Debug.Log ("Escape Rope ability activated");
 
+				Player.Self.currentMana -= manaCostEscape;
+				if (Player.Self.currentMana < 0) {
+					Player.Self.currentMana = 0;
+				}
 				playerXPos = (int)Player.Self.transform.position.x;
 				playerYPos = (int)Player.Self.transform.position.y;
 				Player.Self.elementi.scacchiera [playerXPos, playerYPos].status = 0;
@@ -93,7 +99,8 @@ namespace IndianaBones
 				Player.Self.xPosition = (int)GameController.Self.startPoint.transform.position.x;
 				Player.Self.yPosition = (int)GameController.Self.startPoint.transform.position.y;
 				Player.Self.elementi.scacchiera [Player.Self.xPosition, Player.Self.yPosition].status = 4;
-
+				GameController.Self.PassTurn ();
+				Player.Self.ResetPlayerVar ();
 			} else {
 				Debug.Log ("Non basta il mana per l'attivazione");
 			}
@@ -104,9 +111,14 @@ namespace IndianaBones
 		public void Fever()
 		{
 			if (Player.Self.currentMana >= manaCostFever) {
+				Player.Self.currentMana -= manaCostFever;
+				if (Player.Self.currentMana < 0) {
+					Player.Self.currentMana = 0;
+				}
 				Debug.Log ("Fever ability activated");
 				Player.Self.FeverAttack ();
-
+				GameController.Self.PassTurn ();
+				Player.Self.ResetPlayerVar ();
 			} else {
 				Debug.Log ("Non basta il mana per l'attivazione");
 			}
