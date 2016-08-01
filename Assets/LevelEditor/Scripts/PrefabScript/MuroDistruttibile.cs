@@ -20,7 +20,7 @@ namespace IndianaBones
             elementi.scacchiera[x, y].status = 3;
             elementi.scacchiera[x, y].name = "muro";
 
-
+			this.gameObject.tag = "Walls";
             
 
 
@@ -77,7 +77,38 @@ namespace IndianaBones
             }
 
 
+			//Special Weapons
+			if (coll.gameObject.tag == "Molotov")
+			{
+				gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 0, 0, 255);
+				StartCoroutine(ResetMyColor());
+				DannoPerDistruggerlo -= Player.Self.currentAttack;
+
+			}
+			if (coll.gameObject.tag == "Veleno")
+			{
+				gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 0, 0, 255);
+				StartCoroutine(ResetMyColor());
+				DannoPerDistruggerlo -= Player.Self.currentAttack;
+			}
+
         }
+
+
+		public void OnCollisionEnter2D(Collision2D coll)
+		{
+
+			if (coll.gameObject.name == "dente(Clone)") {
+				gameObject.GetComponent<SpriteRenderer> ().color = new Color32 (255, 0, 0, 255);
+				StartCoroutine (ResetMyColor ());
+				DannoPerDistruggerlo -= Player.Self.currentAttack;
+			} else if (coll.gameObject.tag == "FeverAttack") {
+				gameObject.GetComponent<SpriteRenderer> ().color = new Color32 (255, 0, 0, 255);
+				StartCoroutine (ResetMyColor ());
+				DannoPerDistruggerlo = 0;
+			}
+		}
+
 
         IEnumerator ResetMyColor()
         {

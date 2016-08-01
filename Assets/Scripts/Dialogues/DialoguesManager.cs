@@ -38,7 +38,7 @@ namespace IndianaBones
 		
 		}
 
-
+		//Set to true the corrsipondent dialogue index
 		public void SetDialogueSeen (int index) {
 			for (int i = 0; i < dialoguesActivated.Count; i++) {
 				if (i == index) {
@@ -46,9 +46,11 @@ namespace IndianaBones
 				}
 			}
 
-			CheckEvent ();
+			//CheckEvent ();
 		}
 
+
+		//I dont know
 		public void CheckDialogues () {
 			for (int i = 0; i < dialoguesToSee.Count; i++) {
 				if (!dialoguesActivated [i]) {
