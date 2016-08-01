@@ -744,8 +744,10 @@ namespace IndianaBones
 				if (Input.GetKeyDown("space"))
 				{
 					if (endMove == false) {
-						//Set true to the attack parameter of animation
-						animator.SetBool ("Attack", true);
+                        audioPlayer.clip = SFX_Attack;
+                        audioPlayer.Play();
+                        //Set true to the attack parameter of animation
+                        animator.SetBool ("Attack", true);
 						Attacco ();
 					}
 				}
