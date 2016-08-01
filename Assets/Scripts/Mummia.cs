@@ -547,12 +547,13 @@ namespace IndianaBones
             }
 
 
-            if (vita > 0)
-                elementi.scacchiera[xPosition, yPosition].status = 3;
+			if (vita > 0) {
+				elementi.scacchiera [xPosition, yPosition].status = 3;
+			}
 
-            if (ManhattanDist() < distanzaAttivazione)
-                rangeActive = true;
-
+			if (ManhattanDist () < distanzaAttivazione) {
+				rangeActive = true;
+			}
             
 
             Vector3 distance = targetTr.position - this.transform.position;

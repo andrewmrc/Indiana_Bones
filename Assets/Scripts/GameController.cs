@@ -39,9 +39,9 @@ namespace IndianaBones
         void Start()
         {
             charactersList.Add(Player.Self.gameObject);
-			if (startPoint != null) {
+			/*if (startPoint != null) {
 				Player.Self.transform.position = startPoint.transform.position;
-			}
+			}*/
             //Inseriamo tutti i nemici visibili nella lista e facciamo uno shuffle
             //charactersList.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
             /*for(int i = 1; i < charactersList.Count; i++)

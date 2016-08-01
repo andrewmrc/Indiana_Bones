@@ -31,7 +31,7 @@ namespace IndianaBones
 		bool isAttacking = false;
 
 		public bool fromLevelSup;
-		public bool fromLevelMin;
+		public bool fromLevelInf;
 
         public bool endMove;
 		public bool isDead;
@@ -145,16 +145,44 @@ namespace IndianaBones
 
 		public void UpdatePlayer () {
 			isDead = false;
-			if (fromLevelMin) {
-
-			} else {
-
-			}
-			xPosition = (int)this.transform.position.x;
-			yPosition = (int)this.transform.position.y;
 			elementi = FindObjectOfType<Grid>();
-			targetTr = elementi.scacchiera[(int)GameController.Self.startPoint.transform.position.x, (int)GameController.Self.startPoint.transform.position.y].transform;
-			elementi.scacchiera[xPosition, yPosition].status = 4;
+
+			if (fromLevelInf) {
+				Debug.Log ("fromlevelinf");
+				xPosition = (int)this.transform.position.x;
+				yPosition = (int)this.transform.position.y;
+				elementi.scacchiera [xPosition, yPosition].status = 0;
+				this.transform.position = GameController.Self.startPoint.transform.position;
+				targetTr = GameController.Self.startPoint.transform; 
+				xOld = (int)GameController.Self.startPoint.transform.position.x;
+				xOld = (int)GameController.Self.startPoint.transform.position.y;
+				xPosition = (int)GameController.Self.startPoint.transform.position.x;
+				yPosition = (int)GameController.Self.startPoint.transform.position.y;
+				elementi.scacchiera [xPosition, yPosition].status = 4;
+			} else if (fromLevelSup) {
+				Debug.Log ("fromlevelsup");
+
+				xPosition = (int)this.transform.position.x;
+				yPosition = (int)this.transform.position.y;
+				elementi.scacchiera [xPosition, yPosition].status = 0;
+				this.transform.position = GameController.Self.endPoint.transform.position;
+				targetTr = GameController.Self.endPoint.transform; 
+				xOld = (int)GameController.Self.endPoint.transform.position.x;
+				xOld = (int)GameController.Self.endPoint.transform.position.y;
+				xPosition = (int)GameController.Self.endPoint.transform.position.x;
+				yPosition = (int)GameController.Self.endPoint.transform.position.y;
+				elementi.scacchiera [xPosition, yPosition].status = 4;
+			} else {
+				Debug.Log ("defaultPosition");
+
+				xPosition = (int)this.transform.position.x;
+				yPosition = (int)this.transform.position.y;
+				elementi = FindObjectOfType<Grid>();
+				targetTr = elementi.scacchiera[xPosition, yPosition].transform;
+				elementi.scacchiera[xPosition, yPosition].status = 4;
+			}
+
+
 			OldValue ();
 			gameObject.GetComponent<TurnHandler> ().itsMyTurn = true;
 			SetPlayerUI ();

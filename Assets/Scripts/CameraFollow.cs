@@ -8,17 +8,22 @@ namespace IndianaBones
 
 
         public Transform target;
-		public Transform startPoint;
+		//public Transform startPoint;
 
 		void Awake () {
 			target = Player.Self.transform;
-			startPoint = GameObject.Find ("StartPoint").transform;
 		}
 
         void Start()
         {
 			//Se l'index di questa scena è maggiore di quello della scena precedente carica l'end point altrimenti lo start point
-			transform.position = new Vector3(startPoint.transform.position.x, startPoint.transform.position.y);
+			if (Player.Self.fromLevelInf) {
+				transform.position = new Vector3 (GameController.Self.startPoint.transform.position.x, GameController.Self.startPoint.transform.position.y);
+			} else if (Player.Self.fromLevelSup) {
+				transform.position = new Vector3 (GameController.Self.startPoint.transform.position.x, GameController.Self.endPoint.transform.position.y);
+			} else {
+				transform.position = new Vector3 (Player.Self.transform.position.x, Player.Self.transform.position.y);
+			}
         }
 
         // Update is called once per frame

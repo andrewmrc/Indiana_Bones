@@ -26,10 +26,11 @@ namespace IndianaBones
 
 			if (Player.Self.transform.position == myGrid.scacchiera [xPosition, yPosition].transform.position) {
 				if (ToNextLevel) {
-					Player.Self.fromLevelMin = false; //così apparirà nel prossimo start point
+					Player.Self.fromLevelSup = false;
+					Player.Self.fromLevelInf = true; //così apparirà nel prossimo start point
 				} else if (ToPreviousLevel) {
-					Player.Self.fromLevelSup = true; 
-
+					Player.Self.fromLevelInf = false;
+					Player.Self.fromLevelSup = true; //così apparirà nel precedente end point
 				}
 
 				Player.Self.gameObject.GetComponent<TurnHandler> ().itsMyTurn = true;
