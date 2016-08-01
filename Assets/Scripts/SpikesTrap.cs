@@ -22,7 +22,7 @@ namespace IndianaBones
 
 		public bool counted;
 		public bool itsDangerous;
-
+		bool hit;
 
 		void Start()
 		{
@@ -81,9 +81,9 @@ namespace IndianaBones
 			}
 
 
-			if (Player.Self.transform.position == elementi.scacchiera[xPosition, yPosition].transform.position && itsDangerous)
+			if (Player.Self.transform.position == elementi.scacchiera[xPosition, yPosition].transform.position && itsDangerous && !hit)
 			{
-				itsDangerous = false;
+				hit = true;
 				//Resetta la trappola dopo aver colpito il player
 				//playerTurnsCount += nTrapTurnStay;
 				AttackHandler();
@@ -97,6 +97,7 @@ namespace IndianaBones
 			SpriteRenderer spuntoni = GetComponent<SpriteRenderer>();
 			spuntoni.sprite = Resources.Load("Spuntoni_off", typeof(Sprite)) as Sprite;
 			itsDangerous = false;
+			hit = false;
 			playerTurnsCount = 0;
 		}
 
