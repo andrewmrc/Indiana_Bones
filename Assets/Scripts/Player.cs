@@ -41,6 +41,7 @@ namespace IndianaBones
 
         AudioSource audioPlayer;
         //inserisco le clip audio in previsione che i designer possano sostituirle con delle altre
+        public AudioClip SFX_Attack;
         public AudioClip SFX_LancioDente;
 
 
@@ -273,39 +274,39 @@ namespace IndianaBones
 				case 1:
                         audioPlayer.clip = SFX_LancioDente;
                         audioPlayer.Play();
-                    proiettili -= 1;
-					bulletDir = 1;
+                        proiettili -= 1;
+					    bulletDir = 1;
 
-					nuovoDente = Instantiate (dente);
-					nuovoDente.transform.position = up.transform.position;
-					break;
+					    nuovoDente = Instantiate (dente);
+					    nuovoDente.transform.position = up.transform.position;
+					    break;
 
 				case 2:
                         audioPlayer.clip = SFX_LancioDente;
                         audioPlayer.Play();
-                    proiettili -= 1;
-					bulletDir = 3;
-					nuovoDente = Instantiate (dente);
-					nuovoDente.transform.position = right.transform.position;
-					break;
+                        proiettili -= 1;
+					    bulletDir = 3;
+					    nuovoDente = Instantiate (dente);
+					    nuovoDente.transform.position = right.transform.position;
+					    break;
 
 				case 3:
                         audioPlayer.clip = SFX_LancioDente;
                         audioPlayer.Play();
-                    proiettili -= 1;
-					nuovoDente = Instantiate (dente);
-					nuovoDente.transform.position = down.transform.position;
-					bulletDir = 2;
+                        proiettili -= 1;
+					    nuovoDente = Instantiate (dente);
+					    nuovoDente.transform.position = down.transform.position;
+					    bulletDir = 2;
 					break;
 
 				case 4:
                         audioPlayer.clip = SFX_LancioDente;
                         audioPlayer.Play();
-                    proiettili -= 1;
-					nuovoDente = Instantiate (dente);
-					nuovoDente.transform.position = left.transform.position;
-					bulletDir = 4;
-					break;
+                        proiettili -= 1;
+					    nuovoDente = Instantiate (dente);
+					    nuovoDente.transform.position = left.transform.position;
+					    bulletDir = 4;
+					    break;
 
 				}
 
@@ -598,8 +599,10 @@ namespace IndianaBones
 					if (elementi.scacchiera [xPosition + 1, yPosition].status == 3 && isAttacking == false && endMove == false && canMove) {
 						Debug.Log ("Player Attacca Destra");
 						isAttacking = true;
-						//Set true to the attack parameter of animation
-						animator.SetBool ("Attack", true);
+                        audioPlayer.clip = SFX_Attack;
+                        audioPlayer.Play();
+                        //Set true to the attack parameter of animation
+                        animator.SetBool ("Attack", true);
 						Attacco ();
 					}
 				}
@@ -643,8 +646,10 @@ namespace IndianaBones
 					if (elementi.scacchiera [xPosition - 1, yPosition].status == 3 && isAttacking == false && endMove == false && canMove) {
 						Debug.Log ("Player Attacca Sinistra");
 						isAttacking = true;
-						//Set true to the attack parameter of animation
-						animator.SetBool ("Attack", true);
+                        audioPlayer.clip = SFX_Attack;
+                        audioPlayer.Play();
+                        //Set true to the attack parameter of animation
+                        animator.SetBool ("Attack", true);
 						Attacco ();
 					}
 				}
@@ -684,8 +689,10 @@ namespace IndianaBones
 					if (elementi.scacchiera [xPosition, yPosition - 1].status == 3 && isAttacking == false && endMove == false && canMove) {
 						Debug.Log ("Player Attacca Giù");
 						isAttacking = true;
-						//Set true to the attack parameter of animation
-						animator.SetBool ("Attack", true);
+                        audioPlayer.clip = SFX_Attack;
+                        audioPlayer.Play();
+                        //Set true to the attack parameter of animation
+                        animator.SetBool ("Attack", true);
 						Attacco ();
 					}
 				}
@@ -725,8 +732,10 @@ namespace IndianaBones
 					if (elementi.scacchiera [xPosition, yPosition + 1].status == 3 && isAttacking == false && endMove == false && canMove) {
 						Debug.Log ("Player Attacca Su");
 						isAttacking = true;
-						//Set true to the attack parameter of animation
-						animator.SetBool ("Attack", true);
+                        audioPlayer.clip = SFX_Attack;
+                        audioPlayer.Play();
+                        //Set true to the attack parameter of animation
+                        animator.SetBool ("Attack", true);
 						Attacco ();
 					}
 				}
