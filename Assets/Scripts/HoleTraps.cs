@@ -41,7 +41,7 @@ namespace IndianaBones
 					Player.Self.yPosition = Player.Self.yOld;
 
 					myGrid.scacchiera[Player.Self.xPosition, Player.Self.yPosition].status = 4;
-					myGrid.scacchiera[Player.Self.xPosition + 1, Player.Self.yPosition].status = 2;
+					myGrid.scacchiera[x + 1, y].status = 2;
 
 					SpriteRenderer buco = myGrid.scacchiera[x+1, y].GetComponent<SpriteRenderer>();
 					buco.sprite = Resources.Load("buco", typeof(Sprite)) as Sprite;
@@ -62,7 +62,7 @@ namespace IndianaBones
 					Player.Self.yPosition = Player.Self.yOld;
 
 					myGrid.scacchiera[Player.Self.xPosition, Player.Self.yPosition].status = 4;
-					myGrid.scacchiera[Player.Self.xPosition - 1, Player.Self.yPosition].status = 2;
+					myGrid.scacchiera[x - 1, y].status = 2;
 
 					SpriteRenderer buco = myGrid.scacchiera[x-1, y].GetComponent<SpriteRenderer>();
 					buco.sprite = Resources.Load("buco", typeof(Sprite)) as Sprite;
