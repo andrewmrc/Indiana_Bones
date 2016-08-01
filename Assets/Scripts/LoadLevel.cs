@@ -11,6 +11,8 @@ namespace IndianaBones
 		Grid myGrid;
 		int xPosition;
 		int yPosition;
+		public bool ToNextLevel;
+		public bool ToPreviousLevel;
 
 		// Use this for initialization
 		void Start () {
@@ -23,6 +25,13 @@ namespace IndianaBones
 		void Update () {
 
 			if (Player.Self.transform.position == myGrid.scacchiera [xPosition, yPosition].transform.position) {
+				if (ToNextLevel) {
+					Player.Self.fromLevelMin = false; //così apparirà nel prossimo start point
+				} else if (ToPreviousLevel) {
+					Player.Self.fromLevelSup = true; 
+
+				}
+
 				Player.Self.gameObject.GetComponent<TurnHandler> ().itsMyTurn = true;
 				SceneManager.LoadScene (levelToLoad);
 			}

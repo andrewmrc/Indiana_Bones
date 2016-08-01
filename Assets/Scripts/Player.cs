@@ -30,6 +30,9 @@ namespace IndianaBones
         //bool attacco = false;
 		bool isAttacking = false;
 
+		public bool fromLevelSup;
+		public bool fromLevelMin;
+
         public bool endMove;
 		public bool isDead;
 		bool isLevelUp;
@@ -142,6 +145,11 @@ namespace IndianaBones
 
 		public void UpdatePlayer () {
 			isDead = false;
+			if (fromLevelMin) {
+
+			} else {
+
+			}
 			xPosition = (int)this.transform.position.x;
 			yPosition = (int)this.transform.position.y;
 			elementi = FindObjectOfType<Grid>();
@@ -497,6 +505,11 @@ namespace IndianaBones
 
         void Update()
         {
+			//Quando viene ricaricata la scena o si passa da un livello all'altro aggiorniamo le reference
+			if (elementi == null) {
+				UpdatePlayer ();
+			}
+
 			//Aggiorna la UI: vita/mana/exp/munizioni
 			nDenti.text = (proiettili.ToString());
 			healthText.text = (currentLife.ToString() + "/" + startingLife.ToString());
@@ -517,10 +530,6 @@ namespace IndianaBones
 			//Debug button to level up rapidly
 			if (Input.GetKeyDown (KeyCode.L)) {
 				expCollected = (int)expToLevelUp+100;
-			}
-
-			if (elementi == null) {
-				UpdatePlayer ();
 			}
 
 
