@@ -22,10 +22,7 @@ public class DialoguesHandler : MonoBehaviour {
 	public GameObject canvasUI;
 
 	void Awake (){
-		player = GameObject.FindGameObjectWithTag ("Player");
-		canvasUI = GameObject.FindGameObjectWithTag ("CanvasUI");
-		canvasUI.SetActive(false);
-		player.gameObject.GetComponent<Player> ().enabled = false;
+
 	}
 
 
@@ -40,7 +37,11 @@ public class DialoguesHandler : MonoBehaviour {
 		npcChar.GetComponent<Image> ().SetNativeSize ();
         indianaChar.GetComponent<Image>().SetNativeSize();
 
-
+		player = GameObject.FindGameObjectWithTag ("Player");
+		canvasUI = GameObject.FindGameObjectWithTag ("CanvasUI");
+		canvasUI.SetActive(false);
+		Player.Self.GetComponent<Player> ().enabled = false;
+		//player.gameObject.GetComponent<Player> ().enabled = false;
     }
 
 
@@ -58,8 +59,8 @@ public class DialoguesHandler : MonoBehaviour {
 				Debug.Log ("Chiudi dialogo!");
 				this.gameObject.SetActive (false);
 				canvasUI.SetActive(true);
-				player.gameObject.GetComponent<Player> ().enabled = true;
-				//Time.timeScale = 1f;
+				//player.gameObject.GetComponent<Player> ().enabled = true;
+				Player.Self.GetComponent<Player> ().enabled = true;
 			} 
 		}
 

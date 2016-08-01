@@ -30,7 +30,7 @@ namespace IndianaBones
 
 		// Use this for initialization
 		void Start () {
-			CheckDialogues ();
+			//CheckDialogues ();
 		}
 		
 		// Update is called once per frame
@@ -56,6 +56,22 @@ namespace IndianaBones
 				}
 			}
 			CheckEvent ();
+		}
+
+
+		public bool CheckSeen (int index) {
+			for (int i = 0; i < 4; i++) {
+				Debug.Log ("CHECKSEEN: " + index);
+
+				if (i== index) {
+					Debug.Log ("IL DIALOGO TROVATO E': " + dialoguesActivated [i]);
+					return dialoguesActivated [i];
+				} else {
+					Debug.Log ("INDEX NON TROVATO");
+
+				}
+			}
+			return false;
 		}
 
 

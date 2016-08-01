@@ -11,6 +11,7 @@ namespace IndianaBones
 
 		public GameObject dialogueToEnable;
 		public int dialogueIndex;
+		bool started;
 
 		// Use this for initialization
 		void Start () {
@@ -22,15 +23,23 @@ namespace IndianaBones
 		
 		}
 
-		public void OnCollisionEnter2D(Collision2D coll)
+		public void OnTriggerStay2D(Collider2D coll) 
 		{
-			if (coll.gameObject.name == "Player") {
-				DialoguesManager.Self.SetDialogueSeen (dialogueIndex);
-				dialogueToEnable.SetActive (true);
-				Destroy (this.gameObject);
+			if (coll.gameObject.name == "Player" && !Player.Self.endMove && !started) {
+				started = true;
+				if(!DialoguesManager.Self.CheckSeen(dialogueIndex)){
+					Debug.Log ("Start Dialogue: " + DialoguesManager.Self.CheckSeen(dialogueIndex));
+					DialoguesManager.Self.SetDialogueSeen (dialogueIndex);
+					dialogueToEnable.SetActive (true);
+					this.gameObject.SetActive (false);
+					//Destroy (this.gameObject);
+				}
 			}
 
 		}
+
+
+		 
 	}
 
 }
