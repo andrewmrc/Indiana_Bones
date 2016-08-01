@@ -535,8 +535,6 @@ namespace IndianaBones
             //Controlliamo se la vita va a zero e chiamiamo il metodo che gestisce questo evento
             if (vita <= 0)
             {
-                //inserito per sicurezza il passaggio turno non appena muore la mummia
-                GameController.Self.PassTurn();
                 GameController.Self.charactersList.Remove(this.gameObject);
                 if (isDestroyed == false)
                 {
@@ -597,6 +595,9 @@ namespace IndianaBones
             //Aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
             Player.Self.IncreaseExp(levelsList[powerLevel].Exp);
 
+			//inserito per sicurezza il passaggio turno non appena muore la mummia
+			Player.Self.GetComponent<TurnHandler>().itsMyTurn = true;
+
 			elementi.scacchiera[xPosition, yPosition].status = 0;
             Destroy(this.gameObject);
 
@@ -605,6 +606,7 @@ namespace IndianaBones
 
 			//Abilitiamo la maschera
 			healthBar.GetComponentInParent<Mask>().enabled = true;
+
         }
 
     }

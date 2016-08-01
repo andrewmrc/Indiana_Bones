@@ -1,11 +1,12 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using IndianaBones;
 
 public class MenuController : MonoBehaviour {
 	
 	float indexSelected;
-
+	bool pressed;
 	bool  received_input;
 	public GameObject[] menu;
 	GameObject selection;
@@ -138,7 +139,7 @@ public class MenuController : MonoBehaviour {
 
 		}
 
-		if (!buttonPressed) {
+		if (!buttonPressed && GameController.Self.inPause) {
 			//do things based on actual selection 
 			if (selection == menu [0] && Input.GetKeyDown (KeyCode.Return)) {
 				buttonPressed = true;

@@ -25,7 +25,7 @@ public class Pause : MonoBehaviour
         pause.GetComponent<CanvasGroup>().alpha = 0;
         pause.GetComponent<CanvasGroup>().interactable = false;
 		pause.GetComponent<CanvasGroup>().blocksRaycasts = false;
-
+		GameController.Self.inPause = false;
     }
 
 
@@ -42,6 +42,7 @@ public class Pause : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Escape) && !Player.Self.isDead)
         {
 			//Time.timeScale = 0;
+			GameController.Self.inPause = true;
 			ElementsReference.Self.canvasUI.SetActive (false);
 			Player.Self.gameObject.SetActive (false);
             pause.GetComponent<CanvasGroup>().alpha = 1;
