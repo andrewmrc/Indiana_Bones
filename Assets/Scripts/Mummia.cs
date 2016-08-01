@@ -12,7 +12,7 @@ namespace IndianaBones
     {
         bool seen = false;
 
-
+		public GameObject itemKey;
         public GameObject cartaIgienica;
         public int attackPower = 1;
         public int vita = 1;
@@ -503,7 +503,8 @@ namespace IndianaBones
 			if (vita > 0 && gameObject.GetComponent<TurnHandler>().itsMyTurn && !isAttacking)
             {
                
-				gameObject.GetComponent<SpriteRenderer>().color = new Color32(0, 255, 0 ,255);
+				//Colora di verde il personaggio per far capire che è il suo turno
+				//gameObject.GetComponent<SpriteRenderer>().color = new Color32(0, 255, 0, 255);
 
                 APortatadiTiro();
             }
@@ -597,6 +598,11 @@ namespace IndianaBones
 			elementi.scacchiera[xPosition, yPosition].status = 0;
             Destroy(this.gameObject);
 
+			//Chiama la funzione di drop item
+			Instantiate(itemKey).gameObject.transform.position = new Vector2(xPosition,yPosition);
+
+			//Abilitiamo la maschera
+			healthBar.GetComponentInParent<Mask>().enabled = true;
         }
 
     }

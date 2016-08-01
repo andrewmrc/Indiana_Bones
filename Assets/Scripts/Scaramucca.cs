@@ -353,7 +353,8 @@ namespace IndianaBones
 
             if (vita > 0 && gameObject.GetComponent<TurnHandler>().itsMyTurn)
             {
-				gameObject.GetComponent<SpriteRenderer>().color = new Color32(0, 255, 0 ,255);
+				//Colora di verde il personaggio per far capire che è il suo turno
+				//gameObject.GetComponent<SpriteRenderer>().color = new Color32(0, 255, 0 ,255);
 
                 if (ManhattanDist() == 1)
                 {
