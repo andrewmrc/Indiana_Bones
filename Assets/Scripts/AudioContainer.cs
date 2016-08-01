@@ -16,6 +16,8 @@ public class AudioContainer : MonoBehaviour {
         }
     }
 
+    
+
     public AudioClip SFX_RotturaVaso;
     public AudioClip SFX_Canubi_Attack;
     public AudioClip SFX_Canubi_Death;
@@ -33,6 +35,8 @@ public class AudioContainer : MonoBehaviour {
     public AudioClip SFX_Faraona_Death;
 
     public AudioClip SFX_Temple_Door;
+    public AudioClip SFX_Muro_Distruttibile;
+    public AudioClip SFX_Pulsante_Porte;
 
 
 

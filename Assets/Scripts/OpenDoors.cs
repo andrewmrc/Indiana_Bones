@@ -12,11 +12,15 @@ public class OpenDoors : MonoBehaviour {
 	int xPosition;
 	int yPosition;
 
+    bool audioB = true;
+
 	private Grid elementi;
 
 	public bool door_Ankh;
 	public bool door_Eye;
 	public bool door_Bird;
+
+    AudioSource audioPulsante;
 
 	// Use this for initialization
 	void Start () {
@@ -36,10 +40,28 @@ public class OpenDoors : MonoBehaviour {
 		} else {
 			Debug.Log ("Specificare che tipo di porta si vuole aprire");
 		}
+
+        audioPulsante = GetComponent<AudioSource>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+
+    IEnumerator Pulsante()
+    {
+
+        yield return new WaitForSeconds(0.1f);
+        if (audioB == true)
+        {
+            audioPulsante.clip = AudioContainer.Self.SFX_Pulsante_Porte;
+            audioPulsante.Play();
+        }
+
+        audioB = false;
+
+
+    }
+
+    // Update is called once per frame
+    void Update () {
 		if (Player.Self.transform.position == elementi.scacchiera[xPosition, yPosition].transform.position && isActive == false)
 		{
 			isActive = true;
@@ -47,6 +69,7 @@ public class OpenDoors : MonoBehaviour {
 				//doors
 				elementi.scacchiera[(int)doorsToOpen.transform.position.x, (int)doorsToOpen.transform.position.y].status = 0;
 				this.gameObject.GetComponent<SpriteRenderer> ().sprite = buttonsActiveSprite;
+                StartCoroutine(Pulsante());
 				Destroy(doorsToOpen);
 			} else {
 				Debug.Log ("Porta da disattivare non inserita, prenderla dalla scena e trascinarla nell'apposito campo nell'Inspector");
