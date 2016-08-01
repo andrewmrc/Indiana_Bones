@@ -20,7 +20,7 @@ namespace IndianaBones
 			if (Player.Self.fromLevelInf) {
 				transform.position = new Vector3 (GameController.Self.startPoint.transform.position.x, GameController.Self.startPoint.transform.position.y);
 			} else if (Player.Self.fromLevelSup) {
-				transform.position = new Vector3 (GameController.Self.startPoint.transform.position.x, GameController.Self.endPoint.transform.position.y);
+				transform.position = new Vector3 (GameController.Self.endPoint.transform.position.x, GameController.Self.endPoint.transform.position.y);
 			} else {
 				transform.position = new Vector3 (Player.Self.transform.position.x, Player.Self.transform.position.y);
 			}
