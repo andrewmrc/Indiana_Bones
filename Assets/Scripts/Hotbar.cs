@@ -226,8 +226,21 @@ namespace IndianaBones
 
 		}
 
+        IEnumerator White()
+        {
+            Player.Self.gameObject.transform.GetChild(8).GetComponent<SpriteRenderer>().enabled = true;
+            yield return new WaitForSeconds(1);
+            Player.Self.gameObject.transform.GetChild(8).GetComponent<SpriteRenderer>().enabled = false;
+        }
 
-		public void ActivateItem (int keyCode){
+        IEnumerator Mana()
+        {
+            Player.Self.gameObject.transform.GetChild(7).GetComponent<SpriteRenderer>().enabled = true;
+            yield return new WaitForSeconds(1);
+            Player.Self.gameObject.transform.GetChild(7).GetComponent<SpriteRenderer>().enabled = false;
+        }
+
+        public void ActivateItem (int keyCode){
 			Debug.Log ("Try activate object");
 
 			if (itemsOnButton [keyCode].gameObject.GetComponent<SlotButtonHandler> ().slotOccupied) {
@@ -240,7 +253,8 @@ namespace IndianaBones
 					Debug.Log ("Use MILK");
 					healthMilkPotionCount--;
 					Player.Self.currentLife += 5;
-					if (Player.Self.currentLife > Player.Self.startingLife) {
+                        StartCoroutine(White());
+                        if (Player.Self.currentLife > Player.Self.startingLife) {
 						Player.Self.currentLife = Player.Self.startingLife;
 					}
 					GameController.Self.PassTurn ();
@@ -260,7 +274,8 @@ namespace IndianaBones
 					Debug.Log ("Use MOZZARELLA");
 					healthMozzyPotionCount--;
 					Player.Self.currentLife += 10;
-					if (Player.Self.currentLife > Player.Self.startingLife) {
+                        StartCoroutine(White());
+                        if (Player.Self.currentLife > Player.Self.startingLife) {
 						Player.Self.currentLife = Player.Self.startingLife;
 					}
 					GameController.Self.PassTurn ();
@@ -280,7 +295,8 @@ namespace IndianaBones
 					Debug.Log ("Use MANA POTION");
 					manaPotionCount--;
 					Player.Self.currentMana += 5;
-					if (Player.Self.currentMana > Player.Self.startingMana) {
+                        StartCoroutine(Mana());
+                        if (Player.Self.currentMana > Player.Self.startingMana) {
 						Player.Self.currentMana = Player.Self.startingMana;
 					}
 					GameController.Self.PassTurn ();
