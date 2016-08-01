@@ -149,11 +149,11 @@ namespace IndianaBones
 
 			if (fromLevelInf) {
 				Debug.Log ("fromlevelinf");
-				xPosition = (int)this.transform.position.x;
-				yPosition = (int)this.transform.position.y;
-				elementi.scacchiera [xPosition, yPosition].status = 0;
+				//xPosition = (int)this.transform.position.x;
+				//yPosition = (int)this.transform.position.y;
 				this.transform.position = GameController.Self.startPoint.transform.position;
-				targetTr = GameController.Self.startPoint.transform; 
+				targetTr = GameController.Self.startPoint.transform;
+				//elementi.scacchiera [xPosition, yPosition].status = 0;
 				xOld = (int)GameController.Self.startPoint.transform.position.x;
 				xOld = (int)GameController.Self.startPoint.transform.position.y;
 				xPosition = (int)GameController.Self.startPoint.transform.position.x;
@@ -162,11 +162,11 @@ namespace IndianaBones
 			} else if (fromLevelSup) {
 				Debug.Log ("fromlevelsup");
 
-				xPosition = (int)this.transform.position.x;
-				yPosition = (int)this.transform.position.y;
-				elementi.scacchiera [xPosition, yPosition].status = 0;
+				//xPosition = (int)this.transform.position.x;
+				//yPosition = (int)this.transform.position.y;
 				this.transform.position = GameController.Self.endPoint.transform.position;
 				targetTr = GameController.Self.endPoint.transform; 
+				//elementi.scacchiera [xPosition, yPosition].status = 0;
 				xOld = (int)GameController.Self.endPoint.transform.position.x;
 				xOld = (int)GameController.Self.endPoint.transform.position.y;
 				xPosition = (int)GameController.Self.endPoint.transform.position.x;
