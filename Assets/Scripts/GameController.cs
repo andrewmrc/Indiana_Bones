@@ -30,6 +30,7 @@ namespace IndianaBones
 		public GameObject startPoint;
 		public GameObject endPoint;
 		float backupDelay;
+		public bool inPause;
 
 		void Awake(){
 			//startPoint = GameObject.FindGameObjectWithTag ("StartPoint");
