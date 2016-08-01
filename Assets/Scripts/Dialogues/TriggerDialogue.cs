@@ -27,13 +27,13 @@ namespace IndianaBones
 		{
 			if (coll.gameObject.name == "Player" && !Player.Self.endMove && !started) {
 				started = true;
-				if(!DialoguesManager.Self.CheckSeen(dialogueIndex)){
+				if(Player.Self.GetComponent<DialoguesManager>().CheckSeen(dialogueIndex) == false){
 					Debug.Log ("Start Dialogue: " + DialoguesManager.Self.CheckSeen(dialogueIndex));
 					DialoguesManager.Self.SetDialogueSeen (dialogueIndex);
 					dialogueToEnable.SetActive (true);
-					this.gameObject.SetActive (false);
 					//Destroy (this.gameObject);
 				}
+				this.gameObject.SetActive (false);
 			}
 
 		}

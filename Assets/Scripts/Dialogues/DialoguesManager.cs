@@ -28,6 +28,22 @@ namespace IndianaBones
 		public int dialogueAbilityRope;
 		public int dialogueAbilityFever;
 
+		public static DialoguesManager Instance;
+
+		void Awake() {
+			//Metodo per passare l'oggetto da una scena all'altra
+			if (Instance == null)
+			{
+				DontDestroyOnLoad(gameObject);
+				Instance = this;
+			}
+			else if (Instance != this)
+			{
+				Destroy(gameObject);
+			}
+		}
+
+
 		// Use this for initialization
 		void Start () {
 			//CheckDialogues ();
@@ -46,7 +62,7 @@ namespace IndianaBones
 				}
 			}
 
-			//CheckEvent ();
+			CheckEvent ();
 		}
 
 
@@ -62,10 +78,10 @@ namespace IndianaBones
 
 
 		public bool CheckSeen (int index) {
-			for (int i = 0; i < 4; i++) {
+			for (int i = 0; i < dialoguesActivated.Count; i++) {
 				Debug.Log ("CHECKSEEN: " + index);
 
-				if (i== index) {
+				if (i == index) {
 					Debug.Log ("IL DIALOGO TROVATO E': " + dialoguesActivated [i]);
 					return dialoguesActivated [i];
 				} else {
@@ -83,21 +99,21 @@ namespace IndianaBones
 				if (i == dialogueAbilityRestore) {
 					if (dialoguesActivated [i]) {
 						Hotbar.Self.gameObject.transform.GetChild (5).GetComponent<SlotButtonHandler> ().slotOccupied = true;
-						Hotbar.Self.gameObject.transform.GetChild (5).GetChild (0).GetComponent<SpriteRenderer> ().color = new Color32 (255, 255, 255, 255);
+						Hotbar.Self.gameObject.transform.GetChild (5).GetChild (0).GetComponent<Image> ().color = new Color32 (255, 255, 255, 255);
 					}
 				} 
 
 				if (i == dialogueAbilityRope) {
 					if (dialoguesActivated [i]) {
 						Hotbar.Self.gameObject.transform.GetChild (6).GetComponent<SlotButtonHandler> ().slotOccupied = true;
-						Hotbar.Self.gameObject.transform.GetChild (6).GetChild (0).GetComponent<SpriteRenderer> ().color = new Color32 (255, 255, 255, 255);
+						Hotbar.Self.gameObject.transform.GetChild (6).GetChild (0).GetComponent<Image> ().color = new Color32 (255, 255, 255, 255);
 					}
 				}
 
 				if (i == dialogueAbilityFever) {
 					if (dialoguesActivated [i]) {
 						Hotbar.Self.gameObject.transform.GetChild (7).GetComponent<SlotButtonHandler> ().slotOccupied = true;
-						Hotbar.Self.gameObject.transform.GetChild (7).GetChild (0).GetComponent<SpriteRenderer> ().color = new Color32 (255, 255, 255, 255);
+						Hotbar.Self.gameObject.transform.GetChild (7).GetChild (0).GetComponent<Image> ().color = new Color32 (255, 255, 255, 255);
 					}
 				}
 			}

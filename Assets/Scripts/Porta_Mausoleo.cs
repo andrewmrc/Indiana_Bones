@@ -13,6 +13,11 @@ namespace IndianaBones
         SpriteRenderer porta;
         Grid elementi;
         bool abilitata;
+		//public GameObject doorOpenDialogueTile;
+		public GameObject dialogueToEnable;
+		public int dialogueIndex;
+		bool started;
+
 
         void Start()
         {
@@ -57,6 +62,14 @@ namespace IndianaBones
             portaAudio.Play();
             yield return new WaitForSeconds(1);
             elementi.scacchiera[xPosition, yPosition].status = 0;
+			//doorOpenDialogueTile.SetActive (true);
+			if(!DialoguesManager.Self.CheckSeen(dialogueIndex)){
+				Debug.Log ("Start Dialogue: " + DialoguesManager.Self.CheckSeen(dialogueIndex));
+				DialoguesManager.Self.SetDialogueSeen (dialogueIndex);
+				dialogueToEnable.SetActive (true);
+				this.gameObject.SetActive (false);
+				//Destroy (this.gameObject);
+			}
             Destroy(this.gameObject);
         }
     }
