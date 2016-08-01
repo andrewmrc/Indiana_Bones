@@ -9,8 +9,12 @@ namespace IndianaBones
         int x;
         int y;
 
+        bool suono;
+
         public int DannoPerDistruggerlo = 4;
         Grid elementi;
+
+        AudioSource MuroSound;
 
         void Start()
         {
@@ -21,6 +25,8 @@ namespace IndianaBones
             elementi.scacchiera[x, y].name = "muro";
 
 			this.gameObject.tag = "Walls";
+
+            MuroSound = GetComponent<AudioSource>();
             
 
 
@@ -116,12 +122,22 @@ namespace IndianaBones
             gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
         }
 
+        IEnumerator Distruggi()
+        {
+            MuroSound.clip = AudioContainer.Self.SFX_Muro_Distruttibile;
+            MuroSound.Play();
+            elementi.scacchiera[x, y].status = 0;
+            yield return new WaitForSeconds(0.8f);
+            Destroy(this.gameObject);
+        }
+
         void Update()
         {
-            if (DannoPerDistruggerlo <= 0)
+            if (DannoPerDistruggerlo <= 0 && suono == false)
             {
-                elementi.scacchiera[x, y].status = 0;
-                Destroy(this.gameObject);
+                suono = true;
+                StartCoroutine(Distruggi());
+                
             }
         }
 
