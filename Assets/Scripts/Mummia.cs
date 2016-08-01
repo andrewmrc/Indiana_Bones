@@ -535,6 +535,8 @@ namespace IndianaBones
             //Controlliamo se la vita va a zero e chiamiamo il metodo che gestisce questo evento
             if (vita <= 0)
             {
+                //inserito per sicurezza il passaggio turno non appena muore la mummia
+                GameController.Self.PassTurn();
                 GameController.Self.charactersList.Remove(this.gameObject);
                 if (isDestroyed == false)
                 {
