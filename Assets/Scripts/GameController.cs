@@ -65,6 +65,17 @@ namespace IndianaBones
 				delayTurni = backupDelay;
 			}
 
+			/*
+			//Gestisce l'attivazione del menu di pausa
+			if (Input.GetKeyDown(KeyCode.Escape) && Player.Self.isDead == false)
+			{
+				ElementsReference.Self.canvasPause.SetActive (true);
+				ElementsReference.Self.canvasUI.SetActive (false);
+				Player.Self.gameObject.SetActive (false);
+				Time.timeScale = 0;
+
+			}*/
+
         }
 
 

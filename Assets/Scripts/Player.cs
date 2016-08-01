@@ -141,6 +141,7 @@ namespace IndianaBones
 
 
 		public void UpdatePlayer () {
+			isDead = false;
 			xPosition = (int)this.transform.position.x;
 			yPosition = (int)this.transform.position.y;
 			elementi = FindObjectOfType<Grid>();
@@ -190,6 +191,7 @@ namespace IndianaBones
 
 
 		public void ResetPlayerVar(){
+			isDead = false;
 			onOff = false;
 			crossActive = false;
 			canMove = true;
@@ -775,13 +777,14 @@ namespace IndianaBones
 			Debug.Log ("GAME OVER PANEL");
 			yield return new WaitForSeconds (1f);
 			canvasUI.SetActive (false);
+			ElementsReference.Self.canvasPause.SetActive (false);
 			//canvasUI.GetComponent<CanvasGroup>().alpha = 0;
 			yield return new WaitForSeconds (1f);
 			canvasGameOver.SetActive (true);
 			currentLife = startingLife;
 			currentMana = startingMana;
 			proiettili = 5;
-			isDead = false;
+			//isDead = false;
 			animator.SetFloat ("Life", currentLife);
 			gameObject.GetComponent<TurnHandler> ().itsMyTurn = false;
 		}

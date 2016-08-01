@@ -8,18 +8,19 @@ namespace IndianaBones
 {
 	public class GameOverButtons : MonoBehaviour {
 
-		public GameObject eventSystem;
-		public GameObject canvasUI;
+		//public GameObject eventSystem;
+		//public GameObject canvasUI;
+		bool pressed;
 
 		void Awake (){
-			canvasUI = GameObject.FindGameObjectWithTag ("CanvasUI");
-			eventSystem = GameObject.Find ("EventSystem");
+			//canvasUI = GameObject.FindGameObjectWithTag ("CanvasUI");
+			//eventSystem = GameObject.Find ("EventSystem");
 
 		}
 
 		// Use this for initialization
 		void Start () {
-			eventSystem.GetComponent<EventSystem> ().firstSelectedGameObject = this.transform.GetChild (1).gameObject;
+			//eventSystem.GetComponent<EventSystem> ().firstSelectedGameObject = this.transform.GetChild (1).gameObject;
 			//this.gameObject.transform.parent.gameObject.SetActive (false);
 			//this.gameObject.SetActive (false);
 
@@ -27,16 +28,24 @@ namespace IndianaBones
 		
 		public void ExitToMenu()
 		{
-			ElementsReference.Self.canvasUI.SetActive (true);
-			ElementsReference.Self.canvasUI.GetComponent<CanvasGroup>().alpha = 0;
-			SceneManager.LoadScene("Menu");
+			if (!pressed) {
+				pressed = true;
+				Debug.Log ("TORNA AL MENU");
+				ElementsReference.Self.canvasUI.SetActive (true);
+				ElementsReference.Self.canvasUI.GetComponent<CanvasGroup> ().alpha = 0;
+				SceneManager.LoadScene ("Menu");
+			}
 		}
 
 		public void reloadScene ()
 		{
-			Scene thisScene = SceneManager.GetActiveScene ();
-			Player.Self.gameObject.GetComponent<TurnHandler> ().itsMyTurn = true;
-			SceneManager.LoadScene (thisScene.name);
+			if (!pressed) {
+				pressed = true;
+				Debug.Log ("CONTINUA PARTITA");
+				Scene thisScene = SceneManager.GetActiveScene ();
+				Player.Self.gameObject.GetComponent<TurnHandler> ().itsMyTurn = true;
+				SceneManager.LoadScene (thisScene.name);
+			}
 		}
 	}
 }

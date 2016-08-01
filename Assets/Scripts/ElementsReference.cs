@@ -23,15 +23,23 @@ namespace IndianaBones
 
 		public GameObject canvasUI;
 		public GameObject canvasGameOver;
+		public GameObject canvasPause;
+
+		void Awake () {
+			
+		}
 
 		// Use this for initialization
 		void Start () {
-		
+
 		}
 		
 		// Update is called once per frame
 		void Update () {
-		
+			if (canvasUI == null) {
+				//Debug.Log ("CANVAS TROVATO");
+				canvasUI = GameObject.FindGameObjectWithTag ("CanvasUI");
+			}
 		}
 	}
 
