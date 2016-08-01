@@ -27,6 +27,7 @@ namespace IndianaBones
 		private Animator animator;
 		bool isAttacking = false;
         bool isDestroyed;
+        public int incrementoVitaFaraona = 2;
 
         AudioSource audioFaraona;
 
@@ -163,7 +164,7 @@ namespace IndianaBones
 
                     case 2:
 
-                    Fermo();
+                    RecuperoVita();
                     break;
 
                 
@@ -174,9 +175,16 @@ namespace IndianaBones
            
         }
 
-        public void Fermo()
+        public void RecuperoVita()
         {
-           
+
+            if (vita < levelsList[powerLevel].Life)
+            {
+                if (vita + incrementoVitaFaraona <= levelsList[powerLevel].Life)
+                {
+                    vita += incrementoVitaFaraona;
+                }
+            }
             StartCoroutine(ResetMyColor());
 
             GameController.Self.PassTurn();
