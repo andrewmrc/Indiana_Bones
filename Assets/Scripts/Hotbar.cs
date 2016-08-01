@@ -228,6 +228,9 @@ namespace IndianaBones
 
         IEnumerator White()
         {
+            Player.Self.audioPlayer.Play();
+            Player.Self.audioPlayer.clip = AudioContainer.Self.SFX_Consumabile;
+            Player.Self.audioPlayer.Play();
             Player.Self.gameObject.transform.GetChild(8).GetComponent<SpriteRenderer>().enabled = true;
             yield return new WaitForSeconds(1);
             Player.Self.gameObject.transform.GetChild(8).GetComponent<SpriteRenderer>().enabled = false;
@@ -235,6 +238,9 @@ namespace IndianaBones
 
         IEnumerator Mana()
         {
+            Player.Self.audioPlayer.Play();
+            Player.Self.audioPlayer.clip = AudioContainer.Self.SFX_Consumabile;
+            Player.Self.audioPlayer.Play();
             Player.Self.gameObject.transform.GetChild(7).GetComponent<SpriteRenderer>().enabled = true;
             yield return new WaitForSeconds(1);
             Player.Self.gameObject.transform.GetChild(7).GetComponent<SpriteRenderer>().enabled = false;

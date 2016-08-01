@@ -38,6 +38,8 @@ public class AudioContainer : MonoBehaviour {
     public AudioClip SFX_Muro_Distruttibile;
     public AudioClip SFX_Pulsante_Porte;
 
+    public AudioClip SFX_Consumabile;
+
 
 
 

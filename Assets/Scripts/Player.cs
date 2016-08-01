@@ -39,10 +39,11 @@ namespace IndianaBones
 
         public int croce = 1;
 
-        AudioSource audioPlayer;
+        public AudioSource audioPlayer;
         //inserisco le clip audio in previsione che i designer possano sostituirle con delle altre
         public AudioClip SFX_Attack;
         public AudioClip SFX_LancioDente;
+        public AudioClip SFX_Level_Up;
 
 
         public GameObject up;
@@ -427,6 +428,11 @@ namespace IndianaBones
 
 			//Activate the feedback "Coriandoli"
 			this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
+
+            audioPlayer.Stop();
+            audioPlayer.clip = SFX_Level_Up;
+            audioPlayer.Play();
+
 
             //Save the previous required exp
             float expToPreviousLevelUp = expToLevelUp;
