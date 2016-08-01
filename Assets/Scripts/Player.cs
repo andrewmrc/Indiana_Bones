@@ -388,6 +388,9 @@ namespace IndianaBones
 			}
 			levelUpImage.GetComponent<Image>().enabled = true;
 
+			//Activate the feedback "Coriandoli"
+			this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
+
             //Save the previous required exp
             float expToPreviousLevelUp = expToLevelUp;
 
@@ -430,6 +433,7 @@ namespace IndianaBones
 			//Deactivate the feedback image
 			yield return new WaitForSeconds (1.5f);
 			levelUpImage.GetComponent<Image>().enabled = false;
+			this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = false;
 			isLevelUp = false;
 
         }
