@@ -41,7 +41,7 @@ public class Pause : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Escape) && !Player.Self.isDead)
         {
-			Time.timeScale = 0;
+			//Time.timeScale = 0;
 			ElementsReference.Self.canvasUI.SetActive (false);
 			Player.Self.gameObject.SetActive (false);
             pause.GetComponent<CanvasGroup>().alpha = 1;
