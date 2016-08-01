@@ -599,7 +599,7 @@ namespace IndianaBones
             Destroy(this.gameObject);
 
 			//Chiama la funzione di drop item
-			Instantiate(itemKey).gameObject.transform.position = new Vector2(xPosition,yPosition);
+			Instantiate(itemKey).gameObject.transform.position =  elementi.scacchiera[xPosition,yPosition].transform.position;
 
 			//Abilitiamo la maschera
 			healthBar.GetComponentInParent<Mask>().enabled = true;
