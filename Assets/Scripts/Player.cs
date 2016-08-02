@@ -184,7 +184,7 @@ namespace IndianaBones
 				elementi.scacchiera[xPosition, yPosition].status = 4;
 			}
 
-
+			this.transform.rotation = Quaternion.Euler(0, 0, 0);
 			OldValue ();
 			gameObject.GetComponent<TurnHandler> ().itsMyTurn = true;
 			SetPlayerUI ();
