@@ -201,10 +201,10 @@ namespace IndianaBones
 			if (canvasGameOver == null) {
 				canvasGameOver = GameObject.FindGameObjectWithTag ("CanvasGameOver");
 			}
-			healthText = GameObject.Find ("VitaText").GetComponent<Text>();
-			manaText = GameObject.Find ("ManaText").GetComponent<Text>();
-			nDenti = GameObject.Find ("CounterDentiText").GetComponent<Text> ();
-			playerLevelText = GameObject.Find ("PlayerLevelText").GetComponent<Text> ();
+			healthText = GameObject.FindWithTag ("VitaText").GetComponent<Text>();
+			manaText = GameObject.FindWithTag ("ManaText").GetComponent<Text>();
+			nDenti = GameObject.FindWithTag ("CounterDentiText").GetComponent<Text> ();
+			playerLevelText = GameObject.FindWithTag ("PlayerLevelText").GetComponent<Text> ();
 			healthBar = GameObject.FindGameObjectWithTag ("PlayerHealthBar");
 			manaBar = GameObject.FindGameObjectWithTag ("PlayerManaBar");
 			expBar = GameObject.FindGameObjectWithTag ("PlayerExpBar");
@@ -546,12 +546,33 @@ namespace IndianaBones
 			}
 
 			//Aggiorna la UI: vita/mana/exp/munizioni
+			if (nDenti == null) {
+
+			}
 			nDenti.text = (proiettili.ToString());
+			if (healthText == null) {
+				UpdatePlayer ();
+			}
 			healthText.text = (currentLife.ToString() + "/" + startingLife.ToString());
+			if (manaText == null) {
+				UpdatePlayer ();
+			}
 			manaText.text = (currentMana.ToString() + "/" + startingMana.ToString());
+			if (playerLevel == null) {
+				UpdatePlayer ();
+			}
 			playerLevelText.text = ("Lv. " + playerLevel.ToString());
+			if (healthBar == null) {
+				UpdatePlayer ();
+			}
 			healthBar.GetComponent<Slider> ().value = currentLife;
+			if (manaBar == null) {
+				UpdatePlayer ();
+			}
 			manaBar.GetComponent<Slider> ().value = currentMana;
+			if (expBar == null) {
+				UpdatePlayer ();
+			}
 			expBar.GetComponent<Slider> ().value = expCollected;
 
 

@@ -13,11 +13,13 @@ namespace IndianaBones
 		public int dialogueIndex;
 		bool started;
 		public GameObject specialObjects;
+		public bool destroyLater;
 
 		// Use this for initialization
 		void Start () {
 			if (DialoguesManager.Self.dialoguesActivated [dialogueIndex]) {
 				if (specialObjects != null) {
+					Debug.Log ("Tolgo l'oggetto marcato dalla scena");
 					specialObjects.SetActive (false);
 				}
 			}
@@ -37,7 +39,7 @@ namespace IndianaBones
 					DialoguesManager.Self.SetDialogueSeen (dialogueIndex);
 					dialogueToEnable.SetActive (true);
 					//Destroy (this.gameObject);
-					if (specialObjects != null) {
+					if (specialObjects != null && !destroyLater) {
 						specialObjects.SetActive (false);
 					}
 				}
