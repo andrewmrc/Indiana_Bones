@@ -41,6 +41,7 @@ namespace IndianaBones
 					//Destroy (this.gameObject);
 					if (specialObjects != null && !destroyLater) {
 						specialObjects.SetActive (false);
+						//StartCoroutine(DeactivateObject());
 					}
 				}
 				this.gameObject.SetActive (false);
@@ -49,7 +50,12 @@ namespace IndianaBones
 		}
 
 
-		 
+		IEnumerator DeactivateObject(){
+			Debug.Log ("DEACT");
+			yield return new WaitForSeconds (3f);
+			specialObjects.SetActive (false);
+
+		}
 	}
 
 }

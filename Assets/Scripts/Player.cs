@@ -770,7 +770,7 @@ namespace IndianaBones
 
 				if (Input.GetKeyDown("space"))
 				{
-					if (endMove == false) {
+					if (endMove == false && !crossActive) {
                         audioPlayer.clip = SFX_Attack;
                         audioPlayer.Play();
                         //Set true to the attack parameter of animation
@@ -796,7 +796,9 @@ namespace IndianaBones
 				}
 
 
-				if (Input.GetKeyDown (KeyCode.LeftControl)) {
+				//if (Input.GetKeyDown (KeyCode.LeftControl)) {
+				if (Input.GetKeyDown("space"))
+				{
 					if (onOff == true && proiettili > 0) {
 						isAttacking = true;
 						animator.SetBool("DistanceAttack", true);
