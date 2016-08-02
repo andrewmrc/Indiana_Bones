@@ -27,6 +27,8 @@ namespace IndianaBones
 		private Animator animator;
 		bool isAttacking = false;
         bool isDestroyed;
+		public GameObject dialoguePostFight;
+		public int dialogueIndex;
 
         AudioSource audioMummy;
 
@@ -602,8 +604,16 @@ namespace IndianaBones
 			elementi.scacchiera[xPosition, yPosition].status = 0;
             Destroy(this.gameObject);
 
-			//Chiama la funzione di drop item
-			Instantiate(itemKey).gameObject.transform.position =  elementi.scacchiera[xPosition,yPosition].transform.position;
+			if(!DialoguesManager.Self.CheckSeen(dialogueIndex)){
+				Debug.Log ("Start Dialogue: " + DialoguesManager.Self.CheckSeen(dialogueIndex));
+				DialoguesManager.Self.SetDialogueSeen (dialogueIndex);
+				dialoguePostFight.SetActive (true);
+
+				//Chiama la funzione di drop item
+				Instantiate(itemKey).gameObject.transform.position =  elementi.scacchiera[xPosition,yPosition].transform.position;
+
+			}
+
 
 			//Abilitiamo la maschera
 			healthBar.GetComponentInParent<Mask>().enabled = true;

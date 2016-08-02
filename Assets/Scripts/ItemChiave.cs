@@ -11,7 +11,7 @@ namespace IndianaBones
 
         public Transform targetTr;
         public float speed = 1;
-        GameObject stemma;
+        public GameObject stemma;
         // Use this for initialization
         void Start()
         {
@@ -21,6 +21,9 @@ namespace IndianaBones
         // Update is called once per frame
         void Update()
         {
+			if (stemma == null) {
+				stemma = GameObject.FindGameObjectWithTag("CanvasUI");
+			}
 
 			targetTr = Player.Self.transform;
             Vector3 distance = targetTr.position - this.transform.position;
@@ -28,12 +31,13 @@ namespace IndianaBones
             if (distance.magnitude < 0.10f)
             {
 
-                if (name == "Item_Key_1")
-                    stemma.transform.GetChild(7).GetChild(1).GetComponent<Image>().enabled = true;
-                else if (name == "Item_Key_2")
-                    stemma.transform.GetChild(7).GetChild(0).GetComponent<Image>().enabled = true;
-                else if (name == "Item_Key_3")
-                    stemma.transform.GetChild(7).GetChild(2).GetComponent<Image>().enabled = true;
+				if (this.gameObject.tag == "Item_Key_1") {
+					stemma.transform.GetChild (7).GetChild (1).GetComponent<Image> ().enabled = true;
+				} else if (this.gameObject.tag == "Item_Key_2") {
+					stemma.transform.GetChild (7).GetChild (0).GetComponent<Image> ().enabled = true;
+				} else if (this.gameObject.tag == "Item_Key_3") {
+					stemma.transform.GetChild (7).GetChild (2).GetComponent<Image> ().enabled = true;
+				}
 
 
                 transform.position = targetTr.position;
