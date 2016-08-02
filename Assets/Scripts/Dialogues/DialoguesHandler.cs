@@ -61,11 +61,13 @@ public class DialoguesHandler : MonoBehaviour {
 				canvasUI.SetActive(true);
 				//player.gameObject.GetComponent<Player> ().enabled = true;
 				Player.Self.GetComponent<Player> ().enabled = true;
+				if (DialoguesManager.Self.dialoguesActivated [20]) {
+					GameController.Self.StartEndGameCoroutine ();
+				}
 			} 
 		}
 
 	}
-
 
 
 }

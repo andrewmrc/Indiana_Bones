@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 namespace IndianaBones
 {
@@ -31,6 +32,7 @@ namespace IndianaBones
 		public GameObject endPoint;
 		float backupDelay;
 		public bool inPause;
+		public GameObject canvasToOpen;
 
 
 
@@ -107,6 +109,24 @@ namespace IndianaBones
 
 			}
 		}
+
+
+		public void StartEndGameCoroutine (){
+			//ElementsReference.Self.canvasUI.SetActive (false);
+			//Player.Self.gameObject.SetActive (false);
+			StartCoroutine(StartCreditsScene());
+		}
+
+		IEnumerator StartCreditsScene(){
+			Debug.Log ("Credits");
+			yield return new WaitForSeconds (0.5f);
+
+			canvasToOpen.SetActive (true);
+
+			yield return new WaitForSeconds (3f);
+			SceneManager.LoadScene ("Credits");
+		}
+
 
     }
 }

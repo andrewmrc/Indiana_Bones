@@ -28,6 +28,8 @@ namespace IndianaBones
 		bool isAttacking = false;
         bool isDestroyed;
         public int incrementoVitaFaraona = 2;
+		public GameObject dialoguePostFight;
+		public int dialogueIndex;
 
         AudioSource audioFaraona;
 
@@ -603,6 +605,13 @@ namespace IndianaBones
 
             //Aggiungiamo gli exp al player prendendoli dalle stats del livello corretto
             Player.Self.IncreaseExp(levelsList[powerLevel].Exp);
+
+			if(!DialoguesManager.Self.CheckSeen(dialogueIndex)){
+				Debug.Log ("Start Dialogue: " + DialoguesManager.Self.CheckSeen(dialogueIndex));
+				DialoguesManager.Self.SetDialogueSeen (dialogueIndex);
+				dialoguePostFight.SetActive (true);
+
+			}
 
 			elementi.scacchiera[xPosition, yPosition].status = 0;
             Destroy(this.gameObject);
