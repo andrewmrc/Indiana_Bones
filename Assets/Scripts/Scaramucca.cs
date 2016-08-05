@@ -320,8 +320,10 @@ namespace IndianaBones
 
 		public void AttackHandler()
 		{
-            
 
+            audioScaramucca.Stop();
+            audioScaramucca.clip = AudioContainer.Self.SFX_Scaramucca_Attack;
+            audioScaramucca.Play();
             //Formula calcolo attackPower Scaramucca
             int randomX = Random.Range(1, 3);
 			int damage = (int)(attackPower*randomX/2);
