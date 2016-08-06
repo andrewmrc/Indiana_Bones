@@ -893,6 +893,28 @@ namespace IndianaBones
 		}
 
 
+		IEnumerator FeedbackHealth()
+		{
+			Player.Self.audioPlayer.Play();
+			Player.Self.audioPlayer.clip = AudioContainer.Self.SFX_Consumabile;
+			Player.Self.audioPlayer.Play();
+			Player.Self.gameObject.transform.GetChild(8).GetComponent<SpriteRenderer>().enabled = true;
+			yield return new WaitForSeconds(1);
+			Player.Self.gameObject.transform.GetChild(8).GetComponent<SpriteRenderer>().enabled = false;
+		}
+
+
+		IEnumerator FeedbackMana()
+		{
+			Player.Self.audioPlayer.Play();
+			Player.Self.audioPlayer.clip = AudioContainer.Self.SFX_Consumabile;
+			Player.Self.audioPlayer.Play();
+			Player.Self.gameObject.transform.GetChild(7).GetComponent<SpriteRenderer>().enabled = true;
+			yield return new WaitForSeconds(1);
+			Player.Self.gameObject.transform.GetChild(7).GetComponent<SpriteRenderer>().enabled = false;
+		}
+
+
 		//Gestisce il lancio dell'oggetto bomba
 		public void MolotovAttack()
 		{

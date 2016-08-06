@@ -225,26 +225,7 @@ namespace IndianaBones
 			}
 
 		}
-
-        IEnumerator White()
-        {
-            Player.Self.audioPlayer.Play();
-            Player.Self.audioPlayer.clip = AudioContainer.Self.SFX_Consumabile;
-            Player.Self.audioPlayer.Play();
-            Player.Self.gameObject.transform.GetChild(8).GetComponent<SpriteRenderer>().enabled = true;
-            yield return new WaitForSeconds(1);
-            Player.Self.gameObject.transform.GetChild(8).GetComponent<SpriteRenderer>().enabled = false;
-        }
-
-        IEnumerator Mana()
-        {
-            Player.Self.audioPlayer.Play();
-            Player.Self.audioPlayer.clip = AudioContainer.Self.SFX_Consumabile;
-            Player.Self.audioPlayer.Play();
-            Player.Self.gameObject.transform.GetChild(7).GetComponent<SpriteRenderer>().enabled = true;
-            yield return new WaitForSeconds(1);
-            Player.Self.gameObject.transform.GetChild(7).GetComponent<SpriteRenderer>().enabled = false;
-        }
+			
 
         public void ActivateItem (int keyCode){
 			Debug.Log ("Try activate object");
@@ -259,8 +240,8 @@ namespace IndianaBones
 					Debug.Log ("Use MILK");
 					healthMilkPotionCount--;
 					Player.Self.currentLife += 5;
-                        StartCoroutine(White());
-                        if (Player.Self.currentLife > Player.Self.startingLife) {
+					Player.Self.StartCoroutine("FeedbackHealth");
+                    if (Player.Self.currentLife > Player.Self.startingLife) {
 						Player.Self.currentLife = Player.Self.startingLife;
 					}
 					GameController.Self.PassTurn ();
@@ -280,8 +261,8 @@ namespace IndianaBones
 					Debug.Log ("Use MOZZARELLA");
 					healthMozzyPotionCount--;
 					Player.Self.currentLife += 10;
-                        StartCoroutine(White());
-                        if (Player.Self.currentLife > Player.Self.startingLife) {
+					Player.Self.StartCoroutine("FeedbackHealth");
+                    if (Player.Self.currentLife > Player.Self.startingLife) {
 						Player.Self.currentLife = Player.Self.startingLife;
 					}
 					GameController.Self.PassTurn ();
@@ -301,8 +282,8 @@ namespace IndianaBones
 					Debug.Log ("Use MANA POTION");
 					manaPotionCount--;
 					Player.Self.currentMana += 5;
-                        StartCoroutine(Mana());
-                        if (Player.Self.currentMana > Player.Self.startingMana) {
+					Player.Self.StartCoroutine("FeedbackMana");
+                    if (Player.Self.currentMana > Player.Self.startingMana) {
 						Player.Self.currentMana = Player.Self.startingMana;
 					}
 					GameController.Self.PassTurn ();

@@ -58,7 +58,7 @@ namespace IndianaBones
 			if (Player.Self.currentMana >= manaCostRestore) {
 				if(Player.Self.currentLife < Player.Self.startingLife){
 					Debug.Log ("Restore ability activated");
-
+					Player.Self.StartCoroutine("FeedbackHealth");
 					Player.Self.currentLife += healthQuantity;
 					Player.Self.currentMana -= manaCostRestore;
 					if (Player.Self.currentLife > Player.Self.startingLife) {
