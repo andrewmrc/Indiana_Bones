@@ -259,6 +259,10 @@ namespace IndianaBones
                 if (GameController.Self.charactersList.Contains(this.gameObject))
                 {
                     GameController.Self.charactersList.Remove(this.gameObject);
+					//Check if it's my turn and in case pass it
+					if (gameObject.GetComponent<TurnHandler> ().itsMyTurn) {
+						GameController.Self.PassTurn ();
+					}
                 }
                 seen = false;
             }
