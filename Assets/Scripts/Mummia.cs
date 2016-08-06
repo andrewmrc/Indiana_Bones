@@ -93,6 +93,10 @@ namespace IndianaBones
 			if (healthBar == null) {
 				healthBar = GameObject.FindGameObjectWithTag ("EnemyHealthBar");
 			}
+			//Check if health is under 0 and in case set it to 0
+			if (vita < 0) {
+				vita = 0;
+			}
             healthBar.GetComponentInParent<Mask>().enabled = false;
             //healthBar.SetActive(true);
             healthBar.GetComponent<Slider>().maxValue = levelsList[powerLevel].Life;
