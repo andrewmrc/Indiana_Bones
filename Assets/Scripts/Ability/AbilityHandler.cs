@@ -75,6 +75,8 @@ namespace IndianaBones
 				}
 			} else {
 				Debug.Log ("Non basta il mana per l'attivazione");
+				//Inserire feedback
+
 			}
 		}
 
@@ -89,6 +91,8 @@ namespace IndianaBones
 				if (Player.Self.currentMana < 0) {
 					Player.Self.currentMana = 0;
 				}
+				GameObject camera = GameObject.FindGameObjectWithTag ("MainCamera");
+				/*
 				playerXPos = (int)Player.Self.transform.position.x;
 				playerYPos = (int)Player.Self.transform.position.y;
 				Player.Self.elementi.scacchiera [playerXPos, playerYPos].status = 0;
@@ -99,10 +103,43 @@ namespace IndianaBones
 				Player.Self.xPosition = (int)GameController.Self.startPoint.transform.position.x;
 				Player.Self.yPosition = (int)GameController.Self.startPoint.transform.position.y;
 				Player.Self.elementi.scacchiera [Player.Self.xPosition, Player.Self.yPosition].status = 4;
+				*/
+				if (Player.Self.fromLevelInf) {
+					Debug.Log ("fromlevelinf");
+					//xPosition = (int)this.transform.position.x;
+					//yPosition = (int)this.transform.position.y;
+					this.transform.position = GameController.Self.startPoint.transform.position;
+					Player.Self.targetTr = GameController.Self.startPoint.transform;
+					//elementi.scacchiera [xPosition, yPosition].status = 0;
+					Player.Self.xOld = (int)GameController.Self.startPoint.transform.position.x;
+					Player.Self.xOld = (int)GameController.Self.startPoint.transform.position.y;
+					Player.Self.xPosition = (int)GameController.Self.startPoint.transform.position.x;
+					Player.Self.yPosition = (int)GameController.Self.startPoint.transform.position.y;
+					Player.Self.elementi.scacchiera [Player.Self.xPosition, Player.Self.yPosition].status = 4;
+				} else if (Player.Self.fromLevelSup) {
+					Debug.Log ("fromlevelsup");
+
+					//xPosition = (int)this.transform.position.x;
+					//yPosition = (int)this.transform.position.y;
+					this.transform.position = GameController.Self.endPoint.transform.position;
+					Player.Self.targetTr = GameController.Self.endPoint.transform; 
+					//elementi.scacchiera [xPosition, yPosition].status = 0;
+					Player.Self.xOld = (int)GameController.Self.endPoint.transform.position.x;
+					Player.Self.xOld = (int)GameController.Self.endPoint.transform.position.y;
+					Player.Self.xPosition = (int)GameController.Self.endPoint.transform.position.x;
+					Player.Self.yPosition = (int)GameController.Self.endPoint.transform.position.y;
+					Player.Self.elementi.scacchiera [Player.Self.xPosition, Player.Self.yPosition].status = 4;
+				} else {
+					Debug.Log ("DefaultPosition");
+				}
+
+				camera.GetComponent<CameraFollow> ().SetCameraPosition ();
 				GameController.Self.PassTurn ();
 				Player.Self.ResetPlayerVar ();
 			} else {
 				Debug.Log ("Non basta il mana per l'attivazione");
+				//Inserire feedback
+
 			}
 		}
 
@@ -121,6 +158,8 @@ namespace IndianaBones
 				Player.Self.ResetPlayerVar ();
 			} else {
 				Debug.Log ("Non basta il mana per l'attivazione");
+				//Inserire feedback
+
 			}
 
 		}

@@ -461,8 +461,8 @@ namespace IndianaBones
             {
 				//currentMana = currentMana + 3;
 				startingMana = startingMana + 3;
-				currentMana = startingMana;
             }
+			currentMana = startingMana;
 
 
 			//Aggiorna le barre con i nuovi valori max
