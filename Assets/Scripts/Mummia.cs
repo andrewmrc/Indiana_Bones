@@ -454,7 +454,7 @@ namespace IndianaBones
 
             if (coll.gameObject.name == "dente(Clone)")
             {
-
+				rangeActive = true;
 				feedback.enabled = true;
 				//Formula calcolo attacco Player
 				int randomX = Random.Range(1, 3);
@@ -521,7 +521,7 @@ namespace IndianaBones
 			}
 
 
-            if (GetComponent<Renderer>().isVisible)
+			if (GetComponent<Renderer>().isVisible && rangeActive)
             {
                 if (!GameController.Self.charactersList.Contains(this.gameObject))
                 {
