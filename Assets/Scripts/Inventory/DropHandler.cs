@@ -195,19 +195,19 @@ namespace IndianaBones
 
 			case "Vaso":
 
-				if (randomValue > 0 && randomValue < 25) {
+				if (randomValue > 0 && randomValue < 20) {
 					//Drop Latte
 					Instantiate(milk).gameObject.transform.position = new Vector2(xPosition,yPosition);
 
-				} else if ((randomValue > 25 && randomValue < 50)) {
+				} else if ((randomValue > 20 && randomValue < 40)) {
 					//Drop Pozione Mana
 					Instantiate (manaPotion).gameObject.transform.position = new Vector2 (xPosition, yPosition);
 
-				} else if ((randomValue > 50 && randomValue < 70)) {
+				} else if ((randomValue > 40 && randomValue < 60)) {
 					//Drop Denti
 					Instantiate (dente).gameObject.transform.position = new Vector2 (xPosition, yPosition);
 
-				} else if ((randomValue > 70 && randomValue < 100)) {
+				} else if ((randomValue > 60 && randomValue < 100)) {
 					//Non droppa niente
 
 				}
