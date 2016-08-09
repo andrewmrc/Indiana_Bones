@@ -56,7 +56,7 @@ namespace IndianaBones
         {
 
 
-			if (coll.gameObject.tag == "Walls" || coll.gameObject.tag == "Enemy" || coll.gameObject.tag == "Colonne")
+			if (coll.gameObject.tag == "Walls" || coll.gameObject.tag == "Enemy" || coll.gameObject.tag == "Colonne" || coll.gameObject.tag == "Door_Ankh" || coll.gameObject.tag == "Door_Eye" || coll.gameObject.tag == "Door_Bird")
             {
 				Debug.Log ("Nome oggetto toccato: " + coll.gameObject.name);
 				GameController.Self.PassTurn ();
