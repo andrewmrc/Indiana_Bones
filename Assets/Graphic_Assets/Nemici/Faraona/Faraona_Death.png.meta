@@ -1,0 +1,405 @@
+fileFormatVersion: 2
+guid: 28629d09b1afecc4196eda95bedb6ab5
+timeCreated: 1469892186
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Faraona_Dead_0
+    21300002: Faraona_Dead_1
+    21300004: Faraona_Dead_2
+    21300006: Faraona_Dead_3
+    21300008: Faraona_Dead_4
+    21300010: Faraona_Dead_5
+    21300012: Faraona_Dead_6
+    21300014: Faraona_Dead_7
+    21300016: Faraona_Dead_8
+    21300018: Faraona_Dead_9
+    21300020: Faraona_Dead_10
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Faraona_Dead_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32, y: 49}
+        - {x: -45, y: 40}
+        - {x: -45, y: 0}
+        - {x: -31, y: -43}
+        - {x: 46, y: -43}
+        - {x: 46, y: 19}
+        - {x: 5, y: 49}
+    - name: Faraona_Dead_1
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32, y: 49}
+        - {x: -45, y: 40}
+        - {x: -45, y: 0}
+        - {x: -31, y: -43}
+        - {x: 46, y: -43}
+        - {x: 46, y: 19}
+        - {x: 5, y: 49}
+    - name: Faraona_Dead_2
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32, y: 49}
+        - {x: -45, y: 40}
+        - {x: -45, y: 0}
+        - {x: -31, y: -43}
+        - {x: 46, y: -43}
+        - {x: 46, y: 19}
+        - {x: 5, y: 49}
+    - name: Faraona_Dead_3
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -45, y: 49}
+        - {x: -45, y: -29}
+        - {x: -34, y: -43}
+        - {x: 33, y: -43}
+        - {x: 46, y: -39}
+        - {x: 46, y: 26}
+        - {x: 14, y: 49}
+    - name: Faraona_Dead_4
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 28, y: 38}
+        - {x: 25, y: 35}
+        - {x: 25, y: 30}
+        - {x: 25, y: 32}
+        - {x: 19, y: 41}
+        - {x: 7, y: 49}
+        - {x: -32, y: 49}
+        - {x: -48, y: 36}
+        - {x: -48, y: -3}
+        - {x: -31, y: -43}
+        - {x: 50, y: -43}
+        - {x: 50, y: 11}
+        - {x: 39, y: 29}
+    - name: Faraona_Dead_5
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 34, y: 50}
+        - {x: -48, y: 50}
+        - {x: -48, y: -31}
+        - {x: -25, y: -47}
+        - {x: 43, y: -47}
+        - {x: 47, y: -43}
+        - {x: 50, y: -39}
+        - {x: 50, y: 42}
+    - name: Faraona_Dead_6
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -17, y: -39}
+        - {x: -14, y: -45}
+        - {x: -4, y: -45}
+        - {x: -4, y: -40}
+        - {x: -6, y: -34}
+        - {x: -17, y: -34}
+      - - {x: 25, y: 30}
+        - {x: 25, y: 32}
+        - {x: 18, y: 39}
+        - {x: -17, y: 50}
+        - {x: -35, y: 50}
+        - {x: -48, y: 40}
+        - {x: -48, y: -1}
+        - {x: -28, y: -45}
+        - {x: 46, y: -45}
+        - {x: 50, y: -43}
+        - {x: 50, y: 17}
+        - {x: 47, y: 30}
+        - {x: 28, y: 36}
+        - {x: 25, y: 35}
+    - name: Faraona_Dead_7
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -45}
+        - {x: 12, y: -44}
+        - {x: 12, y: -41}
+        - {x: 9, y: -40}
+        - {x: 7, y: -42}
+      - - {x: 13, y: -22}
+        - {x: 22, y: -25}
+        - {x: 36, y: -24}
+        - {x: 38, y: -24}
+        - {x: 39, y: -21}
+        - {x: 36, y: -17}
+        - {x: 34, y: -17}
+        - {x: 35, y: -17}
+        - {x: 38, y: -16}
+        - {x: 38, y: -18}
+        - {x: 39, y: -21}
+        - {x: 39, y: -27}
+        - {x: 40, y: -30}
+        - {x: 48, y: -27}
+        - {x: 50, y: -19}
+        - {x: 50, y: 21}
+        - {x: 33, y: 44}
+        - {x: 19, y: 44}
+        - {x: 2, y: 41}
+        - {x: 0, y: 37}
+        - {x: 0, y: 36}
+        - {x: -4, y: 44}
+        - {x: -26, y: 44}
+        - {x: -42, y: 26}
+        - {x: -42, y: -16}
+        - {x: -17, y: -39}
+        - {x: 8, y: -39}
+        - {x: 14, y: -26}
+        - {x: 11, y: -22}
+        - {x: 7, y: -22}
+      - - {x: -36, y: 29}
+        - {x: -33, y: 30}
+        - {x: -33, y: 33}
+        - {x: -36, y: 34}
+        - {x: -38, y: 32}
+    - name: Faraona_Dead_8
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -7, y: -12}
+        - {x: -4, y: -14}
+        - {x: -1, y: -14}
+        - {x: -2, y: -16}
+        - {x: -1, y: -20}
+        - {x: 6, y: -25}
+        - {x: 21, y: -19}
+        - {x: 20, y: -16}
+        - {x: 17, y: -15}
+        - {x: 19, y: -15}
+        - {x: 21, y: -17}
+        - {x: 25, y: -23}
+        - {x: 39, y: -15}
+        - {x: 33, y: -13}
+        - {x: 32, y: -10}
+        - {x: 30, y: -9}
+        - {x: 34, y: -12}
+        - {x: 36, y: -12}
+        - {x: 41, y: -9}
+        - {x: 47, y: -4}
+        - {x: 47, y: 0}
+        - {x: 44, y: 1}
+        - {x: 46, y: 1}
+        - {x: 47, y: 2}
+        - {x: 47, y: 12}
+        - {x: 41, y: 28}
+        - {x: 20, y: 33}
+        - {x: 0, y: 36}
+        - {x: -1, y: 32}
+        - {x: -1, y: 30}
+        - {x: 1, y: 28}
+        - {x: -7, y: 32}
+        - {x: -7, y: 40}
+        - {x: -26, y: 40}
+        - {x: -33, y: 25}
+        - {x: -33, y: -7}
+        - {x: -29, y: -20}
+        - {x: -10, y: -25}
+        - {x: -4, y: -25}
+        - {x: -2, y: -24}
+        - {x: -2, y: -19}
+        - {x: -4, y: -17}
+        - {x: -5, y: -14}
+      - - {x: -29, y: -13}
+        - {x: -26, y: -12}
+        - {x: -26, y: -9}
+        - {x: -29, y: -8}
+        - {x: -31, y: -10}
+      - - {x: -41, y: 21}
+        - {x: -42, y: 19}
+        - {x: -41, y: 16}
+        - {x: -36, y: 16}
+        - {x: -33, y: 17}
+        - {x: -33, y: 20}
+        - {x: -35, y: 21}
+      - - {x: -34, y: 23}
+        - {x: -32, y: 20}
+        - {x: -28, y: 21}
+        - {x: -26, y: 23}
+        - {x: -27, y: 26}
+        - {x: -30, y: 26}
+      - - {x: -2, y: 23}
+        - {x: 1, y: 24}
+        - {x: 1, y: 27}
+        - {x: -2, y: 28}
+        - {x: -4, y: 26}
+      - - {x: 26, y: 30}
+        - {x: 26, y: 28}
+        - {x: 28, y: 26}
+        - {x: 29, y: 26}
+        - {x: 32, y: 29}
+        - {x: 31, y: 32}
+        - {x: 28, y: 32}
+      - - {x: 34, y: 26}
+        - {x: 37, y: 27}
+        - {x: 37, y: 30}
+        - {x: 34, y: 31}
+        - {x: 32, y: 29}
+      - - {x: 13, y: 35}
+        - {x: 14, y: 32}
+        - {x: 17, y: 32}
+        - {x: 19, y: 34}
+        - {x: 18, y: 37}
+        - {x: 15, y: 37}
+      - - {x: 3, y: 35}
+        - {x: 6, y: 36}
+        - {x: 6, y: 39}
+        - {x: 3, y: 40}
+        - {x: 1, y: 38}
+    - name: Faraona_Dead_9
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -28, y: 23}
+        - {x: -29, y: 21}
+        - {x: -29, y: -2}
+        - {x: -14, y: -13}
+        - {x: 32, y: -13}
+        - {x: 38, y: -6}
+        - {x: 38, y: 10}
+        - {x: 37, y: 11}
+        - {x: 14, y: 23}
+    - name: Faraona_Dead_10
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 16, y: -3}
+        - {x: -29, y: -3}
+        - {x: -29, y: -19}
+        - {x: -14, y: -37}
+        - {x: 7, y: -39}
+        - {x: 28, y: -39}
+        - {x: 38, y: -26}
+        - {x: 38, y: -17}
+        - {x: 37, y: -15}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

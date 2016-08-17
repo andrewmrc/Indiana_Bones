@@ -1,0 +1,172 @@
+fileFormatVersion: 2
+guid: a55edff747b073c4491b18f3a8cc1ac4
+timeCreated: 1469889587
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Faraona_attack_0
+    21300002: Faraona_attack_1
+    21300004: Faraona_attack_2
+    21300006: Faraona_attack_3
+    21300008: Faraona_attack_4
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Faraona_attack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32, y: 49}
+        - {x: -45, y: 40}
+        - {x: -45, y: 0}
+        - {x: -31, y: -43}
+        - {x: 46, y: -43}
+        - {x: 46, y: 19}
+        - {x: 5, y: 49}
+    - name: Faraona_attack_1
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -31, y: 42}
+        - {x: -34, y: 40}
+        - {x: -45, y: 29}
+        - {x: -45, y: -3}
+        - {x: -43, y: -11}
+        - {x: -23, y: -43}
+        - {x: 21, y: -43}
+        - {x: 43, y: -38}
+        - {x: 46, y: -28}
+        - {x: 46, y: 19}
+        - {x: 3, y: 42}
+    - name: Faraona_attack_2
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -45, y: 36}
+        - {x: -48, y: 29}
+        - {x: -48, y: -4}
+        - {x: -27, y: -43}
+        - {x: 19, y: -43}
+        - {x: 50, y: -34}
+        - {x: 50, y: 30}
+        - {x: 27, y: 36}
+    - name: Faraona_attack_3
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -39, y: 36}
+        - {x: -44, y: 28}
+        - {x: -48, y: 15}
+        - {x: -48, y: -1}
+        - {x: -32, y: -43}
+        - {x: 41, y: -43}
+        - {x: 50, y: -40}
+        - {x: 50, y: 14}
+        - {x: 49, y: 16}
+        - {x: 38, y: 31}
+        - {x: 14, y: 36}
+      - - {x: -50, y: -21}
+        - {x: -47, y: -20}
+        - {x: -47, y: -16}
+        - {x: -49, y: -14}
+        - {x: -50, y: -14}
+    - name: Faraona_attack_4
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -45, y: 36}
+        - {x: -48, y: 28}
+        - {x: -48, y: -5}
+        - {x: -32, y: -43}
+        - {x: 44, y: -43}
+        - {x: 50, y: -41}
+        - {x: 50, y: 30}
+        - {x: 28, y: 36}
+      - - {x: -50, y: -21}
+        - {x: -47, y: -20}
+        - {x: -47, y: -16}
+        - {x: -49, y: -14}
+        - {x: -50, y: -14}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

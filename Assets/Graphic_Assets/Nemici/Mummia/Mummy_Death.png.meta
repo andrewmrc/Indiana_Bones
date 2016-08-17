@@ -1,0 +1,441 @@
+fileFormatVersion: 2
+guid: eab092e7de1f1b54d990445b6bde091e
+timeCreated: 1469403507
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: mummia--morte_0
+    21300002: mummia--morte_1
+    21300004: mummia--morte_2
+    21300006: mummia--morte_3
+    21300008: mummia--morte_4
+    21300010: mummia--morte_5
+    21300012: mummia--morte_6
+    21300014: mummia--morte_7
+    21300016: mummia--morte_8
+    21300018: mummia--morte_9
+    21300020: mummia--morte_10
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: mummia--morte_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -31, y: 50}
+        - {x: -31, y: -45}
+        - {x: -25, y: -50}
+        - {x: 35, y: -50}
+        - {x: 35, y: -14}
+        - {x: 32, y: 14}
+        - {x: 12, y: 50}
+    - name: mummia--morte_1
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 30, y: -25}
+        - {x: 35, y: -21}
+        - {x: 37, y: -18}
+        - {x: 41, y: -10}
+        - {x: 41, y: 6}
+        - {x: 36, y: 17}
+        - {x: 25, y: 28}
+        - {x: 21, y: 31}
+        - {x: 38, y: 43}
+        - {x: 23, y: 50}
+        - {x: -26, y: 50}
+        - {x: -31, y: 45}
+        - {x: -31, y: 24}
+        - {x: -27, y: 14}
+        - {x: -18, y: 9}
+        - {x: -6, y: 10}
+        - {x: -3, y: 11}
+        - {x: -8, y: 8}
+        - {x: -28, y: 11}
+        - {x: -31, y: -3}
+        - {x: -31, y: -16}
+        - {x: -23, y: -20}
+        - {x: -5, y: -48}
+        - {x: -1, y: -50}
+        - {x: 37, y: -50}
+        - {x: 37, y: -26}
+        - {x: 31, y: -25}
+        - {x: 29, y: -25}
+    - name: mummia--morte_2
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 37, y: -23}
+        - {x: 38, y: -20}
+        - {x: 38, y: 25}
+        - {x: 33, y: 37}
+        - {x: 9, y: 50}
+        - {x: -25, y: 50}
+        - {x: -31, y: 43}
+        - {x: -31, y: 27}
+        - {x: -27, y: 14}
+        - {x: -18, y: 9}
+        - {x: -6, y: 10}
+        - {x: -3, y: 11}
+        - {x: -8, y: 8}
+        - {x: -28, y: 11}
+        - {x: -31, y: -3}
+        - {x: -31, y: -18}
+        - {x: -4, y: -50}
+        - {x: 35, y: -50}
+        - {x: 37, y: -26}
+        - {x: 34, y: -25}
+        - {x: 32, y: -25}
+    - name: mummia--morte_3
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 37, y: -23}
+        - {x: 47, y: -18}
+        - {x: 50, y: -12}
+        - {x: 50, y: -6}
+        - {x: 43, y: 14}
+        - {x: 40, y: 15}
+        - {x: 29, y: 15}
+        - {x: 27, y: 13}
+        - {x: 30, y: 18}
+        - {x: 33, y: 15}
+        - {x: 50, y: 15}
+        - {x: 50, y: 26}
+        - {x: 38, y: 46}
+        - {x: 15, y: 50}
+        - {x: -29, y: 50}
+        - {x: -31, y: 47}
+        - {x: -31, y: 27}
+        - {x: -27, y: 14}
+        - {x: -18, y: 9}
+        - {x: -6, y: 10}
+        - {x: -3, y: 11}
+        - {x: -8, y: 8}
+        - {x: -28, y: 11}
+        - {x: -31, y: -3}
+        - {x: -31, y: -16}
+        - {x: -23, y: -19}
+        - {x: -16, y: -18}
+        - {x: -12, y: -15}
+        - {x: -17, y: -20}
+        - {x: -17, y: -22}
+        - {x: -15, y: -24}
+        - {x: -8, y: -24}
+        - {x: -6, y: -23}
+        - {x: 0, y: -21}
+        - {x: 2, y: -19}
+        - {x: 2, y: -18}
+        - {x: 8, y: -18}
+        - {x: 2, y: -20}
+        - {x: 0, y: -25}
+        - {x: -1, y: -50}
+        - {x: 35, y: -50}
+        - {x: 37, y: -26}
+        - {x: 34, y: -25}
+        - {x: 32, y: -25}
+      - - {x: 36, y: 34}
+        - {x: 32, y: 31}
+        - {x: 32, y: 29}
+        - {x: 35, y: 26}
+        - {x: 47, y: 26}
+        - {x: 50, y: 28}
+        - {x: 50, y: 30}
+        - {x: 49, y: 34}
+    - name: mummia--morte_4
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 32, y: -25}
+        - {x: 37, y: -23}
+        - {x: 47, y: -18}
+        - {x: 50, y: -12}
+        - {x: 50, y: -6}
+        - {x: 42, y: 13}
+        - {x: 40, y: 15}
+        - {x: 29, y: 15}
+        - {x: 32, y: 18}
+        - {x: 42, y: 43}
+        - {x: 15, y: 50}
+        - {x: -31, y: 50}
+        - {x: -31, y: 27}
+        - {x: -27, y: 14}
+        - {x: -18, y: 9}
+        - {x: -6, y: 10}
+        - {x: -3, y: 11}
+        - {x: -8, y: 8}
+        - {x: -28, y: 11}
+        - {x: -31, y: -3}
+        - {x: -31, y: -16}
+        - {x: -23, y: -19}
+        - {x: -16, y: -18}
+        - {x: -12, y: -15}
+        - {x: -17, y: -20}
+        - {x: -17, y: -22}
+        - {x: -15, y: -24}
+        - {x: -8, y: -24}
+        - {x: -6, y: -23}
+        - {x: 0, y: -21}
+        - {x: 2, y: -19}
+        - {x: 2, y: -18}
+        - {x: 8, y: -18}
+        - {x: 2, y: -20}
+        - {x: 3, y: -24}
+        - {x: -1, y: -48}
+        - {x: 0, y: -50}
+        - {x: 35, y: -50}
+        - {x: 39, y: -45}
+        - {x: 40, y: -43}
+        - {x: 39, y: -25}
+    - name: mummia--morte_5
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 11, y: 50}
+        - {x: -25, y: 50}
+        - {x: -31, y: 43}
+        - {x: -31, y: 27}
+        - {x: -27, y: 14}
+        - {x: -18, y: 9}
+        - {x: -6, y: 10}
+        - {x: -3, y: 11}
+        - {x: -8, y: 9}
+        - {x: -19, y: 9}
+        - {x: -31, y: 0}
+        - {x: -31, y: -12}
+        - {x: -28, y: -28}
+        - {x: -1, y: -50}
+        - {x: 36, y: -50}
+        - {x: 39, y: -46}
+        - {x: 39, y: 23}
+        - {x: 36, y: 40}
+    - name: mummia--morte_6
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 29, y: 22}
+        - {x: 20, y: 41}
+        - {x: 10, y: 50}
+        - {x: -31, y: 50}
+        - {x: -31, y: -41}
+        - {x: -28, y: -50}
+        - {x: 36, y: -50}
+        - {x: 39, y: -46}
+        - {x: 39, y: -24}
+        - {x: 35, y: 0}
+      - - {x: -15, y: -9}
+        - {x: -15, y: -16}
+        - {x: -9, y: -16}
+        - {x: -8, y: -15}
+        - {x: -8, y: -8}
+        - {x: -11, y: -4}
+        - {x: -14, y: -5}
+      - - {x: -4, y: -1}
+        - {x: -4, y: -12}
+        - {x: 3, y: -12}
+        - {x: 3, y: -2}
+        - {x: 2, y: -1}
+    - name: mummia--morte_7
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -17, y: 50}
+        - {x: -35, y: 40}
+        - {x: -35, y: 23}
+        - {x: -22, y: -10}
+        - {x: -14, y: -24}
+        - {x: -5, y: -20}
+        - {x: -11, y: -24}
+        - {x: -35, y: -46}
+        - {x: -35, y: -50}
+        - {x: 36, y: -50}
+        - {x: 39, y: -46}
+        - {x: 39, y: 7}
+        - {x: 20, y: 50}
+      - - {x: -4, y: -23}
+        - {x: -4, y: -34}
+        - {x: 3, y: -34}
+        - {x: 3, y: -24}
+        - {x: 0, y: -23}
+    - name: mummia--morte_8
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 7, y: 36}
+        - {x: -21, y: 36}
+        - {x: -31, y: 33}
+        - {x: -35, y: 20}
+        - {x: -35, y: 5}
+        - {x: -25, y: -17}
+        - {x: -16, y: -21}
+        - {x: -35, y: -46}
+        - {x: -35, y: -50}
+        - {x: 36, y: -50}
+        - {x: 39, y: -47}
+        - {x: 39, y: -19}
+        - {x: 31, y: 23}
+      - - {x: -5, y: 45}
+        - {x: -2, y: 46}
+        - {x: -2, y: 49}
+        - {x: -5, y: 50}
+        - {x: -7, y: 48}
+    - name: mummia--morte_9
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 28, y: 25}
+        - {x: 0, y: 25}
+        - {x: -9, y: 13}
+        - {x: -35, y: -13}
+        - {x: -35, y: -50}
+        - {x: 36, y: -50}
+        - {x: 39, y: -45}
+        - {x: 39, y: -29}
+        - {x: 32, y: 24}
+      - - {x: -5, y: 45}
+        - {x: -2, y: 46}
+        - {x: -2, y: 49}
+        - {x: -5, y: 50}
+        - {x: -7, y: 48}
+    - name: mummia--morte_10
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 2, y: 25}
+        - {x: -6, y: 12}
+        - {x: 0, y: 1}
+        - {x: -35, y: -10}
+        - {x: -35, y: -50}
+        - {x: 39, y: -50}
+        - {x: 39, y: 11}
+        - {x: 31, y: 25}
+      - - {x: -5, y: 45}
+        - {x: -2, y: 46}
+        - {x: -2, y: 49}
+        - {x: -5, y: 50}
+        - {x: -7, y: 48}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
