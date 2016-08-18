@@ -52,9 +52,7 @@ namespace IndianaBones
         {
             gameObject.tag = "Enemy";
 
-
-
-            //Settiamo l'animator e i parametri per le animazioni
+	        //Settiamo l'animator e i parametri per le animazioni
             animator = GetComponent<Animator>();
             animator.SetBool("Walk", false);
         }
@@ -88,6 +86,7 @@ namespace IndianaBones
             return (Mathf.Abs((int)Player.Self.transform.position.x - (int)this.transform.position.x) + Mathf.Abs((int)Player.Self.transform.position.y - (int)this.transform.position.y));
         }
 
+
         IEnumerator UpdateHealthBar()
         {
 			if (healthBar == null) {
@@ -111,6 +110,7 @@ namespace IndianaBones
             healthBar.GetComponentInParent<Mask>().enabled = true;
 
         }
+
 
         IEnumerator AttaccoADistanza()
         {
@@ -148,11 +148,13 @@ namespace IndianaBones
 
         }
 
+
         /*public void AggiornamentoBarraVitaNemico()
         {
             EnemyScrollBar elementi = FindObjectOfType<EnemyScrollBar>();
             elementi.EnemyLifeBar.text = "Mummia : " + vita.ToString();
         }*/
+
 
         //gestisce i tre tipi di movimento della mummia, se il player non è nella sua linea di tiro ne fa partire uno random
         public void GestoreMovimenti()

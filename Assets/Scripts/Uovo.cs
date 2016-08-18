@@ -39,12 +39,12 @@ namespace IndianaBones
 
 
         void Update()
-        {
+        {/*
 			if (!GetComponent<Renderer> ().isVisible) {
 				Debug.Log ("Uovo uscito dallo schermo -> Faraona passa il turno");
 				GameController.Self.PassTurn ();
 				Destroy(this.gameObject);
-			}
+			}*/
         }
 
 

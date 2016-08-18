@@ -10,19 +10,15 @@ namespace IndianaBones
 
     public class Faraona : Character
     {
-        bool seen = false;
-
-
         public GameObject uovoLancio;
         public int attackPower = 1;
         public int vita = 1;
         public float speed = 2;
         public Transform targetTr;
-        public bool attivo = false;
         public bool rangeActive = false;
         public bool onMove;
         GameObject giocatore;
-        public int distanzaAttivazione = 10;
+        public int distanzaAttivazione = 8;
 		private Grid elementi;
 		private Animator animator;
 		bool isAttacking = false;
@@ -89,6 +85,7 @@ namespace IndianaBones
             return (Mathf.Abs((int)Player.Self.transform.position.x - (int)this.transform.position.x) + Mathf.Abs((int)Player.Self.transform.position.y - (int)this.transform.position.y));
         }
 
+
         IEnumerator UpdateHealthBar()
         {
 			if (healthBar == null) {
@@ -113,12 +110,13 @@ namespace IndianaBones
 
         }
 
+
         IEnumerator AttaccoADistanza()
         {
             audioFaraona.clip = AudioContainer.Self.SFX_Faraona_Attack;
             audioFaraona.Play();
 
-            Debug.Log ("La mummia ha deciso di attaccare");
+            Debug.Log ("La Faraona ha deciso di attaccare");
 			isAttacking = true;
 			//Set true to the attack parameter of animation
 			animator.SetBool ("Attack", true);
@@ -146,8 +144,8 @@ namespace IndianaBones
         {
             return Random.Range(1, 3);
            
-
         }
+
 
         /*public void AggiornamentoBarraVitaNemico()
         {
@@ -155,11 +153,11 @@ namespace IndianaBones
             elementi.EnemyLifeBar.text = "Mummia : " + vita.ToString();
         }*/
 
-        //gestisce i tre tipi di movimento della mummia, se il player non è nella sua linea di tiro ne fa partire uno random
-        public void GestoreMovimenti()
+
+        //gestisce i tre tipi di azione della Faraona, se il player non è nella sua linea di tiro ne fa partire uno random
+        public void ActionHandler()
         {
            
-
                 switch (Casuale())
                 {
                     case 1:
@@ -171,15 +169,12 @@ namespace IndianaBones
                     case 2:
 
                     RecuperoVita();
-                    break;
-
-                
-                      
-                        
+                    break;                      
 
                 }
            
         }
+
 
         public void RecuperoVita()
         {
@@ -191,50 +186,44 @@ namespace IndianaBones
                     vita += incrementoVitaFaraona;
                 }
             }
+
+			GameController.Self.PassTurn();
+
             StartCoroutine(ResetMyColor());
 
-            GameController.Self.PassTurn();
         }
+
 
         //controlla se il player è nella sua linea di tiro
         public void APortatadiTiro()
         {
-			if (direzioneLancio == 0 && isAttacking == false)
-            {
-                if (Player.Self.xPosition == this.xPosition)
-                {
-                    if (Player.Self.yPosition > this.yPosition)
-                    {
-                        direzioneLancio = 1;
-						StartCoroutine(AttaccoADistanza());
-                    }
-                    else if (Player.Self.yPosition < this.yPosition)
-                    {
-                        direzioneLancio = 2;
-						StartCoroutine(AttaccoADistanza());
-                    }
-                }
+			if (rangeActive == true) {
+				if (direzioneLancio == 0 && isAttacking == false) {
+					if (Player.Self.xPosition == this.xPosition) {
+						if (Player.Self.yPosition > this.yPosition) {
+							direzioneLancio = 1;
+							StartCoroutine (AttaccoADistanza ());
+						} else if (Player.Self.yPosition < this.yPosition) {
+							direzioneLancio = 2;
+							StartCoroutine (AttaccoADistanza ());
+						}
+					} else if (Player.Self.yPosition == this.yPosition) {
+						if (Player.Self.xPosition > this.xPosition) {
+							direzioneLancio = 3;
+							gameObject.GetComponent<SpriteRenderer> ().flipX = true;
+							StartCoroutine (AttaccoADistanza ());
+						} else if (Player.Self.xPosition < this.xPosition) {
+							direzioneLancio = 4;
+							gameObject.GetComponent<SpriteRenderer> ().flipX = false;
+							StartCoroutine (AttaccoADistanza ());
+						}
+					} else
+						ActionHandler ();
 
-                else if (Player.Self.yPosition == this.yPosition)
-                {
-                    if (Player.Self.xPosition > this.xPosition)
-                    {
-                        direzioneLancio = 3;
-                        gameObject.GetComponent<SpriteRenderer>().flipX = true;
-                        StartCoroutine(AttaccoADistanza());
-                    }
-                    else if (Player.Self.xPosition < this.xPosition)
-                    {
-                        direzioneLancio = 4;
-                        gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                        StartCoroutine(AttaccoADistanza());
-                    }
-                }
-                else
-                    GestoreMovimenti();
-
-            }
-
+				}
+			} else {
+				GameController.Self.PassTurn();
+			}
 
         }
 
@@ -530,14 +519,13 @@ namespace IndianaBones
 			}
 
 
-            if (GetComponent<Renderer>().isVisible)
+			if (GetComponent<Renderer>().isVisible && rangeActive)
             {
                 if (!GameController.Self.charactersList.Contains(this.gameObject))
                 {
                     GameController.Self.charactersList.Add(this.gameObject);
                 }
-                seen = true;
-            } else if (!GetComponent<Renderer>().isVisible)
+            } /*else if (!GetComponent<Renderer>().isVisible)
             {
                 if (GameController.Self.charactersList.Contains(this.gameObject))
                 {
@@ -547,8 +535,7 @@ namespace IndianaBones
 						GameController.Self.PassTurn ();
 					}
                 }
-                seen = false;
-            }
+            }*/
 
 
             //Controlliamo se la vita va a zero e chiamiamo il metodo che gestisce questo evento
@@ -569,8 +556,11 @@ namespace IndianaBones
             if (vita > 0)
                 elementi.scacchiera[xPosition, yPosition].status = 3;
 
-            if (ManhattanDist() < distanzaAttivazione)
-                rangeActive = true;
+			if (ManhattanDist () < distanzaAttivazione) {
+				rangeActive = true;
+			} else {
+				rangeActive = false;
+			}
 
             
 

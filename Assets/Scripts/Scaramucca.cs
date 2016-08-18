@@ -28,6 +28,8 @@ namespace IndianaBones
 		private Animator animator;
 		GameObject healthBar;
         bool isDestroyed;
+		public bool rangeActive;
+		public int distanzaAttivazione = 4;
 
         [Header("Level and Stats")]
         [Space(10)]
@@ -374,7 +376,7 @@ namespace IndianaBones
             }
 
 
-            if (GetComponent<Renderer>().isVisible)
+			if (GetComponent<Renderer>().isVisible && rangeActive)
             {
                 if (!GameController.Self.charactersList.Contains(this.gameObject))
                 {
@@ -413,6 +415,12 @@ namespace IndianaBones
 
             if (vita > 0)
                 elementi.scacchiera[xPosition, yPosition].status = 3;
+
+			if (ManhattanDist () < distanzaAttivazione) {
+				rangeActive = true;
+			} else {
+				rangeActive = false;
+			}
 
             Vector3 distance = targetTr.position - this.transform.position;
             Vector3 direction = distance.normalized;

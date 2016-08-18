@@ -26,6 +26,9 @@ namespace IndianaBones
 		GameObject healthBar;
         bool isDestroyed;
 
+		public bool rangeActive;
+		public int distanzaAttivazione = 2;
+
         [Header("Level and Stats")]
         [Space(10)]
 
@@ -253,7 +256,14 @@ namespace IndianaBones
             }
 
 
-            if (GetComponent<Renderer>().isVisible)
+			if (ManhattanDist () < distanzaAttivazione) {
+				rangeActive = true;
+			} else {
+				rangeActive = false;
+			}
+			
+
+			if (GetComponent<Renderer>().isVisible && rangeActive)
             {
                 if (!GameController.Self.charactersList.Contains(this.gameObject))
                 {
