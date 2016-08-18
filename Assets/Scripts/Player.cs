@@ -28,7 +28,7 @@ namespace IndianaBones
         bool onOff = false;
         bool crossActive = false;
         //bool attacco = false;
-		bool isAttacking = false;
+		public bool isAttacking = false;
 
 		public bool fromLevelSup;
 		public bool fromLevelInf;
@@ -596,214 +596,74 @@ namespace IndianaBones
 				//Movimento verso destra
                 if (Input.GetKey(KeyCode.RightArrow))
                 {
-                    croce = 2;
-                    AttackDirection();
-                    //Flip the sprite of the player
-                    gameObject.GetComponent<SpriteRenderer>().flipX = false;
-
-					if (canMove == true && isAttacking == false)
-                    {
-                        if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
-                        {
-							Debug.Log ("Muovi Destra");
-                            canMove = false;
-                            PickUp();
-                            animator.SetBool("Walk", true);
-                            //StartCoroutine(Camminata(0.5f));
-                            bulletDir = 3;
-                            OldValue();
-                            xPosition += 1;
-                            targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-                            elementi.scacchiera[xPosition, yPosition].status = 4;
-                            endMove = true;
-						} 
-                    }
+					MovePlayerRight ();
                 }
 
 
 				//Attacco verso destra
 				if (Input.GetKey (KeyCode.RightArrow)) {
-					if (elementi.scacchiera [xPosition + 1, yPosition].status == 3 && isAttacking == false && endMove == false && canMove) {
-						Debug.Log ("Player Attacca Destra");
-						isAttacking = true;
-                        audioPlayer.clip = SFX_Attack;
-                        audioPlayer.Play();
-                        //Set true to the attack parameter of animation
-                        animator.SetBool ("Attack", true);
-						Attacco ();
-					}
+					AttackRight ();
 				}
 
 
 				//Movimento verso sinistra
                 if (Input.GetKey(KeyCode.LeftArrow))
                 {
-                    croce = 4;
-                    AttackDirection();
-                    //Flip the sprite of the player
-                    gameObject.GetComponent<SpriteRenderer>().flipX = true;
-
-					if (canMove == true && isAttacking == false)
-                    {
-                        if (xPosition > 0)
-                        {
-                            if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
-                            {
-								Debug.Log ("Muovi sinistra");
-
-                                canMove = false;
-                                PickUp();
-                                animator.SetBool("Walk", true);
-                                //StartCoroutine(Camminata(0.5f));
-                                bulletDir = 4;
-                                OldValue();
-                                xPosition -= 1;
-                                targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-                                elementi.scacchiera[xPosition, yPosition].status = 4;
-                                endMove = true;
-
-							} 
-                        }
-                    }
+					MovePlayerLeft ();
                 }
 
 
 				//Attacco verso sinistra
 				if (Input.GetKeyDown (KeyCode.LeftArrow)) {
-					if (elementi.scacchiera [xPosition - 1, yPosition].status == 3 && isAttacking == false && endMove == false && canMove) {
-						Debug.Log ("Player Attacca Sinistra");
-						isAttacking = true;
-                        audioPlayer.clip = SFX_Attack;
-                        audioPlayer.Play();
-                        //Set true to the attack parameter of animation
-                        animator.SetBool ("Attack", true);
-						Attacco ();
-					}
+					AttackLeft ();
 				}
 
 
 				//Movimento verso il basso
                 if (Input.GetKey(KeyCode.DownArrow))
                 {
-                    croce = 3;
-                    AttackDirection();
-					if (canMove == true && isAttacking == false)
-                    {
-                        if (yPosition > 0)
-                        {
-                            if (elementi.scacchiera[xPosition, yPosition - 1].status < 2)
-                            {
-								Debug.Log ("Muovi Giù");
-
-                                canMove = false;
-                                PickUp();
-                                animator.SetBool("Walk", true);
-                                //StartCoroutine(Camminata(0.5f));
-                                bulletDir = 2;
-                                OldValue();
-                                yPosition -= 1;
-                                targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-                                elementi.scacchiera[xPosition, yPosition].status = 4;
-                                endMove = true;
-							} 
-                        }
-                    }
+					MovePlayerDown ();
                 }
 
 
 				//Attacco verso il basso
 				if (Input.GetKeyDown (KeyCode.DownArrow)) {
-					if (elementi.scacchiera [xPosition, yPosition - 1].status == 3 && isAttacking == false && endMove == false && canMove) {
-						Debug.Log ("Player Attacca Giù");
-						isAttacking = true;
-                        audioPlayer.clip = SFX_Attack;
-                        audioPlayer.Play();
-                        //Set true to the attack parameter of animation
-                        animator.SetBool ("Attack", true);
-						Attacco ();
-					}
+					AttackDown ();
 				}
 
 
 				//Movimento verso l'alto
 				if (Input.GetKey(KeyCode.UpArrow))
                 {
-                    croce = 1;
-                    AttackDirection();
-					if (canMove == true && isAttacking == false)
-                    {
-                        if (yPosition < 100)
-                        {
-                            if (elementi.scacchiera[xPosition, yPosition + 1].status < 2)
-                            {
-								Debug.Log ("Muovi Su");
-
-                                canMove = false;
-                                PickUp();
-                                animator.SetBool("Walk", true);
-                                //StartCoroutine(Camminata(0.5f));
-                                bulletDir = 1;
-                                OldValue();
-                                yPosition += 1;
-                                targetTr = elementi.scacchiera[xPosition, yPosition].transform;
-                                elementi.scacchiera[xPosition, yPosition].status = 4;
-                                endMove = true;
-							} 
-                        }
-                    }
+					MovePlayerUp ();
                 }
 
 
 				//Attacco verso l'alto
 				if (Input.GetKeyDown (KeyCode.UpArrow)) {
-					if (elementi.scacchiera [xPosition, yPosition + 1].status == 3 && isAttacking == false && endMove == false && canMove) {
-						Debug.Log ("Player Attacca Su");
-						isAttacking = true;
-                        audioPlayer.clip = SFX_Attack;
-                        audioPlayer.Play();
-                        //Set true to the attack parameter of animation
-                        animator.SetBool ("Attack", true);
-						Attacco ();
-					}
+					AttackUp ();
 				}
             
 
+				//Pass turn
 				if (Input.GetKeyDown("space"))
 				{
-					if (endMove == false && !crossActive) {
-                        audioPlayer.clip = SFX_Attack;
-                        audioPlayer.Play();
-                        //Set true to the attack parameter of animation
-                        animator.SetBool ("Attack", true);
-						Attacco ();
-					}
+					PassTurnAttack ();
 				}
 
 
-				if (Input.GetKeyDown(KeyCode.Z) && onOff == false && endMove == false)
+				//Open directional cross
+				if (Input.GetKeyDown(KeyCode.Z))
 				{
-					onOff = true;
-					CrossActivationHandler ();
-					canMove = false;
-					crossActive = true;
-				}
-				else if (Input.GetKeyDown(KeyCode.Z) && onOff == true)
-				{
-					onOff = false;
-					CrossActivationHandler ();
-					canMove = true;
-					crossActive = false;
+					CheckForCross ();
 				}
 
 
+				//Attacca dalla distanza
 				//if (Input.GetKeyDown (KeyCode.LeftControl)) {
 				if (Input.GetKeyDown("space"))
 				{
-					if (onOff == true && proiettili > 0) {
-						isAttacking = true;
-						animator.SetBool("DistanceAttack", true);
-						AttaccoADistanza ();
-					}
+					AttackFromDistance ();
 				}
 					
 
@@ -854,6 +714,7 @@ namespace IndianaBones
         }
 
 
+		//Attiva il Game Over Panel e blocca il player
 		IEnumerator ActivateGameOverPanel (){
 			Debug.Log ("GAME OVER PANEL");
 			yield return new WaitForSeconds (1f);
@@ -871,8 +732,8 @@ namespace IndianaBones
 		}
 
 
+		//Attiva e disattiva visualizzazione croce
 		public void CrossActivationHandler() {
-			//Attiva e disattiva visualizzazione croce
 			if (onOff == true)
 			{
 				up.gameObject.GetComponent<SpriteRenderer> ().enabled = true; 
@@ -1056,5 +917,216 @@ namespace IndianaBones
 		}
 
 
+		//Move player up
+		public void MovePlayerUp () {
+			croce = 1;
+			AttackDirection();
+			if (canMove == true && isAttacking == false)
+			{
+				if (yPosition < 100)
+				{
+					if (elementi.scacchiera[xPosition, yPosition + 1].status < 2)
+					{
+						Debug.Log ("Muovi Su");
+
+						canMove = false;
+						PickUp();
+						animator.SetBool("Walk", true);
+						//StartCoroutine(Camminata(0.5f));
+						bulletDir = 1;
+						OldValue();
+						yPosition += 1;
+						targetTr = elementi.scacchiera[xPosition, yPosition].transform;
+						elementi.scacchiera[xPosition, yPosition].status = 4;
+						endMove = true;
+					} 
+				}
+			}
+		}
+
+
+		//Attack up
+		public void AttackUp () {
+			if (elementi.scacchiera [xPosition, yPosition + 1].status == 3 && isAttacking == false && endMove == false && canMove) {
+				Debug.Log ("Player Attacca Su");
+				isAttacking = true;
+				audioPlayer.clip = SFX_Attack;
+				audioPlayer.Play();
+				//Set true to the attack parameter of animation
+				animator.SetBool ("Attack", true);
+				Attacco ();
+			}
+		}
+			
+
+		//Move player down
+		public void MovePlayerDown () {
+			croce = 3;
+			AttackDirection();
+			if (canMove == true && isAttacking == false)
+			{
+				if (yPosition > 0)
+				{
+					if (elementi.scacchiera[xPosition, yPosition - 1].status < 2)
+					{
+						Debug.Log ("Muovi Giù");
+
+						canMove = false;
+						PickUp();
+						animator.SetBool("Walk", true);
+						//StartCoroutine(Camminata(0.5f));
+						bulletDir = 2;
+						OldValue();
+						yPosition -= 1;
+						targetTr = elementi.scacchiera[xPosition, yPosition].transform;
+						elementi.scacchiera[xPosition, yPosition].status = 4;
+						endMove = true;
+					} 
+				}
+			}
+		}
+
+
+		//Attack down
+		public void AttackDown () {
+			if (elementi.scacchiera [xPosition, yPosition - 1].status == 3 && isAttacking == false && endMove == false && canMove) {
+				Debug.Log ("Player Attacca Giù");
+				isAttacking = true;
+				audioPlayer.clip = SFX_Attack;
+				audioPlayer.Play();
+				//Set true to the attack parameter of animation
+				animator.SetBool ("Attack", true);
+				Attacco ();
+			}
+		}
+
+
+
+		//Move player right
+		public void MovePlayerRight () {
+			croce = 2;
+			AttackDirection();
+			//Flip the sprite of the player
+			gameObject.GetComponent<SpriteRenderer>().flipX = false;
+
+			if (canMove == true && isAttacking == false)
+			{
+				if (elementi.scacchiera[xPosition + 1, yPosition].status < 2)
+				{
+					Debug.Log ("Muovi Destra");
+					canMove = false;
+					PickUp();
+					animator.SetBool("Walk", true);
+					//StartCoroutine(Camminata(0.5f));
+					bulletDir = 3;
+					OldValue();
+					xPosition += 1;
+					targetTr = elementi.scacchiera[xPosition, yPosition].transform;
+					elementi.scacchiera[xPosition, yPosition].status = 4;
+					endMove = true;
+				} 
+			}
+		}
+
+
+		//Attack right
+		public void AttackRight () {
+			if (elementi.scacchiera [xPosition + 1, yPosition].status == 3 && isAttacking == false && endMove == false && canMove) {
+				Debug.Log ("Player Attacca Destra");
+				isAttacking = true;
+				audioPlayer.clip = SFX_Attack;
+				audioPlayer.Play();
+				//Set true to the attack parameter of animation
+				animator.SetBool ("Attack", true);
+				Attacco ();
+			}
+		}
+
+
+		//Move player left
+		public void MovePlayerLeft () {
+			croce = 4;
+			AttackDirection();
+			//Flip the sprite of the player
+			gameObject.GetComponent<SpriteRenderer>().flipX = true;
+
+			if (canMove == true && isAttacking == false)
+			{
+				if (xPosition > 0)
+				{
+					if (elementi.scacchiera[xPosition - 1, yPosition].status < 2)
+					{
+						Debug.Log ("Muovi sinistra");
+
+						canMove = false;
+						PickUp();
+						animator.SetBool("Walk", true);
+						//StartCoroutine(Camminata(0.5f));
+						bulletDir = 4;
+						OldValue();
+						xPosition -= 1;
+						targetTr = elementi.scacchiera[xPosition, yPosition].transform;
+						elementi.scacchiera[xPosition, yPosition].status = 4;
+						endMove = true;
+
+					} 
+				}
+			}
+		}
+
+
+		//Attack left
+		public void AttackLeft () {
+			if (elementi.scacchiera [xPosition - 1, yPosition].status == 3 && isAttacking == false && endMove == false && canMove) {
+				Debug.Log ("Player Attacca Sinistra");
+				isAttacking = true;
+				audioPlayer.clip = SFX_Attack;
+				audioPlayer.Play();
+				//Set true to the attack parameter of animation
+				animator.SetBool ("Attack", true);
+				Attacco ();
+			}
+		}
+
+
+		//Check to activate the attack from distance
+		public void AttackFromDistance(){
+			if (onOff == true && proiettili > 0) {
+				isAttacking = true;
+				animator.SetBool("DistanceAttack", true);
+				AttaccoADistanza ();
+			}
+		}
+
+
+		//Check to enable or disable the selection cross
+		public void CheckForCross () {
+			if (onOff == false && endMove == false)
+			{
+				onOff = true;
+				crossActive = true;
+				canMove = false;
+				CrossActivationHandler ();
+			}
+			else if (onOff == true)
+			{
+				onOff = false;
+				crossActive = false;
+				canMove = true;
+				CrossActivationHandler ();
+			}
+		}
+
+
+		//Attack to pass turn
+		public void PassTurnAttack () {
+			if (endMove == false && !crossActive) {
+				audioPlayer.clip = SFX_Attack;
+				audioPlayer.Play();
+				//Set true to the attack parameter of animation
+				animator.SetBool ("Attack", true);
+				Attacco ();
+			}
+		}
     }
 }

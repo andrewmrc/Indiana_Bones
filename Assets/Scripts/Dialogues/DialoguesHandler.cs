@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,24 @@ public class DialoguesHandler : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		//Deactivate the player
+		player = GameObject.FindGameObjectWithTag ("Player");
+		Player.Self.GetComponent<Player> ().enabled = false;
+
+		//Disable Canvas UI interaction
+		canvasUI = GameObject.FindGameObjectWithTag ("CanvasUI");
+		//canvasUI.SetActive(false);
+		canvasUI.GetComponent<CanvasGroup> ().alpha = 0;
+		canvasUI.GetComponent<CanvasGroup> ().interactable = false;
+		canvasUI.GetComponent<CanvasGroup> ().blocksRaycasts = false;
+
+		//Set the event trigger
+		EventTrigger trigger = gameObject.AddComponent<EventTrigger>() as EventTrigger;
+		EventTrigger.Entry entry = new EventTrigger.Entry( );
+		entry.eventID = EventTriggerType.PointerDown;
+		entry.callback.AddListener( ( data ) => { OnPointerDownDelegate( (PointerEventData)data ); } );
+		trigger.triggers.Add( entry );
+
 		//Time.timeScale = 0f;
 		textVisualized = this.transform.GetChild (0).GetChild(0).gameObject;
 		textVisualized.GetComponent<Text> ().text = dialogues [count];
@@ -37,37 +56,47 @@ public class DialoguesHandler : MonoBehaviour {
 		npcChar.GetComponent<Image> ().SetNativeSize ();
         indianaChar.GetComponent<Image>().SetNativeSize();
 
-		player = GameObject.FindGameObjectWithTag ("Player");
-		canvasUI = GameObject.FindGameObjectWithTag ("CanvasUI");
-		canvasUI.SetActive(false);
-		Player.Self.GetComponent<Player> ().enabled = false;
-		//player.gameObject.GetComponent<Player> ().enabled = false;
+
     }
 
 
     // Update is called once per frame
     void Update () {
 		if (Input.GetKeyDown ("space")) {
-			if (count < dialogues.Count-1) { 
-				Debug.Log ("Stamp dialogo!");
-				count++;
-				textVisualized.GetComponent<Text> ().text = dialogues [count];
-				textVisualized.GetComponent<Text> ().color = textColors [count];
-				indianaChar.GetComponent<Image> ().sprite = indianaExpression [count];
-				npcChar.GetComponent<Image> ().sprite = npcExpression [count];
-			}else {
-				Debug.Log ("Chiudi dialogo!");
-				this.gameObject.SetActive (false);
-				canvasUI.SetActive(true);
-				//player.gameObject.GetComponent<Player> ().enabled = true;
-				Player.Self.GetComponent<Player> ().enabled = true;
-				if (DialoguesManager.Self.dialoguesActivated [20]) {
-					GameController.Self.StartEndGameCoroutine ();
-				}
-			} 
+			HandleDialogue ();
 		}
 
 	}
 
+
+	public void HandleDialogue () {
+		if (count < dialogues.Count-1) { 
+			Debug.Log ("Stamp dialogo!");
+			count++;
+			textVisualized.GetComponent<Text> ().text = dialogues [count];
+			textVisualized.GetComponent<Text> ().color = textColors [count];
+			indianaChar.GetComponent<Image> ().sprite = indianaExpression [count];
+			npcChar.GetComponent<Image> ().sprite = npcExpression [count];
+		}else {
+			Debug.Log ("Chiudi dialogo!");
+			this.gameObject.SetActive (false);
+			//canvasUI.SetActive(true);
+			canvasUI.GetComponent<CanvasGroup> ().alpha = 1;
+			canvasUI.GetComponent<CanvasGroup> ().interactable = true;
+			canvasUI.GetComponent<CanvasGroup> ().blocksRaycasts = true;
+			//player.gameObject.GetComponent<Player> ().enabled = true;
+			Player.Self.GetComponent<Player> ().enabled = true;
+			if (DialoguesManager.Self.dialoguesActivated [20]) {
+				GameController.Self.StartEndGameCoroutine ();
+			}
+		} 
+	}
+
+
+	//Go ahead with the dialogue touching the screen
+	public void OnPointerDownDelegate( PointerEventData data )
+	{
+		HandleDialogue ();
+	}
 
 }

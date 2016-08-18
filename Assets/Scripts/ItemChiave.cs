@@ -25,8 +25,8 @@ namespace IndianaBones
 				stemma = GameObject.FindGameObjectWithTag("CanvasUI");
 			}
 
-			targetTr = Player.Self.transform;
-            Vector3 distance = targetTr.position - this.transform.position;
+			//targetTr = Player.Self.transform;
+			Vector3 distance = Player.Self.transform.position - this.transform.position;
 
             if (distance.magnitude < 0.10f)
             {
@@ -40,7 +40,7 @@ namespace IndianaBones
 				}
 
 
-                transform.position = targetTr.position;
+				transform.position = Player.Self.transform.position;
 				
 				Player.Self.keyScarabeo += 1;
 

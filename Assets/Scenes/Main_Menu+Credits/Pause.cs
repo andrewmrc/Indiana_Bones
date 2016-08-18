@@ -41,15 +41,20 @@ public class Pause : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Escape) && !Player.Self.isDead)
         {
+			EnablePause ();
+        }
+    }
+
+
+	public void EnablePause () {
+		if (!Player.Self.isDead) {
 			//Time.timeScale = 0;
 			GameController.Self.inPause = true;
 			ElementsReference.Self.canvasUI.SetActive (false);
 			Player.Self.gameObject.SetActive (false);
-            pause.GetComponent<CanvasGroup>().alpha = 1;
-            pause.GetComponent<CanvasGroup>().interactable = true;
-			pause.GetComponent<CanvasGroup>().blocksRaycasts = true;
-
-        }
-    }
-
+			pause.GetComponent<CanvasGroup> ().alpha = 1;
+			pause.GetComponent<CanvasGroup> ().interactable = true;
+			pause.GetComponent<CanvasGroup> ().blocksRaycasts = true;
+		}
+	}
 }
