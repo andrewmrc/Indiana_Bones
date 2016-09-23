@@ -646,7 +646,7 @@ namespace IndianaBones
             
 
 				//Pass turn
-				if (Input.GetKeyDown("space"))
+				if (Input.GetKeyDown(KeyCode.RightControl))
 				{
 					PassTurnAttack ();
 				}
@@ -1091,7 +1091,8 @@ namespace IndianaBones
 
 		//Check to activate the attack from distance
 		public void AttackFromDistance(){
-			if (onOff == true && proiettili > 0) {
+			//if (onOff == true && proiettili > 0) {
+			if (proiettili > 0) {
 				isAttacking = true;
 				animator.SetBool("DistanceAttack", true);
 				AttaccoADistanza ();
